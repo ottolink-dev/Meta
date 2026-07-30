@@ -49,4 +49,21 @@ template <> struct AttributeTraits<ColorGradient>
   }
 };
 
+/// Typename for GradientPresets.
+template <> struct TypeName<meta::GradientPresets>
+{
+  static constexpr std::string_view name = "meta::GradientPresets";
+};
+
+/// No-op traits: presets are host configuration that must not be serialized.
+template <> struct AttributeTraits<GradientPresets>
+{
+  static std::string to_string(const GradientPresets &v)
+  {
+    return "<gradient_presets:" + std::to_string(v.presets.size()) + ">";
+  }
+  static nlohmann::json   json_to(const GradientPresets &) { return nullptr; }
+  static GradientPresets  json_from(const nlohmann::json &) { return {}; }
+};
+
 } // namespace meta

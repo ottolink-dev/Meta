@@ -515,10 +515,9 @@ int main(int argc, char *argv[])
   if (base_color_gradient)
   {
     {
-      container.add("ColorGradient", meta::ColorGradient());
-
-      container.value<meta::ColorGradient>("ColorGradient")
-          .set_presets(generate_random_presets(16));
+      auto *a = container.add("ColorGradient", meta::ColorGradient());
+      a->metadata().add(meta::keys::ui::presets,
+                        meta::GradientPresets{generate_random_presets(16)});
     }
   }
 #endif

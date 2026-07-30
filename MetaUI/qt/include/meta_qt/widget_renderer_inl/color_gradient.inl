@@ -11,6 +11,7 @@
 #include "meta_qt/widgets/gradient_picker.hpp"
 
 #include "meta/ext/color_gradient/color_gradient.hpp"
+#include "meta/metadata/keys.hpp"
 
 namespace meta::qt
 {
@@ -20,7 +21,8 @@ namespace meta::qt
 //
 // widget_type: "GradientEditor" (default)
 //
-// No extra metadata needed — presets and stops come from the attribute itself.
+// Stops come from the attribute value; presets come from the ui.presets
+// metadata entry (GradientPresets), installed by the host at setup time.
 // ---------------------------------------------------------------------------
 
 template <> struct WidgetRenderer<meta::ColorGradient>
@@ -48,7 +50,13 @@ template <> struct WidgetRenderer<meta::ColorGradient>
         layout->addWidget(
             new QLabel(QString::fromStdString(label_txt), widget));
 
-      auto *picker = new GradientPicker(cga.value(), cga.presets(), widget);
+      const auto *p_presets = attr.metadata().try_value<meta::GradientPresets>(
+          meta::keys::ui::presets);
+
+      auto *picker = new GradientPicker(cga.value(),
+                                        p_presets ? p_presets->presets
+                                                  : std::vector<meta::Preset>{},
+                                        widget);
       layout->addWidget(picker);
 
       widget->set_sync_from_model([picker]() { picker->update(); });

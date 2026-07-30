@@ -32,13 +32,6 @@ nlohmann::json ColorGradient::json_to() const
   return j;
 }
 
-const std::vector<Preset> &ColorGradient::presets() const { return presets_; }
-
-void ColorGradient::set_presets(const std::vector<Preset> &new_presets)
-{
-  presets_ = new_presets;
-}
-
 void ColorGradient::set_value(const std::vector<Stop> &new_value)
 {
   value_ = new_value;

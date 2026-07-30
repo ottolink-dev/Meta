@@ -31,7 +31,10 @@ struct Preset
   std::vector<Stop> stops;
 };
 
-/// Editable color gradient with optional presets.
+/// Editable color gradient. Presets are deliberately NOT part of this value
+/// type: they are host configuration, carried in attribute metadata as a
+/// GradientPresets entry (keys::ui::presets), so that deserializing a value
+/// cannot clobber the preset library installed at setup time.
 class ColorGradient
 {
 public:
@@ -52,14 +55,8 @@ public:
    */
   nlohmann::json json_to() const;
 
-  /// Returns the available presets.
-  const std::vector<Preset> &presets() const;
-
   /// Sets the gradient stops.
   void set_value(const std::vector<Stop> &new_value);
-
-  /// Sets the available presets.
-  void set_presets(const std::vector<Preset> &new_presets);
 
   /// Returns the gradient stops.
   const std::vector<Stop> &value() const;
@@ -68,11 +65,17 @@ public:
   std::vector<Stop> &value();
 
 private:
-  std::vector<Stop>   value_ = {{0.f, {0.f, 0.f, 0.f, 1.f}},
-                                {1.f, {1.f, 1.f, 1.f, 1.f}}};
-  std::vector<Preset> presets_ = {
-      {"Grayscale",
-       {{0.f, {0.f, 0.f, 0.f, 1.f}}, {1.f, {1.f, 1.f, 1.f, 1.f}}}}};
+  std::vector<Stop> value_ = {{0.f, {0.f, 0.f, 0.f, 1.f}},
+                              {1.f, {1.f, 1.f, 1.f, 1.f}}};
+};
+
+/// Preset library for a gradient attribute, installed by the host into
+/// attribute metadata under keys::ui::presets. Runtime configuration, not
+/// document state: never serialized (mirrors meta::DataProvider).
+struct GradientPresets
+{
+  /// Available presets.
+  std::vector<Preset> presets;
 };
 
 } // namespace meta

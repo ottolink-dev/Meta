@@ -11,6 +11,10 @@
 #include "meta/logger.hpp"
 #include "meta/serialization/attribute_factory.hpp"
 
+#ifdef META_ENABLE_COLOR_GRADIENT_TYPES
+#include "meta/ext/color_gradient/color_gradient.hpp"
+#endif
+
 namespace meta
 {
 
@@ -210,6 +214,10 @@ nlohmann::json AttributeContainer::json_to() const
   {
     if (attr->type() == std::type_index(typeid(meta::DataProvider)))
       continue;  // non-serializable runtime provider
+#ifdef META_ENABLE_COLOR_GRADIENT_TYPES
+    if (attr->type() == std::type_index(typeid(meta::GradientPresets)))
+      continue;  // non-serializable host configuration
+#endif
     j[name] = attr->json_to();
   }
 

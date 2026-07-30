@@ -29,6 +29,7 @@ inline constexpr char state[] = "ui.state";
 inline constexpr char widget_type[] = "ui.widget_type";
 inline constexpr char data_provider[] = "ui.data_provider";
 inline constexpr char tooltip[]       = "ui.tooltip";
+inline constexpr char presets[]       = "ui.presets";
 
 // Ad-hoc keys hoisted from raw string literals (Phase C migration). Each value
 // is byte-identical to the literal it replaced; producers set them and
