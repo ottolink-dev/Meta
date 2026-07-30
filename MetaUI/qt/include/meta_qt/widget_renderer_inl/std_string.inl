@@ -15,6 +15,7 @@
 #include "meta/type/type_name.hpp"
 #include "meta_common.hpp"
 #include "meta_qt/meta_widget.hpp"
+#include "meta_qt/widgets/helpers.hpp"
 
 namespace meta::qt
 {
@@ -22,14 +23,10 @@ namespace meta::qt
 namespace helpers
 {
 
-// compute a fixed pixel height that fits [n_lines] of text including
-// the frame margin of a QPlainTextEdit.
-inline int plain_text_height(const QPlainTextEdit *te, int n_lines)
-{
-  const int lh = QFontMetrics(te->font()).lineSpacing();
-  // QPlainTextEdit adds ~4 px top + bottom document margin by default.
-  return lh * n_lines + 8;
-}
+// plain_text_height lives in meta_qt/widgets/helpers.hpp (included above).
+// It must NOT be redefined here: helpers.cpp defines it non-inline, and a
+// second inline definition is an ODR violation that GNU ld resolves silently
+// but MSVC rejects outright (LNK2005, COMDAT vs non-COMDAT).
 
 // apply min/max height constraints to a QPlainTextEdit from metadata.
 inline void apply_height_constraints(QPlainTextEdit         *te,
