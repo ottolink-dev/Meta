@@ -51,6 +51,9 @@ private:
   void set_is_dragging(bool new_state);
   void update_geometry();
 
+  bool  is_range_bounded() const;
+  QRect handle_rect() const;
+
   // --- Config
   Style style{this};
 
@@ -75,6 +78,11 @@ private:
   int   value_before_dragging = 0;
   int   pos_x_before_dragging = 0;
   float drag_accumulator = 0.f; // sub-integer drag accumulator
+
+  // Cursor displacement from the drag origin, in pixels. Only used to place
+  // the handle of an unbounded slider; zeroed whenever a drag starts or ends
+  // so the handle always sits at the centre at rest.
+  int drag_dx = 0;
 
   // --- geometry -------------------------------------------------------------
   int base_dx = 8;

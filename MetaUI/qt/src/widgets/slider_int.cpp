@@ -119,7 +119,7 @@ std::string SliderInt::get_value_as_string() const
 
 void SliderInt::mouseDoubleClickEvent(QMouseEvent *)
 {
-  const bool is_bounded = this->vmin != INT_MIN && this->vmax != INT_MAX;
+  const bool is_bounded = this->is_range_bounded();
   const int  delta = is_bounded ? std::max(1,
                                           (this->vmax - this->vmin) /
                                               this->style.button_ticks())
@@ -154,10 +154,9 @@ void SliderInt::mouseMoveEvent(QMouseEvent *event)
 
   // For integer sliders we accumulate sub-integer motion to avoid jitter
   // when the range is large relative to the bar width.
-  float      ppu;
-  const bool is_bounded = this->vmin != INT_MIN && this->vmax != INT_MAX;
+  float ppu;
 
-  if (!is_bounded || this->vmin == this->vmax)
+  if (!this->is_range_bounded())
     ppu = PPU_UNBOUNDED;
   else
     ppu = float(this->rect_bar.width()) / float(this->vmax - this->vmin);
@@ -176,10 +175,13 @@ void SliderInt::mouseMoveEvent(QMouseEvent *event)
   const float dv = float(dx) / ppu;
 
   // Accumulate fractional motion; only commit whole integer steps.
+  this->drag_dx = dx;
   this->drag_accumulator = dv;
   const int delta = static_cast<int>(this->drag_accumulator);
 
   if (delta != 0) this->set_value(this->value_before_dragging + delta);
+
+  this->update(); // the handle moves even between integer steps
 
   QWidget::mouseMoveEvent(event);
 }
@@ -188,7 +190,7 @@ void SliderInt::mousePressEvent(QMouseEvent *event)
 {
   if (event->button() == Qt::LeftButton)
   {
-    const bool is_bounded = this->vmin != INT_MIN && this->vmax != INT_MAX;
+    const bool is_bounded = this->is_range_bounded();
     const int  delta = is_bounded ? std::max(1,
                                             (this->vmax - this->vmin) /
                                                 this->style.button_ticks())
@@ -221,6 +223,29 @@ void SliderInt::mouseReleaseEvent(QMouseEvent *event)
   }
 }
 
+bool SliderInt::is_range_bounded() const
+{
+  return this->vmin != INT_MIN && this->vmax != INT_MAX &&
+         this->vmax > this->vmin;
+}
+
+// Handle of an unbounded slider: centred at rest, following the drag while one
+// is in progress, clamped so it never leaves the track. Its travel is only an
+// affordance - the value keeps changing once the handle hits an end.
+QRect SliderInt::handle_rect() const
+{
+  const int track_w = std::max(this->rect_bar.width() - 2, 2);
+  const int handle_w = std::clamp(3 * this->base_dx, 2, track_w);
+  const int span = (track_w - handle_w) / 2;
+
+  QRect r = this->rect_bar.adjusted(1, 1, -1, -1);
+  r.setWidth(handle_w);
+  r.moveLeft(this->rect_bar.left() + 1 + span +
+             std::clamp(this->drag_dx, -span, span));
+
+  return r;
+}
+
 void SliderInt::paintEvent(QPaintEvent *)
 {
   QPainter p(this);
@@ -242,27 +267,43 @@ void SliderInt::paintEvent(QPaintEvent *)
                     this->style.border_radius(),
                     this->style.border_radius());
 
-  // Value fill bar
-  const bool is_bounded = this->vmin != INT_MIN && this->vmax != INT_MAX;
+  // Value fill bar when the range is bounded, drag handle when it is not: an
+  // unbounded range has no ratio to fill, so the bar would otherwise stay
+  // empty whatever the value.
+  const bool is_editing = this->value_edit->isVisible();
 
-  if (is_bounded && !this->value_edit->isVisible())
+  if (this->is_range_bounded() && !is_editing)
   {
-    const int range = this->vmax - this->vmin;
-    if (range > 0)
+    const int   range = this->vmax - this->vmin;
+    const float r = float(this->value - this->vmin) / float(range);
+    const int   rcut = int((1.f - r) * float(this->rect_bar.width()));
+
+    p.setBrush(c_fill.darker(130));
+    p.setPen(Qt::NoPen);
+
+    if (this->add_plus_minus_buttons)
+      p.drawRect(this->rect_bar.adjusted(1, 1, -rcut - 1, -1));
+    else
+      p.drawRoundedRect(this->rect_bar.adjusted(1, 1, -rcut - 1, -1),
+                        this->style.border_radius(),
+                        this->style.border_radius());
+  }
+  else if (!is_editing)
+  {
+    // While dragging, mark the rest position the handle will snap back to.
+    if (this->is_dragging)
     {
-      const float r = float(this->value - this->vmin) / float(range);
-      const int   rcut = int((1.f - r) * float(this->rect_bar.width()));
-
-      p.setBrush(c_fill.darker(130));
-      p.setPen(Qt::NoPen);
-
-      if (this->add_plus_minus_buttons)
-        p.drawRect(this->rect_bar.adjusted(1, 1, -rcut - 1, -1));
-      else
-        p.drawRoundedRect(this->rect_bar.adjusted(1, 1, -rcut - 1, -1),
-                          this->style.border_radius(),
-                          this->style.border_radius());
+      const int x_mid = this->rect_bar.center().x();
+      p.setPen(QPen(c_border, this->style.border_width()));
+      p.drawLine(QPoint(x_mid, this->rect_bar.top() + 3),
+                 QPoint(x_mid, this->rect_bar.bottom() - 3));
     }
+
+    p.setBrush(c_fill.darker(this->is_dragging ? 110 : 130));
+    p.setPen(Qt::NoPen);
+    p.drawRoundedRect(this->handle_rect(),
+                      this->style.border_radius(),
+                      this->style.border_radius());
   }
 
   // +/- button separators
@@ -309,7 +350,9 @@ void SliderInt::set_is_dragging(bool new_state)
 {
   this->is_dragging = new_state;
   if (!new_state) this->drag_accumulator = 0.f; // reset on release
+  this->drag_dx = 0; // an unbounded slider's handle recentres on release
   this->setCursor(new_state ? Qt::SizeHorCursor : Qt::ArrowCursor);
+  this->update();
 }
 
 bool SliderInt::set_value(int new_value)

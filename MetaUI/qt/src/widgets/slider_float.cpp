@@ -150,6 +150,33 @@ float SliderFloat::value_to_ratio(float v) const
   return range > 0.f ? std::clamp((lv - lmin) / range, 0.f, 1.f) : 0.f;
 }
 
+// ---------------------------------------------------------------------------
+// Bounded vs unbounded
+// ---------------------------------------------------------------------------
+
+bool SliderFloat::is_range_bounded() const
+{
+  return this->vmin != -FLT_MAX && this->vmax != FLT_MAX &&
+         this->vmax > this->vmin;
+}
+
+// Handle of an unbounded slider: centred at rest, following the drag while one
+// is in progress, clamped so it never leaves the track. Its travel is only an
+// affordance - the value keeps changing once the handle hits an end.
+QRect SliderFloat::handle_rect() const
+{
+  const int track_w = std::max(this->rect_bar.width() - 2, 2);
+  const int handle_w = std::clamp(3 * this->base_dx, 2, track_w);
+  const int span = (track_w - handle_w) / 2;
+
+  QRect r = this->rect_bar.adjusted(1, 1, -1, -1);
+  r.setWidth(handle_w);
+  r.moveLeft(this->rect_bar.left() + 1 + span +
+             std::clamp(this->drag_dx, -span, span));
+
+  return r;
+}
+
 float SliderFloat::ratio_to_value(float r) const
 {
   r = std::clamp(r, 0.f, 1.f);
@@ -165,7 +192,7 @@ float SliderFloat::ratio_to_value(float r) const
 
 void SliderFloat::mouseDoubleClickEvent(QMouseEvent *)
 {
-  const bool is_bounded = this->vmin != -FLT_MAX && this->vmax != FLT_MAX;
+  const bool is_bounded = this->is_range_bounded();
 
   if (this->is_bar_hovered)
   {
@@ -242,14 +269,15 @@ void SliderFloat::mouseMoveEvent(QMouseEvent *event)
     const float dr = float(dx) / ppu;
     const float r_before = this->value_to_ratio(this->value_before_dragging);
 
+    this->drag_dx = dx;
     this->set_value(this->ratio_to_value(r_before + dr));
+    this->update(); // the handle moves even when the value is clamped
   }
   else
   {
-    float      ppu;
-    const bool is_bounded = this->vmin != -FLT_MAX && this->vmax != FLT_MAX;
+    float ppu;
 
-    if (!is_bounded || this->vmin == this->vmax)
+    if (!this->is_range_bounded())
       ppu = PPU_F;
     else
       ppu = float(this->rect_bar.width()) / (this->vmax - this->vmin);
@@ -264,7 +292,10 @@ void SliderFloat::mouseMoveEvent(QMouseEvent *event)
     const int dx = event->position().toPoint().x() -
                    this->pos_x_before_dragging;
     const float dv = float(dx) / ppu;
+
+    this->drag_dx = dx;
     this->set_value(this->value_before_dragging + dv);
+    this->update(); // the handle moves even when the value is clamped
   }
 
   QWidget::mouseMoveEvent(event);
@@ -274,7 +305,7 @@ void SliderFloat::mousePressEvent(QMouseEvent *event)
 {
   if (event->button() == Qt::LeftButton)
   {
-    const bool is_bounded = this->vmin != -FLT_MAX && this->vmax != FLT_MAX;
+    const bool is_bounded = this->is_range_bounded();
 
     if (this->is_bar_hovered)
     {
@@ -349,27 +380,49 @@ void SliderFloat::paintEvent(QPaintEvent *)
                     this->style.border_radius(),
                     this->style.border_radius());
 
-  // Value fill bar
-  const bool is_bounded = this->vmin != -FLT_MAX && this->vmax != FLT_MAX;
-  const bool has_fill = is_bounded && !this->value_edit->isVisible();
-  QRect      fill_rect;
+  // Value fill bar when the range is bounded, drag handle when it is not. Both
+  // are drawn in the highlight colour and both define the region over which the
+  // label and value are drawn in HighlightedText, so `accent_rect` covers them.
+  const bool is_editing = this->value_edit->isVisible();
+  const bool has_fill = this->is_range_bounded() && !is_editing;
+  const bool has_handle = !this->is_range_bounded() && !is_editing;
+  QRect      accent_rect;
 
   if (has_fill)
   {
     const float r = this->value_to_ratio(this->value);
     const int   rcut = int((1.f - r) * float(this->rect_bar.width()));
 
-    fill_rect = this->rect_bar.adjusted(1, 1, -rcut - 1, -1);
+    accent_rect = this->rect_bar.adjusted(1, 1, -rcut - 1, -1);
 
     p.setBrush(c_fill.darker(130));
     p.setPen(Qt::NoPen);
 
     if (this->add_plus_minus_buttons)
-      p.drawRect(fill_rect);
+      p.drawRect(accent_rect);
     else
-      p.drawRoundedRect(fill_rect,
+      p.drawRoundedRect(accent_rect,
                         this->style.border_radius(),
                         this->style.border_radius());
+  }
+  else if (has_handle)
+  {
+    accent_rect = this->handle_rect();
+
+    // While dragging, mark the rest position the handle will snap back to.
+    if (this->is_dragging)
+    {
+      const int x_mid = this->rect_bar.center().x();
+      p.setPen(QPen(c_border, this->style.border_width()));
+      p.drawLine(QPoint(x_mid, this->rect_bar.top() + 3),
+                 QPoint(x_mid, this->rect_bar.bottom() - 3));
+    }
+
+    p.setBrush(c_fill.darker(this->is_dragging ? 110 : 130));
+    p.setPen(Qt::NoPen);
+    p.drawRoundedRect(accent_rect,
+                      this->style.border_radius(),
+                      this->style.border_radius());
   }
 
   // +/- button separators
@@ -390,16 +443,16 @@ void SliderFloat::paintEvent(QPaintEvent *)
   const QString label_str = QString::fromStdString(this->label);
   const QString value_str = QString::fromStdString(this->get_value_as_string());
 
-  if (has_fill)
+  if (has_fill || has_handle)
   {
-    // Two-pass draw: text over the highlighted fill uses HighlightedText
-    // for contrast, text over the plain background uses Text. The two
-    // clip regions are complementary (bar minus fill / fill), so nothing
-    // is drawn twice.
+    // Two-pass draw: text over the highlighted fill or handle uses
+    // HighlightedText for contrast, text over the plain background uses
+    // Text. The two clip regions are complementary (bar minus accent /
+    // accent), so nothing is drawn twice.
     const QColor c_highlighted_text = pal.color(QPalette::HighlightedText);
 
     p.save();
-    p.setClipRect(fill_rect);
+    p.setClipRect(accent_rect);
     p.setBrush(c_highlighted_text);
     p.setPen(c_highlighted_text);
     p.drawText(label_rect, Qt::AlignLeft | Qt::AlignVCenter, label_str);
@@ -407,7 +460,7 @@ void SliderFloat::paintEvent(QPaintEvent *)
     p.restore();
 
     p.save();
-    p.setClipRegion(QRegion(this->rect_bar).subtracted(QRegion(fill_rect)));
+    p.setClipRegion(QRegion(this->rect_bar).subtracted(QRegion(accent_rect)));
     p.setBrush(c_text);
     p.setPen(c_text);
     p.drawText(label_rect, Qt::AlignLeft | Qt::AlignVCenter, label_str);
@@ -459,7 +512,9 @@ bool SliderFloat::set_value(float new_value)
 void SliderFloat::set_is_dragging(bool new_state)
 {
   this->is_dragging = new_state;
+  this->drag_dx = 0; // an unbounded slider's handle recentres on release
   this->setCursor(new_state ? Qt::SizeHorCursor : Qt::ArrowCursor);
+  this->update();
 }
 
 QSize SliderFloat::sizeHint() const

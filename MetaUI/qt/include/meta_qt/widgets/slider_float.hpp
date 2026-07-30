@@ -21,6 +21,10 @@ namespace meta::qt
 // A single-row float slider with:
 //   • Drag on the bar to change the value (Ctrl = fine, Shift = coarse,
 //     Ctrl+Shift = fine + immediate edit_ended per step)
+//   • A proportional fill bar when the range is bounded; when it is not
+//     (vmin/vmax at ±FLT_MAX) there is no ratio to fill, so the bar instead
+//     shows a handle that follows the drag and springs back to the centre on
+//     release — a directional drag counter rather than a slider
 //   • Double-click the bar to type a value directly
 //   • Optional ◁/▷ increment buttons on the sides
 //   • Right-click context menu: Reset, Randomize (when bounded), History
@@ -72,6 +76,9 @@ private:
   float value_to_ratio(float v) const;
   float ratio_to_value(float r) const;
 
+  bool  is_range_bounded() const;
+  QRect handle_rect() const;
+
   // --- Config (replaces QSX_CONFIG) TODO / use Qt QStyle
   Style style{this};
 
@@ -96,6 +103,11 @@ private:
 
   float value_before_dragging = 0.f;
   int   pos_x_before_dragging = 0;
+
+  // Cursor displacement from the drag origin, in pixels. Only used to place
+  // the handle of an unbounded slider; zeroed whenever a drag starts or ends
+  // so the handle always sits at the centre at rest.
+  int drag_dx = 0;
 
   std::deque<float> history;
 
