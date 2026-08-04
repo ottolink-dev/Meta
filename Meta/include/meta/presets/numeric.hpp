@@ -17,4 +17,21 @@ Attribute<int> &seed(AttributeContainer &c,
                      std::string_view    label,
                      int                 value = 0);
 
+Attribute<float> &slider_float(AttributeContainer &c,
+                               std::string_view    key,
+                               std::string_view    label,
+                               float               value,
+                               float               vmin,
+                               float               vmax,
+                               std::string_view    format = "{:.3f}",
+                               bool                log_scale = false);
+
+Attribute<int> &slider_int(AttributeContainer &c,
+                           std::string_view    key,
+                           std::string_view    label,
+                           int                 value,
+                           int                 vmin,
+                           int                 vmax,
+                           std::string_view    format = "{}");
+
 } // namespace meta::presets

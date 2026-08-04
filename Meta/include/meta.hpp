@@ -23,6 +23,12 @@
 
 #include "meta/metadata/keys.hpp"
 #include "meta/presets/numeric.hpp"
+#include "meta/presets/choice.hpp"
+#include "meta/presets/glm.hpp"
+#include "meta/presets/color_gradient.hpp"
+#include "meta/presets/file.hpp"
+#include "meta/presets/text.hpp"
+#include "meta/presets/curve.hpp"
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
 #include "meta/ext/color_gradient/color_gradient.hpp"

@@ -2,7 +2,6 @@
 
 #include "meta.hpp"
 #include "meta/core/data_provider.hpp"
-#include "meta/presets/compat.hpp"
 
 struct Vec2
 {
