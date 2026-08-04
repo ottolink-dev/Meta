@@ -90,26 +90,23 @@ private:
 
   int side_by_side_min_width() const
   {
-    int  w = 0;
-    int  n = 0;
+    int w = 0;
+    int n = 0;
     for (int i = 0; i < this->box->count(); ++i)
       if (QWidget *cw = this->box->itemAt(i)->widget())
       {
         w += this->child_min_width(cw);
         ++n;
       }
-    if (n > 1)
-      w += (n - 1) * this->box_spacing;
+    if (n > 1) w += (n - 1) * this->box_spacing;
     return w;
   }
 
   static int child_min_width(QWidget *cw)
   {
     int w = cw->minimumWidth();
-    if (w <= 0)
-      w = cw->minimumSizeHint().width();
-    if (w <= 0)
-      w = cw->sizeHint().width();
+    if (w <= 0) w = cw->minimumSizeHint().width();
+    if (w <= 0) w = cw->sizeHint().width();
     return std::max(w, 0);
   }
 

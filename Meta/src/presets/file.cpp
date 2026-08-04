@@ -8,9 +8,12 @@
 namespace meta::presets
 {
 
-Attribute<std::filesystem::path> &file(AttributeContainer &c, std::string_view key,
-                                       std::string_view label, std::filesystem::path value,
-                                       std::string_view filter, bool for_saving)
+Attribute<std::filesystem::path> &file(AttributeContainer   &c,
+                                       std::string_view      key,
+                                       std::string_view      label,
+                                       std::filesystem::path value,
+                                       std::string_view      filter,
+                                       bool                  for_saving)
 {
   auto *a = c.add(std::string(key), std::move(value));
   auto &m = a->metadata();

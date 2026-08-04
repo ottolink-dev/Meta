@@ -14,8 +14,14 @@ namespace meta::qt
 
 MetaWidget::MetaWidget(QWidget *parent) : QWidget(parent)
 {
-  QObject::connect(this, &MetaWidget::edit_started, this, [this]() { this->editing_ = true; });
-  QObject::connect(this, &MetaWidget::edit_ended, this, [this]() { this->editing_ = false; });
+  QObject::connect(this,
+                   &MetaWidget::edit_started,
+                   this,
+                   [this]() { this->editing_ = true; });
+  QObject::connect(this,
+                   &MetaWidget::edit_ended,
+                   this,
+                   [this]() { this->editing_ = false; });
 }
 
 void MetaWidget::closeEvent(QCloseEvent *event)

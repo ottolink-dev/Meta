@@ -2,14 +2,15 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
-#include <vector>
 #include <glm/glm.hpp>
 #include <nlohmann/json.hpp>
+#include <vector>
 
 namespace meta
 {
 
-/// A structure representing an array with dimensions (shape) and flat data (vector).
+/// A structure representing an array with dimensions (shape) and flat data
+/// (vector).
 struct Array
 {
   /// Array dimensions (e.g. width, height).

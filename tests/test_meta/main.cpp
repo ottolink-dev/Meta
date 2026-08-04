@@ -226,12 +226,19 @@ int main()
   std::cout << "draw_bounds = " << ui.value<bool>("draw_bounds") << "\n";
 
   {
-    struct TestData {};
+    struct TestData
+    {
+    };
 
     // Attribute<DataProvider> compiles, to_string is the no-op sentinel
     meta::AttributeContainer c;
-    bool called = false;
-    c.add<meta::DataProvider>("p", meta::DataProvider{[&]{ called = true; return TestData{}; }});
+    bool                     called = false;
+    c.add<meta::DataProvider>("p",
+                              meta::DataProvider{[&]
+                                                 {
+                                                   called = true;
+                                                   return TestData{};
+                                                 }});
     auto *a = c.find("p");
     assert(a && a->to_string() == "<data_provider>");
 
@@ -247,13 +254,16 @@ int main()
   }
 
   {
-    struct TestData {};
+    struct TestData
+    {
+    };
     meta::AttributeContainer c;
     c.add<int>("keep", 7);
-    c.add<meta::DataProvider>("skip", meta::DataProvider{[]{ return TestData{}; }});
+    c.add<meta::DataProvider>("skip",
+                              meta::DataProvider{[] { return TestData{}; }});
     auto j = c.json_to();
     assert(j.contains("keep"));
-    assert(!j.contains("skip"));   // DataProvider omitted from serialization
+    assert(!j.contains("skip")); // DataProvider omitted from serialization
     std::cout << "[data_provider] serialize-skip OK" << std::endl;
   }
 
@@ -262,18 +272,20 @@ int main()
     // gradient presets live in attribute metadata, not in the value: they are
     // host configuration, must not be serialized, and must survive json_from
     meta::AttributeContainer c;
-    auto *a = c.add("g", meta::ColorGradient());
-    a->metadata().add(
-        meta::keys::ui::presets,
-        meta::GradientPresets{
-            {{"Reds", {{0.f, {1.f, 0.f, 0.f, 1.f}}, {1.f, {1.f, 1.f, 1.f, 1.f}}}}}});
+    auto                    *a = c.add("g", meta::ColorGradient());
+    a->metadata().add(meta::keys::ui::presets,
+                      meta::GradientPresets{{{"Reds",
+                                              {{0.f, {1.f, 0.f, 0.f, 1.f}},
+                                               {1.f, {1.f, 1.f, 1.f, 1.f}}}}}});
 
     auto j = c.json_to();
-    assert(!j["g"]["metadata"].contains(meta::keys::ui::presets)); // not serialized
+    assert(!j["g"]["metadata"].contains(
+        meta::keys::ui::presets)); // not serialized
 
     // reload in place: value updates, installed presets untouched
     c.json_from(j);
-    auto *pp = a->metadata().try_value<meta::GradientPresets>(meta::keys::ui::presets);
+    auto *pp = a->metadata().try_value<meta::GradientPresets>(
+        meta::keys::ui::presets);
     assert(pp && pp->presets.size() == 1 && pp->presets[0].name == "Reds");
 
     // decode into a fresh container: no phantom presets appear
@@ -288,7 +300,7 @@ int main()
 #ifdef META_ENABLE_ARRAY_TYPES
   {
     meta::AttributeContainer c;
-    Array arr;
+    Array                    arr;
     arr.shape = {3, 2};
     arr.vector = {10.f, 20.f, 30.f, 40.f, 50.f, 60.f};
     c.add("arr", arr);
@@ -315,21 +327,29 @@ int main()
     auto &f = meta::presets::slider_float(pc, "f", "Float", 0.5f, 0.f, 1.f);
     assert(f.value() == 0.5f);
     assert(pc.value<float>("f") == 0.5f);
-    assert(f.metadata().value<std::string>(meta::keys::ui::widget_type) == "SliderFloat");
+    assert(f.metadata().value<std::string>(meta::keys::ui::widget_type) ==
+           "SliderFloat");
     assert(f.metadata().value<float>(meta::keys::constraints::max) == 1.f);
 
     std::vector<std::pair<int, std::string>> items = {{0, "a"}, {1, "b"}};
     auto &e = meta::presets::enum_choice(pc, "e", "Enum", items, 1);
     assert(e.value() == 1);
 
-    auto &r = meta::presets::range(pc, "r", "Range", {0.f, 1.f}, -1.f, 2.f, false);
+    auto &r =
+        meta::presets::range(pc, "r", "Range", {0.f, 1.f}, -1.f, 2.f, false);
     assert(r.metadata().value<bool>("ui.active") == false);
 
     auto &ch = meta::presets::string_choice(pc, "c", "Choice", {"x", "y"}, "x");
     assert(ch.value() == "x");
 
-    auto &sf = meta::presets::file(pc, "p", "File", "out.png", "PNG (*.png)", true);
-    assert(sf.metadata().value<std::string>(meta::keys::ui::widget_type) == "SaveFile");
+    auto &sf = meta::presets::file(pc,
+                                   "p",
+                                   "File",
+                                   "out.png",
+                                   "PNG (*.png)",
+                                   true);
+    assert(sf.metadata().value<std::string>(meta::keys::ui::widget_type) ==
+           "SaveFile");
 
     std::cout << "presets::compat smoke OK" << std::endl;
   }
@@ -337,14 +357,16 @@ int main()
   // --- set_insertion_order
   {
     meta::AttributeContainer oc;
-    oc.add("a", 1); oc.add("b", 2); oc.add("c", 3);
+    oc.add("a", 1);
+    oc.add("b", 2);
+    oc.add("c", 3);
     assert(oc.set_insertion_order({"c", "a", "b"}));
     assert(oc.insertion_order() == (std::vector<std::string>{"c", "a", "b"}));
-    assert(!oc.set_insertion_order({"c", "a"}));          // wrong size
+    assert(!oc.set_insertion_order({"c", "a"})); // wrong size
     assert(oc.insertion_order() == (std::vector<std::string>{"c", "a", "b"}));
-    assert(!oc.set_insertion_order({"c", "a", "zzz"}));   // unknown key
+    assert(!oc.set_insertion_order({"c", "a", "zzz"})); // unknown key
     assert(oc.insertion_order() == (std::vector<std::string>{"c", "a", "b"}));
-    assert(!oc.set_insertion_order({"c", "c", "b"}));     // duplicate key
+    assert(!oc.set_insertion_order({"c", "c", "b"})); // duplicate key
     assert(oc.insertion_order() == (std::vector<std::string>{"c", "a", "b"}));
     std::cout << "set_insertion_order OK" << std::endl;
   }

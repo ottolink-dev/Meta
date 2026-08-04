@@ -324,7 +324,7 @@ void SliderInt::paintEvent(QPaintEvent *)
   }
 
   // Label (left) and value (right) inside the bar
-  const QRect label_rect = this->rect_bar.adjusted(this->base_dx,
+  const QRect   label_rect = this->rect_bar.adjusted(this->base_dx,
                                                    0,
                                                    -this->base_dx,
                                                    0);

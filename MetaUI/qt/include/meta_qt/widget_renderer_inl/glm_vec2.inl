@@ -28,7 +28,9 @@ template <> struct WidgetRenderer<glm::vec2>
     const bool        show_grid = meta::common::try_get<bool>(attr,
                                                        "ui.show_grid",
                                                        true);
-    bool locked_xy = meta::common::try_get<bool>(attr, meta::keys::ui::locked_xy, false);
+    bool              locked_xy = meta::common::try_get<bool>(attr,
+                                                 meta::keys::ui::locked_xy,
+                                                 false);
     const std::string x_label = meta::common::try_get<std::string>(attr,
                                                                    "ui.label_x",
                                                                    "x");
@@ -147,18 +149,21 @@ template <> struct WidgetRenderer<glm::vec2>
       // Per-axis bounds (compat "xy()" preset stash), falling back to the
       // shared min/max when absent so asymmetric domains (e.g. x in [0,1],
       // y in [0,100]) reach the widget.
-      const float min_x = meta::common::try_get<float>(attr, meta::keys::ui::min_x, min);
-      const float max_x = meta::common::try_get<float>(attr, meta::keys::ui::max_x, max);
-      const float min_y = meta::common::try_get<float>(attr, meta::keys::ui::min_y, min);
-      const float max_y = meta::common::try_get<float>(attr, meta::keys::ui::max_y, max);
+      const float min_x = meta::common::try_get<float>(attr,
+                                                       meta::keys::ui::min_x,
+                                                       min);
+      const float max_x = meta::common::try_get<float>(attr,
+                                                       meta::keys::ui::max_x,
+                                                       max);
+      const float min_y = meta::common::try_get<float>(attr,
+                                                       meta::keys::ui::min_y,
+                                                       min);
+      const float max_y = meta::common::try_get<float>(attr,
+                                                       meta::keys::ui::max_y,
+                                                       max);
 
-      auto *canvas = new XYCanvas(value,
-                                  min_x,
-                                  max_x,
-                                  min_y,
-                                  max_y,
-                                  show_grid,
-                                  widget);
+      auto *canvas =
+          new XYCanvas(value, min_x, max_x, min_y, max_y, show_grid, widget);
       layout->addWidget(canvas);
 
       // Button row
@@ -257,9 +262,10 @@ template <> struct WidgetRenderer<glm::vec2>
           attr,
           meta::keys::ui::has_active_toggle,
           false);
-      const bool initial_active = meta::common::try_get<bool>(attr,
-                                                              meta::keys::ui::active,
-                                                              true);
+      const bool initial_active = meta::common::try_get<bool>(
+          attr,
+          meta::keys::ui::active,
+          true);
 
       QCheckBox *active_box = nullptr;
       if (has_active_toggle)
@@ -270,7 +276,8 @@ template <> struct WidgetRenderer<glm::vec2>
 
       meta::DataProvider range_provider; // empty if none
       if (const auto *mp = attr.metadata().find(meta::keys::ui::data_provider))
-        if (const auto *dp = mp->try_cast<meta::Attribute<meta::DataProvider>>())
+        if (const auto
+                *dp = mp->try_cast<meta::Attribute<meta::DataProvider>>())
           range_provider = dp->value();
 
       if (range_provider)
@@ -332,8 +339,8 @@ template <> struct WidgetRenderer<glm::vec2>
       auto set_active =
           [bar, reset_btn, center_btn, unit_btn, active_box](bool active)
       {
-        const bool enabled = active && (active_box == nullptr ||
-                                        active_box->isChecked());
+        const bool enabled = active &&
+                             (active_box == nullptr || active_box->isChecked());
         bar->setEnabled(enabled);
         reset_btn->setEnabled(enabled);
         center_btn->setEnabled(enabled);
@@ -358,9 +365,10 @@ template <> struct WidgetRenderer<glm::vec2>
             // helper reads the up-to-date checkbox state
             if (active_box != nullptr)
             {
-              const bool is_active = meta::common::try_get<bool>(attr,
-                                                                 meta::keys::ui::active,
-                                                                 true);
+              const bool is_active = meta::common::try_get<bool>(
+                  attr,
+                  meta::keys::ui::active,
+                  true);
               QSignalBlocker b(active_box);
               active_box->setChecked(is_active);
             }
@@ -435,25 +443,26 @@ template <> struct WidgetRenderer<glm::vec2>
       // enable/disable-full-range toggle_btn above.
       if (active_box != nullptr)
       {
-        QObject::connect(
-            active_box,
-            &QCheckBox::toggled,
-            widget,
-            [&attr, set_active, toggle_btn, widget](bool checked)
-            {
-              attr.metadata()
-                  .try_add(std::string(meta::keys::ui::active), checked)
-                  ->value() = checked;
-              // checkbox already reflects 'checked'; set_active ANDs it in
-              set_active(toggle_btn->isChecked());
+        QObject::connect(active_box,
+                         &QCheckBox::toggled,
+                         widget,
+                         [&attr, set_active, toggle_btn, widget](bool checked)
+                         {
+                           attr.metadata()
+                               .try_add(std::string(meta::keys::ui::active),
+                                        checked)
+                               ->value() = checked;
+                           // checkbox already reflects 'checked'; set_active
+                           // ANDs it in
+                           set_active(toggle_btn->isChecked());
 
-              // is_active affects compute: treat as a value edit.
-              Q_EMIT widget->edit_started();
-              // not using 'set_from_any' method, force emit
-              attr.value_changed.notify(attr.value());
-              Q_EMIT widget->value_changed();
-              Q_EMIT widget->edit_ended();
-            });
+                           // is_active affects compute: treat as a value edit.
+                           Q_EMIT widget->edit_started();
+                           // not using 'set_from_any' method, force emit
+                           attr.value_changed.notify(attr.value());
+                           Q_EMIT widget->value_changed();
+                           Q_EMIT widget->edit_ended();
+                         });
       }
 
       // Live drag → edit_started + value_changed

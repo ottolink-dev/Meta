@@ -166,12 +166,13 @@ void RangeBar::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, false);
     const QRect r = this->rect();
-    const float ymax = *std::max_element(this->hist_y_.begin(), this->hist_y_.end());
+    const float ymax = *std::max_element(this->hist_y_.begin(),
+                                         this->hist_y_.end());
     if (ymax > 0.f)
     {
-      const int   n  = static_cast<int>(this->hist_y_.size());
+      const int   n = static_cast<int>(this->hist_y_.size());
       const float bw = static_cast<float>(r.width()) / static_cast<float>(n);
-      QColor c = this->palette().color(QPalette::Mid);
+      QColor      c = this->palette().color(QPalette::Mid);
       c.setAlpha(90);
       painter.setPen(Qt::NoPen);
       painter.setBrush(c);
@@ -251,7 +252,8 @@ void RangeBar::set_value(glm::vec2 v)
   update();
 }
 
-void RangeBar::set_histogram(const std::vector<float> &x, const std::vector<float> &y)
+void RangeBar::set_histogram(const std::vector<float> &x,
+                             const std::vector<float> &y)
 {
   this->hist_x_ = x;
   this->hist_y_ = y;

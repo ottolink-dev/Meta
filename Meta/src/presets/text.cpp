@@ -8,15 +8,17 @@
 namespace meta::presets
 {
 
-Attribute<std::string> &text(AttributeContainer &c, std::string_view key, std::string_view label,
-                             std::string value, bool read_only)
+Attribute<std::string> &text(AttributeContainer &c,
+                             std::string_view    key,
+                             std::string_view    label,
+                             std::string         value,
+                             bool                read_only)
 {
   auto *a = c.add(std::string(key), std::move(value));
   auto &m = a->metadata();
   m.add(keys::ui::widget_type, "SingleLineText");
   m.add(keys::ui::label, std::string(label));
-  if (read_only)
-    m.add(keys::ui::read_only, true);
+  if (read_only) m.add(keys::ui::read_only, true);
   return *a;
 }
 

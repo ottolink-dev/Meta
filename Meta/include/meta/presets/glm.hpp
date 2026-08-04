@@ -38,9 +38,9 @@ Attribute<glm::vec2> &xy(AttributeContainer &c,
                          float               ymin,
                          float               ymax);
 
-Attribute<std::vector<glm::vec3>> &points(AttributeContainer &c,
-                                          std::string_view    key,
-                                          std::string_view    label,
+Attribute<std::vector<glm::vec3>> &points(AttributeContainer    &c,
+                                          std::string_view       key,
+                                          std::string_view       label,
                                           std::vector<glm::vec3> value = {});
 
 Attribute<glm::vec4> &color(AttributeContainer &c,

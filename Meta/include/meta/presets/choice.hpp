@@ -23,17 +23,18 @@ Attribute<bool> &binary_buttons(AttributeContainer &c,
                                 std::string_view    label_false,
                                 bool                value);
 
-Attribute<int> &enum_choice(AttributeContainer                            &c,
-                            std::string_view                              key,
-                            std::string_view                              label,
-                            const std::vector<std::pair<int, std::string>> &items,
-                            int                                            value);
+Attribute<int> &enum_choice(
+    AttributeContainer                             &c,
+    std::string_view                                key,
+    std::string_view                                label,
+    const std::vector<std::pair<int, std::string>> &items,
+    int                                             value);
 
-Attribute<std::string> &string_choice(AttributeContainer            &c,
+Attribute<std::string> &string_choice(AttributeContainer             &c,
                                       std::string_view                key,
                                       std::string_view                label,
                                       const std::vector<std::string> &choices,
                                       std::string                     value,
-                                      bool                             use_combo = true);
+                                      bool use_combo = true);
 
 } // namespace meta::presets

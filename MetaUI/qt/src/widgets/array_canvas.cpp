@@ -3,21 +3,21 @@
    this software. */
 #include "meta_qt/widgets/array_canvas.hpp"
 #include "meta_qt/widgets/style.hpp"
-#include <QPainter>
-#include <QMouseEvent>
-#include <QWheelEvent>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include <cmath>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QWheelEvent>
 #include <algorithm>
+#include <cmath>
 
 namespace meta::qt
 {
 
 ArrayCanvas::ArrayCanvas(const std::string &label,
-                         int width,
-                         int height,
-                         QWidget *parent)
+                         int                width,
+                         int                height,
+                         QWidget           *parent)
     : QWidget(parent), label_(label), width_(width), height_(height)
 {
   field_.resize(static_cast<size_t>(width_ * height_), 0.f);
@@ -26,7 +26,10 @@ ArrayCanvas::ArrayCanvas(const std::string &label,
   setMouseTracking(true);
   setAttribute(Qt::WA_Hover);
 
-  help_msg_ = "Array editor\n- Left-click: Paint\n- Right-click: Erase\n- Mousewheel: Brush size\n- Ctrl + Mousewheel: Brush strength\n- Shift + Left-click: Smooth\n- Key C: Clear canvas\n- Space: Toggle background image";
+  help_msg_ =
+      "Array editor\n- Left-click: Paint\n- Right-click: Erase\n- Mousewheel: "
+      "Brush size\n- Ctrl + Mousewheel: Brush strength\n- Shift + Left-click: "
+      "Smooth\n- Key C: Clear canvas\n- Space: Toggle background image";
   setToolTip(QString::fromStdString(help_msg_));
 
   update_geometry();
@@ -35,7 +38,7 @@ ArrayCanvas::ArrayCanvas(const std::string &label,
 QSize ArrayCanvas::sizeHint() const
 {
   Style style(this);
-  int gap = style.border_radius();
+  int   gap = style.border_radius();
   return QSize(width_ + 2 * gap, height_ + 2 * gap);
 }
 
@@ -54,13 +57,12 @@ void ArrayCanvas::set_field_data(const std::vector<float> &data)
   update();
 }
 
-const std::vector<float> &ArrayCanvas::get_field_data() const
-{
-  return field_;
-}
+const std::vector<float> &ArrayCanvas::get_field_data() const { return field_; }
 
 void ArrayCanvas::set_background_image(const std::vector<uint8_t> &pixels,
-                                       int w, int h, int channels)
+                                       int                         w,
+                                       int                         h,
+                                       int                         channels)
 {
   if (pixels.empty() || w <= 0 || h <= 0)
   {
@@ -68,9 +70,9 @@ void ArrayCanvas::set_background_image(const std::vector<uint8_t> &pixels,
   }
   else
   {
-    QImage::Format fmt = (channels == 4) ? QImage::Format_RGBA8888
-                       : (channels == 1) ? QImage::Format_Grayscale8
-                                         : QImage::Format_RGB888;
+    QImage::Format fmt = (channels == 4)   ? QImage::Format_RGBA8888
+                         : (channels == 1) ? QImage::Format_Grayscale8
+                                           : QImage::Format_RGB888;
     bg_image_ = QImage(pixels.data(), w, h, w * channels, fmt).copy();
   }
   update_geometry();
@@ -87,7 +89,7 @@ void ArrayCanvas::clear()
 
 void ArrayCanvas::draw_at(const QPoint &pos, Qt::MouseButtons buttons)
 {
-  const int ir = brush_radius_;
+  const int   ir = brush_radius_;
   const float sign = (buttons & Qt::LeftButton) ? 1.f : -1.f;
 
   if (shift_pressed_)
@@ -99,14 +101,13 @@ void ArrayCanvas::draw_at(const QPoint &pos, Qt::MouseButtons buttons)
       {
         int fx = pos.x() + i;
         int fy = pos.y() + j;
-        if (fx < 0 || fy < 0 || fx >= width_ || fy >= height_)
-          continue;
+        if (fx < 0 || fy < 0 || fx >= width_ || fy >= height_) continue;
 
         float dist = std::sqrt(static_cast<float>(i * i + j * j));
         if (dist <= static_cast<float>(ir))
         {
           float sum = 0.f;
-          int ns = 0;
+          int   ns = 0;
           for (int r = -1; r <= 1; ++r)
           {
             for (int s = -1; s <= 1; ++s)
@@ -120,8 +121,8 @@ void ArrayCanvas::draw_at(const QPoint &pos, Qt::MouseButtons buttons)
               }
             }
           }
-          float falloff = 1.f - (dist / static_cast<float>(ir));
-          float value_avg = std::clamp(sum / static_cast<float>(ns), 0.f, 1.f);
+          float  falloff = 1.f - (dist / static_cast<float>(ir));
+          float  value_avg = std::clamp(sum / static_cast<float>(ns), 0.f, 1.f);
           size_t idx = static_cast<size_t>(fy * width_ + fx);
           field_[idx] = (1.f - falloff) * field_[idx] + falloff * value_avg;
         }
@@ -137,8 +138,7 @@ void ArrayCanvas::draw_at(const QPoint &pos, Qt::MouseButtons buttons)
       {
         int fx = pos.x() + i;
         int fy = pos.y() + j;
-        if (fx < 0 || fy < 0 || fx >= width_ || fy >= height_)
-          continue;
+        if (fx < 0 || fy < 0 || fx >= width_ || fy >= height_) continue;
 
         float dist = std::sqrt(static_cast<float>(i * i + j * j));
         if (dist <= static_cast<float>(ir))
@@ -174,7 +174,7 @@ bool ArrayCanvas::is_mouse_cursor_on_img() const
 void ArrayCanvas::update_geometry()
 {
   Style style(this);
-  int gap = style.border_radius();
+  int   gap = style.border_radius();
 
   int canvas_width = width_ + 2 * gap;
   int canvas_height = height_ + 2 * gap;
@@ -191,9 +191,7 @@ bool ArrayCanvas::event(QEvent *event)
 {
   switch (event->type())
   {
-  case QEvent::Enter:
-    setFocus(Qt::MouseFocusReason);
-    break;
+  case QEvent::Enter: setFocus(Qt::MouseFocusReason); break;
 
   case QEvent::HoverEnter:
     is_hovered_ = true;
@@ -207,12 +205,9 @@ bool ArrayCanvas::event(QEvent *event)
     update();
     break;
 
-  case QEvent::HoverMove:
-    update();
-    break;
+  case QEvent::HoverMove: update(); break;
 
-  default:
-    break;
+  default: break;
   }
 
   return QWidget::event(event);
@@ -233,7 +228,9 @@ void ArrayCanvas::keyPressEvent(QKeyEvent *event)
   else if (event->key() == Qt::Key_C)
   {
     QMessageBox::StandardButton reply = QMessageBox::question(
-        this, "Clear canvas", "Are you sure you want to clear the canvas?",
+        this,
+        "Clear canvas",
+        "Are you sure you want to clear the canvas?",
         QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes)
     {
@@ -310,7 +307,8 @@ void ArrayCanvas::wheelEvent(QWheelEvent *event)
     }
     else
     {
-      int diff = (event->angleDelta().y() > 0 ? 1 : -1) * std::max(1, brush_radius_ / 8);
+      int diff = (event->angleDelta().y() > 0 ? 1 : -1) *
+                 std::max(1, brush_radius_ / 8);
       brush_radius_ = std::max(1, brush_radius_ + diff);
     }
     update();
@@ -322,11 +320,12 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
 
-  Style style(this);
-  int radius = style.border_radius();
+  Style  style(this);
+  int    radius = style.border_radius();
   QColor border_color = is_hovered_ ? palette().color(QPalette::Highlight)
                                     : palette().color(QPalette::Mid);
-  int border_w = is_hovered_ ? style.border_width_hovered() : style.border_width();
+  int    border_w = is_hovered_ ? style.border_width_hovered()
+                                : style.border_width();
 
   // Background filled area
   painter.fillRect(rect(), palette().color(QPalette::Base));
@@ -347,7 +346,7 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
     {
       for (int i = 0; i < width_; ++i)
       {
-        float val = field_[static_cast<size_t>(j * width_ + i)];
+        float  val = field_[static_cast<size_t>(j * width_ + i)];
         QColor c = colormap(val);
         if (is_image)
         {
@@ -362,14 +361,16 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
   // Draw label
   {
     painter.setPen(palette().color(QPalette::Text));
-    painter.drawText(rect_img_, Qt::AlignLeft | Qt::AlignBottom, QString::fromStdString(label_));
+    painter.drawText(rect_img_,
+                     Qt::AlignLeft | Qt::AlignBottom,
+                     QString::fromStdString(label_));
   }
 
   // Draw brush outline
   if (is_mouse_cursor_on_img())
   {
     QPoint mouse_pos = mapFromGlobal(QCursor::pos());
-    QPen pen(palette().color(QPalette::Highlight), 1);
+    QPen   pen(palette().color(QPalette::Highlight), 1);
     if (shift_pressed_)
     {
       pen.setStyle(Qt::DotLine);
@@ -381,7 +382,8 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
     // Info overlay
     QString txt;
     if (ctrl_pressed_)
-      txt = QString("Strength: %1").arg(static_cast<double>(brush_strength_), 0, 'f', 2);
+      txt = QString("Strength: %1")
+                .arg(static_cast<double>(brush_strength_), 0, 'f', 2);
     else if (shift_pressed_)
       txt = "Smoothing";
 

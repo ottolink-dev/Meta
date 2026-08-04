@@ -28,12 +28,22 @@ template <> struct WidgetRenderer<std::vector<glm::vec3>>
     std::string       widget_type = meta::common::widget_type(attr);
     const std::string label_txt = meta::common::label(attr);
 
-    const float min_x = meta::common::try_get<float>(attr, meta::keys::ui::min_x, 0.f);
-    const float max_x = meta::common::try_get<float>(attr, meta::keys::ui::max_x, 1.f);
-    const float min_y = meta::common::try_get<float>(attr, meta::keys::ui::min_y, 0.f);
-    const float max_y = meta::common::try_get<float>(attr, meta::keys::ui::max_y, 1.f);
+    const float min_x = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::min_x,
+                                                     0.f);
+    const float max_x = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::max_x,
+                                                     1.f);
+    const float min_y = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::min_y,
+                                                     0.f);
+    const float max_y = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::max_y,
+                                                     1.f);
     const float z_step = meta::common::try_get<float>(attr, "ui.z_step", 0.05f);
-    const bool  closed = meta::common::try_get<bool>(attr, meta::keys::ui::closed, false);
+    const bool  closed = meta::common::try_get<bool>(attr,
+                                                    meta::keys::ui::closed,
+                                                    false);
 
     std::vector<glm::vec3> &value = attr.value();
 
@@ -69,7 +79,8 @@ template <> struct WidgetRenderer<std::vector<glm::vec3>>
 
       meta::DataProvider points_provider; // empty if none
       if (const auto *mp = attr.metadata().find(meta::keys::ui::data_provider))
-        if (const auto *dp = mp->try_cast<meta::Attribute<meta::DataProvider>>())
+        if (const auto
+                *dp = mp->try_cast<meta::Attribute<meta::DataProvider>>())
           points_provider = dp->value();
 
       if (points_provider)

@@ -8,9 +8,12 @@
 namespace meta::presets
 {
 
-Attribute<std::vector<float>> &curve(AttributeContainer &c, std::string_view key,
-                                     std::string_view label, std::vector<float> value,
-                                     float vmin, float vmax)
+Attribute<std::vector<float>> &curve(AttributeContainer &c,
+                                     std::string_view    key,
+                                     std::string_view    label,
+                                     std::vector<float>  value,
+                                     float               vmin,
+                                     float               vmax)
 {
   auto *a = c.add(std::string(key), std::move(value));
   auto &m = a->metadata();

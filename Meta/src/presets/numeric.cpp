@@ -8,9 +8,14 @@
 namespace meta::presets
 {
 
-Attribute<float> &slider_float(AttributeContainer &c, std::string_view key,
-                               std::string_view label, float value, float vmin, float vmax,
-                               std::string_view format, bool log_scale)
+Attribute<float> &slider_float(AttributeContainer &c,
+                               std::string_view    key,
+                               std::string_view    label,
+                               float               value,
+                               float               vmin,
+                               float               vmax,
+                               std::string_view    format,
+                               bool                log_scale)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -19,13 +24,17 @@ Attribute<float> &slider_float(AttributeContainer &c, std::string_view key,
   m.add(keys::ui::format, std::string(format));
   m.add(keys::constraints::min, vmin);
   m.add(keys::constraints::max, vmax);
-  if (log_scale)
-    m.add(keys::ui::log_scale, true);
+  if (log_scale) m.add(keys::ui::log_scale, true);
   return *a;
 }
 
-Attribute<int> &slider_int(AttributeContainer &c, std::string_view key, std::string_view label,
-                           int value, int vmin, int vmax, std::string_view format)
+Attribute<int> &slider_int(AttributeContainer &c,
+                           std::string_view    key,
+                           std::string_view    label,
+                           int                 value,
+                           int                 vmin,
+                           int                 vmax,
+                           std::string_view    format)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();

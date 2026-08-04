@@ -57,7 +57,10 @@ public:
   void randomize(int count);
   void load_csv(const QString &path); // x,y,z per line (z clamped to [0,1])
   void set_points(const std::vector<glm::vec3> &new_points);
-  void set_background_image(const std::vector<uint8_t> &pixels, int w, int h, int channels);
+  void set_background_image(const std::vector<uint8_t> &pixels,
+                            int                         w,
+                            int                         h,
+                            int                         channels);
 
 Q_SIGNALS:
   void points_changed();

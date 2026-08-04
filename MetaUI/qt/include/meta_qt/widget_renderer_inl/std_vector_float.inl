@@ -29,10 +29,18 @@ template <> struct WidgetRenderer<std::vector<float>>
     const int   curve_size = meta::common::try_get<int>(attr,
                                                       "ui.curve_size",
                                                       default_size);
-    const float min_x = meta::common::try_get<float>(attr, meta::keys::ui::min_x, 0.f);
-    const float max_x = meta::common::try_get<float>(attr, meta::keys::ui::max_x, 1.f);
-    const float min_y = meta::common::try_get<float>(attr, meta::keys::ui::min_y, 0.f);
-    const float max_y = meta::common::try_get<float>(attr, meta::keys::ui::max_y, 1.f);
+    const float min_x = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::min_x,
+                                                     0.f);
+    const float max_x = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::max_x,
+                                                     1.f);
+    const float min_y = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::min_y,
+                                                     0.f);
+    const float max_y = meta::common::try_get<float>(attr,
+                                                     meta::keys::ui::max_y,
+                                                     1.f);
 
     if (widget_type.empty()) widget_type = "CurveEditor";
 

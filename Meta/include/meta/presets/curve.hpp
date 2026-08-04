@@ -2,8 +2,8 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
-#include <vector>
 #include "meta/core/attribute.hpp"
+#include <vector>
 
 namespace meta::presets
 {

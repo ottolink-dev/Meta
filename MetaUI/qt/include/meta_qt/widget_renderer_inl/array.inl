@@ -25,17 +25,17 @@ namespace meta::qt
 // =====================================
 
 inline std::vector<float> resample_bilinear_array(const std::vector<float> &src,
-                                                  int                       src_w,
-                                                  int                       src_h,
-                                                  int                       dst_w,
-                                                  int                       dst_h)
+                                                  int src_w,
+                                                  int src_h,
+                                                  int dst_w,
+                                                  int dst_h)
 {
   if (src.empty() || src_w <= 0 || src_h <= 0)
     return std::vector<float>(static_cast<size_t>(dst_w * dst_h), 0.f);
 
   std::vector<float> dst(static_cast<size_t>(dst_w * dst_h));
-  const float        x_scale = static_cast<float>(src_w) / static_cast<float>(dst_w);
-  const float        y_scale = static_cast<float>(src_h) / static_cast<float>(dst_h);
+  const float x_scale = static_cast<float>(src_w) / static_cast<float>(dst_w);
+  const float y_scale = static_cast<float>(src_h) / static_cast<float>(dst_h);
 
   for (int j = 0; j < dst_h; ++j)
   {
@@ -57,8 +57,10 @@ inline std::vector<float> resample_bilinear_array(const std::vector<float> &src,
       const float v01 = src[static_cast<size_t>(y1 * src_w + x0)];
       const float v11 = src[static_cast<size_t>(y1 * src_w + x1)];
 
-      dst[static_cast<size_t>(j * dst_w + i)] = (1.f - ty) * ((1.f - tx) * v00 + tx * v10) +
-                                                ty * ((1.f - tx) * v01 + tx * v11);
+      dst[static_cast<size_t>(j * dst_w + i)] = (1.f - ty) * ((1.f - tx) * v00 +
+                                                              tx * v10) +
+                                                ty * ((1.f - tx) * v01 +
+                                                      tx * v11);
     }
   }
   return dst;
@@ -74,10 +76,10 @@ inline float cubic_hermite_array(float a, float b, float c, float d, float t)
 }
 
 inline std::vector<float> resample_bicubic_array(const std::vector<float> &src,
-                                                 int                       src_w,
-                                                 int                       src_h,
-                                                 int                       dst_w,
-                                                 int                       dst_h)
+                                                 int src_w,
+                                                 int src_h,
+                                                 int dst_w,
+                                                 int dst_h)
 {
   if (src.empty() || src_w <= 0 || src_h <= 0 || dst_w <= 0 || dst_h <= 0)
     return std::vector<float>(static_cast<size_t>(dst_w * dst_h), 0.f);
@@ -90,8 +92,8 @@ inline std::vector<float> resample_bicubic_array(const std::vector<float> &src,
   };
 
   std::vector<float> dst(static_cast<size_t>(dst_w * dst_h));
-  const float        x_scale = static_cast<float>(src_w) / static_cast<float>(dst_w);
-  const float        y_scale = static_cast<float>(src_h) / static_cast<float>(dst_h);
+  const float x_scale = static_cast<float>(src_w) / static_cast<float>(dst_w);
+  const float y_scale = static_cast<float>(src_h) / static_cast<float>(dst_h);
 
   for (int j = 0; j < dst_h; ++j)
   {
@@ -113,7 +115,11 @@ inline std::vector<float> resample_bicubic_array(const std::vector<float> &src,
                                           at(x0 + 2, y0 + r),
                                           tx);
 
-      dst[static_cast<size_t>(j * dst_w + i)] = cubic_hermite_array(rows[0], rows[1], rows[2], rows[3], ty);
+      dst[static_cast<size_t>(j * dst_w + i)] = cubic_hermite_array(rows[0],
+                                                                    rows[1],
+                                                                    rows[2],
+                                                                    rows[3],
+                                                                    ty);
     }
   }
   return dst;
@@ -125,8 +131,7 @@ inline std::vector<float> resample_bicubic_array(const std::vector<float> &src,
 
 template <> struct WidgetRenderer<meta::Array>
 {
-  static MetaWidget *render(Attribute<meta::Array> &attr,
-                            QWidget                *parent)
+  static MetaWidget *render(Attribute<meta::Array> &attr, QWidget *parent)
   {
     std::string       widget_type = meta::common::widget_type(attr);
     const std::string label_txt = meta::common::label(attr);
@@ -144,10 +149,12 @@ template <> struct WidgetRenderer<meta::Array>
     {
       int canvas_w = 128;
       int canvas_h = 128;
-  
-      if (const auto *val = attr.metadata().try_value<int>(meta::keys::ui::width))
+
+      if (const auto *val = attr.metadata().try_value<int>(
+              meta::keys::ui::width))
         canvas_w = *val;
-      if (const auto *val = attr.metadata().try_value<int>(meta::keys::ui::height))
+      if (const auto *val = attr.metadata().try_value<int>(
+              meta::keys::ui::height))
         canvas_h = *val;
 
       auto *canvas = new ArrayCanvas(label_txt, canvas_w, canvas_h, widget);
@@ -157,7 +164,7 @@ template <> struct WidgetRenderer<meta::Array>
       widget->set_sync_from_model(
           [canvas, &attr]()
           {
-            auto const &arr = attr.value();
+            auto const        &arr = attr.value();
             std::vector<float> data = arr.vector;
 
             if (!data.empty())
@@ -172,7 +179,9 @@ template <> struct WidgetRenderer<meta::Array>
               }
             }
 
-            data = resample_bilinear_array(data, arr.shape.x, arr.shape.y,
+            data = resample_bilinear_array(data,
+                                           arr.shape.x,
+                                           arr.shape.y,
                                            canvas->get_field_width(),
                                            canvas->get_field_height());
             canvas->set_field_data(data);
@@ -183,7 +192,8 @@ template <> struct WidgetRenderer<meta::Array>
       // Background image DataProvider support
       meta::DataProvider data_provider;
       if (const auto *mp = attr.metadata().find(meta::keys::ui::data_provider))
-        if (const auto *dp = mp->try_cast<meta::Attribute<meta::DataProvider>>())
+        if (const auto
+                *dp = mp->try_cast<meta::Attribute<meta::DataProvider>>())
           data_provider = dp->value();
 
       if (data_provider)
@@ -214,10 +224,12 @@ template <> struct WidgetRenderer<meta::Array>
                          Q_EMIT widget->value_changed();
 
                          auto const &cdata = canvas->get_field_data();
-                         auto &arr = attr.value();
+                         auto       &arr = attr.value();
                          arr.vector = resample_bicubic_array(
-                             cdata, canvas->get_field_width(),
-                             canvas->get_field_height(), arr.shape.x,
+                             cdata,
+                             canvas->get_field_width(),
+                             canvas->get_field_height(),
+                             arr.shape.x,
                              arr.shape.y);
 
                          attr.value_changed.notify(attr.value());
@@ -230,10 +242,12 @@ template <> struct WidgetRenderer<meta::Array>
                        [&attr, canvas, widget]()
                        {
                          auto const &cdata = canvas->get_field_data();
-                         auto &arr = attr.value();
+                         auto       &arr = attr.value();
                          arr.vector = resample_bicubic_array(
-                             cdata, canvas->get_field_width(),
-                             canvas->get_field_height(), arr.shape.x,
+                             cdata,
+                             canvas->get_field_width(),
+                             canvas->get_field_height(),
+                             arr.shape.x,
                              arr.shape.y);
 
                          Q_EMIT widget->edit_ended();

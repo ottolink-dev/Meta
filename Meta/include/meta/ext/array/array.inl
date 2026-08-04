@@ -2,8 +2,8 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
-#include <string>
 #include <sstream>
+#include <string>
 
 #include "meta/type/attribute_traits.hpp"
 #include "meta/type/type_name.hpp"
@@ -23,7 +23,8 @@ template <> struct AttributeTraits<Array>
   static std::string to_string(const Array &v)
   {
     std::ostringstream oss;
-    oss << "shape: (" << v.shape.x << ", " << v.shape.y << "), vector size: " << v.vector.size();
+    oss << "shape: (" << v.shape.x << ", " << v.shape.y
+        << "), vector size: " << v.vector.size();
     return oss.str();
   }
 

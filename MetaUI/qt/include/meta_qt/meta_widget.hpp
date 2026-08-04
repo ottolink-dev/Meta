@@ -77,7 +77,7 @@ protected:
   void closeEvent(QCloseEvent *event) override;
 
 private:
-  bool editing_ = false;
+  bool                  editing_ = false;
   std::function<void()> sync_from_model_;
 };
 

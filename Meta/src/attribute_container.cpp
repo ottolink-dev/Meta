@@ -211,10 +211,10 @@ nlohmann::json AttributeContainer::json_to() const
   for (const auto &[name, attr] : attributes_)
   {
     if (attr->type() == std::type_index(typeid(meta::DataProvider)))
-      continue;  // non-serializable runtime provider
+      continue; // non-serializable runtime provider
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
     if (attr->type() == std::type_index(typeid(meta::GradientPresets)))
-      continue;  // non-serializable host configuration
+      continue; // non-serializable host configuration
 #endif
     j[name] = attr->json_to();
   }

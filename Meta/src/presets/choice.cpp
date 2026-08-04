@@ -8,8 +8,10 @@
 namespace meta::presets
 {
 
-Attribute<bool> &checkbox(AttributeContainer &c, std::string_view key, std::string_view label,
-                          bool value)
+Attribute<bool> &checkbox(AttributeContainer &c,
+                          std::string_view    key,
+                          std::string_view    label,
+                          bool                value)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -18,9 +20,12 @@ Attribute<bool> &checkbox(AttributeContainer &c, std::string_view key, std::stri
   return *a;
 }
 
-Attribute<bool> &binary_buttons(AttributeContainer &c, std::string_view key,
-                                std::string_view label, std::string_view label_true,
-                                std::string_view label_false, bool value)
+Attribute<bool> &binary_buttons(AttributeContainer &c,
+                                std::string_view    key,
+                                std::string_view    label,
+                                std::string_view    label_true,
+                                std::string_view    label_false,
+                                bool                value)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -31,8 +36,12 @@ Attribute<bool> &binary_buttons(AttributeContainer &c, std::string_view key,
   return *a;
 }
 
-Attribute<int> &enum_choice(AttributeContainer &c, std::string_view key, std::string_view label,
-                            const std::vector<std::pair<int, std::string>> &items, int value)
+Attribute<int> &enum_choice(
+    AttributeContainer                             &c,
+    std::string_view                                key,
+    std::string_view                                label,
+    const std::vector<std::pair<int, std::string>> &items,
+    int                                             value)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -42,10 +51,12 @@ Attribute<int> &enum_choice(AttributeContainer &c, std::string_view key, std::st
   return *a;
 }
 
-Attribute<std::string> &string_choice(AttributeContainer &c, std::string_view key,
-                                      std::string_view label,
-                                      const std::vector<std::string> &choices, std::string value,
-                                      bool use_combo)
+Attribute<std::string> &string_choice(AttributeContainer             &c,
+                                      std::string_view                key,
+                                      std::string_view                label,
+                                      const std::vector<std::string> &choices,
+                                      std::string                     value,
+                                      bool                            use_combo)
 {
   auto *a = c.add(std::string(key), std::move(value));
   auto &m = a->metadata();

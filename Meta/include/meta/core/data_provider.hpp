@@ -19,8 +19,8 @@ namespace meta
 /**
  * @brief A type-erased container class inheriting from std::any.
  *
- * Provides a convenient template member function `get<T>()` to retrieve pointers
- * to the wrapped value, matching typical generic query syntax.
+ * Provides a convenient template member function `get<T>()` to retrieve
+ * pointers to the wrapped value, matching typical generic query syntax.
  */
 struct Any : std::any
 {
@@ -31,35 +31,32 @@ struct Any : std::any
    * @tparam T The expected type of the contained value.
    * @return A pointer to const T if the type matches, or nullptr otherwise.
    */
-  template <typename T>
-  const T* get() const
-  {
-    return std::any_cast<T>(this);
-  }
+  template <typename T> const T *get() const { return std::any_cast<T>(this); }
 
   /**
    * @brief Accesses the contained value as a pointer to T.
    * @tparam T The expected type of the contained value.
    * @return A pointer to T if the type matches, or nullptr otherwise.
    */
-  template <typename T>
-  T* get()
-  {
-    return std::any_cast<T>(this);
-  }
+  template <typename T> T *get() { return std::any_cast<T>(this); }
 };
 
-/// Host-supplied callback returning fresh display data on each call. Non-serializable.
+/// Host-supplied callback returning fresh display data on each call.
+/// Non-serializable.
 using DataProvider = std::function<Any()>;
 
-/// No-op traits: a DataProvider carries runtime state that must not be serialized.
+/// No-op traits: a DataProvider carries runtime state that must not be
+/// serialized.
 template <> struct AttributeTraits<DataProvider>
 {
-  static std::string   to_string(const DataProvider &) { return "<data_provider>"; }
+  static std::string to_string(const DataProvider &)
+  {
+    return "<data_provider>";
+  }
 
   static nlohmann::json json_to(const DataProvider &) { return nullptr; }
-  
-  static DataProvider   json_from(const nlohmann::json &) { return {}; }
+
+  static DataProvider json_from(const nlohmann::json &) { return {}; }
 };
 
 } // namespace meta

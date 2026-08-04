@@ -21,7 +21,7 @@ namespace meta
 /**
  * @class EventConnection
  * @brief Manages the lifetime of a subscription to an Event.
- * 
+ *
  * Automatically disconnects the subscription upon destruction unless
  * manually disconnected beforehand.
  */
@@ -68,7 +68,7 @@ public:
 
   /**
    * @brief Manually disconnect the subscription.
-   * 
+   *
    * Triggers the stored callback and releases it. Safe to call multiple times.
    */
   void disconnect()
@@ -87,9 +87,10 @@ private:
 /**
  * @class Event
  * @brief Thread-unsafe publisher-subscriber event stream.
- * 
- * Allows multiple callbacks to subscribe and receive notifications of new values/signals.
- * 
+ *
+ * Allows multiple callbacks to subscribe and receive notifications of new
+ * values/signals.
+ *
  * @tparam Args Argument types passed to subscribers when notified.
  */
 template <typename... Args> class Event
@@ -108,7 +109,7 @@ public:
 
   /**
    * @brief Subscribe to the event.
-   * 
+   *
    * @param callback Function to be called when notify() is called.
    * @return EventConnection Managing the subscription lifetime.
    */
@@ -123,15 +124,18 @@ public:
     // disconnect becomes a safe no-op (prevents UAF on listeners_).
     std::weak_ptr<void> alive = alive_token_;
 
-    return EventConnection([this, id, alive]()
-                           { if (!alive.expired()) this->unsubscribe(id); });
+    return EventConnection(
+        [this, id, alive]()
+        {
+          if (!alive.expired()) this->unsubscribe(id);
+        });
   }
 
   /**
    * @brief Notify all subscribers with the given arguments.
-   * 
-   * Copies the listener list internally to allow callbacks to safely unsubscribe
-   * themselves during execution.
+   *
+   * Copies the listener list internally to allow callbacks to safely
+   * unsubscribe themselves during execution.
    */
   void notify(Args... args)
   {

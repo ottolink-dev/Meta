@@ -62,8 +62,8 @@ template <> struct AttributeTraits<GradientPresets>
   {
     return "<gradient_presets:" + std::to_string(v.presets.size()) + ">";
   }
-  static nlohmann::json   json_to(const GradientPresets &) { return nullptr; }
-  static GradientPresets  json_from(const nlohmann::json &) { return {}; }
+  static nlohmann::json  json_to(const GradientPresets &) { return nullptr; }
+  static GradientPresets json_from(const nlohmann::json &) { return {}; }
 };
 
 } // namespace meta

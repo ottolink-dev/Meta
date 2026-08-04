@@ -10,9 +10,14 @@
 namespace meta::presets
 {
 
-Attribute<glm::vec2> &wavenumber(AttributeContainer &c, std::string_view key,
-                                 std::string_view label, glm::vec2 value, float vmin, float vmax,
-                                 bool link_xy, std::string_view format)
+Attribute<glm::vec2> &wavenumber(AttributeContainer &c,
+                                 std::string_view    key,
+                                 std::string_view    label,
+                                 glm::vec2           value,
+                                 float               vmin,
+                                 float               vmax,
+                                 bool                link_xy,
+                                 std::string_view    format)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -25,9 +30,14 @@ Attribute<glm::vec2> &wavenumber(AttributeContainer &c, std::string_view key,
   return *a;
 }
 
-Attribute<glm::vec2> &range(AttributeContainer &c, std::string_view key, std::string_view label,
-                            glm::vec2 value, float vmin, float vmax, bool is_active,
-                            std::string_view format)
+Attribute<glm::vec2> &range(AttributeContainer &c,
+                            std::string_view    key,
+                            std::string_view    label,
+                            glm::vec2           value,
+                            float               vmin,
+                            float               vmax,
+                            bool                is_active,
+                            std::string_view    format)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -41,8 +51,14 @@ Attribute<glm::vec2> &range(AttributeContainer &c, std::string_view key, std::st
   return *a;
 }
 
-Attribute<glm::vec2> &xy(AttributeContainer &c, std::string_view key, std::string_view label,
-                         glm::vec2 value, float xmin, float xmax, float ymin, float ymax)
+Attribute<glm::vec2> &xy(AttributeContainer &c,
+                         std::string_view    key,
+                         std::string_view    label,
+                         glm::vec2           value,
+                         float               xmin,
+                         float               xmax,
+                         float               ymin,
+                         float               ymax)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();
@@ -57,8 +73,10 @@ Attribute<glm::vec2> &xy(AttributeContainer &c, std::string_view key, std::strin
   return *a;
 }
 
-Attribute<std::vector<glm::vec3>> &points(AttributeContainer &c, std::string_view key,
-                                          std::string_view label, std::vector<glm::vec3> value)
+Attribute<std::vector<glm::vec3>> &points(AttributeContainer    &c,
+                                          std::string_view       key,
+                                          std::string_view       label,
+                                          std::vector<glm::vec3> value)
 {
   auto *a = c.add(std::string(key), std::move(value));
   auto &m = a->metadata();
@@ -67,8 +85,10 @@ Attribute<std::vector<glm::vec3>> &points(AttributeContainer &c, std::string_vie
   return *a;
 }
 
-Attribute<glm::vec4> &color(AttributeContainer &c, std::string_view key, std::string_view label,
-                            glm::vec4 value)
+Attribute<glm::vec4> &color(AttributeContainer &c,
+                            std::string_view    key,
+                            std::string_view    label,
+                            glm::vec4           value)
 {
   auto *a = c.add(std::string(key), value);
   auto &m = a->metadata();

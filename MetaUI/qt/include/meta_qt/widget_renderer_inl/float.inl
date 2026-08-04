@@ -33,9 +33,10 @@ template <> struct WidgetRenderer<float>
     const bool        plus_minus = meta::common::try_get<bool>(attr,
                                                         "ui.plus_minus",
                                                         false);
-    const bool        log_scale = meta::common::try_get<bool>(attr,
-                                                       meta::keys::ui::log_scale,
-                                                       false);
+    const bool        log_scale = meta::common::try_get<bool>(
+        attr,
+        meta::keys::ui::log_scale,
+        false);
 
     float &value = attr.value();
 

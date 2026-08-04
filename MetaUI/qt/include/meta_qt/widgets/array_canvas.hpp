@@ -2,10 +2,10 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
-#include <QWidget>
 #include <QImage>
-#include <vector>
+#include <QWidget>
 #include <string>
+#include <vector>
 
 namespace meta::qt
 {
@@ -16,17 +16,19 @@ class ArrayCanvas : public QWidget
 
 public:
   explicit ArrayCanvas(const std::string &label,
-                       int width = 256,
-                       int height = 256,
-                       QWidget *parent = nullptr);
+                       int                width = 256,
+                       int                height = 256,
+                       QWidget           *parent = nullptr);
 
   QSize sizeHint() const override;
 
-  void set_field_data(const std::vector<float> &data);
+  void                      set_field_data(const std::vector<float> &data);
   const std::vector<float> &get_field_data() const;
 
   void set_background_image(const std::vector<uint8_t> &pixels,
-                            int w, int h, int channels);
+                            int                         w,
+                            int                         h,
+                            int                         channels);
 
   void clear();
 
@@ -48,23 +50,23 @@ protected:
   bool event(QEvent *event) override;
 
 private:
-  void draw_at(const QPoint &pos, Qt::MouseButtons buttons);
-  void update_geometry();
-  bool is_mouse_cursor_on_img() const;
+  void   draw_at(const QPoint &pos, Qt::MouseButtons buttons);
+  void   update_geometry();
+  bool   is_mouse_cursor_on_img() const;
   QColor colormap(float v) const;
 
   std::string label_;
-  int width_ = 128;
-  int height_ = 128;
+  int         width_ = 128;
+  int         height_ = 128;
 
   std::vector<float> field_;
 
   // Background image
   QImage bg_image_;
-  bool show_bg_image_ = true;
+  bool   show_bg_image_ = true;
 
   // Brush settings
-  int brush_radius_ = 10;
+  int   brush_radius_ = 10;
   float brush_strength_ = 0.1f;
 
   // Modifiers
@@ -74,7 +76,7 @@ private:
   bool is_hovered_ = false;
 
   QPoint pos_previous_;
-  QRect rect_img_;
+  QRect  rect_img_;
 
   std::string help_msg_;
 };

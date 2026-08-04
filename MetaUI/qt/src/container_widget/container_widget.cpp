@@ -77,9 +77,10 @@ void render_flat(CategoryNode              &node,
 
     if (w)
     {
-      if (const std::string tip = meta::common::try_get<std::string>(*p_attr,
-                                                                     meta::keys::ui::tooltip,
-                                                                     "");
+      if (const std::string tip = meta::common::try_get<std::string>(
+              *p_attr,
+              meta::keys::ui::tooltip,
+              "");
           !tip.empty())
         w->setToolTip(QString::fromStdString(tip));
     }
@@ -147,9 +148,10 @@ void render_category(meta::AttributeContainer  &container,
 
     if (w) // avoid 'None' type widgets
     {
-      if (const std::string tip = meta::common::try_get<std::string>(*p_attr,
-                                                                      meta::keys::ui::tooltip,
-                                                                      "");
+      if (const std::string tip = meta::common::try_get<std::string>(
+              *p_attr,
+              meta::keys::ui::tooltip,
+              "");
           !tip.empty())
         w->setToolTip(QString::fromStdString(tip));
 
@@ -239,9 +241,10 @@ void render_category_merged(meta::AttributeContainer        &container,
 
       if (w) // 'None' widget is possible
       {
-        if (const std::string tip = meta::common::try_get<std::string>(*p_attr,
-                                                                        meta::keys::ui::tooltip,
-                                                                        "");
+        if (const std::string tip = meta::common::try_get<std::string>(
+                *p_attr,
+                meta::keys::ui::tooltip,
+                "");
             !tip.empty())
           w->setToolTip(QString::fromStdString(tip));
 

@@ -10,8 +10,10 @@
 namespace meta::presets
 {
 
-Attribute<ColorGradient> &color_gradient(AttributeContainer &c, std::string_view key,
-                                         std::string_view label, ColorGradient value)
+Attribute<ColorGradient> &color_gradient(AttributeContainer &c,
+                                         std::string_view    key,
+                                         std::string_view    label,
+                                         ColorGradient       value)
 {
   auto *a = c.add(std::string(key), std::move(value));
   auto &m = a->metadata();

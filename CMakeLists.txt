@@ -23,8 +23,7 @@ option(META_ENABLE_TESTS "" ON)
 option(META_ENABLE_GLM_TYPES "Enable built-in GLM type registrations" ON)
 option(META_ENABLE_COLOR_GRADIENT_TYPES
        "Enable built-in color gradient type registrations" ON)
-option(META_ENABLE_ARRAY_TYPES
-       "Enable built-in array type registrations" ON)
+option(META_ENABLE_ARRAY_TYPES "Enable built-in array type registrations" ON)
 
 # -----------------------------------------------------------------------------
 # UI backends
@@ -42,9 +41,7 @@ message(STATUS "│ META_ENABLE_GLM_TYPES:            ${META_ENABLE_GLM_TYPES}")
 message(
   STATUS
     "│ META_ENABLE_COLOR_GRADIENT_TYPES: ${META_ENABLE_COLOR_GRADIENT_TYPES}")
-message(
-  STATUS
-    "│ META_ENABLE_ARRAY_TYPES:          ${META_ENABLE_ARRAY_TYPES}")
+message(STATUS "│ META_ENABLE_ARRAY_TYPES:          ${META_ENABLE_ARRAY_TYPES}")
 message(STATUS "│ META_ENABLE_FTXUI_UI:             ${META_ENABLE_FTXUI_UI}")
 message(STATUS "│ META_ENABLE_QT_UI:                ${META_ENABLE_QT_UI}")
 message(STATUS "│ META_ENABLE_TESTS:                ${META_ENABLE_TESTS}")

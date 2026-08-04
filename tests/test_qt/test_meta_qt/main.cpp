@@ -6,8 +6,8 @@
 
 #include "meta.hpp"
 #include "meta_qt.hpp"
-#include "meta_qt/widgets/range_bar.hpp"
 #include "meta_qt/widgets/points_canvas.hpp"
+#include "meta_qt/widgets/range_bar.hpp"
 
 // --- Qt helper
 
@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
       a->metadata().add(meta::keys::ui::format, "{:.2f}");
       a->metadata().add("ui.plus_minus", true);
     }
-    
+
     {
       auto *a = container.add("float_slider_custom_unbounded", 0.f);
       a->metadata().add(meta::keys::ui::widget_type, "SliderFloat");
@@ -473,12 +473,15 @@ int main(int argc, char *argv[])
         a->metadata().add(meta::keys::constraints::max, 2.f);
         a->metadata().add(meta::keys::constraints::step, 0.1f);
         a->metadata().add(meta::keys::ui::format, "{:.3f}");
-        a->metadata().add(meta::keys::ui::data_provider, meta::DataProvider([]() {
-          meta::qt::HistogramData hist;
-          hist.x = {-0.5f, 0.0f, 0.5f, 1.0f, 1.5f};
-          hist.y = {0.1f, 0.8f, 0.4f, 0.9f, 0.2f};
-          return hist;
-        }));
+        a->metadata().add(meta::keys::ui::data_provider,
+                          meta::DataProvider(
+                              []()
+                              {
+                                meta::qt::HistogramData hist;
+                                hist.x = {-0.5f, 0.0f, 0.5f, 1.0f, 1.5f};
+                                hist.y = {0.1f, 0.8f, 0.4f, 0.9f, 0.2f};
+                                return hist;
+                              }));
       }
     }
 
@@ -516,24 +519,27 @@ int main(int argc, char *argv[])
                                        glm::vec3(0.7f, 0.5f, 1.f)};
       auto *a = container.add("std::vector<glm::vec3>_points", values);
       a->metadata().add(meta::keys::ui::widget_type, "PointsEditor");
-      a->metadata().add(meta::keys::ui::data_provider, meta::DataProvider([]() {
-        meta::qt::ImageData img;
-        img.width = 4;
-        img.height = 4;
-        img.channels = 3;
-        img.pixels = std::vector<uint8_t>(4 * 4 * 3, 200);
-        for (int y = 0; y < 4; ++y)
-        {
-          for (int x = 0; x < 4; ++x)
-          {
-            int idx = (y * 4 + x) * 3;
-            img.pixels[idx] = (x + y) * 32;
-            img.pixels[idx + 1] = x * 64;
-            img.pixels[idx + 2] = y * 64;
-          }
-        }
-        return img;
-      }));
+      a->metadata().add(meta::keys::ui::data_provider,
+                        meta::DataProvider(
+                            []()
+                            {
+                              meta::qt::ImageData img;
+                              img.width = 4;
+                              img.height = 4;
+                              img.channels = 3;
+                              img.pixels = std::vector<uint8_t>(4 * 4 * 3, 200);
+                              for (int y = 0; y < 4; ++y)
+                              {
+                                for (int x = 0; x < 4; ++x)
+                                {
+                                  int idx = (y * 4 + x) * 3;
+                                  img.pixels[idx] = (x + y) * 32;
+                                  img.pixels[idx + 1] = x * 64;
+                                  img.pixels[idx + 2] = y * 64;
+                                }
+                              }
+                              return img;
+                            }));
     }
 
     {
@@ -566,15 +572,18 @@ int main(int argc, char *argv[])
 
     float xc = 0.5f * arr.shape.x;
     float yc = 0.5f * arr.shape.y;
-    
+
     for (int y = 0; y < arr.shape.y; ++y)
     {
       for (int x = 0; x < arr.shape.x; ++x)
       {
         float dx = (x - xc) / xc;
-	float dy = (y - yc) / yc;
+        float dy = (y - yc) / yc;
         float dist = std::sqrt(dx * dx + dy * dy);
-        arr.vector[static_cast<size_t>(y * arr.shape.x + x)] = std::clamp(1.f - dist, 0.f, 1.f);
+        arr.vector[static_cast<size_t>(y * arr.shape.x + x)] = std::clamp(
+            1.f - dist,
+            0.f,
+            1.f);
       }
     }
 
@@ -583,37 +592,45 @@ int main(int argc, char *argv[])
     // the editor shape (not the array shape...)
     a->metadata().add(meta::keys::ui::width, 512);
     a->metadata().add(meta::keys::ui::height, 512);
-		   
-    a->metadata().add(meta::keys::ui::data_provider,
-                      meta::DataProvider([]()
-                      {
-                        meta::qt::ImageData img;
-			
-                        img.width = 312; // no constraints
-                        img.height = 312;
-                        img.channels = 4;
-			
-                        img.pixels.resize(static_cast<size_t>(img.width * img.height * img.channels), 0);
-			
-                        for (int y = 0; y < img.height; ++y)
-                        {
-                          for (int x = 0; x < img.width; ++x)
-                          {
-                            float u = static_cast<float>(x) / static_cast<float>(img.width - 1);
-                            float v = static_cast<float>(y) / static_cast<float>(img.height - 1);
-                            float r = (1.f - u) * (1.f - v) * 255.f + u * v * 255.f;
-                            float g = u * (1.f - v) * 255.f;
-                            float b = (1.f - u) * v * 255.f + u * v * 255.f;
-                            float a = (1.f - u) * (1.f - v) * 255.f + u * (1.f - v) * 255.f + (1.f - u) * v * 255.f;
-                            size_t idx = static_cast<size_t>((y * img.width + x) * img.channels);
-                            img.pixels[idx] = static_cast<uint8_t>(r);
-                            img.pixels[idx + 1] = static_cast<uint8_t>(g);
-                            img.pixels[idx + 2] = static_cast<uint8_t>(b);
-                            img.pixels[idx + 3] = static_cast<uint8_t>(a);
-                          }
-                        }
-                        return img;
-                      }));
+
+    a->metadata().add(
+        meta::keys::ui::data_provider,
+        meta::DataProvider(
+            []()
+            {
+              meta::qt::ImageData img;
+
+              img.width = 312; // no constraints
+              img.height = 312;
+              img.channels = 4;
+
+              img.pixels.resize(
+                  static_cast<size_t>(img.width * img.height * img.channels),
+                  0);
+
+              for (int y = 0; y < img.height; ++y)
+              {
+                for (int x = 0; x < img.width; ++x)
+                {
+                  float u = static_cast<float>(x) /
+                            static_cast<float>(img.width - 1);
+                  float v = static_cast<float>(y) /
+                            static_cast<float>(img.height - 1);
+                  float r = (1.f - u) * (1.f - v) * 255.f + u * v * 255.f;
+                  float g = u * (1.f - v) * 255.f;
+                  float b = (1.f - u) * v * 255.f + u * v * 255.f;
+                  float a = (1.f - u) * (1.f - v) * 255.f +
+                            u * (1.f - v) * 255.f + (1.f - u) * v * 255.f;
+                  size_t idx = static_cast<size_t>((y * img.width + x) *
+                                                   img.channels);
+                  img.pixels[idx] = static_cast<uint8_t>(r);
+                  img.pixels[idx + 1] = static_cast<uint8_t>(g);
+                  img.pixels[idx + 2] = static_cast<uint8_t>(b);
+                  img.pixels[idx + 3] = static_cast<uint8_t>(a);
+                }
+              }
+              return img;
+            }));
   }
 #endif
 
