@@ -16,16 +16,32 @@
 namespace meta
 {
 
+/**
+ * @brief A type-erased container class inheriting from std::any.
+ *
+ * Provides a convenient template member function `get<T>()` to retrieve pointers
+ * to the wrapped value, matching typical generic query syntax.
+ */
 struct Any : std::any
 {
   using std::any::any;
 
+  /**
+   * @brief Accesses the contained value as a pointer to const T.
+   * @tparam T The expected type of the contained value.
+   * @return A pointer to const T if the type matches, or nullptr otherwise.
+   */
   template <typename T>
   const T* get() const
   {
     return std::any_cast<T>(this);
   }
 
+  /**
+   * @brief Accesses the contained value as a pointer to T.
+   * @tparam T The expected type of the contained value.
+   * @return A pointer to T if the type matches, or nullptr otherwise.
+   */
   template <typename T>
   T* get()
   {
