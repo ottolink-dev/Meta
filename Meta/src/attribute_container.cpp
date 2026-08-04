@@ -46,8 +46,6 @@ void AttributeContainer::compact_insertion_order()
 {
   Logger::log()->trace("AttributeContainer::compact_insertion_order");
 
-  attributes_.clear();
-
   insertion_order_.erase(std::remove_if(insertion_order_.begin(),
                                         insertion_order_.end(),
                                         [this](const std::string &name) {
