@@ -33,3 +33,7 @@
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
 #include "meta/ext/color_gradient/color_gradient.hpp"
 #endif
+
+#ifdef META_ENABLE_ARRAY_TYPES
+#include "meta/ext/array/array.hpp"
+#endif

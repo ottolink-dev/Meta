@@ -16,6 +16,8 @@ target_compile_definitions(
   PUBLIC $<$<BOOL:${META_ENABLE_GLM_TYPES}>:META_ENABLE_GLM_TYPES>
   PUBLIC
     $<$<BOOL:${META_ENABLE_COLOR_GRADIENT_TYPES}>:META_ENABLE_COLOR_GRADIENT_TYPES>
+  PUBLIC
+    $<$<BOOL:${META_ENABLE_ARRAY_TYPES}>:META_ENABLE_ARRAY_TYPES>
 )
 
 target_compile_definitions(
@@ -27,6 +29,6 @@ target_compile_definitions(
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json
                       spdlog::spdlog)
 
-if(META_ENABLE_GLM_TYPES)
+if(META_ENABLE_GLM_TYPES OR META_ENABLE_ARRAY_TYPES)
   target_link_libraries(${PROJECT_NAME} glm::glm)
 endif()

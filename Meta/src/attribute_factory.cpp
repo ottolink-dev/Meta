@@ -10,6 +10,10 @@
 #include "meta/ext/color_gradient/color_gradient.hpp"
 #endif
 
+#ifdef META_ENABLE_ARRAY_TYPES
+#include "meta/ext/array/array.hpp"
+#endif
+
 namespace meta
 {
 
@@ -80,6 +84,11 @@ void register_builtin_types()
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
   Logger::log()->trace("register_builtin_types: ColorGradient enabled");
   META_REGISTER_ATTRIBUTE_TYPE(meta::ColorGradient);
+#endif
+
+#ifdef META_ENABLE_ARRAY_TYPES
+  Logger::log()->trace("register_builtin_types: Array enabled");
+  META_REGISTER_ATTRIBUTE_TYPE(meta::Array);
 #endif
 
   Logger::log()->trace("register_builtin_types: done");

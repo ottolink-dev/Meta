@@ -104,6 +104,15 @@ int main()
   }
 #endif
 
+#ifdef META_ENABLE_ARRAY_TYPES
+  {
+    Array arr;
+    arr.shape = {2, 3};
+    arr.vector = {1.f, 2.f, 3.f, 4.f, 5.f, 6.f};
+    container.add("Array", arr);
+  }
+#endif
+
   // --- Metadata example
 
   {
@@ -273,6 +282,30 @@ int main()
     auto *a2 = c2.find("g");
     assert(a2 && !a2->metadata().contains(meta::keys::ui::presets));
     std::cout << "[gradient_presets] metadata round-trip OK" << std::endl;
+  }
+#endif
+
+#ifdef META_ENABLE_ARRAY_TYPES
+  {
+    meta::AttributeContainer c;
+    Array arr;
+    arr.shape = {3, 2};
+    arr.vector = {10.f, 20.f, 30.f, 40.f, 50.f, 60.f};
+    c.add("arr", arr);
+
+    auto j = c.json_to();
+    assert(j["arr"]["value"]["vector"].is_binary());
+
+    meta::AttributeContainer c2;
+    c2.json_from(j);
+    auto *a2 = c2.find("arr");
+    assert(a2);
+    auto const &decoded = c2.value<meta::Array>("arr");
+    assert(decoded.shape.x == 3 && decoded.shape.y == 2);
+    assert(decoded.vector.size() == 6);
+    assert(decoded.vector[2] == 30.f);
+
+    std::cout << "[array] binary round-trip OK" << std::endl;
   }
 #endif
 
