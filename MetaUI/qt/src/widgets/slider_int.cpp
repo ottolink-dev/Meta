@@ -267,29 +267,36 @@ void SliderInt::paintEvent(QPaintEvent *)
                     this->style.border_radius(),
                     this->style.border_radius());
 
-  // Value fill bar when the range is bounded, drag handle when it is not: an
-  // unbounded range has no ratio to fill, so the bar would otherwise stay
-  // empty whatever the value.
+  // Value fill bar when the range is bounded, drag handle when it is not. Both
+  // are drawn in the highlight colour and both define the region over which the
+  // label and value are drawn in HighlightedText, so `accent_rect` covers them.
   const bool is_editing = this->value_edit->isVisible();
+  const bool has_fill = this->is_range_bounded() && !is_editing;
+  const bool has_handle = !this->is_range_bounded() && !is_editing;
+  QRect      accent_rect;
 
-  if (this->is_range_bounded() && !is_editing)
+  if (has_fill)
   {
     const int   range = this->vmax - this->vmin;
     const float r = float(this->value - this->vmin) / float(range);
     const int   rcut = int((1.f - r) * float(this->rect_bar.width()));
 
+    accent_rect = this->rect_bar.adjusted(1, 1, -rcut - 1, -1);
+
     p.setBrush(c_fill.darker(130));
     p.setPen(Qt::NoPen);
 
     if (this->add_plus_minus_buttons)
-      p.drawRect(this->rect_bar.adjusted(1, 1, -rcut - 1, -1));
+      p.drawRect(accent_rect);
     else
-      p.drawRoundedRect(this->rect_bar.adjusted(1, 1, -rcut - 1, -1),
+      p.drawRoundedRect(accent_rect,
                         this->style.border_radius(),
                         this->style.border_radius());
   }
-  else if (!is_editing)
+  else if (has_handle)
   {
+    accent_rect = this->handle_rect();
+
     // While dragging, mark the rest position the handle will snap back to.
     if (this->is_dragging)
     {
@@ -301,7 +308,7 @@ void SliderInt::paintEvent(QPaintEvent *)
 
     p.setBrush(c_fill.darker(this->is_dragging ? 110 : 130));
     p.setPen(Qt::NoPen);
-    p.drawRoundedRect(this->handle_rect(),
+    p.drawRoundedRect(accent_rect,
                       this->style.border_radius(),
                       this->style.border_radius());
   }
@@ -316,20 +323,45 @@ void SliderInt::paintEvent(QPaintEvent *)
                QPoint(this->rect_plus.left() - 1, this->rect().bottom()));
   }
 
-  // Label + value
-  p.setBrush(c_text);
-  p.setPen(c_text);
-
+  // Label (left) and value (right) inside the bar
   const QRect label_rect = this->rect_bar.adjusted(this->base_dx,
                                                    0,
                                                    -this->base_dx,
                                                    0);
-  p.drawText(label_rect,
-             Qt::AlignLeft | Qt::AlignVCenter,
-             QString::fromStdString(this->label));
-  p.drawText(label_rect,
-             Qt::AlignRight | Qt::AlignVCenter,
-             QString::fromStdString(this->get_value_as_string()));
+  const QString label_str = QString::fromStdString(this->label);
+  const QString value_str = QString::fromStdString(this->get_value_as_string());
+
+  if (has_fill || has_handle)
+  {
+    // Two-pass draw: text over the highlighted fill or handle uses
+    // HighlightedText for contrast, text over the plain background uses
+    // Text. The two clip regions are complementary (bar minus accent /
+    // accent), so nothing is drawn twice.
+    const QColor c_highlighted_text = pal.color(QPalette::HighlightedText);
+
+    p.save();
+    p.setClipRect(accent_rect);
+    p.setBrush(c_highlighted_text);
+    p.setPen(c_highlighted_text);
+    p.drawText(label_rect, Qt::AlignLeft | Qt::AlignVCenter, label_str);
+    p.drawText(label_rect, Qt::AlignRight | Qt::AlignVCenter, value_str);
+    p.restore();
+
+    p.save();
+    p.setClipRegion(QRegion(this->rect_bar).subtracted(QRegion(accent_rect)));
+    p.setBrush(c_text);
+    p.setPen(c_text);
+    p.drawText(label_rect, Qt::AlignLeft | Qt::AlignVCenter, label_str);
+    p.drawText(label_rect, Qt::AlignRight | Qt::AlignVCenter, value_str);
+    p.restore();
+  }
+  else
+  {
+    p.setBrush(c_text);
+    p.setPen(c_text);
+    p.drawText(label_rect, Qt::AlignLeft | Qt::AlignVCenter, label_str);
+    p.drawText(label_rect, Qt::AlignRight | Qt::AlignVCenter, value_str);
+  }
 
   // ◁/▶ arrows
   p.drawText(this->rect_minus,
