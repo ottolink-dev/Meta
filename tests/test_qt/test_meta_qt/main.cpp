@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
   meta::AttributeContainer container;
 
   const bool base_bool = false;
-  const bool base_float = false;
+  const bool base_float = true;
   const bool base_int = false;
 
   const bool base_string = false;
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 
 #ifdef META_ENABLE_GLM_TYPES
   const bool base_glm_ivec = false;
-  const bool base_glm_vec = true;
+  const bool base_glm_vec = false;
 #endif
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
@@ -213,6 +213,16 @@ int main(int argc, char *argv[])
       a->metadata().add(meta::keys::ui::widget_type, "SliderFloat");
       a->metadata().add(meta::keys::constraints::min, -1.f);
       a->metadata().add(meta::keys::constraints::max, 3.f);
+      a->metadata().add(meta::keys::constraints::step, 0.2f);
+      a->metadata().add(meta::keys::ui::format, "{:.2f}");
+      a->metadata().add("ui.plus_minus", true);
+    }
+    
+    {
+      auto *a = container.add("float_slider_custom_unbounded", 0.f);
+      a->metadata().add(meta::keys::ui::widget_type, "SliderFloat");
+      a->metadata().add(meta::keys::constraints::min, -1.f);
+      a->metadata().add(meta::keys::constraints::max, FLT_MAX);
       a->metadata().add(meta::keys::constraints::step, 0.2f);
       a->metadata().add(meta::keys::ui::format, "{:.2f}");
       a->metadata().add("ui.plus_minus", true);
