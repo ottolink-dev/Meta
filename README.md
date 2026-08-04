@@ -84,6 +84,11 @@ Meta is structured as a modular system:
 * Optional UI backends (Qt, FTXUI stub)
 * Experimental and extensible architecture
 
+> [!WARNING]
+> **Lifetime & GUI Usage Assumptions**
+>
+> In the current setup, it is assumed that all attributes and `AttributeContainer` instances are created beforehand and their structures are not structurally mutated (e.g. deleting, adding, or replacing attributes) during their usage by the GUI. Swapping out, clearing, or destroying containers while active UI widgets are bound to them will lead to dangling references and undefined behavior/crashes, as view widgets keep references directly to their backing models.
+
 ## Extending Meta with a New Built-in Type (Core Source Changes)
 
 To add support for a new type in Meta, follow these steps.
