@@ -18,27 +18,41 @@
 namespace meta
 {
 
+/**
+ * @class EventConnection
+ * @brief Manages the lifetime of a subscription to an Event.
+ * 
+ * Automatically disconnects the subscription upon destruction unless
+ * manually disconnected beforehand.
+ */
 class EventConnection
 {
 public:
   EventConnection() = default;
 
+  /**
+   * @brief Construct a connection with a custom disconnect callback.
+   * @param disconnect Callable to execute when disconnecting.
+   */
   EventConnection(std::function<void()> disconnect)
       : disconnect_(std::move(disconnect))
   {
   }
 
+  /// Destructor automatically triggers the disconnect action.
   ~EventConnection() { disconnect(); }
 
   EventConnection(const EventConnection &) = delete;
   EventConnection &operator=(const EventConnection &) = delete;
 
+  /// Move constructor.
   EventConnection(EventConnection &&other) noexcept
       : disconnect_(std::move(other.disconnect_))
   {
     other.disconnect_ = {};
   }
 
+  /// Move assignment operator.
   EventConnection &operator=(EventConnection &&other) noexcept
   {
     if (this != &other)
@@ -52,6 +66,11 @@ public:
     return *this;
   }
 
+  /**
+   * @brief Manually disconnect the subscription.
+   * 
+   * Triggers the stored callback and releases it. Safe to call multiple times.
+   */
   void disconnect()
   {
     if (disconnect_)
@@ -65,6 +84,14 @@ private:
   std::function<void()> disconnect_;
 };
 
+/**
+ * @class Event
+ * @brief Thread-unsafe publisher-subscriber event stream.
+ * 
+ * Allows multiple callbacks to subscribe and receive notifications of new values/signals.
+ * 
+ * @tparam Args Argument types passed to subscribers when notified.
+ */
 template <typename... Args> class Event
 {
 public:
@@ -79,6 +106,12 @@ public:
   Event(Event &&) noexcept = default;
   Event &operator=(Event &&) noexcept = default;
 
+  /**
+   * @brief Subscribe to the event.
+   * 
+   * @param callback Function to be called when notify() is called.
+   * @return EventConnection Managing the subscription lifetime.
+   */
   EventConnection subscribe(callback_t callback)
   {
     const listener_id_t id = next_id_++;
@@ -94,6 +127,12 @@ public:
                            { if (!alive.expired()) this->unsubscribe(id); });
   }
 
+  /**
+   * @brief Notify all subscribers with the given arguments.
+   * 
+   * Copies the listener list internally to allow callbacks to safely unsubscribe
+   * themselves during execution.
+   */
   void notify(Args... args)
   {
     // copy to allow callbacks to disconnect themselves safely
