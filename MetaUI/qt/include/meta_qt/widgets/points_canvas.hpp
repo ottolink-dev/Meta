@@ -24,7 +24,13 @@ namespace meta::qt
 //   Left-drag existing point  → move it
 //   Right-click point         → delete it
 //   Scroll wheel on point     → adjust z in [0, 1] by z_step
-// ---------------------------------------------------------------------------
+struct ImageData
+{
+  int                  width;
+  int                  height;
+  int                  channels;
+  std::vector<uint8_t> pixels;
+};
 
 class PointsCanvas : public QWidget
 {

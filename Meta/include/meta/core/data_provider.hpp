@@ -2,6 +2,7 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
+#include <any>
 #include <cstdint>
 #include <functional>
 #include <string>
@@ -15,31 +16,33 @@
 namespace meta
 {
 
-/// Qt-free payload a host supplies to a widget for runtime-computed display data.
-struct ProviderData
+struct Any : std::any
 {
-  std::vector<float>   series_x;             ///< e.g. histogram bin centers
-  std::vector<float>   series_y;             ///< e.g. histogram counts/heights
-  int                  image_width    = 0;
-  int                  image_height   = 0;
-  int                  image_channels = 0;   ///< 1, 3, or 4
-  std::vector<uint8_t> image_pixels;         ///< row-major, channel-interleaved
+  using std::any::any;
 
-  bool has_series() const { return !series_y.empty(); }
-  bool has_image() const
+  template <typename T>
+  const T* get() const
   {
-    return image_width > 0 && image_height > 0 && !image_pixels.empty();
+    return std::any_cast<T>(this);
+  }
+
+  template <typename T>
+  T* get()
+  {
+    return std::any_cast<T>(this);
   }
 };
 
 /// Host-supplied callback returning fresh display data on each call. Non-serializable.
-using DataProvider = std::function<ProviderData()>;
+using DataProvider = std::function<Any()>;
 
 /// No-op traits: a DataProvider carries runtime state that must not be serialized.
 template <> struct AttributeTraits<DataProvider>
 {
   static std::string   to_string(const DataProvider &) { return "<data_provider>"; }
+
   static nlohmann::json json_to(const DataProvider &) { return nullptr; }
+  
   static DataProvider   json_from(const nlohmann::json &) { return {}; }
 };
 

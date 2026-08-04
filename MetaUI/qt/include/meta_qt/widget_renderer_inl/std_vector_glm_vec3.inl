@@ -76,12 +76,13 @@ template <> struct WidgetRenderer<std::vector<glm::vec3>>
       {
         try
         {
-          meta::ProviderData d = points_provider();
-          if (d.has_image())
-            canvas->set_background_image(d.image_pixels,
-                                         d.image_width,
-                                         d.image_height,
-                                         d.image_channels);
+          auto data = points_provider();
+          if (auto img = data.get<ImageData>())
+            if (img->width > 0 && img->height > 0 && !img->pixels.empty())
+              canvas->set_background_image(img->pixels,
+                                           img->width,
+                                           img->height,
+                                           img->channels);
         }
         catch (...)
         {
@@ -124,12 +125,13 @@ template <> struct WidgetRenderer<std::vector<glm::vec3>>
             {
               try
               {
-                meta::ProviderData d = points_provider();
-                if (d.has_image())
-                  canvas->set_background_image(d.image_pixels,
-                                               d.image_width,
-                                               d.image_height,
-                                               d.image_channels);
+                auto data = points_provider();
+                if (auto img = data.get<ImageData>())
+                  if (img->width > 0 && img->height > 0 && !img->pixels.empty())
+                    canvas->set_background_image(img->pixels,
+                                                 img->width,
+                                                 img->height,
+                                                 img->channels);
               }
               catch (...)
               {

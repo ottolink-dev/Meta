@@ -218,32 +218,31 @@ int main()
   std::cout << "draw_bounds = " << ui.value<bool>("draw_bounds") << "\n";
 
   {
-    // ProviderData predicates
-    meta::ProviderData d;
-    assert(!d.has_series() && !d.has_image());
-    d.series_y = {1.f, 2.f};
-    assert(d.has_series());
+    struct TestData {};
 
     // Attribute<DataProvider> compiles, to_string is the no-op sentinel
     meta::AttributeContainer c;
     bool called = false;
-    c.add<meta::DataProvider>("p", meta::DataProvider{[&]{ called = true; return meta::ProviderData{}; }});
+    c.add<meta::DataProvider>("p", meta::DataProvider{[&]{ called = true; return TestData{}; }});
     auto *a = c.find("p");
     assert(a && a->to_string() == "<data_provider>");
 
     // the stored provider is callable
     auto *typed = a->try_cast<meta::Attribute<meta::DataProvider>>();
     assert(typed && typed->value());
-    typed->value()();
+    meta::Any res = typed->value()();
+    assert(res.has_value());
+    assert(res.get<TestData>() != nullptr);
     assert(called);
 
     std::cout << "[data_provider] core OK" << std::endl;
   }
 
   {
+    struct TestData {};
     meta::AttributeContainer c;
     c.add<int>("keep", 7);
-    c.add<meta::DataProvider>("skip", meta::DataProvider{[]{ return meta::ProviderData{}; }});
+    c.add<meta::DataProvider>("skip", meta::DataProvider{[]{ return TestData{}; }});
     auto j = c.json_to();
     assert(j.contains("keep"));
     assert(!j.contains("skip"));   // DataProvider omitted from serialization

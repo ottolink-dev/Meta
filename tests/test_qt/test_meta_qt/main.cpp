@@ -6,6 +6,8 @@
 
 #include "meta.hpp"
 #include "meta_qt.hpp"
+#include "meta_qt/widgets/range_bar.hpp"
+#include "meta_qt/widgets/points_canvas.hpp"
 
 // --- Qt helper
 
@@ -137,7 +139,7 @@ int main(int argc, char *argv[])
 
 #ifdef META_ENABLE_GLM_TYPES
   const bool base_glm_ivec = false;
-  const bool base_glm_vec = false;
+  const bool base_glm_vec = true;
 #endif
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
@@ -461,6 +463,12 @@ int main(int argc, char *argv[])
         a->metadata().add(meta::keys::constraints::max, 2.f);
         a->metadata().add(meta::keys::constraints::step, 0.1f);
         a->metadata().add(meta::keys::ui::format, "{:.3f}");
+        a->metadata().add(meta::keys::ui::data_provider, meta::DataProvider([]() {
+          meta::qt::HistogramData hist;
+          hist.x = {-0.5f, 0.0f, 0.5f, 1.0f, 1.5f};
+          hist.y = {0.1f, 0.8f, 0.4f, 0.9f, 0.2f};
+          return hist;
+        }));
       }
     }
 
@@ -498,6 +506,24 @@ int main(int argc, char *argv[])
                                        glm::vec3(0.7f, 0.5f, 1.f)};
       auto *a = container.add("std::vector<glm::vec3>_points", values);
       a->metadata().add(meta::keys::ui::widget_type, "PointsEditor");
+      a->metadata().add(meta::keys::ui::data_provider, meta::DataProvider([]() {
+        meta::qt::ImageData img;
+        img.width = 4;
+        img.height = 4;
+        img.channels = 3;
+        img.pixels = std::vector<uint8_t>(4 * 4 * 3, 200);
+        for (int y = 0; y < 4; ++y)
+        {
+          for (int x = 0; x < 4; ++x)
+          {
+            int idx = (y * 4 + x) * 3;
+            img.pixels[idx] = (x + y) * 32;
+            img.pixels[idx + 1] = x * 64;
+            img.pixels[idx + 2] = y * 64;
+          }
+        }
+        return img;
+      }));
     }
 
     {

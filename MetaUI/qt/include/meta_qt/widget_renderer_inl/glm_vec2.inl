@@ -277,9 +277,10 @@ template <> struct WidgetRenderer<glm::vec2>
       {
         try
         {
-          meta::ProviderData d = range_provider();
-          if (d.has_series())
-            bar->set_histogram(d.series_x, d.series_y);
+          auto data = range_provider();
+          if (auto histogram = data.get<HistogramData>())
+            if (!histogram->y.empty())
+              bar->set_histogram(histogram->x, histogram->y);
         }
         catch (...)
         {
@@ -383,9 +384,10 @@ template <> struct WidgetRenderer<glm::vec2>
             {
               try
               {
-                meta::ProviderData d = range_provider();
-                if (d.has_series())
-                  bar->set_histogram(d.series_x, d.series_y);
+                auto data = range_provider();
+                if (auto histogram = data.get<HistogramData>())
+                  if (!histogram->y.empty())
+                    bar->set_histogram(histogram->x, histogram->y);
               }
               catch (...)
               {

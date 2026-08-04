@@ -11,6 +11,12 @@
 namespace meta::qt
 {
 
+struct HistogramData
+{
+  std::vector<float> x;
+  std::vector<float> y;
+};
+
 // Horizontal range bar with two draggable handles.
 // value.x = low handle, value.y = high handle.
 // Invariant: value.x <= value.y, both clamped to [domain_min, domain_max].
