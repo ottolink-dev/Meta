@@ -71,3 +71,7 @@ MetaWidget *render(AbstractAttribute *p_attr, QWidget *parent = nullptr);
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
 #include "meta_qt/widget_renderer_inl/color_gradient.inl"
 #endif
+
+#ifdef META_ENABLE_ARRAY_TYPES
+#include "meta_qt/widget_renderer_inl/array.inl"
+#endif

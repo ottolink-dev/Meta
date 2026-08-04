@@ -91,6 +91,14 @@ MetaWidget *render(AbstractAttribute *p_attr, QWidget *parent)
   }
 #endif
 
+#ifdef META_ENABLE_ARRAY_TYPES
+  if (p_attr->type() == typeid(meta::Array))
+  {
+    auto &attr = static_cast<Attribute<meta::Array> &>(*p_attr);
+    return WidgetRenderer<meta::Array>::render(attr, parent);
+  }
+#endif
+
   Logger::log()->error("attribute type not supported '{}'",
                        p_attr->type().name());
 

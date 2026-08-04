@@ -40,5 +40,7 @@ inline constexpr char read_only[] = "ui.read_only";
 inline constexpr char state[] = "ui.state";
 inline constexpr char tooltip[] = "ui.tooltip";
 inline constexpr char widget_type[] = "ui.widget_type";
+inline constexpr char width[] = "ui.width";
+inline constexpr char height[] = "ui.height";
 
 } // namespace meta::keys::ui
