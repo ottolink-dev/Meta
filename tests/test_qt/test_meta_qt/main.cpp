@@ -130,8 +130,8 @@ int main(int argc, char *argv[])
   meta::AttributeContainer container;
 
   const bool base_bool = false;
-  const bool base_float = true;
-  const bool base_int = true;
+  const bool base_float = false;
+  const bool base_int = false;
 
   const bool base_string = false;
   const bool base_std_filesystem_path = false;
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 
 #ifdef META_ENABLE_GLM_TYPES
   const bool base_glm_ivec = false;
-  const bool base_glm_vec = false;
+  const bool base_glm_vec = true;
 #endif
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
