@@ -5,10 +5,13 @@ var searchData=
   ['serialize_5fmetadata_2',['serialize_metadata',['../namespacemeta.html#a7bc00a3e6c82bebf50d9bd6b724d8128',1,'meta']]],
   ['set_5fcurrent_3',['set_current',['../classmeta_1_1ContainerGroup.html#a869e7c2de22d43cd0a9bf5f55c35229a',1,'meta::ContainerGroup']]],
   ['set_5ffrom_5fany_4',['set_from_any',['../classmeta_1_1AbstractAttribute.html#a04b9468d19cc59456c5e761a36eba6a0',1,'meta::AbstractAttribute::set_from_any()'],['../classmeta_1_1Attribute.html#a19bd7cfff14eac74dbea1fa64c3d2d06',1,'meta::Attribute::set_from_any()']]],
-  ['set_5fpresets_5',['set_presets',['../classmeta_1_1ColorGradient.html#a4c90dca751c0b8ab4209c90d2055568f',1,'meta::ColorGradient']]],
+  ['set_5finsertion_5forder_5',['set_insertion_order',['../classmeta_1_1AttributeContainer.html#af595c59d271648639f1cf0d735bd5097',1,'meta::AttributeContainer']]],
   ['set_5fvalue_6',['set_value',['../classmeta_1_1ColorGradient.html#a7e8778ea1096d97411ee37b8142cac57',1,'meta::ColorGradient']]],
   ['setattributecommand_7',['SetAttributeCommand',['../classmeta_1_1SetAttributeCommand.html#a53a701bd7af30efe5dd5616f3c4590cd',1,'meta::SetAttributeCommand']]],
-  ['size_8',['size',['../classmeta_1_1AttributeContainer.html#a883f07e5f83ad0ccd7d68280164a795c',1,'meta::AttributeContainer::size()'],['../classmeta_1_1ContainerGroup.html#a9c03b68dbd3ad3bcdc4f6eaec65db3a9',1,'meta::ContainerGroup::size()']]],
-  ['snapshot_5fmanager_9',['snapshot_manager',['../classmeta_1_1AttributeContainer.html#aeb6e6e1a9f188e3aa53896f9b0c94ebf',1,'meta::AttributeContainer::snapshot_manager()'],['../classmeta_1_1AttributeContainer.html#a7fb22ee2a8c63bbbf154b30b06d993cf',1,'meta::AttributeContainer::snapshot_manager() const']]],
-  ['subscribe_10',['subscribe',['../classmeta_1_1Event.html#ae9efe77a31419e5cb46d49f62e7dac09',1,'meta::Event']]]
+  ['size_8',['size',['../classmeta_1_1ContainerGroup.html#a9c03b68dbd3ad3bcdc4f6eaec65db3a9',1,'meta::ContainerGroup::size()'],['../classmeta_1_1AttributeContainer.html#a883f07e5f83ad0ccd7d68280164a795c',1,'meta::AttributeContainer::size()']]],
+  ['slider_5ffloat_9',['slider_float',['../namespacemeta_1_1presets.html#af991d58b77084f624501f01008bed548',1,'meta::presets']]],
+  ['slider_5fint_10',['slider_int',['../namespacemeta_1_1presets.html#a09fb0fde5b87818eb69a5a950683eb26',1,'meta::presets']]],
+  ['snapshot_5fmanager_11',['snapshot_manager',['../classmeta_1_1AttributeContainer.html#a7fb22ee2a8c63bbbf154b30b06d993cf',1,'meta::AttributeContainer::snapshot_manager() const'],['../classmeta_1_1AttributeContainer.html#aeb6e6e1a9f188e3aa53896f9b0c94ebf',1,'meta::AttributeContainer::snapshot_manager()']]],
+  ['string_5fchoice_12',['string_choice',['../namespacemeta_1_1presets.html#ae1c8693829c612cf4a042a830c24ec90',1,'meta::presets']]],
+  ['subscribe_13',['subscribe',['../classmeta_1_1Event.html#ae9efe77a31419e5cb46d49f62e7dac09',1,'meta::Event']]]
 ];

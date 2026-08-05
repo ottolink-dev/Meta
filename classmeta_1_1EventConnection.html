@@ -104,6 +104,9 @@ $(document).ready(function(){initNavTree('classmeta_1_1EventConnection.html','')
 </div><!--header-->
 <div class="contents">
 
+<p>Manages the lifetime of a subscription to an <a class="el" href="classmeta_1_1Event.html" title="Thread-unsafe publisher-subscriber event stream.">Event</a>.  
+ <a href="classmeta_1_1EventConnection.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="event_8hpp_source.html">event.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -111,18 +114,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e0427cb1c4ef64e7e5294bafa71ba9f" id="r_a1e0427cb1c4ef64e7e5294bafa71ba9f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a1e0427cb1c4ef64e7e5294bafa71ba9f">EventConnection</a> ()=default</td></tr>
 <tr class="separator:a1e0427cb1c4ef64e7e5294bafa71ba9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5396cb3e9bb343d40aa89d971a6a768e" id="r_a5396cb3e9bb343d40aa89d971a6a768e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a5396cb3e9bb343d40aa89d971a6a768e">EventConnection</a> (std::function&lt; void()&gt; <a class="el" href="classmeta_1_1EventConnection.html#a4cd1a7f3705e5c9272af8b3e95602fad">disconnect</a>)</td></tr>
+<tr class="memdesc:a5396cb3e9bb343d40aa89d971a6a768e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a connection with a custom disconnect callback.  <br /></td></tr>
 <tr class="separator:a5396cb3e9bb343d40aa89d971a6a768e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3622ed38a5977aefeb935da1ecbc4ac2" id="r_a3622ed38a5977aefeb935da1ecbc4ac2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a3622ed38a5977aefeb935da1ecbc4ac2">~EventConnection</a> ()</td></tr>
+<tr class="memdesc:a3622ed38a5977aefeb935da1ecbc4ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor automatically triggers the disconnect action.  <br /></td></tr>
 <tr class="separator:a3622ed38a5977aefeb935da1ecbc4ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16f8d697919bafd134d84365ae507b1a" id="r_a16f8d697919bafd134d84365ae507b1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a16f8d697919bafd134d84365ae507b1a">EventConnection</a> (const <a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &amp;)=delete</td></tr>
 <tr class="separator:a16f8d697919bafd134d84365ae507b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaffe859495c498bdbe41ea843a1610c4" id="r_aaffe859495c498bdbe41ea843a1610c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#aaffe859495c498bdbe41ea843a1610c4">operator=</a> (const <a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &amp;)=delete</td></tr>
 <tr class="separator:aaffe859495c498bdbe41ea843a1610c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f399b31b73f910c61df0dc7bfedbcc6" id="r_a4f399b31b73f910c61df0dc7bfedbcc6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a4f399b31b73f910c61df0dc7bfedbcc6">EventConnection</a> (<a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a4f399b31b73f910c61df0dc7bfedbcc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <br /></td></tr>
 <tr class="separator:a4f399b31b73f910c61df0dc7bfedbcc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6532d4a436e039b606122774822c0762" id="r_a6532d4a436e039b606122774822c0762"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a6532d4a436e039b606122774822c0762">operator=</a> (<a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a6532d4a436e039b606122774822c0762"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment operator.  <br /></td></tr>
 <tr class="separator:a6532d4a436e039b606122774822c0762"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cd1a7f3705e5c9272af8b3e95602fad" id="r_a4cd1a7f3705e5c9272af8b3e95602fad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#a4cd1a7f3705e5c9272af8b3e95602fad">disconnect</a> ()</td></tr>
+<tr class="memdesc:a4cd1a7f3705e5c9272af8b3e95602fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually disconnect the subscription.  <br /></td></tr>
 <tr class="separator:a4cd1a7f3705e5c9272af8b3e95602fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -130,7 +138,10 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:aa436847c63461a3acb49753527e82d6e" id="r_aa436847c63461a3acb49753527e82d6e"><td class="memItemLeft" align="right" valign="top">std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html#aa436847c63461a3acb49753527e82d6e">disconnect_</a></td></tr>
 <tr class="separator:aa436847c63461a3acb49753527e82d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages the lifetime of a subscription to an <a class="el" href="classmeta_1_1Event.html" title="Thread-unsafe publisher-subscriber event stream.">Event</a>. </p>
+<p>Automatically disconnects the subscription upon destruction unless manually disconnected beforehand. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1e0427cb1c4ef64e7e5294bafa71ba9f" name="a1e0427cb1c4ef64e7e5294bafa71ba9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e0427cb1c4ef64e7e5294bafa71ba9f">&#9670;&#160;</a></span>EventConnection() <span class="overload">[1/4]</span></h2>
 
@@ -180,6 +191,14 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Construct a connection with a custom disconnect callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">disconnect</td><td>Callable to execute when disconnecting. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a3622ed38a5977aefeb935da1ecbc4ac2" name="a3622ed38a5977aefeb935da1ecbc4ac2"></a>
@@ -204,6 +223,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destructor automatically triggers the disconnect action. </p>
 
 </div>
 </div>
@@ -257,6 +278,8 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Move constructor. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -282,6 +305,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Manually disconnect the subscription. </p>
+<p>Triggers the stored callback and releases it. Safe to call multiple times. </p>
 
 </div>
 </div>
@@ -334,6 +360,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Move assignment operator. </p>
 
 </div>
 </div>

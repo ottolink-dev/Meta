@@ -2,6 +2,11 @@
 \hypertarget{classmeta_1_1Event}{}\label{classmeta_1_1Event}\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
 
 
+Thread-\/unsafe publisher-\/subscriber event stream.  
+
+
+
+
 {\ttfamily \#include $<$event.\+hpp$>$}
 
 \doxysubsubsection*{Classes}
@@ -19,10 +24,20 @@ using \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{lis
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \mbox{\hyperlink{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09}{subscribe}} (\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\+\_\+t}} callback)
+\mbox{\hyperlink{classmeta_1_1Event_a849371b2ea3b5fcd7c843709633fd367}{Event}} ()=default
 \item 
+\mbox{\hyperlink{classmeta_1_1Event_a386967f7b408f4c7b7eceae932aebc4b}{Event}} (const \mbox{\hyperlink{classmeta_1_1Event}{Event}} \&)=delete
+\item 
+\mbox{\hyperlink{classmeta_1_1Event}{Event}} \& \mbox{\hyperlink{classmeta_1_1Event_a9d707d610b1753f7dda0f1bcc631372d}{operator=}} (const \mbox{\hyperlink{classmeta_1_1Event}{Event}} \&)=delete
+\item 
+\mbox{\hyperlink{classmeta_1_1Event_a08864cc75c6d9826a4a9447450984ea9}{Event}} (\mbox{\hyperlink{classmeta_1_1Event}{Event}} \&\&) noexcept=default
+\item 
+\mbox{\hyperlink{classmeta_1_1Event}{Event}} \& \mbox{\hyperlink{classmeta_1_1Event_a61d76fca3051a9498b42daab5feed060}{operator=}} (\mbox{\hyperlink{classmeta_1_1Event}{Event}} \&\&) noexcept=default
+\item 
+\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \mbox{\hyperlink{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09}{subscribe}} (\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\+\_\+t}} callback)
+\begin{DoxyCompactList}\small\item\em Subscribe to the event. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}} (Args... args)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Notify all subscribers with the given arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -34,7 +49,23 @@ void \mbox{\hyperlink{classmeta_1_1Event_a01e559e9a97f3ea3ca33ec2b6110a457}{unsu
 std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener}{Listener}} $>$ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\+\_\+}}
 \item 
 \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\+\_\+id\+\_\+t}} \mbox{\hyperlink{classmeta_1_1Event_a83117ee8fb6ddffc159258917f7fa927}{next\+\_\+id\+\_\+}} = 0
+\item 
+std\+::shared\+\_\+ptr$<$ void $>$ \mbox{\hyperlink{classmeta_1_1Event_a92c07f67737d1e8551c8b7e9e83908fe}{alive\+\_\+token\+\_\+}} = std\+::make\+\_\+shared$<$char$>$()
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename... Args$>$\newline
+class meta\+::\+Event$<$ Args $>$}
+Thread-\/unsafe publisher-\/subscriber event stream. 
+
+Allows multiple callbacks to subscribe and receive notifications of new values/signals.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Argument types passed to subscribers when notified. \\
+\hline
+\end{DoxyTemplParams}
 
 
 \doxysubsection{Member Typedef Documentation}
@@ -54,6 +85,30 @@ using \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::list
 
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmeta_1_1Event_a849371b2ea3b5fcd7c843709633fd367}\label{classmeta_1_1Event_a849371b2ea3b5fcd7c843709633fd367} 
+\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!Event@{Event}}
+\index{Event@{Event}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::\+Event (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classmeta_1_1Event_a386967f7b408f4c7b7eceae932aebc4b}\label{classmeta_1_1Event_a386967f7b408f4c7b7eceae932aebc4b} 
+\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!Event@{Event}}
+\index{Event@{Event}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::\+Event (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$ Args $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classmeta_1_1Event_a08864cc75c6d9826a4a9447450984ea9}\label{classmeta_1_1Event_a08864cc75c6d9826a4a9447450984ea9} 
+\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!Event@{Event}}
+\index{Event@{Event}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{Event()}{Event()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$ Args $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}\label{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451} 
 \index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!notify@{notify}}
@@ -62,6 +117,24 @@ using \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::list
 {\footnotesize\ttfamily template$<$typename... Args$>$ \\
 void \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::notify (\begin{DoxyParamCaption}\item[{Args...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Notify all subscribers with the given arguments. 
+
+Copies the listener list internally to allow callbacks to safely unsubscribe themselves during execution. \Hypertarget{classmeta_1_1Event_a9d707d610b1753f7dda0f1bcc631372d}\label{classmeta_1_1Event_a9d707d610b1753f7dda0f1bcc631372d} 
+\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classmeta_1_1Event}{Event}} \& \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$ Args $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classmeta_1_1Event_a61d76fca3051a9498b42daab5feed060}\label{classmeta_1_1Event_a61d76fca3051a9498b42daab5feed060} 
+\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+\mbox{\hyperlink{classmeta_1_1Event}{Event}} \& \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$ Args $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
 \Hypertarget{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09}\label{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09} 
 \index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!subscribe@{subscribe}}
 \index{subscribe@{subscribe}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
@@ -69,6 +142,18 @@ void \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::notif
 {\footnotesize\ttfamily template$<$typename... Args$>$ \\
 \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::subscribe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\+\_\+t}}}]{callback }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Subscribe to the event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Function to be called when \doxylink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify()} is called. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classmeta_1_1EventConnection}{Event\+Connection} Managing the subscription lifetime. 
+\end{DoxyReturn}
 \Hypertarget{classmeta_1_1Event_a01e559e9a97f3ea3ca33ec2b6110a457}\label{classmeta_1_1Event_a01e559e9a97f3ea3ca33ec2b6110a457} 
 \index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!unsubscribe@{unsubscribe}}
 \index{unsubscribe@{unsubscribe}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
@@ -79,6 +164,13 @@ void \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::unsub
 
 
 \doxysubsection{Member Data Documentation}
+\Hypertarget{classmeta_1_1Event_a92c07f67737d1e8551c8b7e9e83908fe}\label{classmeta_1_1Event_a92c07f67737d1e8551c8b7e9e83908fe} 
+\index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!alive\_token\_@{alive\_token\_}}
+\index{alive\_token\_@{alive\_token\_}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{alive\_token\_}{alive\_token\_}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+std\+::shared\+\_\+ptr$<$void$>$ \mbox{\hyperlink{classmeta_1_1Event}{meta\+::\+Event}}$<$ Args $>$\+::alive\+\_\+token\+\_\+ = std\+::make\+\_\+shared$<$char$>$()\hspace{0.3cm}{\ttfamily [private]}}
+
 \Hypertarget{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}\label{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b} 
 \index{meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}!listeners\_@{listeners\_}}
 \index{listeners\_@{listeners\_}!meta::Event$<$ Args $>$@{meta::Event$<$ Args $>$}}

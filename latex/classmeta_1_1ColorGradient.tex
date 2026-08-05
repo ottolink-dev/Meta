@@ -2,7 +2,7 @@
 \hypertarget{classmeta_1_1ColorGradient}{}\label{classmeta_1_1ColorGradient}\index{meta::ColorGradient@{meta::ColorGradient}}
 
 
-Editable color gradient with optional presets.  
+Editable color gradient.  
 
 
 
@@ -18,12 +18,8 @@ void \mbox{\hyperlink{classmeta_1_1ColorGradient_a41278df1e7a2356271b3762a49382b
 \begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON representation. \end{DoxyCompactList}\item 
 nlohmann\+::json \mbox{\hyperlink{classmeta_1_1ColorGradient_af237aee28617812c2124d1c1085fd6e2}{json\+\_\+to}} () const
 \begin{DoxyCompactList}\small\item\em Serializes the object to a JSON representation. \end{DoxyCompactList}\item 
-const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \& \mbox{\hyperlink{classmeta_1_1ColorGradient_a591fb451fa031997bb30e435c2d99b67}{presets}} () const
-\begin{DoxyCompactList}\small\item\em Returns the available presets. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1ColorGradient_a7e8778ea1096d97411ee37b8142cac57}{set\+\_\+value}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&new\+\_\+value)
 \begin{DoxyCompactList}\small\item\em Sets the gradient stops. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classmeta_1_1ColorGradient_a4c90dca751c0b8ab4209c90d2055568f}{set\+\_\+presets}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&new\+\_\+presets)
-\begin{DoxyCompactList}\small\item\em Sets the available presets. \end{DoxyCompactList}\item 
 const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \& \mbox{\hyperlink{classmeta_1_1ColorGradient_aa6f929637eabc71f8c2649c0d896654a}{value}} () const
 \begin{DoxyCompactList}\small\item\em Returns the gradient stops. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \& \mbox{\hyperlink{classmeta_1_1ColorGradient_a2e67f0416630399a9b2bcdc05a73e516}{value}} ()
@@ -32,13 +28,13 @@ std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \& \mbox{\hyper
 \begin{DoxyCompactItemize}
 \item 
 std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \mbox{\hyperlink{classmeta_1_1ColorGradient_aef92522e1815a920090d2d039bb94f43}{value\+\_\+}}
-\item 
-std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \mbox{\hyperlink{classmeta_1_1ColorGradient_ae3c2c4fc0a8119711abb5a0158071ae9}{presets\+\_\+}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Editable color gradient with optional presets. 
+Editable color gradient. 
+
+Presets are deliberately NOT part of this value type\+: they are host configuration, carried in attribute metadata as a \doxylink{structmeta_1_1GradientPresets}{Gradient\+Presets} entry (\doxylink{namespacemeta_1_1keys_1_1ui_aa10c249df5f6548c5ee851d7d010eeb8}{keys\+::ui\+::presets}), so that deserializing a value cannot clobber the preset library installed at setup time. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classmeta_1_1ColorGradient_a7933eec94941180458a736512aff6e08}\label{classmeta_1_1ColorGradient_a7933eec94941180458a736512aff6e08} 
@@ -82,26 +78,6 @@ Serializes the object to a JSON representation.
 \begin{DoxyReturn}{Returns}
 nlohmann\+::json JSON object representing the current state. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ColorGradient_a591fb451fa031997bb30e435c2d99b67}\label{classmeta_1_1ColorGradient_a591fb451fa031997bb30e435c2d99b67} 
-\index{meta::ColorGradient@{meta::ColorGradient}!presets@{presets}}
-\index{presets@{presets}!meta::ColorGradient@{meta::ColorGradient}}
-\doxysubsubsection{\texorpdfstring{presets()}{presets()}}
-{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \& meta\+::\+Color\+Gradient\+::presets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
-
-
-
-Returns the available presets. 
-
-\Hypertarget{classmeta_1_1ColorGradient_a4c90dca751c0b8ab4209c90d2055568f}\label{classmeta_1_1ColorGradient_a4c90dca751c0b8ab4209c90d2055568f} 
-\index{meta::ColorGradient@{meta::ColorGradient}!set\_presets@{set\_presets}}
-\index{set\_presets@{set\_presets}!meta::ColorGradient@{meta::ColorGradient}}
-\doxysubsubsection{\texorpdfstring{set\_presets()}{set\_presets()}}
-{\footnotesize\ttfamily void meta\+::\+Color\+Gradient\+::set\+\_\+presets (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&}]{new\+\_\+presets }\end{DoxyParamCaption})}
-
-
-
-Sets the available presets. 
-
 \Hypertarget{classmeta_1_1ColorGradient_a7e8778ea1096d97411ee37b8142cac57}\label{classmeta_1_1ColorGradient_a7e8778ea1096d97411ee37b8142cac57} 
 \index{meta::ColorGradient@{meta::ColorGradient}!set\_value@{set\_value}}
 \index{set\_value@{set\_value}!meta::ColorGradient@{meta::ColorGradient}}
@@ -135,19 +111,6 @@ Returns the gradient stops.
 
 
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classmeta_1_1ColorGradient_ae3c2c4fc0a8119711abb5a0158071ae9}\label{classmeta_1_1ColorGradient_ae3c2c4fc0a8119711abb5a0158071ae9} 
-\index{meta::ColorGradient@{meta::ColorGradient}!presets\_@{presets\_}}
-\index{presets\_@{presets\_}!meta::ColorGradient@{meta::ColorGradient}}
-\doxysubsubsection{\texorpdfstring{presets\_}{presets\_}}
-{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structmeta_1_1Preset}{Preset}}$>$ meta\+::\+Color\+Gradient\+::presets\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{=\ \{}
-\DoxyCodeLine{\ \ \ \ \ \ \{\textcolor{stringliteral}{"{}Grayscale"{}},}
-\DoxyCodeLine{\ \ \ \ \ \ \ \{\{0.f,\ \{0.f,\ 0.f,\ 0.f,\ 1.f\}\},\ \{1.f,\ \{1.f,\ 1.f,\ 1.f,\ 1.f\}\}\}\}\}}
-
-\end{DoxyCode}
 \Hypertarget{classmeta_1_1ColorGradient_aef92522e1815a920090d2d039bb94f43}\label{classmeta_1_1ColorGradient_aef92522e1815a920090d2d039bb94f43} 
 \index{meta::ColorGradient@{meta::ColorGradient}!value\_@{value\_}}
 \index{value\_@{value\_}!meta::ColorGradient@{meta::ColorGradient}}
@@ -157,11 +120,11 @@ Returns the gradient stops.
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{=\ \{\{0.f,\ \{0.f,\ 0.f,\ 0.f,\ 1.f\}\},}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1.f,\ \{1.f,\ 1.f,\ 1.f,\ 1.f\}\}\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{1.f,\ \{1.f,\ 1.f,\ 1.f,\ 1.f\}\}\}}
 
 \end{DoxyCode}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Meta/include/meta/ext/color\+\_\+gradient/\mbox{\hyperlink{color__gradient_8hpp}{color\+\_\+gradient.\+hpp}}\end{DoxyCompactItemize}
+Meta/include/meta/ext/color\+\_\+gradient/\mbox{\hyperlink{ext_2color__gradient_2color__gradient_8hpp}{color\+\_\+gradient.\+hpp}}\end{DoxyCompactItemize}

@@ -1,10 +1,23 @@
 var searchData=
 [
-  ['name_0',['name',['../structmeta_1_1Preset.html#abd87d9ca99edc05595c460656fe89b4c',1,'meta::Preset::name'],['../classmeta_1_1Attribute.html#acd53b61f4daeb870c1de2f64cc623b2d',1,'meta::Attribute::name()'],['../classmeta_1_1AbstractAttribute.html#a34e05959e427fca417caeff45b8c9f6f',1,'meta::AbstractAttribute::name()'],['../structmeta_1_1TypeName_3_01uint64__t_01_4.html#ad1bce7a0861b1570ddaee8356ad3c24f',1,'meta::TypeName&lt; uint64_t &gt;::name'],['../structmeta_1_1TypeName_3_01uint32__t_01_4.html#ae5244ff3976a7d7d5255cd06ef018486',1,'meta::TypeName&lt; uint32_t &gt;::name'],['../structmeta_1_1TypeName_3_01uint16__t_01_4.html#a28ca83287efa7a149b60636e79ad81ef',1,'meta::TypeName&lt; uint16_t &gt;::name'],['../structmeta_1_1TypeName_3_01uint8__t_01_4.html#a47fd264cd4e2c7b52346d3d0fe235d45',1,'meta::TypeName&lt; uint8_t &gt;::name'],['../structmeta_1_1TypeName_3_01bool_01_4.html#a1a76d4a0a644de75dcb8ff5a8df6d915',1,'meta::TypeName&lt; bool &gt;::name'],['../structmeta_1_1TypeName_3_01int_01_4.html#ae8b813f21fb7ec7e34eee42e6a2b3ec3',1,'meta::TypeName&lt; int &gt;::name'],['../structmeta_1_1TypeName_3_01double_01_4.html#a11903da312c0e00b0833fc84940bd920',1,'meta::TypeName&lt; double &gt;::name'],['../structmeta_1_1TypeName_3_01float_01_4.html#a45237c46d2d0435203c8a66f77a1b7d5',1,'meta::TypeName&lt; float &gt;::name']]],
-  ['name_5f_1',['name_',['../classmeta_1_1Attribute.html#a8b810f1d9c81c792a04161cab3dd6b08',1,'meta::Attribute']]],
-  ['names_2',['names',['../classmeta_1_1SnapshotManager.html#a5e27f2bbd5eb4268c21e7b4f3e7bb0d2',1,'meta::SnapshotManager']]],
-  ['new_5fvalue_5f_3',['new_value_',['../classmeta_1_1SetAttributeCommand.html#aac97e364f3e214b4b6c7ecb3a9bacdfd',1,'meta::SetAttributeCommand']]],
-  ['next_5fid_5f_4',['next_id_',['../classmeta_1_1Event.html#a83117ee8fb6ddffc159258917f7fa927',1,'meta::Event']]],
-  ['notify_5',['notify',['../classmeta_1_1Event.html#aff0616e49d75f14b6795c1a2b8b7a451',1,'meta::Event']]],
-  ['numeric_2ehpp_6',['numeric.hpp',['../numeric_8hpp.html',1,'']]]
+  ['max_0',['max',['../namespacemeta_1_1keys_1_1constraints.html#a95348dc98f507f5e81b9546b5dee24d9',1,'meta::keys::constraints']]],
+  ['max_5fx_1',['max_x',['../namespacemeta_1_1keys_1_1ui.html#addcea73f714fdac5c5aa864ec7cb6cc4',1,'meta::keys::ui']]],
+  ['max_5fy_2',['max_y',['../namespacemeta_1_1keys_1_1ui.html#abd9bd2b1f01350fd4f4f62abc72e123d',1,'meta::keys::ui']]],
+  ['merge_5fwith_3',['merge_with',['../classmeta_1_1ICommand.html#a83574bc0d07a22884bec79b5b41296fb',1,'meta::ICommand::merge_with()'],['../classmeta_1_1SetAttributeCommand.html#ac264abccfedc901be3b3dd67242fa51d',1,'meta::SetAttributeCommand::merge_with()']]],
+  ['meta_4',['meta',['../namespacemeta.html',1,'']]],
+  ['meta_2ehpp_5',['meta.hpp',['../meta_8hpp.html',1,'']]],
+  ['meta_3a_3akeys_6',['keys',['../namespacemeta_1_1keys.html',1,'meta']]],
+  ['meta_3a_3akeys_3a_3aconstraints_7',['constraints',['../namespacemeta_1_1keys_1_1constraints.html',1,'meta::keys']]],
+  ['meta_3a_3akeys_3a_3aui_8',['ui',['../namespacemeta_1_1keys_1_1ui.html',1,'meta::keys']]],
+  ['meta_3a_3apresets_9',['presets',['../namespacemeta_1_1presets.html',1,'meta']]],
+  ['meta_3a_3astringlike_10',['StringLike',['../conceptmeta_1_1StringLike.html',1,'meta']]],
+  ['meta_5fdefine_5ftype_5fname_11',['META_DEFINE_TYPE_NAME',['../type__name_8hpp.html#a7b8c9e9159e2ec94e7055efd3d9f541e',1,'type_name.hpp']]],
+  ['meta_5fobject_2ehpp_12',['meta_object.hpp',['../meta__object_8hpp.html',1,'']]],
+  ['meta_5fregister_5fattribute_5ftype_13',['META_REGISTER_ATTRIBUTE_TYPE',['../attribute__factory_8hpp.html#abd0dbebfd92f510dfd1cbf21bf839aab',1,'attribute_factory.hpp']]],
+  ['metadata_14',['metadata',['../classmeta_1_1MetaObject.html#aaa64bfdc3ebb1c26290067a1e3dc5bf6',1,'meta::MetaObject::metadata()'],['../classmeta_1_1MetaObject.html#a155c8e64f91d97387c8cc10bf63783a9',1,'meta::MetaObject::metadata() const']]],
+  ['metadata_5f_15',['metadata_',['../classmeta_1_1MetaObject.html#a0e939f50d4c16e99377a41c465a12b1f',1,'meta::MetaObject']]],
+  ['metaobject_16',['metaobject',['../classmeta_1_1MetaObject.html#a54d756b3460ed63bcfa00d711cb442c2',1,'meta::MetaObject::MetaObject()'],['../classmeta_1_1MetaObject.html',1,'meta::MetaObject']]],
+  ['min_17',['min',['../namespacemeta_1_1keys_1_1constraints.html#a48d52b68a2ffb44683062dad9fc4e260',1,'meta::keys::constraints']]],
+  ['min_5fx_18',['min_x',['../namespacemeta_1_1keys_1_1ui.html#ac81a65280be4f906e78e9ed4823c6154',1,'meta::keys::ui']]],
+  ['min_5fy_19',['min_y',['../namespacemeta_1_1keys_1_1ui.html#a18af73df9db6712f7c1fd149e722464d',1,'meta::keys::ui']]]
 ];

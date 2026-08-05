@@ -12,6 +12,10 @@ namespace \mbox{\hyperlink{namespacemeta_1_1presets}{presets}}
 \item 
 class \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}}
 \begin{DoxyCompactList}\small\item\em Base class for all attribute types stored in the reflection system. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1Any}{Any}}
+\begin{DoxyCompactList}\small\item\em A type-\/erased container class inheriting from std\+::any. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1Array}{Array}}
+\begin{DoxyCompactList}\small\item\em A structure representing an array with dimensions (shape) and flat data (vector). \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}
 \begin{DoxyCompactList}\small\item\em Typed runtime attribute with reflection support. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}
@@ -20,8 +24,10 @@ class \mbox{\hyperlink{classmeta_1_1AttributeFactory}{Attribute\+Factory}}
 \begin{DoxyCompactList}\small\item\em Factory for runtime creation of attributes by type name. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structmeta_1_1AttributeTraits}{Attribute\+Traits}}
 \begin{DoxyCompactList}\small\item\em Default traits for attribute value conversion. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1AttributeTraits_3_01DataProvider_01_4}{Attribute\+Traits$<$ Data\+Provider $>$}}
+\begin{DoxyCompactList}\small\item\em No-\/op traits\+: a Data\+Provider carries runtime state that must not be serialized. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1ColorGradient}{Color\+Gradient}}
-\begin{DoxyCompactList}\small\item\em Editable color gradient with optional presets. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Editable color gradient. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1CommandGroup}{Command\+Group}}
 \begin{DoxyCompactList}\small\item\em Command that groups multiple commands into a single undo/redo step. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1CommandStack}{Command\+Stack}}
@@ -29,9 +35,11 @@ class \mbox{\hyperlink{classmeta_1_1CommandStack}{Command\+Stack}}
 class \mbox{\hyperlink{classmeta_1_1ContainerGroup}{Container\+Group}}
 \begin{DoxyCompactList}\small\item\em Collection of named attribute containers. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1Event}{Event}}
-\item 
+\begin{DoxyCompactList}\small\item\em Thread-\/unsafe publisher-\/subscriber event stream. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}}
-\item 
+\begin{DoxyCompactList}\small\item\em Manages the lifetime of a subscription to an \doxylink{classmeta_1_1Event}{Event}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1GradientPresets}{Gradient\+Presets}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structmeta_1_1Preset}{Preset} library for a gradient attribute, installed by the host into attribute metadata under \doxylink{namespacemeta_1_1keys_1_1ui_aa10c249df5f6548c5ee851d7d010eeb8}{keys\+::ui\+::presets}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}
 \begin{DoxyCompactList}\small\item\em Abstract interface for reversible operations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1Logger}{Logger}}
@@ -56,6 +64,8 @@ struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01float_01_4}{Type\+Name$<$ flo
 \item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01int_01_4}{Type\+Name$<$ int $>$}}
 \item 
+struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01meta_1_1DataProvider_01_4}{Type\+Name$<$ meta\+::\+Data\+Provider $>$}}
+\item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint16__t_01_4}{Type\+Name$<$ uint16\+\_\+t $>$}}
 \item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint32__t_01_4}{Type\+Name$<$ uint32\+\_\+t $>$}}
@@ -77,7 +87,9 @@ using \mbox{\hyperlink{namespacemeta_a7aa591df94fd2685bcb8e24adcdf9fda}{Attr\+Co
 using \mbox{\hyperlink{namespacemeta_a041b3b46016d4565e45294279f021fa4}{Attr\+Iterator}} = Attr\+Container\+Type\+::iterator
 \begin{DoxyCompactList}\small\item\em Mutable iterator over attributes. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacemeta_a3819cf59692150303d5cd95dc4bd2979}{Const\+Attr\+Iterator}} = Attr\+Container\+Type\+::const\+\_\+iterator
-\begin{DoxyCompactList}\small\item\em Const iterator over attributes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Const iterator over attributes. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{Data\+Provider}} = std\+::function$<$ \mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$
+\begin{DoxyCompactList}\small\item\em Host-\/supplied callback returning fresh display data on each call. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -127,7 +139,17 @@ Mutable iterator over attributes.
 
 Const iterator over attributes. 
 
+\Hypertarget{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}\label{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423} 
+\index{meta@{meta}!DataProvider@{DataProvider}}
+\index{DataProvider@{DataProvider}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{DataProvider}{DataProvider}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{meta\+::\+Data\+Provider}} = typedef std\+::function$<$\mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$}
 
+
+
+Host-\/supplied callback returning fresh display data on each call. 
+
+Non-\/serializable. 
 
 \doxysubsection{Function Documentation}
 \Hypertarget{namespacemeta_a1ec007edebf611446a66ccb33aff0311}\label{namespacemeta_a1ec007edebf611446a66ccb33aff0311} 

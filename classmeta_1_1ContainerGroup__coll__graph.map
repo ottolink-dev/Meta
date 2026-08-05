@@ -6,6 +6,6 @@
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="233,217,151,271,148,267,230,212"/>
 <area shape="rect" id="Node000004" href="$classmeta_1_1SnapshotManager.html" title=" " alt="" coords="169,93,351,119"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="263,133,263,181,257,181,257,133"/>
-<area shape="rect" id="Node000005" href="$classmeta_1_1Event.html" title=" " alt="" coords="180,5,340,31"/>
+<area shape="rect" id="Node000005" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="180,5,340,31"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="263,45,263,93,257,93,257,45"/>
 </map>

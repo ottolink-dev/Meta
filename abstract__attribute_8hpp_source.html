@@ -159,7 +159,7 @@ $(document).ready(function(){initNavTree('abstract__attribute_8hpp_source.html',
 <div class="foldopen" id="foldopen00085" data-start="{" data-end="}">
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classmeta_1_1AbstractAttribute.html#af5f7d7e97f9ec75fc31766552cf107ec">   85</a></span>  <span class="keyword">template</span> &lt;<span class="keyword">class</span> T = <span class="keywordtype">void</span>&gt; <span class="keyword">const</span> T *<a class="code hl_function" href="classmeta_1_1AbstractAttribute.html#af5f7d7e97f9ec75fc31766552cf107ec">try_cast</a>()<span class="keyword"> const</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    T *ptr = <span class="keyword">dynamic_cast&lt;</span>T *<span class="keyword">&gt;</span>(<span class="keyword">this</span>);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keyword">const</span> T *ptr = <span class="keyword">dynamic_cast&lt;</span><span class="keyword">const </span>T *<span class="keyword">&gt;</span>(<span class="keyword">this</span>);</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordflow">if</span> (ptr)</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      <span class="keywordflow">return</span> ptr;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">else</span></div>

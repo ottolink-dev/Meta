@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['operator_3d_0',['operator=',['../classmeta_1_1EventConnection.html#aaffe859495c498bdbe41ea843a1610c4',1,'meta::EventConnection::operator=(const EventConnection &amp;)=delete'],['../classmeta_1_1EventConnection.html#a6532d4a436e039b606122774822c0762',1,'meta::EventConnection::operator=(EventConnection &amp;&amp;other) noexcept'],['../classmeta_1_1Logger.html#a5da53987ccbe2ff92062ef09b584de27',1,'meta::Logger::operator=()']]]
+  ['name_0',['name',['../classmeta_1_1AbstractAttribute.html#a34e05959e427fca417caeff45b8c9f6f',1,'meta::AbstractAttribute::name()'],['../classmeta_1_1Attribute.html#acd53b61f4daeb870c1de2f64cc623b2d',1,'meta::Attribute::name()']]],
+  ['names_1',['names',['../classmeta_1_1SnapshotManager.html#a5e27f2bbd5eb4268c21e7b4f3e7bb0d2',1,'meta::SnapshotManager']]],
+  ['notify_2',['notify',['../classmeta_1_1Event.html#aff0616e49d75f14b6795c1a2b8b7a451',1,'meta::Event']]]
 ];

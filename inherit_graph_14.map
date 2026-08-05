@@ -1,3 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structmeta_1_1Stop.html" title="A color stop in a gradient." alt="" coords="5,5,99,31"/>
+<area shape="rect" id="Node000000" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,31,144,56"/>
+<area shape="rect" id="Node000001" href="$classmeta_1_1AbstractAttribute.html" title="Base class for all attribute types stored in the reflection system." alt="" coords="192,5,367,31"/>
+<area shape="poly" id="edge3_Node000000_Node000001" title=" " alt="" coords="157,30,191,26,192,31,158,36"/>
+<area shape="rect" id="Node000003" href="$classmeta_1_1ContainerGroup.html" title="Collection of named attribute containers." alt="" coords="196,55,363,80"/>
+<area shape="poly" id="edge5_Node000000_Node000003" title=" " alt="" coords="158,50,196,55,195,60,157,56"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1Attribute.html" title="Typed runtime attribute with reflection support." alt="" coords="415,5,573,31"/>
+<area shape="poly" id="edge4_Node000001_Node000002" title=" " alt="" coords="380,15,414,15,414,21,380,21"/>
 </map>

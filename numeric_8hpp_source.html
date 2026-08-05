@@ -110,8 +110,7 @@ $(document).ready(function(){initNavTree('numeric_8hpp_source.html',''); initRes
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="attribute_8hpp.html">meta/core/attribute.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="foldopen" id="foldopen00007" data-start="{" data-end="}">
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="namespacemeta_1_1presets.html">    7</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemeta_1_1presets.html">meta::presets</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacemeta_1_1presets.html">meta::presets</a></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="namespacemeta_1_1presets.html#a12c87d3cc24e4a6f323c5389b714667e">   10</a></span><a class="code hl_class" href="classmeta_1_1Attribute.html">Attribute&lt;float&gt;</a> &amp;<a class="code hl_function" href="namespacemeta_1_1presets.html#a12c87d3cc24e4a6f323c5389b714667e">angle</a>(<a class="code hl_class" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;c,</div>
@@ -124,14 +123,32 @@ $(document).ready(function(){initNavTree('numeric_8hpp_source.html',''); initRes
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                     std::string_view    label,</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>                     <span class="keywordtype">int</span>                 value = 0);</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>} <span class="comment">// namespace meta::presets</span></div>
-</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="namespacemeta_1_1presets.html#af991d58b77084f624501f01008bed548">   20</a></span><a class="code hl_class" href="classmeta_1_1Attribute.html">Attribute&lt;float&gt;</a> &amp;<a class="code hl_function" href="namespacemeta_1_1presets.html#af991d58b77084f624501f01008bed548">slider_float</a>(<a class="code hl_class" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;c,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>                               std::string_view    key,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>                               std::string_view    label,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                               <span class="keywordtype">float</span>               value,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>                               <span class="keywordtype">float</span>               vmin,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                               <span class="keywordtype">float</span>               vmax,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                               std::string_view    format = <span class="stringliteral">&quot;{:.3f}&quot;</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                               <span class="keywordtype">bool</span>                log_scale = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="namespacemeta_1_1presets.html#a09fb0fde5b87818eb69a5a950683eb26">   29</a></span><a class="code hl_class" href="classmeta_1_1Attribute.html">Attribute&lt;int&gt;</a> &amp;<a class="code hl_function" href="namespacemeta_1_1presets.html#a09fb0fde5b87818eb69a5a950683eb26">slider_int</a>(<a class="code hl_class" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;c,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                           std::string_view    key,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                           std::string_view    label,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                           <span class="keywordtype">int</span>                 value,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                           <span class="keywordtype">int</span>                 vmin,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                           <span class="keywordtype">int</span>                 vmax,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                           std::string_view    format = <span class="stringliteral">&quot;{}&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>} <span class="comment">// namespace meta::presets</span></div>
 <div class="ttc" id="aattribute_8hpp_html"><div class="ttname"><a href="attribute_8hpp.html">attribute.hpp</a></div><div class="ttdoc">Typed runtime attribute with reflection, serialization, and metadata.</div></div>
 <div class="ttc" id="aclassmeta_1_1AttributeContainer_html"><div class="ttname"><a href="classmeta_1_1AttributeContainer.html">meta::AttributeContainer</a></div><div class="ttdoc">Container of named runtime attributes.</div><div class="ttdef"><b>Definition</b> attribute_container.hpp:59</div></div>
 <div class="ttc" id="aclassmeta_1_1Attribute_html"><div class="ttname"><a href="classmeta_1_1Attribute.html">meta::Attribute</a></div><div class="ttdoc">Typed runtime attribute with reflection support.</div><div class="ttdef"><b>Definition</b> attribute.hpp:50</div></div>
-<div class="ttc" id="anamespacemeta_1_1presets_html"><div class="ttname"><a href="namespacemeta_1_1presets.html">meta::presets</a></div><div class="ttdef"><b>Definition</b> numeric.hpp:8</div></div>
+<div class="ttc" id="anamespacemeta_1_1presets_html"><div class="ttname"><a href="namespacemeta_1_1presets.html">meta::presets</a></div><div class="ttdef"><b>Definition</b> choice.hpp:12</div></div>
+<div class="ttc" id="anamespacemeta_1_1presets_html_a09fb0fde5b87818eb69a5a950683eb26"><div class="ttname"><a href="namespacemeta_1_1presets.html#a09fb0fde5b87818eb69a5a950683eb26">meta::presets::slider_int</a></div><div class="ttdeci">Attribute&lt; int &gt; &amp; slider_int(AttributeContainer &amp;c, std::string_view key, std::string_view label, int value, int vmin, int vmax, std::string_view format=&quot;{}&quot;)</div></div>
 <div class="ttc" id="anamespacemeta_1_1presets_html_a12c87d3cc24e4a6f323c5389b714667e"><div class="ttname"><a href="namespacemeta_1_1presets.html#a12c87d3cc24e4a6f323c5389b714667e">meta::presets::angle</a></div><div class="ttdeci">Attribute&lt; float &gt; &amp; angle(AttributeContainer &amp;c, std::string_view key, std::string_view label, float value=0)</div></div>
 <div class="ttc" id="anamespacemeta_1_1presets_html_ad1df577669955490b2d562a9a5a7f1e5"><div class="ttname"><a href="namespacemeta_1_1presets.html#ad1df577669955490b2d562a9a5a7f1e5">meta::presets::seed</a></div><div class="ttdeci">Attribute&lt; int &gt; &amp; seed(AttributeContainer &amp;c, std::string_view key, std::string_view label, int value=0)</div></div>
+<div class="ttc" id="anamespacemeta_1_1presets_html_af991d58b77084f624501f01008bed548"><div class="ttname"><a href="namespacemeta_1_1presets.html#af991d58b77084f624501f01008bed548">meta::presets::slider_float</a></div><div class="ttdeci">Attribute&lt; float &gt; &amp; slider_float(AttributeContainer &amp;c, std::string_view key, std::string_view label, float value, float vmin, float vmax, std::string_view format=&quot;{:.3f}&quot;, bool log_scale=false)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

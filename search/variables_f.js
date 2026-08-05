@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['value_5f_0',['value_',['../classmeta_1_1Attribute.html#ad2532415a409e5467cac06bf06703565',1,'meta::Attribute::value_'],['../classmeta_1_1ColorGradient.html#aef92522e1815a920090d2d039bb94f43',1,'meta::ColorGradient::value_']]],
-  ['value_5fchanged_1',['value_changed',['../classmeta_1_1Attribute.html#a858e31369ceb320968290876aa5713c8',1,'meta::Attribute']]]
+  ['undo_5fstack_5f_0',['undo_stack_',['../classmeta_1_1CommandStack.html#ae281a38f4c8cc324ac9807e2854ba45e',1,'meta::CommandStack']]]
 ];

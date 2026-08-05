@@ -1,0 +1,21 @@
+\doxysection{Meta/include/meta/core/data\+\_\+provider.hpp File Reference}
+\hypertarget{data__provider_8hpp}{}\label{data__provider_8hpp}\index{Meta/include/meta/core/data\_provider.hpp@{Meta/include/meta/core/data\_provider.hpp}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmeta_1_1Any}{meta\+::\+Any}}
+\begin{DoxyCompactList}\small\item\em A type-\/erased container class inheriting from std\+::any. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1AttributeTraits_3_01DataProvider_01_4}{meta\+::\+Attribute\+Traits$<$ Data\+Provider $>$}}
+\begin{DoxyCompactList}\small\item\em No-\/op traits\+: a Data\+Provider carries runtime state that must not be serialized. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01meta_1_1DataProvider_01_4}{meta\+::\+Type\+Name$<$ meta\+::\+Data\+Provider $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemeta}{meta}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{meta\+::\+Data\+Provider}} = std\+::function$<$ \mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$
+\begin{DoxyCompactList}\small\item\em Host-\/supplied callback returning fresh display data on each call. \end{DoxyCompactList}\end{DoxyCompactItemize}

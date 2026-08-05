@@ -1,19 +1,15 @@
 var searchData=
 [
-  ['max_0',['max',['../namespacemeta_1_1keys_1_1constraints.html#a95348dc98f507f5e81b9546b5dee24d9',1,'meta::keys::constraints']]],
-  ['merge_5fwith_1',['merge_with',['../classmeta_1_1SetAttributeCommand.html#ac264abccfedc901be3b3dd67242fa51d',1,'meta::SetAttributeCommand::merge_with()'],['../classmeta_1_1ICommand.html#a83574bc0d07a22884bec79b5b41296fb',1,'meta::ICommand::merge_with()']]],
-  ['meta_2',['meta',['../namespacemeta.html',1,'']]],
-  ['meta_2ehpp_3',['meta.hpp',['../meta_8hpp.html',1,'']]],
-  ['meta_3a_3akeys_4',['keys',['../namespacemeta_1_1keys.html',1,'meta']]],
-  ['meta_3a_3akeys_3a_3aconstraints_5',['constraints',['../namespacemeta_1_1keys_1_1constraints.html',1,'meta::keys']]],
-  ['meta_3a_3akeys_3a_3aui_6',['ui',['../namespacemeta_1_1keys_1_1ui.html',1,'meta::keys']]],
-  ['meta_3a_3apresets_7',['presets',['../namespacemeta_1_1presets.html',1,'meta']]],
-  ['meta_3a_3astringlike_8',['StringLike',['../conceptmeta_1_1StringLike.html',1,'meta']]],
-  ['meta_5fdefine_5ftype_5fname_9',['META_DEFINE_TYPE_NAME',['../type__name_8hpp.html#a7b8c9e9159e2ec94e7055efd3d9f541e',1,'type_name.hpp']]],
-  ['meta_5fobject_2ehpp_10',['meta_object.hpp',['../meta__object_8hpp.html',1,'']]],
-  ['meta_5fregister_5fattribute_5ftype_11',['META_REGISTER_ATTRIBUTE_TYPE',['../attribute__factory_8hpp.html#abd0dbebfd92f510dfd1cbf21bf839aab',1,'attribute_factory.hpp']]],
-  ['metadata_12',['metadata',['../classmeta_1_1MetaObject.html#aaa64bfdc3ebb1c26290067a1e3dc5bf6',1,'meta::MetaObject::metadata()'],['../classmeta_1_1MetaObject.html#a155c8e64f91d97387c8cc10bf63783a9',1,'meta::MetaObject::metadata() const']]],
-  ['metadata_5f_13',['metadata_',['../classmeta_1_1MetaObject.html#a0e939f50d4c16e99377a41c465a12b1f',1,'meta::MetaObject']]],
-  ['metaobject_14',['metaobject',['../classmeta_1_1MetaObject.html#a54d756b3460ed63bcfa00d711cb442c2',1,'meta::MetaObject::MetaObject()'],['../classmeta_1_1MetaObject.html',1,'meta::MetaObject']]],
-  ['min_15',['min',['../namespacemeta_1_1keys_1_1constraints.html#a48d52b68a2ffb44683062dad9fc4e260',1,'meta::keys::constraints']]]
+  ['label_0',['label',['../namespacemeta_1_1keys_1_1ui.html#a0df564b58f287af0329c510ea64902b5',1,'meta::keys::ui']]],
+  ['label_5ffalse_1',['label_false',['../namespacemeta_1_1keys_1_1ui.html#af48255382d5bc72fe5b5dedc0a5fe7bf',1,'meta::keys::ui']]],
+  ['label_5ftrue_2',['label_true',['../namespacemeta_1_1keys_1_1ui.html#a26f3f0e56572e4493f07e53d8ee238c1',1,'meta::keys::ui']]],
+  ['listener_3',['Listener',['../structmeta_1_1Event_1_1Listener.html',1,'meta::Event']]],
+  ['listener_5fid_5ft_4',['listener_id_t',['../classmeta_1_1Event.html#a52e1c67454634f878c04cf489726aa1f',1,'meta::Event']]],
+  ['listeners_5f_5',['listeners_',['../classmeta_1_1Event.html#a719da3f8750f225ccb4603b8e3aecd7b',1,'meta::Event']]],
+  ['load_6',['load',['../classmeta_1_1SnapshotManager.html#ae92540886e4cef091e79fa7bcb3a2c7e',1,'meta::SnapshotManager']]],
+  ['locked_5fxy_7',['locked_xy',['../namespacemeta_1_1keys_1_1ui.html#a741c6387bc5a4435042a2c7eb428ad5b',1,'meta::keys::ui']]],
+  ['log_8',['log',['../classmeta_1_1Logger.html#a1a17c53906d2694c2711f9772ed23c8f',1,'meta::Logger']]],
+  ['log_5fscale_9',['log_scale',['../namespacemeta_1_1keys_1_1ui.html#a3ce5bb3ab0f3ff0d58ec6e2adee7c573',1,'meta::keys::ui']]],
+  ['logger_10',['logger',['../classmeta_1_1Logger.html',1,'meta::Logger'],['../classmeta_1_1Logger.html#a2956a0a1184ca30178841c5d47ae513d',1,'meta::Logger::Logger()=default'],['../classmeta_1_1Logger.html#a06c2fdf792a63812b3dee60cf74d6982',1,'meta::Logger::Logger(const Logger &amp;)=delete']]],
+  ['logger_2ehpp_11',['logger.hpp',['../logger_8hpp.html',1,'']]]
 ];

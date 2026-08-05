@@ -2,6 +2,11 @@
 \hypertarget{classmeta_1_1EventConnection}{}\label{classmeta_1_1EventConnection}\index{meta::EventConnection@{meta::EventConnection}}
 
 
+Manages the lifetime of a subscription to an \doxylink{classmeta_1_1Event}{Event}.  
+
+
+
+
 {\ttfamily \#include $<$event.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
@@ -10,25 +15,30 @@
 \mbox{\hyperlink{classmeta_1_1EventConnection_a1e0427cb1c4ef64e7e5294bafa71ba9f}{Event\+Connection}} ()=default
 \item 
 \mbox{\hyperlink{classmeta_1_1EventConnection_a5396cb3e9bb343d40aa89d971a6a768e}{Event\+Connection}} (std\+::function$<$ void()$>$ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}})
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a connection with a custom disconnect callback. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classmeta_1_1EventConnection_a3622ed38a5977aefeb935da1ecbc4ac2}{\texorpdfstring{$\sim$}{\string~}\+Event\+Connection}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Destructor automatically triggers the disconnect action. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classmeta_1_1EventConnection_a16f8d697919bafd134d84365ae507b1a}{Event\+Connection}} (const \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \&)=delete
 \item 
 \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \& \mbox{\hyperlink{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4}{operator=}} (const \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \&)=delete
 \item 
 \mbox{\hyperlink{classmeta_1_1EventConnection_a4f399b31b73f910c61df0dc7bfedbcc6}{Event\+Connection}} (\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \&\&other) noexcept
-\item 
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \& \mbox{\hyperlink{classmeta_1_1EventConnection_a6532d4a436e039b606122774822c0762}{operator=}} (\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \&\&other) noexcept
-\item 
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Manually disconnect the subscription. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::function$<$ void()$>$ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\+\_\+}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Manages the lifetime of a subscription to an \doxylink{classmeta_1_1Event}{Event}. 
+
+Automatically disconnects the subscription upon destruction unless manually disconnected beforehand. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classmeta_1_1EventConnection_a1e0427cb1c4ef64e7e5294bafa71ba9f}\label{classmeta_1_1EventConnection_a1e0427cb1c4ef64e7e5294bafa71ba9f} 
@@ -43,11 +53,24 @@ std\+::function$<$ void()$>$ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436
 \doxysubsubsection{\texorpdfstring{EventConnection()}{EventConnection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily meta\+::\+Event\+Connection\+::\+Event\+Connection (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{disconnect }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Construct a connection with a custom disconnect callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disconnect} & Callable to execute when disconnecting. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classmeta_1_1EventConnection_a3622ed38a5977aefeb935da1ecbc4ac2}\label{classmeta_1_1EventConnection_a3622ed38a5977aefeb935da1ecbc4ac2} 
 \index{meta::EventConnection@{meta::EventConnection}!````~EventConnection@{\texorpdfstring{$\sim$}{\string~}EventConnection}}
 \index{````~EventConnection@{\texorpdfstring{$\sim$}{\string~}EventConnection}!meta::EventConnection@{meta::EventConnection}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EventConnection()}{\string~EventConnection()}}
 {\footnotesize\ttfamily meta\+::\+Event\+Connection\+::\texorpdfstring{$\sim$}{\string~}\+Event\+Connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor automatically triggers the disconnect action. 
 
 \Hypertarget{classmeta_1_1EventConnection_a16f8d697919bafd134d84365ae507b1a}\label{classmeta_1_1EventConnection_a16f8d697919bafd134d84365ae507b1a} 
 \index{meta::EventConnection@{meta::EventConnection}!EventConnection@{EventConnection}}
@@ -63,6 +86,10 @@ std\+::function$<$ void()$>$ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436
 
 
 
+Move constructor. 
+
+
+
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}\label{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad} 
 \index{meta::EventConnection@{meta::EventConnection}!disconnect@{disconnect}}
@@ -70,7 +97,11 @@ std\+::function$<$ void()$>$ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436
 \doxysubsubsection{\texorpdfstring{disconnect()}{disconnect()}}
 {\footnotesize\ttfamily void meta\+::\+Event\+Connection\+::disconnect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\Hypertarget{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4}\label{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4} 
+
+
+Manually disconnect the subscription. 
+
+Triggers the stored callback and releases it. Safe to call multiple times. \Hypertarget{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4}\label{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4} 
 \index{meta::EventConnection@{meta::EventConnection}!operator=@{operator=}}
 \index{operator=@{operator=}!meta::EventConnection@{meta::EventConnection}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -81,6 +112,10 @@ std\+::function$<$ void()$>$ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436
 \index{operator=@{operator=}!meta::EventConnection@{meta::EventConnection}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \& meta\+::\+Event\+Connection\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Move assignment operator. 
 
 
 

@@ -3,9 +3,27 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ bool $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_ac6020ea6cccd122a6fcac8d1e9a43131}{checkbox}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, bool value)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ bool $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_acbf6c96fadb9cc2380a9dad37251ea79}{binary\+\_\+buttons}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, std\+::string\+\_\+view label\+\_\+true, std\+::string\+\_\+view label\+\_\+false, bool value)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ int $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_acb0b77c927e12aa19b6152648bb7f196}{enum\+\_\+choice}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, const std\+::vector$<$ std\+::pair$<$ int, std\+::string $>$ $>$ \&items, int value)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::string $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_ae1c8693829c612cf4a042a830c24ec90}{string\+\_\+choice}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, const std\+::vector$<$ std\+::string $>$ \&choices, std\+::string value, bool use\+\_\+combo=true)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::vector$<$ float $>$ $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_a9bfed3c04419e1e0ac83800868ff4bec}{curve}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, std\+::vector$<$ float $>$ value, float vmin, float vmax)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::filesystem\+::path $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_a25c323e1427495a6dba0b2c0d4f6064c}{file}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, std\+::filesystem\+::path value, std\+::string\+\_\+view filter, bool for\+\_\+saving)
+\item 
 \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ float $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_a12c87d3cc24e4a6f323c5389b714667e}{angle}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, float value=0)
 \item 
 \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ int $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_ad1df577669955490b2d562a9a5a7f1e5}{seed}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, int value=0)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ float $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_af991d58b77084f624501f01008bed548}{slider\+\_\+float}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, float value, float vmin, float vmax, std\+::string\+\_\+view format="{}\{\+:.\+3f\}"{}, bool log\+\_\+scale=false)
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ int $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_a09fb0fde5b87818eb69a5a950683eb26}{slider\+\_\+int}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, int value, int vmin, int vmax, std\+::string\+\_\+view format="{}\{\}"{})
+\item 
+\mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::string $>$ \& \mbox{\hyperlink{namespacemeta_1_1presets_af9ba8f40ead218fb7f325b3e229f74b2}{text}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&c, std\+::string\+\_\+view key, std\+::string\+\_\+view label, std\+::string value, bool read\+\_\+only=false)
 \end{DoxyCompactItemize}
 
 
@@ -16,9 +34,63 @@
 \doxysubsubsection{\texorpdfstring{angle()}{angle()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ float $>$ \& meta\+::presets\+::angle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{float}]{value = {\ttfamily 0} }\end{DoxyParamCaption})}
 
+\Hypertarget{namespacemeta_1_1presets_acbf6c96fadb9cc2380a9dad37251ea79}\label{namespacemeta_1_1presets_acbf6c96fadb9cc2380a9dad37251ea79} 
+\index{meta::presets@{meta::presets}!binary\_buttons@{binary\_buttons}}
+\index{binary\_buttons@{binary\_buttons}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{binary\_buttons()}{binary\_buttons()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ bool $>$ \& meta\+::presets\+::binary\+\_\+buttons (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{std\+::string\+\_\+view}]{label\+\_\+true,  }\item[{std\+::string\+\_\+view}]{label\+\_\+false,  }\item[{bool}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_ac6020ea6cccd122a6fcac8d1e9a43131}\label{namespacemeta_1_1presets_ac6020ea6cccd122a6fcac8d1e9a43131} 
+\index{meta::presets@{meta::presets}!checkbox@{checkbox}}
+\index{checkbox@{checkbox}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{checkbox()}{checkbox()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ bool $>$ \& meta\+::presets\+::checkbox (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{bool}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_a9bfed3c04419e1e0ac83800868ff4bec}\label{namespacemeta_1_1presets_a9bfed3c04419e1e0ac83800868ff4bec} 
+\index{meta::presets@{meta::presets}!curve@{curve}}
+\index{curve@{curve}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{curve()}{curve()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::vector$<$ float $>$ $>$ \& meta\+::presets\+::curve (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{std\+::vector$<$ float $>$}]{value,  }\item[{float}]{vmin,  }\item[{float}]{vmax }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_acb0b77c927e12aa19b6152648bb7f196}\label{namespacemeta_1_1presets_acb0b77c927e12aa19b6152648bb7f196} 
+\index{meta::presets@{meta::presets}!enum\_choice@{enum\_choice}}
+\index{enum\_choice@{enum\_choice}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{enum\_choice()}{enum\_choice()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ int $>$ \& meta\+::presets\+::enum\+\_\+choice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{const std\+::vector$<$ std\+::pair$<$ int, std\+::string $>$ $>$ \&}]{items,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_a25c323e1427495a6dba0b2c0d4f6064c}\label{namespacemeta_1_1presets_a25c323e1427495a6dba0b2c0d4f6064c} 
+\index{meta::presets@{meta::presets}!file@{file}}
+\index{file@{file}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{file()}{file()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::filesystem\+::path $>$ \& meta\+::presets\+::file (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{std\+::filesystem\+::path}]{value,  }\item[{std\+::string\+\_\+view}]{filter,  }\item[{bool}]{for\+\_\+saving }\end{DoxyParamCaption})}
+
 \Hypertarget{namespacemeta_1_1presets_ad1df577669955490b2d562a9a5a7f1e5}\label{namespacemeta_1_1presets_ad1df577669955490b2d562a9a5a7f1e5} 
 \index{meta::presets@{meta::presets}!seed@{seed}}
 \index{seed@{seed}!meta::presets@{meta::presets}}
 \doxysubsubsection{\texorpdfstring{seed()}{seed()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ int $>$ \& meta\+::presets\+::seed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{int}]{value = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_af991d58b77084f624501f01008bed548}\label{namespacemeta_1_1presets_af991d58b77084f624501f01008bed548} 
+\index{meta::presets@{meta::presets}!slider\_float@{slider\_float}}
+\index{slider\_float@{slider\_float}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{slider\_float()}{slider\_float()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ float $>$ \& meta\+::presets\+::slider\+\_\+float (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{float}]{value,  }\item[{float}]{vmin,  }\item[{float}]{vmax,  }\item[{std\+::string\+\_\+view}]{format = {\ttfamily "{}\{\+:.3f\}"{}},  }\item[{bool}]{log\+\_\+scale = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_a09fb0fde5b87818eb69a5a950683eb26}\label{namespacemeta_1_1presets_a09fb0fde5b87818eb69a5a950683eb26} 
+\index{meta::presets@{meta::presets}!slider\_int@{slider\_int}}
+\index{slider\_int@{slider\_int}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{slider\_int()}{slider\_int()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ int $>$ \& meta\+::presets\+::slider\+\_\+int (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{int}]{value,  }\item[{int}]{vmin,  }\item[{int}]{vmax,  }\item[{std\+::string\+\_\+view}]{format = {\ttfamily "{}\{\}"{}} }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_ae1c8693829c612cf4a042a830c24ec90}\label{namespacemeta_1_1presets_ae1c8693829c612cf4a042a830c24ec90} 
+\index{meta::presets@{meta::presets}!string\_choice@{string\_choice}}
+\index{string\_choice@{string\_choice}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{string\_choice()}{string\_choice()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::string $>$ \& meta\+::presets\+::string\+\_\+choice (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{choices,  }\item[{std\+::string}]{value,  }\item[{bool}]{use\+\_\+combo = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacemeta_1_1presets_af9ba8f40ead218fb7f325b3e229f74b2}\label{namespacemeta_1_1presets_af9ba8f40ead218fb7f325b3e229f74b2} 
+\index{meta::presets@{meta::presets}!text@{text}}
+\index{text@{text}!meta::presets@{meta::presets}}
+\doxysubsubsection{\texorpdfstring{text()}{text()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}$<$ std\+::string $>$ \& meta\+::presets\+::text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{c,  }\item[{std\+::string\+\_\+view}]{key,  }\item[{std\+::string\+\_\+view}]{label,  }\item[{std\+::string}]{value,  }\item[{bool}]{read\+\_\+only = {\ttfamily false} }\end{DoxyParamCaption})}
 

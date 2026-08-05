@@ -10,106 +10,129 @@
 \DoxyCodeLine{00011\ }
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <algorithm>}}
 \DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <functional>}}
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <utility>}}
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemeta}{meta}}}
-\DoxyCodeLine{00018\ \{}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}}
-\DoxyCodeLine{00021\ \{}
-\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a1e0427cb1c4ef64e7e5294bafa71ba9f}{EventConnection}}()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a5396cb3e9bb343d40aa89d971a6a768e}{EventConnection}}(std::function<\textcolor{keywordtype}{void}()>\ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}})}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}(std::move(\mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}))}
-\DoxyCodeLine{00027\ \ \ \{}
-\DoxyCodeLine{00028\ \ \ \}}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a3622ed38a5977aefeb935da1ecbc4ac2}{\string~EventConnection}}()\ \{\ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}();\ \}}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a16f8d697919bafd134d84365ae507b1a}{EventConnection}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00033\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\mbox{\hyperlink{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a4f399b31b73f910c61df0dc7bfedbcc6}{EventConnection}}(\mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\&other)\ noexcept}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}(std::move(other.disconnect\_))}
-\DoxyCodeLine{00037\ \ \ \{}
-\DoxyCodeLine{00038\ \ \ \ \ other.disconnect\_\ =\ \{\};}
-\DoxyCodeLine{00039\ \ \ \}}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\mbox{\hyperlink{classmeta_1_1EventConnection_a6532d4a436e039b606122774822c0762}{operator=}}(\mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\&other)\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{00042\ \ \ \{}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)}
-\DoxyCodeLine{00044\ \ \ \ \ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}();}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}\ =\ std::move(other.disconnect\_);}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ other.disconnect\_\ =\ \{\};}
-\DoxyCodeLine{00049\ \ \ \ \ \}}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
-\DoxyCodeLine{00052\ \ \ \}}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}()}
-\DoxyCodeLine{00055\ \ \ \{}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}})}
-\DoxyCodeLine{00057\ \ \ \ \ \{}
-\DoxyCodeLine{00058\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}();}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}\ =\ \{\};}
-\DoxyCodeLine{00060\ \ \ \ \ \}}
-\DoxyCodeLine{00061\ \ \ \}}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00064\ \ \ std::function<void()>\ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}};}
-\DoxyCodeLine{00065\ \};}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00067\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1Event}{Event}}}
-\DoxyCodeLine{00068\ \{}
-\DoxyCodeLine{00069\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\_t}}\ =\ std::function<void(Args...)>;}
-\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ =\ std::size\_t;}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \mbox{\hyperlink{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09}{subscribe}}(\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\_t}}\ callback)}
-\DoxyCodeLine{00074\ \ \ \{}
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{classmeta_1_1Event_a83117ee8fb6ddffc159258917f7fa927}{next\_id\_}}++;}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.push\_back(\{id,\ std::move(callback)\});}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}([\textcolor{keyword}{this},\ \textcolor{keywordtype}{id}]()\ \{\ \mbox{\hyperlink{classmeta_1_1Event_a01e559e9a97f3ea3ca33ec2b6110a457}{unsubscribe}}(\textcolor{keywordtype}{id});\ \});}
-\DoxyCodeLine{00080\ \ \ \}}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(Args...\ args)}
-\DoxyCodeLine{00083\ \ \ \{}
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ copy\ to\ allow\ callbacks\ to\ disconnect\ themselves\ safely}}
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{auto}\ listeners\ =\ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}};}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemeta}{meta}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a1e0427cb1c4ef64e7e5294bafa71ba9f}{EventConnection}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a5396cb3e9bb343d40aa89d971a6a768e}{EventConnection}}(std::function<\textcolor{keywordtype}{void}()>\ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}})}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}(std::move(\mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}))}
+\DoxyCodeLine{00039\ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a3622ed38a5977aefeb935da1ecbc4ac2}{\string~EventConnection}}()\ \{\ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}();\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a16f8d697919bafd134d84365ae507b1a}{EventConnection}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\mbox{\hyperlink{classmeta_1_1EventConnection_aaffe859495c498bdbe41ea843a1610c4}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a4f399b31b73f910c61df0dc7bfedbcc6}{EventConnection}}(\mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\&other)\ noexcept}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}(std::move(other.disconnect\_))}
+\DoxyCodeLine{00051\ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ other.disconnect\_\ =\ \{\};}
+\DoxyCodeLine{00053\ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\mbox{\hyperlink{classmeta_1_1EventConnection_a6532d4a436e039b606122774822c0762}{operator=}}(\mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \&\&other)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00057\ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)}
+\DoxyCodeLine{00059\ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}\ =\ std::move(other.disconnect\_);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ other.disconnect\_\ =\ \{\};}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00067\ \ \ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1EventConnection_a4cd1a7f3705e5c9272af8b3e95602fad}{disconnect}}()}
+\DoxyCodeLine{00075\ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}})}
+\DoxyCodeLine{00077\ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}();}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}}\ =\ \{\};}
+\DoxyCodeLine{00080\ \ \ \ \ \}}
+\DoxyCodeLine{00081\ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00084\ \ \ std::function<void()>\ \mbox{\hyperlink{classmeta_1_1EventConnection_aa436847c63461a3acb49753527e82d6e}{disconnect\_}};}
+\DoxyCodeLine{00085\ \};}
 \DoxyCodeLine{00086\ }
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&listener\ :\ listeners)}
-\DoxyCodeLine{00088\ \ \ \ \ \{}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ listener.callback(args...);}
-\DoxyCodeLine{00090\ \ \ \ \ \}}
-\DoxyCodeLine{00091\ \ \ \}}
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00094\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmeta_1_1Event_1_1Listener}{Listener}}}
-\DoxyCodeLine{00095\ \ \ \{}
-\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener_a9e1ee2c442bbc62309f99d093049bba6}{id}};}
-\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\_t}}\ \ \ \ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener_ab41c5f156e543a109209a59cb2cdfa5a}{callback}};}
-\DoxyCodeLine{00098\ \ \ \};}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Event_a01e559e9a97f3ea3ca33ec2b6110a457}{unsubscribe}}(\mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \textcolor{keywordtype}{id})}
-\DoxyCodeLine{00101\ \ \ \{}
-\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.erase(std::remove\_if(\mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.begin(),}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.end(),}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keywordtype}{id}](\textcolor{keyword}{const}\ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener}{Listener}}\ \&listener)}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ return\ listener.id\ ==\ id;\ \}),}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.end());}
-\DoxyCodeLine{00107\ \ \ \}}
-\DoxyCodeLine{00108\ }
-\DoxyCodeLine{00109\ \ \ std::vector<Listener>\ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}};}
-\DoxyCodeLine{00110\ }
-\DoxyCodeLine{00111\ \ \ \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \mbox{\hyperlink{classmeta_1_1Event_a83117ee8fb6ddffc159258917f7fa927}{next\_id\_}}\ =\ 0;}
-\DoxyCodeLine{00112\ \};}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+\DoxyCodeLine{00096\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1Event}{Event}}}
+\DoxyCodeLine{00097\ \{}
+\DoxyCodeLine{00098\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00099\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\_t}}\ =\ std::function<void(Args...)>;}
+\DoxyCodeLine{00100\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ =\ std::size\_t;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \mbox{\hyperlink{classmeta_1_1Event_a849371b2ea3b5fcd7c843709633fd367}{Event}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \mbox{\hyperlink{classmeta_1_1Event_a386967f7b408f4c7b7eceae932aebc4b}{Event}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1Event}{Event}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00105\ \ \ \mbox{\hyperlink{classmeta_1_1Event}{Event}}\ \&\mbox{\hyperlink{classmeta_1_1Event_a9d707d610b1753f7dda0f1bcc631372d}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1Event}{Event}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \mbox{\hyperlink{classmeta_1_1Event_a08864cc75c6d9826a4a9447450984ea9}{Event}}(\mbox{\hyperlink{classmeta_1_1Event}{Event}}\ \&\&)\ noexcept\ =\ default;}
+\DoxyCodeLine{00108\ \ \ \mbox{\hyperlink{classmeta_1_1Event}{Event}}\ \&operator=(\mbox{\hyperlink{classmeta_1_1Event}{Event}}\ \&\&)\ noexcept\ =\ default;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00116\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \mbox{\hyperlink{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09}{subscribe}}(\mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\_t}}\ callback)}
+\DoxyCodeLine{00117\ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{classmeta_1_1Event_a83117ee8fb6ddffc159258917f7fa927}{next\_id\_}}++;}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.push\_back(\{id,\ std::move(callback)\});}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{comment}{//\ Capture\ a\ weak\ handle\ to\ the\ Event's\ lifetime\ token.\ If\ the\ Event\ is}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{//\ destroyed\ before\ the\ connection\ disconnects,\ the\ token\ is\ gone\ and\ the}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//\ disconnect\ becomes\ a\ safe\ no-\/op\ (prevents\ UAF\ on\ listeners\_).}}
+\DoxyCodeLine{00125\ \ \ \ \ std::weak\_ptr<void>\ alive\ =\ \mbox{\hyperlink{classmeta_1_1Event_a92c07f67737d1e8551c8b7e9e83908fe}{alive\_token\_}};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}(}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this},\ \textcolor{keywordtype}{id},\ alive]()}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!alive.expired())\ this-\/>unsubscribe(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00132\ \ \ \}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(Args...\ args)}
+\DoxyCodeLine{00141\ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//\ copy\ to\ allow\ callbacks\ to\ disconnect\ themselves\ safely}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{auto}\ listeners\ =\ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \&listener\ :\ listeners)}
+\DoxyCodeLine{00146\ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ listener.callback(args...);}
+\DoxyCodeLine{00148\ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00152\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmeta_1_1Event_1_1Listener}{Listener}}}
+\DoxyCodeLine{00153\ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener_a9e1ee2c442bbc62309f99d093049bba6}{id}};}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a1dda283b825179b818c07ecf6d492f27}{callback\_t}}\ \ \ \ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener_ab41c5f156e543a109209a59cb2cdfa5a}{callback}};}
+\DoxyCodeLine{00156\ \ \ \};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Event_a01e559e9a97f3ea3ca33ec2b6110a457}{unsubscribe}}(\mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{00159\ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.erase(std::remove\_if(\mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.begin(),}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.end(),}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keywordtype}{id}](\textcolor{keyword}{const}\ \mbox{\hyperlink{structmeta_1_1Event_1_1Listener}{Listener}}\ \&listener)}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ return\ listener.id\ ==\ id;\ \}),}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}}.end());}
+\DoxyCodeLine{00165\ \ \ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ std::vector<Listener>\ \mbox{\hyperlink{classmeta_1_1Event_a719da3f8750f225ccb4603b8e3aecd7b}{listeners\_}};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \mbox{\hyperlink{classmeta_1_1Event_a52e1c67454634f878c04cf489726aa1f}{listener\_id\_t}}\ \mbox{\hyperlink{classmeta_1_1Event_a83117ee8fb6ddffc159258917f7fa927}{next\_id\_}}\ =\ 0;}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \textcolor{comment}{//\ Pure\ lifetime\ sentinel:\ destroyed\ together\ with\ the\ Event.\ A\ weak\_ptr\ to}}
+\DoxyCodeLine{00172\ \ \ \textcolor{comment}{//\ this\ token\ lets\ an\ outliving\ EventConnection\ detect\ a\ dead\ Event\ and\ skip}}
+\DoxyCodeLine{00173\ \ \ \textcolor{comment}{//\ the\ unsubscribe\ (see\ subscribe()).}}
+\DoxyCodeLine{00174\ \ \ std::shared\_ptr<void>\ \mbox{\hyperlink{classmeta_1_1Event_a92c07f67737d1e8551c8b7e9e83908fe}{alive\_token\_}}\ =\ std::make\_shared<char>();}
+\DoxyCodeLine{00175\ \};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \}\ \textcolor{comment}{//\ namespace\ meta}}
 
 \end{DoxyCode}

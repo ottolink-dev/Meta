@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['position_0',['position',['../structmeta_1_1Stop.html#a8fe3d422bd0e09f41fc51bf39393750d',1,'meta::Stop']]],
-  ['power_5fof_5ftwo_1',['power_of_two',['../namespacemeta_1_1keys_1_1constraints.html#a41a01ae5d2b6f41b08fd8cdf8c2a7ed4',1,'meta::keys::constraints']]],
-  ['preset_2',['Preset',['../structmeta_1_1Preset.html',1,'meta']]],
-  ['presets_3',['presets',['../classmeta_1_1ColorGradient.html#a591fb451fa031997bb30e435c2d99b67',1,'meta::ColorGradient']]],
-  ['presets_5f_4',['presets_',['../classmeta_1_1ColorGradient.html#ae3c2c4fc0a8119711abb5a0158071ae9',1,'meta::ColorGradient']]]
+  ['old_5fvalue_5f_0',['old_value_',['../classmeta_1_1SetAttributeCommand.html#ac4da1a17a38e42077676ea1cb5675684',1,'meta::SetAttributeCommand']]],
+  ['operator_3d_1',['operator=',['../classmeta_1_1EventConnection.html#aaffe859495c498bdbe41ea843a1610c4',1,'meta::EventConnection::operator=(const EventConnection &amp;)=delete'],['../classmeta_1_1EventConnection.html#a6532d4a436e039b606122774822c0762',1,'meta::EventConnection::operator=(EventConnection &amp;&amp;other) noexcept'],['../classmeta_1_1Event.html#a9d707d610b1753f7dda0f1bcc631372d',1,'meta::Event::operator=(const Event &amp;)=delete'],['../classmeta_1_1Event.html#a61d76fca3051a9498b42daab5feed060',1,'meta::Event::operator=(Event &amp;&amp;) noexcept=default'],['../classmeta_1_1Logger.html#a5da53987ccbe2ff92062ef09b584de27',1,'meta::Logger::operator=()']]]
 ];

@@ -104,10 +104,10 @@ $(document).ready(function(){initNavTree('classmeta_1_1ColorGradient.html',''); 
 </div><!--header-->
 <div class="contents">
 
-<p>Editable color gradient with optional presets.  
+<p>Editable color gradient.  
  <a href="classmeta_1_1ColorGradient.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="color__gradient_8hpp_source.html">color_gradient.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="ext_2color__gradient_2color__gradient_8hpp_source.html">color_gradient.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -120,15 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af237aee28617812c2124d1c1085fd6e2" id="r_af237aee28617812c2124d1c1085fd6e2"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#af237aee28617812c2124d1c1085fd6e2">json_to</a> () const</td></tr>
 <tr class="memdesc:af237aee28617812c2124d1c1085fd6e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the object to a JSON representation.  <br /></td></tr>
 <tr class="separator:af237aee28617812c2124d1c1085fd6e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a591fb451fa031997bb30e435c2d99b67" id="r_a591fb451fa031997bb30e435c2d99b67"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#a591fb451fa031997bb30e435c2d99b67">presets</a> () const</td></tr>
-<tr class="memdesc:a591fb451fa031997bb30e435c2d99b67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the available presets.  <br /></td></tr>
-<tr class="separator:a591fb451fa031997bb30e435c2d99b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e8778ea1096d97411ee37b8142cac57" id="r_a7e8778ea1096d97411ee37b8142cac57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#a7e8778ea1096d97411ee37b8142cac57">set_value</a> (const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;new_value)</td></tr>
 <tr class="memdesc:a7e8778ea1096d97411ee37b8142cac57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the gradient stops.  <br /></td></tr>
 <tr class="separator:a7e8778ea1096d97411ee37b8142cac57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c90dca751c0b8ab4209c90d2055568f" id="r_a4c90dca751c0b8ab4209c90d2055568f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#a4c90dca751c0b8ab4209c90d2055568f">set_presets</a> (const std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &amp;new_presets)</td></tr>
-<tr class="memdesc:a4c90dca751c0b8ab4209c90d2055568f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the available presets.  <br /></td></tr>
-<tr class="separator:a4c90dca751c0b8ab4209c90d2055568f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6f929637eabc71f8c2649c0d896654a" id="r_aa6f929637eabc71f8c2649c0d896654a"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#aa6f929637eabc71f8c2649c0d896654a">value</a> () const</td></tr>
 <tr class="memdesc:aa6f929637eabc71f8c2649c0d896654a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the gradient stops.  <br /></td></tr>
 <tr class="separator:aa6f929637eabc71f8c2649c0d896654a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,11 +134,10 @@ Public Member Functions</h2></td></tr>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aef92522e1815a920090d2d039bb94f43" id="r_aef92522e1815a920090d2d039bb94f43"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#aef92522e1815a920090d2d039bb94f43">value_</a></td></tr>
 <tr class="separator:aef92522e1815a920090d2d039bb94f43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3c2c4fc0a8119711abb5a0158071ae9" id="r_ae3c2c4fc0a8119711abb5a0158071ae9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ColorGradient.html#ae3c2c4fc0a8119711abb5a0158071ae9">presets_</a></td></tr>
-<tr class="separator:ae3c2c4fc0a8119711abb5a0158071ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Editable color gradient with optional presets. </p>
+<div class="textblock"><p>Editable color gradient. </p>
+<p>Presets are deliberately NOT part of this value type: they are host configuration, carried in attribute metadata as a <a class="el" href="structmeta_1_1GradientPresets.html" title="Preset library for a gradient attribute, installed by the host into attribute metadata under keys::ui...">GradientPresets</a> entry (<a class="el" href="namespacemeta_1_1keys_1_1ui.html#aa10c249df5f6548c5ee851d7d010eeb8">keys::ui::presets</a>), so that deserializing a value cannot clobber the preset library installed at setup time. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7933eec94941180458a736512aff6e08" name="a7933eec94941180458a736512aff6e08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7933eec94941180458a736512aff6e08">&#9670;&#160;</a></span>ColorGradient()</h2>
@@ -220,45 +213,6 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a591fb451fa031997bb30e435c2d99b67" name="a591fb451fa031997bb30e435c2d99b67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a591fb451fa031997bb30e435c2d99b67">&#9670;&#160;</a></span>presets()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &amp; meta::ColorGradient::presets </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the available presets. </p>
-
-</div>
-</div>
-<a id="a4c90dca751c0b8ab4209c90d2055568f" name="a4c90dca751c0b8ab4209c90d2055568f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c90dca751c0b8ab4209c90d2055568f">&#9670;&#160;</a></span>set_presets()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void meta::ColorGradient::set_presets </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>new_presets</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets the available presets. </p>
-
-</div>
-</div>
 <a id="a7e8778ea1096d97411ee37b8142cac57" name="a7e8778ea1096d97411ee37b8142cac57"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e8778ea1096d97411ee37b8142cac57">&#9670;&#160;</a></span>set_value()</h2>
 
@@ -318,31 +272,6 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae3c2c4fc0a8119711abb5a0158071ae9" name="ae3c2c4fc0a8119711abb5a0158071ae9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3c2c4fc0a8119711abb5a0158071ae9">&#9670;&#160;</a></span>presets_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="structmeta_1_1Preset.html">Preset</a>&gt; meta::ColorGradient::presets_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
-<div class="line">      {<span class="stringliteral">&quot;Grayscale&quot;</span>,</div>
-<div class="line">       {{0.f, {0.f, 0.f, 0.f, 1.f}}, {1.f, {1.f, 1.f, 1.f, 1.f}}}}}</div>
-</div><!-- fragment -->
-</div>
-</div>
 <a id="aef92522e1815a920090d2d039bb94f43" name="aef92522e1815a920090d2d039bb94f43"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef92522e1815a920090d2d039bb94f43">&#9670;&#160;</a></span>value_</h2>
 
@@ -363,12 +292,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {{0.f, {0.f, 0.f, 0.f, 1.f}},</div>
-<div class="line">                                {1.f, {1.f, 1.f, 1.f, 1.f}}}</div>
+<div class="line">                              {1.f, {1.f, 1.f, 1.f, 1.f}}}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Meta/include/meta/ext/color_gradient/<a class="el" href="color__gradient_8hpp_source.html">color_gradient.hpp</a></li>
+<li>Meta/include/meta/ext/color_gradient/<a class="el" href="ext_2color__gradient_2color__gradient_8hpp_source.html">color_gradient.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

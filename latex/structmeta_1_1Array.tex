@@ -1,0 +1,87 @@
+\doxysection{meta\+::Array Struct Reference}
+\hypertarget{structmeta_1_1Array}{}\label{structmeta_1_1Array}\index{meta::Array@{meta::Array}}
+
+
+A structure representing an array with dimensions (shape) and flat data (vector).  
+
+
+
+
+{\ttfamily \#include $<$array.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{void}} \mbox{\hyperlink{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b}{json\+\_\+from}} (nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{const}} \&\mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON representation. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf}{json\+\_\+to}} () \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{const}}
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+glm\+::ivec2 \mbox{\hyperlink{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3}{shape}} \{0, 0\}
+\begin{DoxyCompactList}\small\item\em \doxylink{structmeta_1_1Array}{Array} dimensions (e.\+g. width, height). \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{vector}}
+\begin{DoxyCompactList}\small\item\em Flat data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A structure representing an array with dimensions (shape) and flat data (vector). 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b}\label{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b} 
+\index{meta::Array@{meta::Array}!json\_from@{json\_from}}
+\index{json\_from@{json\_from}!meta::Array@{meta::Array}}
+\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{void}} meta\+::\+Array\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{const}} \&}]{json }\end{DoxyParamCaption})}
+
+
+
+Deserializes the object from a JSON representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & Input JSON data used to restore the object state. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf}\label{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf} 
+\index{meta::Array@{meta::Array}!json\_to@{json\_to}}
+\index{json\_to@{json\_to}!meta::Array@{meta::Array}}
+\doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
+{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Array\+::json\+\_\+to (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Serializes the object to a JSON representation. 
+
+\begin{DoxyReturn}{Returns}
+nlohmann\+::json JSON object representing the current state. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3}\label{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3} 
+\index{meta::Array@{meta::Array}!shape@{shape}}
+\index{shape@{shape}!meta::Array@{meta::Array}}
+\doxysubsubsection{\texorpdfstring{shape}{shape}}
+{\footnotesize\ttfamily glm\+::ivec2 meta\+::\+Array\+::shape \{0, 0\}}
+
+
+
+\doxylink{structmeta_1_1Array}{Array} dimensions (e.\+g. width, height). 
+
+\Hypertarget{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}\label{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a} 
+\index{meta::Array@{meta::Array}!vector@{vector}}
+\index{vector@{vector}!meta::Array@{meta::Array}}
+\doxysubsubsection{\texorpdfstring{vector}{vector}}
+{\footnotesize\ttfamily std\+::vector$<$float$>$ meta\+::\+Array\+::vector}
+
+
+
+Flat data. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Meta/include/meta/ext/array/\mbox{\hyperlink{array_8hpp}{array.\+hpp}}\end{DoxyCompactItemize}

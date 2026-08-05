@@ -18,6 +18,7 @@ var classmeta_1_1AttributeContainer =
     [ "insertion_order", "classmeta_1_1AttributeContainer.html#a498bc26ac82caf211c49af80a0302825", null ],
     [ "json_from", "classmeta_1_1AttributeContainer.html#a4349aa8544d422d0fb90a520517a3c48", null ],
     [ "json_to", "classmeta_1_1AttributeContainer.html#af12dbed3c9932638b4d7c01ad81a25cd", null ],
+    [ "set_insertion_order", "classmeta_1_1AttributeContainer.html#af595c59d271648639f1cf0d735bd5097", null ],
     [ "size", "classmeta_1_1AttributeContainer.html#a883f07e5f83ad0ccd7d68280164a795c", null ],
     [ "snapshot_manager", "classmeta_1_1AttributeContainer.html#aeb6e6e1a9f188e3aa53896f9b0c94ebf", null ],
     [ "snapshot_manager", "classmeta_1_1AttributeContainer.html#a7fb22ee2a8c63bbbf154b30b06d993cf", null ],
