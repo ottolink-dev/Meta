@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 
 #ifdef META_ENABLE_GLM_TYPES
   const bool base_glm_ivec = false;
-  const bool base_glm_vec = false;
+  const bool base_glm_vec = true;
 #endif
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
@@ -432,39 +432,40 @@ int main(int argc, char *argv[])
         container.add("glm::vec2_free", glm::vec2(16, 32));
       }
 
-      {
-        auto *a = container.add("glm::vec2_constrained", glm::vec2(16.f, 32.f));
-        a->metadata().add(meta::keys::constraints::min, -1.f);
-        a->metadata().add(meta::keys::constraints::max, 64.f);
-        a->metadata().add(meta::keys::constraints::step, 0.1f);
-        a->metadata().add(meta::keys::ui::format, "{:.2f}");
-      }
+      // {
+      //   auto *a = container.add("glm::vec2_constrained",
+      //   glm::vec2(16.f, 32.f));
+      //   a->metadata().add(meta::keys::constraints::min, -1.f);
+      //   a->metadata().add(meta::keys::constraints::max, 64.f);
+      //   a->metadata().add(meta::keys::constraints::step, 0.1f);
+      //   a->metadata().add(meta::keys::ui::format, "{:.2f}");
+      // }
 
-      {
-        auto *a = container.add("glm::vec2_xy", glm::vec2(16.f, 32.f));
-        a->metadata().add(meta::keys::ui::widget_type, "XYCanvas");
-        a->metadata().add(meta::keys::constraints::min, -1.f);
-        a->metadata().add(meta::keys::constraints::max, 64.f);
-      }
+      // {
+      //   auto *a = container.add("glm::vec2_xy", glm::vec2(16.f, 32.f));
+      //   a->metadata().add(meta::keys::ui::widget_type, "XYCanvas");
+      //   a->metadata().add(meta::keys::constraints::min, -1.f);
+      //   a->metadata().add(meta::keys::constraints::max, 64.f);
+      // }
 
-      {
-        auto *a = container.add("glm::vec2_vector", glm::vec2(16.f, 16.f));
-        a->metadata().add(meta::keys::ui::widget_type, "VectorEditor");
-        a->metadata().add(meta::keys::constraints::min, 0.f);
-        a->metadata().add(meta::keys::constraints::max, 128.f);
-        a->metadata().add("ui.locked_xy", true);
-      }
+      // {
+      //   auto *a = container.add("glm::vec2_vector", glm::vec2(16.f, 16.f));
+      //   a->metadata().add(meta::keys::ui::widget_type, "VectorEditor");
+      //   a->metadata().add(meta::keys::constraints::min, 0.f);
+      //   a->metadata().add(meta::keys::constraints::max, 128.f);
+      //   a->metadata().add("ui.locked_xy", true);
+      // }
 
-      {
-        auto *a = container.add("glm::vec2_linked", glm::vec2(16.f, 32.f));
-        a->metadata().add(meta::keys::ui::widget_type, "LinkedSliders");
-        a->metadata().add(meta::keys::constraints::min, 0.f);
-        a->metadata().add(meta::keys::constraints::max, 64.f);
-        a->metadata().add("ui.locked_xy", true);
-        a->metadata().add("ui.label_x", "kx");
-        a->metadata().add("ui.label_y", "ky");
-        a->metadata().add(meta::keys::ui::format, "{:.1f}");
-      }
+      // {
+      //   auto *a = container.add("glm::vec2_linked", glm::vec2(16.f, 32.f));
+      //   a->metadata().add(meta::keys::ui::widget_type, "LinkedSliders");
+      //   a->metadata().add(meta::keys::constraints::min, 0.f);
+      //   a->metadata().add(meta::keys::constraints::max, 64.f);
+      //   a->metadata().add("ui.locked_xy", true);
+      //   a->metadata().add("ui.label_x", "kx");
+      //   a->metadata().add("ui.label_y", "ky");
+      //   a->metadata().add(meta::keys::ui::format, "{:.1f}");
+      // }
 
       {
         auto *a = container.add("glm::vec2_range", glm::vec2(0.f, 1.f));

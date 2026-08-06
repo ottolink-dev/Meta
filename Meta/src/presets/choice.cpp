@@ -20,6 +20,18 @@ Attribute<bool> &checkbox(AttributeContainer &c,
   return *a;
 }
 
+Attribute<bool> &toogle_button(AttributeContainer &c,
+                               std::string_view    key,
+                               std::string_view    label,
+                               bool                value)
+{
+  auto *a = c.add(std::string(key), value);
+  auto &m = a->metadata();
+  m.add(keys::ui::widget_type, "Toggle");
+  m.add(keys::ui::label, std::string(label));
+  return *a;
+}
+
 Attribute<bool> &binary_buttons(AttributeContainer &c,
                                 std::string_view    key,
                                 std::string_view    label,
