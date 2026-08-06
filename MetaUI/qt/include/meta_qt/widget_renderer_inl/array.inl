@@ -173,18 +173,19 @@ template <> struct WidgetRenderer<meta::Array>
             auto const        &arr = attr.value();
             std::vector<float> data = arr.vector;
 
-            if (!data.empty())
-            {
-              float mn = *std::min_element(data.begin(), data.end());
-              float mx = *std::max_element(data.begin(), data.end());
-              float range = mx - mn;
-              if (range > 0.f)
-              {
-                for (auto &x : data)
-                  x = (x - mn) / range;
-              }
-            }
-
+            // Amplitude semantics: the canvas is a raw [0,1] surface (draw_at
+            // and colormap both clamp to it), and the model is expected to
+            // hold values in that same unit range (e.g. Hesiod's Brush node
+            // treats it as normalized height). Do NOT min/max-stretch the
+            // model into [0,1] here: that would make canvas and model
+            // disagree on units, and since live-edit/edit_ended write the
+            // canvas straight back into the model (no inverse transform),
+            // every gesture after a sync would re-upload the display-
+            // stretched amplitude, inflating the painting on each round
+            // trip. Displaying model values directly keeps canvas and model
+            // in the same units, so repeated sync/edit cycles are
+            // amplitude-stable; out-of-range model data simply displays
+            // saturated (clamped) rather than being silently rescaled.
             data = resample_bilinear_array(data,
                                            arr.shape.x,
                                            arr.shape.y,
