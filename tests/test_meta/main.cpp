@@ -280,7 +280,8 @@ int main()
 
     auto j = c.json_to();
     assert(!j["g"].contains("metadata") ||
-           !j["g"]["metadata"].contains(meta::keys::ui::presets)); // not serialized
+           !j["g"]["metadata"].contains(
+               meta::keys::ui::presets)); // not serialized
 
     // reload in place: value updates, installed presets untouched
     c.json_from(j);

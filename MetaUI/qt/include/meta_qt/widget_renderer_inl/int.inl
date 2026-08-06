@@ -37,7 +37,7 @@ template <> struct WidgetRenderer<int>
     MetaWidget *widget = make_meta_widget_vbox(parent);
     auto       *layout = static_cast<QVBoxLayout *>(widget->layout());
 
-    if (!label_txt.empty())
+    if (!label_txt.empty() && widget_type != "SliderInt")
     {
       QLabel *label = new QLabel(label_txt.c_str(), widget);
       layout->addWidget(label);

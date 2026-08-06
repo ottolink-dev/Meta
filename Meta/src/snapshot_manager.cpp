@@ -36,10 +36,7 @@ bool SnapshotManager::has(const std::string &name) const
   return snapshots_.contains(name);
 }
 
-bool SnapshotManager::empty() const
-{
-  return snapshots_.empty();
-}
+bool SnapshotManager::empty() const { return snapshots_.empty(); }
 
 bool SnapshotManager::json_from(const nlohmann::json &j)
 {
