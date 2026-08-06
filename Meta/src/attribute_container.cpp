@@ -206,7 +206,7 @@ nlohmann::json AttributeContainer::json_to() const
 {
   Logger::log()->trace("AttributeContainer::json_to");
 
-  nlohmann::json j;
+  nlohmann::json j = nlohmann::json::object();
 
   for (const auto &[name, attr] : attributes_)
   {
@@ -219,7 +219,10 @@ nlohmann::json AttributeContainer::json_to() const
     j[name] = attr->json_to();
   }
 
-  j["snapshot_manager"] = snapshot_manager_.json_to();
+  if (!snapshot_manager_.empty())
+  {
+    j["snapshot_manager"] = snapshot_manager_.json_to();
+  }
 
   return j;
 }

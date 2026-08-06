@@ -114,9 +114,14 @@ public:
    */
   nlohmann::json json_to() const override
   {
-    return {{"type", TypeName<T>::name},
-            {"value", AttributeTraits<T>::json_to(value_)},
-            {"metadata", serialize_metadata(metadata())}};
+    nlohmann::json j = {{"type", TypeName<T>::name},
+                        {"value", AttributeTraits<T>::json_to(value_)}};
+    nlohmann::json meta_json = serialize_metadata(metadata());
+    if (!meta_json.empty())
+    {
+      j["metadata"] = meta_json;
+    }
+    return j;
   }
 
   /**
@@ -130,7 +135,10 @@ public:
   {
     value_ = AttributeTraits<T>::json_from(j.at("value"));
     value_changed.notify(value_);
-    deserialize_metadata(metadata(), j.at("metadata"));
+    if (j.contains("metadata"))
+    {
+      deserialize_metadata(metadata(), j.at("metadata"));
+    }
   }
 
 private:

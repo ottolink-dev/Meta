@@ -34,6 +34,12 @@ public:
   void erase(const std::string &name);
 
   /**
+   * @brief Check whether any snapshots are saved.
+   * @return True if there are no snapshots.
+   */
+  bool empty() const;
+
+  /**
    * @brief Check whether a snapshot exists.
    * @param name Snapshot identifier.
    * @return True if the snapshot exists.
