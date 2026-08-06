@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
 
   // 2. Choice presets
   meta::presets::checkbox(choice_c, "checkbox", "Checkbox", true);
-  meta::presets::toogle_button(choice_c,
-                               "toogle_button",
+  meta::presets::toggle_button(choice_c,
+                               "toggle_button",
                                "Toggle Button",
                                true);
   meta::presets::binary_buttons(choice_c,

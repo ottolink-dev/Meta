@@ -16,7 +16,7 @@ Attribute<bool> &checkbox(AttributeContainer &c,
                           std::string_view    label,
                           bool                value);
 
-Attribute<bool> &toogle_button(AttributeContainer &c,
+Attribute<bool> &toggle_button(AttributeContainer &c,
                                std::string_view    key,
                                std::string_view    label,
                                bool                value);
