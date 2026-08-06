@@ -162,8 +162,14 @@ template <> struct WidgetRenderer<meta::Array>
 
       // Sync logic from model to widget
       widget->set_sync_from_model(
-          [canvas, &attr]()
+          [canvas, widget, &attr]()
           {
+            // R1 sync contract: never clobber a live-edited canvas. During a
+            // paint gesture the model is refreshed FROM the canvas; a host
+            // recomputing synchronously on value_changed would otherwise
+            // resample the stale model back over the in-progress stroke.
+            if (widget->is_editing()) return;
+
             auto const        &arr = attr.value();
             std::vector<float> data = arr.vector;
 
@@ -220,9 +226,13 @@ template <> struct WidgetRenderer<meta::Array>
                        widget,
                        [&attr, canvas, widget]()
                        {
+                         // mark editing FIRST so the sync-from-model callback
+                         // is inert for the rest of the gesture
                          Q_EMIT widget->edit_started();
-                         Q_EMIT widget->value_changed();
 
+                         // canvas -> model BEFORE announcing the change: hosts
+                         // may recompute synchronously on value_changed and
+                         // must see the fresh stroke, not the previous state
                          auto const &cdata = canvas->get_field_data();
                          auto       &arr = attr.value();
                          arr.vector = resample_bicubic_array(
@@ -232,6 +242,7 @@ template <> struct WidgetRenderer<meta::Array>
                              arr.shape.x,
                              arr.shape.y);
 
+                         Q_EMIT widget->value_changed();
                          attr.value_changed.notify(attr.value());
                        });
 
