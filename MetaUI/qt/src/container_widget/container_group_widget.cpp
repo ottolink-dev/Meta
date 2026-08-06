@@ -64,6 +64,10 @@ ContainerGroupWidget::ContainerGroupWidget(meta::ContainerGroup  &group,
 
             Q_EMIT current_container_changed(new_current);
           });
+
+  // pass through for the synching from the model (the
+  // ContainerGroupWidget is derived from a MetaWidget)
+  set_sync_from_model([this]() { this->on_sync_meta_widgets_from_model(); });
 }
 
 QWidget *ContainerGroupWidget::build_container_widget(const std::string &key)
