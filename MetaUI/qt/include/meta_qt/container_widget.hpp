@@ -42,6 +42,7 @@ struct CategoryNode
   std::string name;                                              ///< Category name
   std::vector<meta::AbstractAttribute *> attributes;             ///< Attributes in this category
   std::map<std::string, std::unique_ptr<CategoryNode>> children; ///< Subcategories
+  std::vector<std::string> children_order;                      ///< Insertion order of subcategories
   // clang-format on
 };
 

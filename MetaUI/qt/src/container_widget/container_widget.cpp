@@ -54,6 +54,7 @@ void insert_attribute(CategoryNode      &root,
     {
       child = std::make_unique<CategoryNode>();
       child->name = part;
+      node->children_order.push_back(part);
     }
 
     node = child.get();
@@ -89,8 +90,8 @@ void render_flat(CategoryNode              &node,
     collected_widgets.push_back(w);
   }
 
-  for (auto &[name, child] : node.children)
-    render_flat(*child, layout, collected_widgets);
+  for (const auto &name : node.children_order)
+    render_flat(*node.children.at(name), layout, collected_widgets);
 }
 
 void render_category(meta::AttributeContainer  &container,
@@ -160,8 +161,11 @@ void render_category(meta::AttributeContainer  &container,
     }
   }
 
-  for (auto &[name, child] : node.children)
-    render_category(container, *child, current_layout, collected_widgets);
+  for (const auto &name : node.children_order)
+    render_category(container,
+                    *node.children.at(name),
+                    current_layout,
+                    collected_widgets);
 }
 
 void render_category_merged(meta::AttributeContainer        &container,
@@ -255,9 +259,9 @@ void render_category_merged(meta::AttributeContainer        &container,
 
   CategoryNode *last = chain.back();
 
-  for (auto &[name, child] : last->children)
+  for (const auto &name : last->children_order)
     render_category_merged(container,
-                           *child,
+                           *last->children.at(name),
                            layout,
                            collected_widgets,
                            collapse_regex);
