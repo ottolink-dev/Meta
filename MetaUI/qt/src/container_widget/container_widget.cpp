@@ -196,44 +196,48 @@ void render_category_merged(meta::AttributeContainer        &container,
     }
   }
 
-  auto *section = new CollapsibleSection(title.c_str());
+  QVBoxLayout *layout = parent_layout;
 
-  if (collapse_regex && std::regex_search(title, *collapse_regex))
+  if (!title.empty())
   {
-    Logger::log()->trace(
-        "container_widget::render_category_merged: auto-collapse '{}'",
-        title);
+    auto *section = new CollapsibleSection(title.c_str());
 
-    section->set_expanded(false);
-  }
-
-  // UI state management
-  {
-    auto *state = container.try_add(meta::keys::ui::state, true);
-    state->metadata().try_add(meta::keys::ui::widget_type, "None");
-
-    // apply stored state if available
-    if (state->metadata().contains(title))
+    if (collapse_regex && std::regex_search(title, *collapse_regex))
     {
-      bool current_state = state->metadata().value<bool>(title);
-      section->set_expanded(current_state);
+      Logger::log()->trace(
+          "container_widget::render_category_merged: auto-collapse '{}'",
+          title);
+
+      section->set_expanded(false);
     }
 
-    QObject::connect(
-        section,
-        &CollapsibleSection::expanded_state_changed,
-        [&container, title](bool new_state)
-        {
-          // add or get existing (dummy attribute used as a
-          // metadata container)
-          auto *state = container.try_add(meta::keys::ui::state, true);
-          state->metadata().try_add(title, new_state)->value() = new_state;
-        });
+    // UI state management
+    {
+      auto *state = container.try_add(meta::keys::ui::state, true);
+      state->metadata().try_add(meta::keys::ui::widget_type, "None");
+
+      // apply stored state if available
+      if (state->metadata().contains(title))
+      {
+        bool current_state = state->metadata().value<bool>(title);
+        section->set_expanded(current_state);
+      }
+
+      QObject::connect(
+          section,
+          &CollapsibleSection::expanded_state_changed,
+          [&container, title](bool new_state)
+          {
+            // add or get existing (dummy attribute used as a
+            // metadata container)
+            auto *state = container.try_add(meta::keys::ui::state, true);
+            state->metadata().try_add(title, new_state)->value() = new_state;
+          });
+    }
+
+    parent_layout->addWidget(section);
+    layout = section->content_layout;
   }
-
-  parent_layout->addWidget(section);
-
-  QVBoxLayout *layout = section->content_layout;
 
   for (auto *n : chain)
     for (auto *p_attr : n->attributes)
@@ -274,8 +278,7 @@ MetaWidget *render(AttributeContainer    &container,
   Logger::log()->trace("container_widget::render");
 
   CategoryNode root;
-
-  if (options.root_category_name.empty()) root.name = META_ROOT_CATEGORY;
+  root.name = options.root_category_name;
 
   bool has_no_categorys = true;
 

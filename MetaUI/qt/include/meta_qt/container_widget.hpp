@@ -8,6 +8,7 @@
 
 #include "meta/core/abstract_attribute.hpp"
 #include "meta/serialization/snapshot_manager.hpp"
+#include "meta_common.hpp"
 
 #include "meta_qt/meta_widget.hpp"
 
@@ -27,11 +28,11 @@ enum CategoryPolicy
 struct ContainerRenderOptions
 {
   // clang-format off
-  CategoryPolicy category_policy = CategoryPolicy::CP_SMART; ///< Category organization strategy
-  std::string root_category_name = "";                       ///< Optional root category label
-  std::vector<std::string> insertion_order = {};             ///< Explicit ordering of categories
-  std::optional<std::regex> collapse_regex = std::nullopt;   ///< Regex used to collapse categories
-  bool snapshot_manager = false;                             ///< Add snapshot manager widget
+  CategoryPolicy category_policy = CategoryPolicy::CP_SMART;    ///< Category organization strategy
+  std::string root_category_name = META_ROOT_CATEGORY;          ///< Optional root category label
+  std::vector<std::string> insertion_order = {};                ///< Explicit ordering of categories
+  std::optional<std::regex> collapse_regex = std::nullopt;      ///< Regex used to collapse categories
+  bool snapshot_manager = false;                                ///< Add snapshot manager widget
   // clang-format on
 };
 
