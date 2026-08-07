@@ -97,6 +97,18 @@ template <> struct WidgetRenderer<std::string>
     {
       return nullptr;
     }
+    else if (widget_type == "ReadOnlyText") // --- ReadOnlyText
+    {
+      auto *val_label = new QLabel(QString::fromStdString(value), widget);
+      val_label->setTextInteractionFlags(Qt::TextSelectableByMouse);
+      layout->addWidget(val_label);
+
+      widget->set_sync_from_model(
+          [val_label, &value]()
+          {
+            val_label->setText(QString::fromStdString(value));
+          });
+    }
     else if (widget_type == "SingleLineText") // --- SingleLineText
     {
       const std::string placeholder = meta::common::try_get<std::string>(

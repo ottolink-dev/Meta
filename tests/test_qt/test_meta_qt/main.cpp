@@ -328,6 +328,11 @@ int main(int argc, char *argv[])
       a->metadata().add(meta::keys::ui::widget_type, "CodeEditor");
       a->metadata().add("ui.min_lines", 24);
     }
+
+    {
+      auto *a = container.add("string_readonly", "Read-only text content");
+      a->metadata().add(meta::keys::ui::widget_type, "ReadOnlyText");
+    }
   }
 
   // --- Groups
