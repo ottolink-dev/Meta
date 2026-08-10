@@ -17,11 +17,12 @@ Attribute<int> &seed(AttributeContainer &c,
 
   auto &m = a->metadata();
 
-  m.add(keys::ui::widget_type, "Input");
+  m.add(keys::ui::widget_type, "SliderInt");
   m.add(keys::ui::label, std::string(label));
   m.add(keys::constraints::min, 0);
   m.add(keys::constraints::max, INT_MAX);
   m.add(keys::constraints::step, 1);
+  m.add("ui.plus_minus", true);
 
   return *a;
 }
