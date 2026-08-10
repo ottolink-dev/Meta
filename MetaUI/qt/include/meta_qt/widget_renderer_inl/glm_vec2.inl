@@ -61,9 +61,7 @@ template <> struct WidgetRenderer<glm::vec2>
     if (widget_type.empty()) widget_type = "Input";
 
     if (!label_txt.empty())
-    {
       layout->addWidget(new QLabel(QString::fromStdString(label_txt), widget));
-    }
 
     if (widget_type == "None") // --- None
     {
@@ -448,10 +446,6 @@ template <> struct WidgetRenderer<glm::vec2>
     }
     else if (widget_type == "VectorEditor") // --- VectorEditor
     {
-      if (!label_txt.empty())
-        layout->addWidget(
-            new QLabel(QString::fromStdString(label_txt), widget));
-
       // --- Canvas
 
       auto *canvas = new VectorCanvas(value, max, locked_xy, widget);
@@ -642,10 +636,6 @@ template <> struct WidgetRenderer<glm::vec2>
     }
     else if (widget_type == "LinkedSliders") // --- LinkedSliders
     {
-      if (!label_txt.empty())
-        layout->addWidget(
-            new QLabel(QString::fromStdString(label_txt), widget));
-
       // Row: [slider X] [slider Y] [X=Y toggle]
       auto *row = new QHBoxLayout();
       row->setSpacing(4);
