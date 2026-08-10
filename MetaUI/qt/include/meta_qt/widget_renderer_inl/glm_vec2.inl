@@ -60,18 +60,17 @@ template <> struct WidgetRenderer<glm::vec2>
 
     if (widget_type.empty()) widget_type = "Input";
 
+    if (!label_txt.empty())
+    {
+      layout->addWidget(new QLabel(QString::fromStdString(label_txt), widget));
+    }
+
     if (widget_type == "None") // --- None
     {
       return nullptr;
     }
     else if (widget_type == "Input") // --- Input
     {
-      if (!label_txt.empty())
-      {
-        layout->addWidget(
-            new QLabel(QString::fromStdString(label_txt), widget));
-      }
-
       auto *row = new QHBoxLayout();
 
       auto *spinbox_x = new QDoubleSpinBox(widget);
