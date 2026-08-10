@@ -105,9 +105,7 @@ template <> struct WidgetRenderer<std::string>
 
       widget->set_sync_from_model(
           [val_label, &value]()
-          {
-            val_label->setText(QString::fromStdString(value));
-          });
+          { val_label->setText(QString::fromStdString(value)); });
     }
     else if (widget_type == "SingleLineText") // --- SingleLineText
     {

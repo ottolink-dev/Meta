@@ -255,25 +255,6 @@ template <> struct WidgetRenderer<glm::vec2>
 
       auto *bar = new RangeBar(value, min, max, decimals, widget);
 
-      // Optional secondary "active" toggle, independent from the
-      // enable/disable-full-range toggle_btn above (compat facade:
-      // "ui.has_active_toggle" / "ui.active").
-      const bool has_active_toggle = meta::common::try_get<bool>(
-          attr,
-          meta::keys::ui::has_active_toggle,
-          false);
-      const bool initial_active = meta::common::try_get<bool>(
-          attr,
-          meta::keys::ui::active,
-          true);
-
-      QCheckBox *active_box = nullptr;
-      if (has_active_toggle)
-      {
-        active_box = new QCheckBox(widget);
-        active_box->setChecked(initial_active);
-      }
-
       meta::DataProvider range_provider; // empty if none
       if (const auto *mp = attr.metadata().find(meta::keys::ui::data_provider))
         if (const auto
@@ -320,58 +301,24 @@ template <> struct WidgetRenderer<glm::vec2>
       btn_row->addWidget(center_btn);
       btn_row->addWidget(unit_btn);
 
-      if (active_box != nullptr)
-      {
-        auto *bar_row = new QHBoxLayout();
-        bar_row->addWidget(active_box);
-        bar_row->addWidget(bar, 1);
-        layout->addLayout(bar_row);
-      }
-      else
-      {
-        layout->addWidget(bar);
-      }
+      layout->addWidget(bar);
       layout->addLayout(btn_row);
 
-      // Helper: enable or disable all range controls at once. Gated by
-      // the sentinel toggle (parameter) AND, when present, the "ui.active"
-      // checkbox — bar and buttons always agree.
-      auto set_active =
-          [bar, reset_btn, center_btn, unit_btn, active_box](bool active)
+      // Enable or disable all range controls according to the sentinel state.
+      auto set_active = [bar, reset_btn, center_btn, unit_btn](bool active)
       {
-        const bool enabled = active &&
-                             (active_box == nullptr || active_box->isChecked());
-        bar->setEnabled(enabled);
-        reset_btn->setEnabled(enabled);
-        center_btn->setEnabled(enabled);
-        unit_btn->setEnabled(enabled);
+        bar->setEnabled(active);
+        reset_btn->setEnabled(active);
+        center_btn->setEnabled(active);
+        unit_btn->setEnabled(active);
       };
 
       set_active(initially_active);
 
       widget->set_sync_from_model(
-          [&value,
-           &attr,
-           bar,
-           toggle_btn,
-           active_box,
-           set_active,
-           widget,
-           range_provider]()
+          [&value, bar, toggle_btn, set_active, widget, range_provider]()
           {
             const bool active = !(value.x == -1.f && value.y == 0.f);
-
-            // refresh the "ui.active" checkbox BEFORE set_active so the
-            // helper reads the up-to-date checkbox state
-            if (active_box != nullptr)
-            {
-              const bool is_active = meta::common::try_get<bool>(
-                  attr,
-                  meta::keys::ui::active,
-                  true);
-              QSignalBlocker b(active_box);
-              active_box->setChecked(is_active);
-            }
 
             set_active(active);
 
@@ -413,7 +360,7 @@ template <> struct WidgetRenderer<glm::vec2>
                         toggle_btn,
                         set_active,
                         widget,
-                        // mutable copy so each lambda invocation can update it
+                        // Mutable copy so each lambda invocation can update it.
                         lav = last_active_value](bool active) mutable
                        {
                          toggle_btn->setText(active ? QObject::tr("On")
@@ -438,32 +385,6 @@ template <> struct WidgetRenderer<glm::vec2>
                          Q_EMIT widget->value_changed();
                          Q_EMIT widget->edit_ended();
                        });
-
-      // Active toggle ("ui.active") — independent from the RangeBar's own
-      // enable/disable-full-range toggle_btn above.
-      if (active_box != nullptr)
-      {
-        QObject::connect(active_box,
-                         &QCheckBox::toggled,
-                         widget,
-                         [&attr, set_active, toggle_btn, widget](bool checked)
-                         {
-                           attr.metadata()
-                               .try_add(std::string(meta::keys::ui::active),
-                                        checked)
-                               ->value() = checked;
-                           // checkbox already reflects 'checked'; set_active
-                           // ANDs it in
-                           set_active(toggle_btn->isChecked());
-
-                           // is_active affects compute: treat as a value edit.
-                           Q_EMIT widget->edit_started();
-                           // not using 'set_from_any' method, force emit
-                           attr.value_changed.notify(attr.value());
-                           Q_EMIT widget->value_changed();
-                           Q_EMIT widget->edit_ended();
-                         });
-      }
 
       // Live drag → edit_started + value_changed
       QObject::connect(bar,
