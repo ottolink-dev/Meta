@@ -646,6 +646,7 @@ template <> struct WidgetRenderer<glm::vec2>
                                        max,
                                        /* plus_minus */ false,
                                        format,
+                                       /* log_scale */ false,
                                        widget);
       auto *slider_y = new SliderFloat(y_label,
                                        value.y,
@@ -653,6 +654,7 @@ template <> struct WidgetRenderer<glm::vec2>
                                        max,
                                        /* plus_minus */ false,
                                        format,
+                                       /* log_scale */ false,
                                        widget);
 
       slider_x->set_value(value.x);
