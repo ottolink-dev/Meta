@@ -1,8 +1,11 @@
 /* Copyright (c) 2026 Otto Link. Distributed under the terms of the GNU General
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
-#include "meta/ext/array/array.hpp"
+#include <algorithm>
 #include <cstring>
+
+#include "meta/ext/array/array.hpp"
+#include "meta/logger.hpp"
 
 namespace meta
 {
@@ -38,6 +41,19 @@ void Array::json_from(nlohmann::json const &json)
     {
       vector = v.get<std::vector<float>>();
     }
+  }
+
+  size_t const expected_size = static_cast<size_t>(std::max(0, shape.x)) *
+                               static_cast<size_t>(std::max(0, shape.y));
+  if (vector.size() != expected_size)
+  {
+    Logger::log()->warn("Array size mismatch: shape ({}x{}) expects {} "
+                        "elements, but data has {} elements.",
+                        shape.x,
+                        shape.y,
+                        expected_size,
+                        vector.size());
+    vector.resize(expected_size, 0.0f);
   }
 }
 

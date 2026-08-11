@@ -319,6 +319,22 @@ int main()
     assert(decoded.vector[2] == 30.f);
 
     std::cout << "[array] binary round-trip OK" << std::endl;
+
+    // Test size incompatibility warning and zero-filling
+    nlohmann::json bad_arr_json = {
+        {"shape", {{"x", 3}, {"y", 2}}},
+        {"vector", std::vector<float>{10.f, 20.f, 30.f}}};
+    Array arr_bad;
+    arr_bad.json_from(bad_arr_json);
+    assert(arr_bad.shape.x == 3 && arr_bad.shape.y == 2);
+    assert(arr_bad.vector.size() == 6);
+    assert(arr_bad.vector[0] == 10.f);
+    assert(arr_bad.vector[1] == 20.f);
+    assert(arr_bad.vector[2] == 30.f);
+    assert(arr_bad.vector[3] == 0.0f);
+    assert(arr_bad.vector[4] == 0.0f);
+    assert(arr_bad.vector[5] == 0.0f);
+    std::cout << "[array] incompatible size handling OK" << std::endl;
   }
 #endif
 
