@@ -12,7 +12,8 @@ var namespacemeta =
       [ "slider_float", "namespacemeta_1_1presets.html#af991d58b77084f624501f01008bed548", null ],
       [ "slider_int", "namespacemeta_1_1presets.html#a09fb0fde5b87818eb69a5a950683eb26", null ],
       [ "string_choice", "namespacemeta_1_1presets.html#ae1c8693829c612cf4a042a830c24ec90", null ],
-      [ "text", "namespacemeta_1_1presets.html#af9ba8f40ead218fb7f325b3e229f74b2", null ]
+      [ "text", "namespacemeta_1_1presets.html#af9ba8f40ead218fb7f325b3e229f74b2", null ],
+      [ "toggle_button", "namespacemeta_1_1presets.html#a55e39c22b780ad6bf4e80cc1f3ec912d", null ]
     ] ],
     [ "AbstractAttribute", "classmeta_1_1AbstractAttribute.html", "classmeta_1_1AbstractAttribute" ],
     [ "Any", "structmeta_1_1Any.html", "structmeta_1_1Any" ],

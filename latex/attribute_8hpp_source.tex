@@ -75,23 +75,31 @@
 \DoxyCodeLine{00106\ }
 \DoxyCodeLine{00115\ \ \ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1Attribute_a8f218693e33cf75e8ba0c9470b965dc0}{json\_to}}()\textcolor{keyword}{\ const\ override}}
 \DoxyCodeLine{00116\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordflow}{return}\ \{\{\textcolor{stringliteral}{"{}type"{}},\ \mbox{\hyperlink{structmeta_1_1TypeName}{TypeName<T>::name}}\},}
-\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}value"{}},\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a42be738ca9dd51c89cd9d995d830d771}{AttributeTraits<T>::json\_to}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}})\},}
-\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}metadata"{}},\ \mbox{\hyperlink{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}{serialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}())\}\};}
-\DoxyCodeLine{00120\ \ \ \}}
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00129\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Attribute_aa8bef7eeb618f3c7c8072bd9d7f389f0}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j)\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00130\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_aea52842559753728aa5b07153bb93732}{AttributeTraits<T>::json\_from}}(j.at(\textcolor{stringliteral}{"{}value"{}}));}
-\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
-\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{namespacemeta_a1ec007edebf611446a66ccb33aff0311}{deserialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}(),\ j.at(\textcolor{stringliteral}{"{}metadata"{}}));}
-\DoxyCodeLine{00134\ \ \ \}}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00136\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00137\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}};}
-\DoxyCodeLine{00138\ \ \ T\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};}
-\DoxyCodeLine{00139\ \};}
-\DoxyCodeLine{00140\ }
-\DoxyCodeLine{00141\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+\DoxyCodeLine{00117\ \ \ \ \ nlohmann::json\ j\ =\ \{\{\textcolor{stringliteral}{"{}type"{}},\ \mbox{\hyperlink{structmeta_1_1TypeName}{TypeName<T>::name}}\},}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}value"{}},\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a42be738ca9dd51c89cd9d995d830d771}{AttributeTraits<T>::json\_to}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}})\}\};}
+\DoxyCodeLine{00119\ \ \ \ \ nlohmann::json\ meta\_json\ =\ \mbox{\hyperlink{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}{serialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}());}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordflow}{if}\ (!meta\_json.empty())}
+\DoxyCodeLine{00121\ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}metadata"{}}]\ =\ meta\_json;}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{00125\ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Attribute_aa8bef7eeb618f3c7c8072bd9d7f389f0}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00135\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_aea52842559753728aa5b07153bb93732}{AttributeTraits<T>::json\_from}}(j.at(\textcolor{stringliteral}{"{}value"{}}));}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}metadata"{}}))}
+\DoxyCodeLine{00139\ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a1ec007edebf611446a66ccb33aff0311}{deserialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}(),\ j.at(\textcolor{stringliteral}{"{}metadata"{}}));}
+\DoxyCodeLine{00141\ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00145\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}};}
+\DoxyCodeLine{00146\ \ \ T\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};}
+\DoxyCodeLine{00147\ \};}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \}\ \textcolor{comment}{//\ namespace\ meta}}
 
 \end{DoxyCode}

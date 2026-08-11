@@ -1,6 +1,7 @@
 var classmeta_1_1SnapshotManager =
 [
     [ "clear", "classmeta_1_1SnapshotManager.html#aadb5e379aba37d8ac345420fbfda533f", null ],
+    [ "empty", "classmeta_1_1SnapshotManager.html#af024ebc2a539d260fc163332618ef12d", null ],
     [ "erase", "classmeta_1_1SnapshotManager.html#a86306cfcfb3519c2a8efe700106e97fe", null ],
     [ "has", "classmeta_1_1SnapshotManager.html#a709e780d5fc7f0e2967a0d34ea3d2404", null ],
     [ "json_from", "classmeta_1_1SnapshotManager.html#a017ba11bd1bc84c78f0a56aa41152b02", null ],

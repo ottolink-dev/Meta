@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['empty_0',['empty',['../classmeta_1_1AttributeContainer.html#ad5dc2aebafabcbffaa931d9e3d38b4b8',1,'meta::AttributeContainer']]],
+  ['empty_0',['empty',['../classmeta_1_1AttributeContainer.html#ad5dc2aebafabcbffaa931d9e3d38b4b8',1,'meta::AttributeContainer::empty()'],['../classmeta_1_1SnapshotManager.html#af024ebc2a539d260fc163332618ef12d',1,'meta::SnapshotManager::empty()']]],
   ['end_1',['end',['../classmeta_1_1AttributeContainer.html#a6cefb44fe311b4095559a53d456e62b2',1,'meta::AttributeContainer::end()'],['../classmeta_1_1AttributeContainer.html#a68544cc2fc15ab50ce046cac1ebb90e5',1,'meta::AttributeContainer::end() const']]],
   ['enum_5fchoice_2',['enum_choice',['../namespacemeta_1_1presets.html#acb0b77c927e12aa19b6152648bb7f196',1,'meta::presets']]],
   ['enum_5fitems_3',['enum_items',['../namespacemeta_1_1keys_1_1constraints.html#a524c1fb2d07430c8ceebf1389618b069',1,'meta::keys::constraints']]],

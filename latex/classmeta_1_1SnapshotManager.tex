@@ -21,6 +21,8 @@ void \mbox{\hyperlink{classmeta_1_1SnapshotManager_aadb5e379aba37d8ac345420fbfda
 \begin{DoxyCompactList}\small\item\em Remove all saved snapshots. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1SnapshotManager_a86306cfcfb3519c2a8efe700106e97fe}{erase}} (const std\+::string \&name)
 \begin{DoxyCompactList}\small\item\em Remove a saved snapshot. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1SnapshotManager_af024ebc2a539d260fc163332618ef12d}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Check whether any snapshots are saved. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classmeta_1_1SnapshotManager_a709e780d5fc7f0e2967a0d34ea3d2404}{has}} (const std\+::string \&name) const
 \begin{DoxyCompactList}\small\item\em Check whether a snapshot exists. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classmeta_1_1SnapshotManager_a017ba11bd1bc84c78f0a56aa41152b02}{json\+\_\+from}} (const nlohmann\+::json \&j)
@@ -56,6 +58,19 @@ std\+::unordered\+\_\+map$<$ std\+::string, nlohmann\+::json $>$ \mbox{\hyperlin
 
 Remove all saved snapshots. 
 
+\Hypertarget{classmeta_1_1SnapshotManager_af024ebc2a539d260fc163332618ef12d}\label{classmeta_1_1SnapshotManager_af024ebc2a539d260fc163332618ef12d} 
+\index{meta::SnapshotManager@{meta::SnapshotManager}!empty@{empty}}
+\index{empty@{empty}!meta::SnapshotManager@{meta::SnapshotManager}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool meta\+::\+Snapshot\+Manager\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Check whether any snapshots are saved. 
+
+\begin{DoxyReturn}{Returns}
+True if there are no snapshots. 
+\end{DoxyReturn}
 \Hypertarget{classmeta_1_1SnapshotManager_a86306cfcfb3519c2a8efe700106e97fe}\label{classmeta_1_1SnapshotManager_a86306cfcfb3519c2a8efe700106e97fe} 
 \index{meta::SnapshotManager@{meta::SnapshotManager}!erase@{erase}}
 \index{erase@{erase}!meta::SnapshotManager@{meta::SnapshotManager}}
