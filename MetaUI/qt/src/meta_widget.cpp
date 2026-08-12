@@ -46,7 +46,30 @@ void MetaWidget::set_sync_from_model(std::function<void()> callback)
 
 void MetaWidget::sync_widget_from_model()
 {
-  if (sync_from_model_) sync_from_model_();
+  if (sync_from_model_)
+  {
+    // Block signals on all child widgets (buttons, checkboxes,
+    // spinboxes, etc.)  to prevent programmatic modifications from
+    // firing toggled/value_changed signals back to the model, which
+    // could cause feedback loops or crashes during teardown.
+    const auto children_list = this->findChildren<QWidget *>();
+    
+    std::vector<bool> blocked_states;
+    blocked_states.reserve(children_list.size());
+
+    for (auto *child : children_list)
+    {
+      blocked_states.push_back(child->blockSignals(true));
+    }
+
+    sync_from_model_();
+
+    // Restore original signal-blocking states
+    for (size_t i = 0; i < size_t(children_list.size()); ++i)
+    {
+      children_list[i]->blockSignals(blocked_states[i]);
+    }
+  }
 }
 
 // --- FUNCTIONS
