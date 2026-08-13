@@ -100,7 +100,8 @@ template <typename T> void register_attribute_type(const std::string &name)
 /**
  * @brief Register all built-in attribute types.
  *
- * Typically called once at application startup or before deserialization.
+ * Invoked automatically on first use of AttributeFactory::create(); hosts do
+ * not need to call it. Calling it manually remains safe.
  */
 void register_builtin_types();
 
