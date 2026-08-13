@@ -74,6 +74,7 @@ private:
 
   std::vector<float> hist_x_;
   std::vector<float> hist_y_;
+  bool               hist_provided_ = false; // set_histogram was called
 
   static constexpr int pad_h_ = 10;   // horizontal padding (handle overhang)
   static constexpr int pad_v_ = 8;    // vertical padding

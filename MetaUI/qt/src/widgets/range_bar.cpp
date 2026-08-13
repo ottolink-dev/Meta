@@ -160,30 +160,6 @@ void RangeBar::mouseReleaseEvent(QMouseEvent *e)
 
 void RangeBar::paintEvent(QPaintEvent *)
 {
-  // Draw histogram if present
-  if (!this->hist_y_.empty())
-  {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing, false);
-    const QRect r = this->rect();
-    const float ymax = *std::max_element(this->hist_y_.begin(),
-                                         this->hist_y_.end());
-    if (ymax > 0.f)
-    {
-      const int   n = static_cast<int>(this->hist_y_.size());
-      const float bw = static_cast<float>(r.width()) / static_cast<float>(n);
-      QColor      c = this->palette().color(QPalette::Mid);
-      c.setAlpha(90);
-      painter.setPen(Qt::NoPen);
-      painter.setBrush(c);
-      for (int i = 0; i < n; ++i)
-      {
-        const float h = (this->hist_y_[i] / ymax) * r.height();
-        painter.drawRect(QRectF(r.left() + i * bw, r.bottom() - h, bw, h));
-      }
-    }
-  }
-
   QPainter p(this);
   p.setRenderHint(QPainter::Antialiasing);
 
@@ -204,16 +180,98 @@ void RangeBar::paintEvent(QPaintEvent *)
     p.drawRect(filled);
   }
 
+  // Histogram — drawn after the track so the track does not cover it. Bins go
+  // through value_to_canvas() like the handles, so the bin under a handle
+  // corresponds to that handle's value.
+  const float ymax = hist_y_.empty() ? 0.f
+                                     : *std::max_element(hist_y_.begin(),
+                                                         hist_y_.end());
+  if (ymax > 0.f)
+  {
+    p.setRenderHint(QPainter::Antialiasing, false);
+    p.setPen(Qt::NoPen);
+
+    const int  n = static_cast<int>(hist_y_.size());
+    const bool use_x = static_cast<int>(hist_x_.size()) == n;
+
+    // Bin center in value space; uniform spacing over the domain when no
+    // matching hist_x_ is available.
+    auto center = [&](int i)
+    {
+      return use_x ? hist_x_[static_cast<size_t>(i)]
+                   : domain_min_ + (float(i) + 0.5f) / float(n) *
+                                       (domain_max_ - domain_min_);
+    };
+
+    QColor c_out = palette().color(QPalette::Text);
+    c_out.setAlpha(110);
+    QColor c_in = palette().color(QPalette::Highlight);
+    c_in.setAlpha(180);
+
+    for (int i = 0; i < n; ++i)
+    {
+      // Bin edges sit halfway to the neighbouring centers.
+      const float cm = center(i);
+      float       e0, e1;
+      if (n == 1)
+      {
+        e0 = domain_min_;
+        e1 = domain_max_;
+      }
+      else if (i == 0)
+      {
+        e1 = 0.5f * (cm + center(1));
+        e0 = cm - (e1 - cm);
+      }
+      else if (i == n - 1)
+      {
+        e0 = 0.5f * (center(i - 1) + cm);
+        e1 = cm + (cm - e0);
+      }
+      else
+      {
+        e0 = 0.5f * (center(i - 1) + cm);
+        e1 = 0.5f * (cm + center(i + 1));
+      }
+
+      const int x0 = value_to_canvas(e0);
+      const int x1 = std::max(value_to_canvas(e1), x0 + 1);
+
+      const float h = (hist_y_[static_cast<size_t>(i)] / ymax) *
+                      float(rect().height());
+      const bool in_sel = cm >= value_.x && cm <= value_.y;
+      p.setBrush(in_sel ? c_in : c_out);
+      p.drawRect(QRectF(x0, rect().bottom() - h, x1 - x0, h));
+    }
+
+    p.setRenderHint(QPainter::Antialiasing, true);
+  }
+  else if (hist_provided_)
+  {
+    // A provider ran but produced nothing (empty or flat input) — say so
+    // instead of being indistinguishable from a broken widget.
+    QColor c = palette().color(QPalette::Text);
+    c.setAlpha(120);
+    QFont f = p.font();
+    f.setItalic(true);
+    p.setFont(f);
+    p.setPen(c);
+    p.drawText(QRect(tr.left(), 0, tr.width(), tr.top() - 2),
+               Qt::AlignHCenter | Qt::AlignBottom,
+               QObject::tr("no histogram data"));
+  }
+
   // Track border
   p.setPen(QPen(palette().color(QPalette::Dark), 1));
   p.setBrush(Qt::NoBrush);
   p.drawRoundedRect(tr, 3, 3);
 
-  // Draw a handle: a rounded rectangle straddling the track vertically
+  // Draw a handle: a rounded rectangle straddling the track vertically,
+  // outlined with the text color so it stays visible on the track.
   auto draw_handle = [&](int x, bool hovered, bool dragged)
   {
     const QRect hr(x - handle_w_, tr.top() - 3, handle_w_ * 2, tr.height() + 6);
-    p.setPen(QPen(palette().color(QPalette::Dark), 1));
+    p.setPen(QPen(palette().color(QPalette::Text), 1));
     p.setBrush(dragged   ? palette().color(QPalette::Highlight)
                : hovered ? palette().color(QPalette::Light)
                          : palette().color(QPalette::Button));
@@ -257,6 +315,7 @@ void RangeBar::set_histogram(const std::vector<float> &x,
 {
   this->hist_x_ = x;
   this->hist_y_ = y;
+  this->hist_provided_ = true;
   this->update();
 }
 
