@@ -2,6 +2,7 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
+#include <cmath>
 #include <format>
 
 #include <QComboBox>
@@ -58,8 +59,14 @@ template <> struct WidgetRenderer<int>
       spinbox->setMinimum(min);
       spinbox->setMaximum(max);
       spinbox->setSingleStep(step);
-      spinbox->setValue(std::clamp(value, min, max));
       spinbox->setDecimals(0);
+
+      // A deserialized value can sit outside the current constraints (e.g.
+      // constraints tightened in a later version); make the model agree with
+      // the clamped value that is displayed instead of keeping the stale one.
+      const int clamped = std::clamp(value, min, max);
+      spinbox->setValue(clamped);
+      if (clamped != value) attr.set_from_any(clamped);
 
       layout->addWidget(spinbox);
 
@@ -70,16 +77,20 @@ template <> struct WidgetRenderer<int>
             spinbox->setValue(value);
           });
 
-      QObject::connect(spinbox,
-                       &QDoubleSpinBox::valueChanged,
-                       spinbox,
-                       [&attr, widget, min, max](int v)
-                       {
-                         attr.set_from_any(std::clamp(v, min, max));
-                         Q_EMIT widget->edit_started();
-                         Q_EMIT widget->value_changed();
-                         Q_EMIT widget->edit_ended();
-                       });
+      QObject::connect(
+          spinbox,
+          &QDoubleSpinBox::valueChanged,
+          spinbox,
+          [&attr, widget, min, max](double v)
+          {
+            // Round explicitly: an implicit double -> int conversion
+            // truncates toward zero.
+            const int iv = static_cast<int>(std::lround(v));
+            attr.set_from_any(std::clamp(iv, min, max));
+            Q_EMIT widget->edit_started();
+            Q_EMIT widget->value_changed();
+            Q_EMIT widget->edit_ended();
+          });
     }
     else if (widget_type == "EnumComboBox")
     {
