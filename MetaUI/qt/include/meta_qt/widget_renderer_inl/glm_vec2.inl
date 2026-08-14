@@ -263,9 +263,12 @@ template <> struct WidgetRenderer<glm::vec2>
         try
         {
           auto data = range_provider();
+          // An empty result is forwarded too: the bar shows a "no data" hint
+          // instead of drawing nothing.
           if (auto histogram = data.get<HistogramData>())
-            if (!histogram->y.empty())
-              bar->set_histogram(histogram->x, histogram->y);
+            bar->set_histogram(histogram->x, histogram->y);
+          else
+            bar->set_histogram({}, {});
         }
         catch (...)
         {
@@ -338,8 +341,9 @@ template <> struct WidgetRenderer<glm::vec2>
               {
                 auto data = range_provider();
                 if (auto histogram = data.get<HistogramData>())
-                  if (!histogram->y.empty())
-                    bar->set_histogram(histogram->x, histogram->y);
+                  bar->set_histogram(histogram->x, histogram->y);
+                else
+                  bar->set_histogram({}, {});
               }
               catch (...)
               {
