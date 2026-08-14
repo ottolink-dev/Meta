@@ -305,11 +305,16 @@ template <> struct WidgetRenderer<glm::vec2>
       layout->addLayout(btn_row);
 
       // Enable or disable all range controls according to the sentinel state.
-      auto set_active = [bar, reset_btn, center_btn, unit_btn](bool active)
+      // Buttons that cannot change the current value stay disabled: "Full"
+      // when the range already spans the whole domain, "Center" when the
+      // span covers the domain and cannot be shifted.
+      auto set_active =
+          [&value, bar, reset_btn, center_btn, unit_btn, min, max](bool active)
       {
+        const bool full_domain = value.x <= min && value.y >= max;
         bar->setEnabled(active);
-        reset_btn->setEnabled(active);
-        center_btn->setEnabled(active);
+        reset_btn->setEnabled(active && !full_domain);
+        center_btn->setEnabled(active && value.y - value.x < max - min);
         unit_btn->setEnabled(active);
       };
 
@@ -366,7 +371,6 @@ template <> struct WidgetRenderer<glm::vec2>
                        {
                          toggle_btn->setText(active ? QObject::tr("On")
                                                     : QObject::tr("Off"));
-                         set_active(active);
 
                          if (active)
                          {
@@ -382,6 +386,9 @@ template <> struct WidgetRenderer<glm::vec2>
                            bar->set_value({-1.f, 0.f});
                          }
 
+                         // After the value update so button states reflect it.
+                         set_active(active);
+
                          Q_EMIT widget->edit_started();
                          Q_EMIT widget->value_changed();
                          Q_EMIT widget->edit_ended();
@@ -391,8 +398,9 @@ template <> struct WidgetRenderer<glm::vec2>
       QObject::connect(bar,
                        &RangeBar::value_changed,
                        widget,
-                       [widget](glm::vec2)
+                       [widget, set_active](glm::vec2)
                        {
+                         set_active(true); // refresh button states
                          Q_EMIT widget->edit_started();
                          Q_EMIT widget->value_changed();
                        });
@@ -407,10 +415,11 @@ template <> struct WidgetRenderer<glm::vec2>
       QObject::connect(reset_btn,
                        &QPushButton::clicked,
                        widget,
-                       [&attr, min, max, bar, widget]()
+                       [&attr, min, max, bar, widget, set_active]()
                        {
                          bar->set_value({min, max});
                          attr.set_from_any(glm::vec2{min, max});
+                         set_active(true);
                          Q_EMIT widget->edit_started();
                          Q_EMIT widget->value_changed();
                          Q_EMIT widget->edit_ended();
@@ -421,13 +430,14 @@ template <> struct WidgetRenderer<glm::vec2>
           center_btn,
           &QPushButton::clicked,
           widget,
-          [&value, &attr, min, max, bar, widget]()
+          [&value, &attr, min, max, bar, widget, set_active]()
           {
             const float span = value.y - value.x;
-            const float mid = 0.f; // (min + max) * 0.5f;
+            const float mid = (min + max) * 0.5f;
             const float lo = std::clamp(mid - span * 0.5f, min, max - span);
             bar->set_value({lo, lo + span});
             attr.set_from_any(glm::vec2{lo, lo + span});
+            set_active(true);
             Q_EMIT widget->edit_started();
             Q_EMIT widget->value_changed();
             Q_EMIT widget->edit_ended();
@@ -437,12 +447,13 @@ template <> struct WidgetRenderer<glm::vec2>
       QObject::connect(unit_btn,
                        &QPushButton::clicked,
                        widget,
-                       [&attr, min, max, bar, widget]()
+                       [&attr, min, max, bar, widget, set_active]()
                        {
                          const float lo = std::clamp(0.f, min, max);
                          const float hi = std::clamp(1.f, min, max);
                          bar->set_value({lo, hi});
                          attr.set_from_any(glm::vec2{lo, hi});
+                         set_active(true);
                          Q_EMIT widget->edit_started();
                          Q_EMIT widget->value_changed();
                          Q_EMIT widget->edit_ended();
