@@ -1,3 +1,4 @@
+#include <cassert>
 #include <iostream>
 
 #include "meta.hpp"
@@ -45,6 +46,27 @@ META_DEFINE_TYPE_NAME(Vec2);
 int main()
 {
   using namespace meta;
+
+  // ---------------------------------------------------------------------------
+  // Factory self-registration (issue #22)
+  // ---------------------------------------------------------------------------
+
+  // Must run before anything in this process registers types manually: a host
+  // that never calls register_builtin_types() still needs the factory to
+  // reconstruct undeclared attributes from their serialized "type" field.
+  {
+    AttributeContainer src;
+    src.add("lazy_float", 0.25f);
+    src.add("lazy_string", std::string("abc"));
+
+    AttributeContainer dst; // declares nothing, registers nothing
+    dst.json_from(src.json_to());
+
+    const float *f = dst.try_value<float>("lazy_float");
+    assert(f && *f == 0.25f);
+    const std::string *s = dst.try_value<std::string>("lazy_string");
+    assert(s && *s == "abc");
+  }
 
   AttributeContainer container;
 

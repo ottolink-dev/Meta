@@ -1,6 +1,8 @@
 /* Copyright (c) 2026 Otto Link. Distributed under the terms of the GNU General
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
+#include <mutex>
+
 #include "meta/serialization/attribute_factory.hpp"
 #include "meta/core/abstract_attribute.hpp"
 #include "meta/core/attribute_container.hpp"
@@ -21,6 +23,13 @@ std::unique_ptr<AbstractAttribute> AttributeFactory::create(
     const std::string &name,
     const std::string &attr_name) const
 {
+  // Hosts cannot be relied upon to call register_builtin_types() at startup;
+  // populate the registry before the first lookup. This lives here rather
+  // than in instance() because register_builtin_types() itself calls
+  // instance() and would recurse.
+  static std::once_flag builtin_types_once;
+  std::call_once(builtin_types_once, register_builtin_types);
+
   Logger::log()->trace("AttributeFactory::create: type='{}', name='{}'",
                        name,
                        attr_name);
