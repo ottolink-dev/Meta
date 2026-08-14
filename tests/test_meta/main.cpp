@@ -320,6 +320,25 @@ int main()
 
     std::cout << "[array] binary round-trip OK" << std::endl;
 
+    // Text round-trip. nlohmann's binary type only survives binary formats;
+    // through dump()/parse() it degenerates into {"bytes": [...], "subtype": ...}.
+    // Hosts persisting to a text .json file take this path, so the reader has to
+    // recover the data from that form too.
+    {
+      auto const j_text = nlohmann::json::parse(c.json_to().dump());
+      assert(!j_text["arr"]["value"]["vector"].is_binary());
+
+      meta::AttributeContainer c3;
+      c3.json_from(j_text);
+      auto const &decoded_text = c3.value<meta::Array>("arr");
+      assert(decoded_text.shape.x == 3 && decoded_text.shape.y == 2);
+      assert(decoded_text.vector.size() == 6);
+      assert(decoded_text.vector[2] == 30.f);
+      assert(decoded_text.vector[5] == 60.f);
+
+      std::cout << "[array] text (dump/parse) round-trip OK" << std::endl;
+    }
+
     // Test size incompatibility warning and zero-filling
     nlohmann::json bad_arr_json = {
         {"shape", {{"x", 3}, {"y", 2}}},

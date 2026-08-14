@@ -41,6 +41,20 @@ void Array::json_from(nlohmann::json const &json)
     {
       vector = v.get<std::vector<float>>();
     }
+    else if (v.is_object() && v.contains("bytes") && v["bytes"].is_array())
+    {
+      // nlohmann's binary type only round-trips through binary formats (CBOR,
+      // MessagePack, BSON). Written with dump() and re-read with parse() — what
+      // any text .json container does — it degenerates into
+      // {"bytes": [...], "subtype": ...}. Accept that form so text round-trips
+      // keep their data, and so files already written this way stay readable.
+      auto const bytes = v["bytes"].get<std::vector<uint8_t>>();
+      if (bytes.size() % sizeof(float) == 0)
+      {
+        vector.resize(bytes.size() / sizeof(float));
+        std::memcpy(vector.data(), bytes.data(), bytes.size());
+      }
+    }
   }
 
   size_t const expected_size = static_cast<size_t>(std::max(0, shape.x)) *
