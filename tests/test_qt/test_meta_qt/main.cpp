@@ -553,9 +553,27 @@ void add_glm_tests(meta::AttributeContainer &container)
                           {
                             meta::qt::HistogramData hist;
 
-                            hist.x = {-0.5f, 0.0f, 0.5f, 1.0f, 1.5f};
+                            const int   nb_pts = 50;
+                            const float x_min = -0.5f;
+                            const float x_max = 1.5f;
+                            const float sigma = 0.5f;
 
-                            hist.y = {0.1f, 0.8f, 0.4f, 0.9f, 0.2f};
+                            hist.x.resize(nb_pts);
+                            hist.y.resize(nb_pts);
+
+                            const float step = (x_max - x_min) /
+                                               static_cast<float>(nb_pts - 1);
+
+                            const float inv_2_sigma2 = 1.f /
+                                                       (2.f * sigma * sigma);
+
+                            for (int i = 0; i < nb_pts; ++i)
+                            {
+                              const float x = x_min + i * step;
+
+                              hist.x[i] = x;
+                              hist.y[i] = std::exp(-x * x * inv_2_sigma2);
+                            }
 
                             return hist;
                           }));

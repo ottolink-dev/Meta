@@ -165,20 +165,39 @@ void RangeBar::paintEvent(QPaintEvent *)
   {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, false);
+
     const QRect r = this->rect();
+
     const float ymax = *std::max_element(this->hist_y_.begin(),
                                          this->hist_y_.end());
+
     if (ymax > 0.f)
     {
       const int   n = static_cast<int>(this->hist_y_.size());
       const float bw = static_cast<float>(r.width()) / static_cast<float>(n);
-      QColor      c = this->palette().color(QPalette::Mid);
-      c.setAlpha(90);
+
+      QColor normal_color = palette().color(QPalette::Mid);
+      normal_color.setAlpha(90);
+
+      QColor highlight_color = palette().color(QPalette::Highlight);
+      highlight_color.setAlpha(140);
+
       painter.setPen(Qt::NoPen);
-      painter.setBrush(c);
+
       for (int i = 0; i < n; ++i)
       {
         const float h = (this->hist_y_[i] / ymax) * r.height();
+
+        // Position of the bin center in widget coordinates.
+        const float x = r.left() + (i + 0.5f) * bw;
+
+        // Convert to value space.
+        const float bin_value = canvas_to_value(static_cast<int>(x));
+
+        const bool highlighted = bin_value >= value_.x && bin_value <= value_.y;
+
+        painter.setBrush(highlighted ? highlight_color : normal_color);
+
         painter.drawRect(QRectF(r.left() + i * bw, r.bottom() - h, bw, h));
       }
     }
