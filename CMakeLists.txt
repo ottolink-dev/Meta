@@ -20,6 +20,7 @@ endif()
 # -----------------------------------------------------------------------------
 
 option(META_ENABLE_TESTS "" ON)
+option(META_ENABLE_UNITTESTS "Enable GoogleTest unit tests" OFF)
 option(META_ENABLE_GLM_TYPES "Enable built-in GLM type registrations" ON)
 option(META_ENABLE_COLOR_GRADIENT_TYPES
        "Enable built-in color gradient type registrations" ON)
@@ -45,6 +46,7 @@ message(STATUS "│ META_ENABLE_ARRAY_TYPES:          ${META_ENABLE_ARRAY_TYPES}
 message(STATUS "│ META_ENABLE_FTXUI_UI:             ${META_ENABLE_FTXUI_UI}")
 message(STATUS "│ META_ENABLE_QT_UI:                ${META_ENABLE_QT_UI}")
 message(STATUS "│ META_ENABLE_TESTS:                ${META_ENABLE_TESTS}")
+message(STATUS "│ META_ENABLE_UNITTESTS:            ${META_ENABLE_UNITTESTS}")
 message(STATUS "│ CMAKE_BUILD_TYPE:                 ${CMAKE_BUILD_TYPE}")
 message(STATUS "└─────────────────────────────────────")
 

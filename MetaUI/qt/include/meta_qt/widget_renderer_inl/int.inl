@@ -77,20 +77,19 @@ template <> struct WidgetRenderer<int>
             spinbox->setValue(value);
           });
 
-      QObject::connect(
-          spinbox,
-          &QDoubleSpinBox::valueChanged,
-          spinbox,
-          [&attr, widget, min, max](double v)
-          {
-            // Round explicitly: an implicit double -> int conversion
-            // truncates toward zero.
-            const int iv = static_cast<int>(std::lround(v));
-            attr.set_from_any(std::clamp(iv, min, max));
-            Q_EMIT widget->edit_started();
-            Q_EMIT widget->value_changed();
-            Q_EMIT widget->edit_ended();
-          });
+      QObject::connect(spinbox,
+                       &QDoubleSpinBox::valueChanged,
+                       spinbox,
+                       [&attr, widget, min, max](double v)
+                       {
+                         // Round explicitly: an implicit double -> int
+                         // conversion truncates toward zero.
+                         const int iv = static_cast<int>(std::lround(v));
+                         attr.set_from_any(std::clamp(iv, min, max));
+                         Q_EMIT widget->edit_started();
+                         Q_EMIT widget->value_changed();
+                         Q_EMIT widget->edit_ended();
+                       });
     }
     else if (widget_type == "EnumComboBox")
     {

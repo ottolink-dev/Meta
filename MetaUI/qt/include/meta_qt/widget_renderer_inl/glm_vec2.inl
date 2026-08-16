@@ -28,10 +28,11 @@ template <> struct WidgetRenderer<glm::vec2>
     const bool        show_grid = meta::common::try_get<bool>(attr,
                                                        "ui.show_grid",
                                                        true);
-    bool locked_xy = false;
+    bool              locked_xy = false;
     if (const auto *p = attr.state().try_value<bool>(meta::keys::ui::locked_xy))
       locked_xy = *p;
-    else if (const auto *p = attr.state().try_value<bool>(widget_type + ".locked_xy"))
+    else if (const auto *p = attr.state().try_value<bool>(widget_type +
+                                                          ".locked_xy"))
       locked_xy = *p;
     const std::string x_label = meta::common::try_get<std::string>(attr,
                                                                    "ui.label_x",
@@ -46,9 +47,8 @@ template <> struct WidgetRenderer<glm::vec2>
 
     // either add with current input state 'locked_xy' or override
     // current 'locked_xy' with state
-    locked_xy = attr.state()
-                    .try_add(widget_type + ".locked_xy", locked_xy)
-                    ->value();
+    locked_xy =
+        attr.state().try_add(widget_type + ".locked_xy", locked_xy)->value();
 
     // --- Generate widget
 
@@ -518,9 +518,11 @@ template <> struct WidgetRenderer<glm::vec2>
                             ? std::atan2(value.y, value.x) * 180.f / float(M_PI)
                             : 45.f;
             bool  stored_locked_state = false;
-            if (const auto *p = attr.state().try_value<bool>(widget_type + ".locked_xy"))
+            if (const auto *p = attr.state().try_value<bool>(widget_type +
+                                                             ".locked_xy"))
               stored_locked_state = *p;
-            else if (const auto *p = attr.state().try_value<bool>(meta::keys::ui::locked_xy))
+            else if (const auto *p = attr.state().try_value<bool>(
+                         meta::keys::ui::locked_xy))
               stored_locked_state = *p;
 
             {
@@ -579,20 +581,21 @@ template <> struct WidgetRenderer<glm::vec2>
                        [canvas](double v) { canvas->set_angle_deg(float(v)); });
 
       // Lock toggle → canvas + angle spinbox enable state
-      QObject::connect(
-          lock_cb,
-          &QCheckBox::toggled,
-          widget,
-          [&attr, widget_type, canvas, angle_spin](bool checked)
-          {
-            canvas->set_locked(checked);
-            angle_spin->setEnabled(!checked);
+      QObject::connect(lock_cb,
+                       &QCheckBox::toggled,
+                       widget,
+                       [&attr, widget_type, canvas, angle_spin](bool checked)
+                       {
+                         canvas->set_locked(checked);
+                         angle_spin->setEnabled(!checked);
 
-            attr.state().try_add(widget_type + ".locked_xy", checked)->value() = checked;
+                         attr.state()
+                             .try_add(widget_type + ".locked_xy", checked)
+                             ->value() = checked;
 
-            // not using 'set_from_any' method, force emit
-            attr.value_changed.notify(attr.value());
-          });
+                         // not using 'set_from_any' method, force emit
+                         attr.value_changed.notify(attr.value());
+                       });
 
       // --- Graph signals
 
@@ -732,9 +735,11 @@ template <> struct WidgetRenderer<glm::vec2>
             }
 
             bool stored_locked_state = false;
-            if (const auto *p = attr.state().try_value<bool>(widget_type + ".locked_xy"))
+            if (const auto *p = attr.state().try_value<bool>(widget_type +
+                                                             ".locked_xy"))
               stored_locked_state = *p;
-            else if (const auto *p = attr.state().try_value<bool>(meta::keys::ui::locked_xy))
+            else if (const auto *p = attr.state().try_value<bool>(
+                         meta::keys::ui::locked_xy))
               stored_locked_state = *p;
 
             {
@@ -829,8 +834,9 @@ template <> struct WidgetRenderer<glm::vec2>
                            }
                          }
 
-                         attr.state().try_add(widget_type + ".locked_xy", locked)->value() =
-                             locked;
+                         attr.state()
+                             .try_add(widget_type + ".locked_xy", locked)
+                             ->value() = locked;
 
                          Q_EMIT widget->edit_started();
                          Q_EMIT widget->value_changed();

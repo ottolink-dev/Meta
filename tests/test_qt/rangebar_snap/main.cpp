@@ -19,7 +19,7 @@ static void snap(QWidget &w, const QString &path)
 
 int main(int argc, char **argv)
 {
-  QApplication app(argc, argv);
+  QApplication  app(argc, argv);
   const QString dir = argc > 1 ? argv[1] : ".";
   QDir().mkpath(dir);
 

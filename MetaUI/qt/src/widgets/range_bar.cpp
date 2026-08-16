@@ -183,9 +183,9 @@ void RangeBar::paintEvent(QPaintEvent *)
   // Histogram — drawn after the track so the track does not cover it. Bins go
   // through value_to_canvas() like the handles, so the bin under a handle
   // corresponds to that handle's value.
-  const float ymax = hist_y_.empty() ? 0.f
-                                     : *std::max_element(hist_y_.begin(),
-                                                         hist_y_.end());
+  const float ymax = hist_y_.empty()
+                         ? 0.f
+                         : *std::max_element(hist_y_.begin(), hist_y_.end());
   if (ymax > 0.f)
   {
     p.setRenderHint(QPainter::Antialiasing, false);

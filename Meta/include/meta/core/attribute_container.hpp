@@ -319,14 +319,24 @@ public:
   // -------------------------------------------------------------------------
 
   /// Serializes container to JSON.
-  nlohmann::json json_to() const;
+  nlohmann::json json_to(
+      SerializationMode mode = SerializationMode::full) const;
 
   /**
    * @brief Deserializes container from JSON.
    *
-   * Existing attributes are updated; missing ones are created via factory.
+   * In Full mode: existing attributes are updated; missing ones are created via
+   * factory. In State mode: only declared attributes are updated; undeclared
+   * ones are skipped.
    */
-  void json_from(const nlohmann::json &j, bool exclude_snapshot_manager = true);
+  void json_from(const nlohmann::json &j, bool exclude_snapshot_manager)
+  {
+    json_from(j, SerializationMode::full, exclude_snapshot_manager);
+  }
+
+  void json_from(const nlohmann::json &j,
+                 SerializationMode     mode = SerializationMode::full,
+                 bool                  exclude_snapshot_manager = true);
 
   /**
    * @brief Access the snapshot manager.

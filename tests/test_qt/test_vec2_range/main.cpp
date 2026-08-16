@@ -19,10 +19,7 @@ static QPushButton *find_button(QWidget *w, const QString &text)
   return nullptr;
 }
 
-static bool near(float a, float b)
-{
-  return std::fabs(a - b) < 1e-5f;
-}
+static bool near(float a, float b) { return std::fabs(a - b) < 1e-5f; }
 
 int main(int argc, char **argv)
 {

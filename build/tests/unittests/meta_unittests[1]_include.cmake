@@ -1,0 +1,5 @@
+if(EXISTS "/home/glop/Documents/dev/Meta/build/tests/unittests/meta_unittests[1]_tests.cmake")
+  include("/home/glop/Documents/dev/Meta/build/tests/unittests/meta_unittests[1]_tests.cmake")
+else()
+  add_test(meta_unittests_NOT_BUILT meta_unittests_NOT_BUILT)
+endif()

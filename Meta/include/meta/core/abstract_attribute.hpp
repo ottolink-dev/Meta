@@ -15,6 +15,7 @@
 #include <nlohmann/json.hpp>
 
 #include "meta/core/meta_object.hpp"
+#include "meta/serialization/serialization_mode.hpp"
 
 namespace meta
 {
@@ -60,10 +61,12 @@ public:
   virtual std::string to_string() const = 0;
 
   /// Serializes the attribute to JSON.
-  virtual nlohmann::json json_to() const = 0;
+  virtual nlohmann::json json_to(
+      SerializationMode mode = SerializationMode::full) const = 0;
 
   /// Deserializes the attribute from JSON.
-  virtual void json_from(const nlohmann::json &j) = 0;
+  virtual void json_from(const nlohmann::json &j,
+                         SerializationMode mode = SerializationMode::full) = 0;
 
   /**
    * @brief Attempts to cast this attribute to the specified derived type.
