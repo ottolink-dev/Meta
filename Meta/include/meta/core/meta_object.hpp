@@ -65,9 +65,24 @@ public:
    */
   const AttributeContainer &metadata() const;
 
+  /**
+   * @brief Access mutable state container.
+   * @return Reference to the internal AttributeContainer.
+   */
+  AttributeContainer &state();
+
+  /**
+   * @brief Access immutable state container.
+   * @return Const reference to the internal AttributeContainer.
+   */
+  const AttributeContainer &state() const;
+
 private:
   /// Owned metadata container storing arbitrary attributes.
   std::unique_ptr<AttributeContainer> metadata_;
+
+  /// Owned state container storing runtime/user state attributes.
+  std::unique_ptr<AttributeContainer> state_;
 };
 
 } // namespace meta

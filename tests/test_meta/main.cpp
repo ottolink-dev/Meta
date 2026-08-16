@@ -440,5 +440,30 @@ int main()
     std::cout << "event teardown-safety OK" << std::endl;
   }
 
+  // --- Attribute state_ member, state() accessor, and serialization
+  {
+    meta::Attribute<int> attr("counter", 42);
+    attr.metadata().add("description", std::string("A test counter"));
+    attr.state().add("expanded", true);
+
+    assert(attr.metadata().value<std::string>("description") == "A test counter");
+    assert(attr.state().value<bool>("expanded") == true);
+
+    nlohmann::json j = attr.json_to();
+    assert(j.contains("type") && j["type"] == "int");
+    assert(j.contains("value") && j["value"] == 42);
+    assert(j.contains("metadata") && j["metadata"].contains("description"));
+    assert(j.contains("state") && j["state"].contains("expanded"));
+    assert(j["state"]["expanded"]["value"] == true);
+
+    meta::Attribute<int> restored("counter", 0);
+    restored.json_from(j);
+    assert(restored.value() == 42);
+    assert(restored.metadata().value<std::string>("description") == "A test counter");
+    assert(restored.state().value<bool>("expanded") == true);
+
+    std::cout << "attribute state_ member and serialization OK" << std::endl;
+  }
+
   return 0;
 }

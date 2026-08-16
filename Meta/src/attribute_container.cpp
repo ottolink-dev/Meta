@@ -256,4 +256,16 @@ nlohmann::json serialize_metadata(const AttributeContainer &m)
   return m.json_to();
 }
 
+void deserialize_state(AttributeContainer &s, const nlohmann::json &j)
+{
+  Logger::log()->trace("deserialize_state");
+  s.json_from(j);
+}
+
+nlohmann::json serialize_state(const AttributeContainer &s)
+{
+  Logger::log()->trace("serialize_state");
+  return s.json_to();
+}
+
 } // namespace meta

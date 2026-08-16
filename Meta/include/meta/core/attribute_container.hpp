@@ -353,7 +353,7 @@ private:
 };
 
 // -----------------------------------------------------------------------------
-// Metadata helpers (external API)
+// Metadata / State helpers (external API)
 // -----------------------------------------------------------------------------
 
 /// Serialize metadata container to JSON.
@@ -361,5 +361,11 @@ nlohmann::json serialize_metadata(const AttributeContainer &m);
 
 /// Deserialize metadata container from JSON.
 void deserialize_metadata(AttributeContainer &m, const nlohmann::json &j);
+
+/// Serialize state container to JSON.
+nlohmann::json serialize_state(const AttributeContainer &s);
+
+/// Deserialize state container from JSON.
+void deserialize_state(AttributeContainer &s, const nlohmann::json &j);
 
 } // namespace meta

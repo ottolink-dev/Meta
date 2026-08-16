@@ -23,7 +23,7 @@ namespace meta
 {
 
 // -----------------------------------------------------------------------------
-// Forward declarations (metadata coupling avoidance)
+// Forward declarations (metadata / state coupling avoidance)
 // -----------------------------------------------------------------------------
 
 class AttributeContainer;
@@ -33,6 +33,12 @@ nlohmann::json serialize_metadata(const AttributeContainer &m);
 
 /// Deserialize attribute metadata from JSON.
 void deserialize_metadata(AttributeContainer &m, const nlohmann::json &j);
+
+/// Serialize attribute state to JSON.
+nlohmann::json serialize_state(const AttributeContainer &s);
+
+/// Deserialize attribute state from JSON.
+void deserialize_state(AttributeContainer &s, const nlohmann::json &j);
 
 // -----------------------------------------------------------------------------
 // Attribute
@@ -111,6 +117,7 @@ public:
    * - type identifier
    * - value serialization
    * - metadata container
+   * - state container
    */
   nlohmann::json json_to() const override
   {
@@ -121,6 +128,11 @@ public:
     {
       j["metadata"] = meta_json;
     }
+    nlohmann::json state_json = serialize_state(state());
+    if (!state_json.empty())
+    {
+      j["state"] = state_json;
+    }
     return j;
   }
 
@@ -130,6 +142,7 @@ public:
    * Restores:
    * - value
    * - metadata container
+   * - state container
    */
   void json_from(const nlohmann::json &j) override
   {
@@ -138,6 +151,10 @@ public:
     if (j.contains("metadata"))
     {
       deserialize_metadata(metadata(), j.at("metadata"));
+    }
+    if (j.contains("state"))
+    {
+      deserialize_state(state(), j.at("state"));
     }
   }
 
