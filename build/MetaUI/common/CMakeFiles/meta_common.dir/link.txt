@@ -1,2 +1,0 @@
-/usr/bin/ar qc libmeta_common.a CMakeFiles/meta_common.dir/src/common.cpp.o
-/usr/bin/ranlib libmeta_common.a
