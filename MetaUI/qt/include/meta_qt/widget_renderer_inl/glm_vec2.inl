@@ -28,9 +28,11 @@ template <> struct WidgetRenderer<glm::vec2>
     const bool        show_grid = meta::common::try_get<bool>(attr,
                                                        "ui.show_grid",
                                                        true);
-    bool              locked_xy = meta::common::try_get<bool>(attr,
-                                                 meta::keys::ui::locked_xy,
-                                                 false);
+    bool locked_xy = false;
+    if (const auto *p = attr.state().try_value<bool>(meta::keys::ui::locked_xy))
+      locked_xy = *p;
+    else if (const auto *p = attr.state().try_value<bool>(widget_type + ".locked_xy"))
+      locked_xy = *p;
     const std::string x_label = meta::common::try_get<std::string>(attr,
                                                                    "ui.label_x",
                                                                    "x");
@@ -42,12 +44,9 @@ template <> struct WidgetRenderer<glm::vec2>
 
     // --- UI state management
 
-    auto *state = attr.metadata().try_add(meta::keys::ui::state, true);
-    state->metadata().try_add(meta::keys::ui::widget_type, "None");
-
     // either add with current input state 'locked_xy' or override
-    // current 'locked_xy' with metadata
-    locked_xy = state->metadata()
+    // current 'locked_xy' with state
+    locked_xy = attr.state()
                     .try_add(widget_type + ".locked_xy", locked_xy)
                     ->value();
 
@@ -512,14 +511,17 @@ template <> struct WidgetRenderer<glm::vec2>
       // --- Sync helpers
 
       widget->set_sync_from_model(
-          [state, widget_type, &value, canvas, mag_spin, angle_spin, lock_cb]()
+          [&attr, widget_type, &value, canvas, mag_spin, angle_spin, lock_cb]()
           {
             float mag = glm::length(value);
             float deg = (mag > 1e-6f)
                             ? std::atan2(value.y, value.x) * 180.f / float(M_PI)
                             : 45.f;
-            bool  stored_locked_state = state->metadata().value<bool>(
-                widget_type + ".locked_xy");
+            bool  stored_locked_state = false;
+            if (const auto *p = attr.state().try_value<bool>(widget_type + ".locked_xy"))
+              stored_locked_state = *p;
+            else if (const auto *p = attr.state().try_value<bool>(meta::keys::ui::locked_xy))
+              stored_locked_state = *p;
 
             {
               QSignalBlocker b(canvas);
@@ -581,12 +583,12 @@ template <> struct WidgetRenderer<glm::vec2>
           lock_cb,
           &QCheckBox::toggled,
           widget,
-          [&attr, state, widget_type, canvas, angle_spin](bool checked)
+          [&attr, widget_type, canvas, angle_spin](bool checked)
           {
             canvas->set_locked(checked);
             angle_spin->setEnabled(!checked);
 
-            state->metadata().value<bool>(widget_type + ".locked_xy") = checked;
+            attr.state().try_add(widget_type + ".locked_xy", checked)->value() = checked;
 
             // not using 'set_from_any' method, force emit
             attr.value_changed.notify(attr.value());
@@ -717,7 +719,7 @@ template <> struct WidgetRenderer<glm::vec2>
       // --- Connections
 
       widget->set_sync_from_model(
-          [state, widget_type, &value, slider_x, slider_y, lock_btn]()
+          [&attr, widget_type, &value, slider_x, slider_y, lock_btn]()
           {
             {
               QSignalBlocker b(slider_x);
@@ -729,10 +731,15 @@ template <> struct WidgetRenderer<glm::vec2>
               slider_y->set_value(value.y);
             }
 
+            bool stored_locked_state = false;
+            if (const auto *p = attr.state().try_value<bool>(widget_type + ".locked_xy"))
+              stored_locked_state = *p;
+            else if (const auto *p = attr.state().try_value<bool>(meta::keys::ui::locked_xy))
+              stored_locked_state = *p;
+
             {
               QSignalBlocker b(lock_btn);
-              lock_btn->setChecked(
-                  state->metadata().value<bool>(widget_type + ".locked_xy"));
+              lock_btn->setChecked(stored_locked_state);
             }
 
             slider_y->setEnabled(!lock_btn->isChecked());
@@ -800,10 +807,9 @@ template <> struct WidgetRenderer<glm::vec2>
       QObject::connect(lock_btn,
                        &QPushButton::toggled,
                        widget,
-                       [state,
+                       [&attr,
                         widget_type,
                         &value,
-                        &attr,
                         slider_x,
                         slider_y,
                         lock_btn,
@@ -823,8 +829,8 @@ template <> struct WidgetRenderer<glm::vec2>
                            }
                          }
 
-                         state->metadata().value<bool>(widget_type +
-                                                       ".locked_xy") = locked;
+                         attr.state().try_add(widget_type + ".locked_xy", locked)->value() =
+                             locked;
 
                          Q_EMIT widget->edit_started();
                          Q_EMIT widget->value_changed();

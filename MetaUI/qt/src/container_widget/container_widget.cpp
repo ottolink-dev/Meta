@@ -119,9 +119,9 @@ void render_category(meta::AttributeContainer  &container,
       state->metadata().try_add(meta::keys::ui::widget_type, "None");
 
       // apply stored state if available
-      if (state->metadata().contains(title))
+      if (state->state().contains(title))
       {
-        bool current_state = state->metadata().value<bool>(title);
+        bool current_state = state->state().value<bool>(title);
         section->set_expanded(current_state);
       }
 
@@ -131,9 +131,9 @@ void render_category(meta::AttributeContainer  &container,
           [&container, title](bool new_state)
           {
             // add or get existing (dummy attribute used as a
-            // metadata container)
+            // state container)
             auto *state = container.try_add(meta::keys::ui::state, true);
-            state->metadata().try_add(title, new_state)->value() = new_state;
+            state->state().try_add(title, new_state)->value() = new_state;
           });
     }
 
@@ -217,9 +217,9 @@ void render_category_merged(meta::AttributeContainer        &container,
       state->metadata().try_add(meta::keys::ui::widget_type, "None");
 
       // apply stored state if available
-      if (state->metadata().contains(title))
+      if (state->state().contains(title))
       {
-        bool current_state = state->metadata().value<bool>(title);
+        bool current_state = state->state().value<bool>(title);
         section->set_expanded(current_state);
       }
 
@@ -229,9 +229,9 @@ void render_category_merged(meta::AttributeContainer        &container,
           [&container, title](bool new_state)
           {
             // add or get existing (dummy attribute used as a
-            // metadata container)
+            // state container)
             auto *state = container.try_add(meta::keys::ui::state, true);
-            state->metadata().try_add(title, new_state)->value() = new_state;
+            state->state().try_add(title, new_state)->value() = new_state;
           });
     }
 

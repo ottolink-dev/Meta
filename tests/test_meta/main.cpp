@@ -395,7 +395,7 @@ int main()
 
     auto &r =
         meta::presets::range(pc, "r", "Range", {0.f, 1.f}, -1.f, 2.f, false);
-    assert(r.metadata().value<bool>("ui.active") == false);
+    assert(r.state().value<bool>("ui.active") == false);
 
     auto &ch = meta::presets::string_choice(pc, "c", "Choice", {"x", "y"}, "x");
     assert(ch.value() == "x");
