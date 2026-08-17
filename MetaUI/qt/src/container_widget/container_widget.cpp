@@ -115,25 +115,29 @@ void render_category(meta::AttributeContainer  &container,
 
     // UI state management
     {
-      auto *state = container.try_add(meta::keys::ui::state, true);
-      state->metadata().try_add(meta::keys::ui::widget_type, "None");
+      const std::string is_collapsed_key = title + ".is_collapsed";
+
+      // the attribute container cannot have itself an attribute container and
+      // so on recursively => use a dummy attribute to store some data related
+      // to the container itself
+      auto *dummy_attr = container.try_add(meta::keys::state::dummy, true);
 
       // apply stored state if available
-      if (state->state().contains(title))
+      if (dummy_attr->state().contains(is_collapsed_key))
       {
-        bool current_state = state->state().value<bool>(title);
+        bool current_state = dummy_attr->state().value<bool>(is_collapsed_key);
         section->set_expanded(current_state);
       }
 
       QObject::connect(
           section,
           &CollapsibleSection::expanded_state_changed,
-          [&container, title](bool new_state)
+          [&container, is_collapsed_key](bool new_state)
           {
-            // add or get existing (dummy attribute used as a
-            // state container)
-            auto *state = container.try_add(meta::keys::ui::state, true);
-            state->state().try_add(title, new_state)->value() = new_state;
+            auto *dummy_attr = container.try_add(meta::keys::state::dummy,
+                                                 true);
+            dummy_attr->state().try_add(is_collapsed_key, new_state)->value() =
+                new_state;
           });
     }
 
@@ -213,25 +217,29 @@ void render_category_merged(meta::AttributeContainer        &container,
 
     // UI state management
     {
-      auto *state = container.try_add(meta::keys::ui::state, true);
-      state->metadata().try_add(meta::keys::ui::widget_type, "None");
+      const std::string is_collapsed_key = title + ".is_collapsed";
+
+      // the attribute container cannot have itself an attribute container and
+      // so on recursively => use a dummy attribute to store some data related
+      // to the container itself
+      auto *dummy_attr = container.try_add(meta::keys::state::dummy, true);
 
       // apply stored state if available
-      if (state->state().contains(title))
+      if (dummy_attr->state().contains(is_collapsed_key))
       {
-        bool current_state = state->state().value<bool>(title);
+        bool current_state = dummy_attr->state().value<bool>(is_collapsed_key);
         section->set_expanded(current_state);
       }
 
       QObject::connect(
           section,
           &CollapsibleSection::expanded_state_changed,
-          [&container, title](bool new_state)
+          [&container, is_collapsed_key](bool new_state)
           {
-            // add or get existing (dummy attribute used as a
-            // state container)
-            auto *state = container.try_add(meta::keys::ui::state, true);
-            state->state().try_add(title, new_state)->value() = new_state;
+            auto *dummy_attr = container.try_add(meta::keys::state::dummy,
+                                                 true);
+            dummy_attr->state().try_add(is_collapsed_key, new_state)->value() =
+                new_state;
           });
     }
 

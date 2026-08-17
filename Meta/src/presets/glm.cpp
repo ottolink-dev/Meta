@@ -24,7 +24,7 @@ Attribute<glm::vec2> &wavenumber(AttributeContainer &c,
   m.add(keys::ui::widget_type, "LinkedSliders");
   m.add(keys::ui::label, std::string(label));
   m.add(keys::ui::format, std::string(format));
-  a->state().add(keys::ui::locked_xy, link_xy);
+  a->state().add(keys::state::locked_xy, link_xy);
   m.add(keys::constraints::min, vmin);
   m.add(keys::constraints::max, vmax);
   return *a;
@@ -46,8 +46,7 @@ Attribute<glm::vec2> &range(AttributeContainer &c,
   m.add(keys::ui::format, std::string(format));
   m.add(keys::constraints::min, vmin);
   m.add(keys::constraints::max, vmax);
-  m.add(keys::ui::has_active_toggle, true);
-  a->state().add(keys::ui::active, is_active);
+  a->state().add(keys::state::active, is_active);
   return *a;
 }
 
