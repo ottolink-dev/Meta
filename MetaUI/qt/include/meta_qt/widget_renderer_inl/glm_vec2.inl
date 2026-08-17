@@ -317,9 +317,12 @@ template <> struct WidgetRenderer<glm::vec2>
       set_active(is_active);
 
       widget->set_sync_from_model(
-          [&value, bar, toggle_btn, set_active, widget, range_provider]()
+          [&value, &attr, bar, toggle_btn, set_active, widget, range_provider]()
           {
-            const bool active = !(value.x == -1.f && value.y == 0.f);
+            bool active = true;
+            if (const auto *p = attr.state().try_value<bool>(
+                    meta::keys::state::active))
+              active = *p;
 
             set_active(active);
 
@@ -381,6 +384,11 @@ template <> struct WidgetRenderer<glm::vec2>
                            attr.set_from_any(glm::vec2{-1.f, 0.f});
                            bar->set_value({-1.f, 0.f});
                          }
+
+                         // update state
+                         if (auto *p = attr.state().try_value<bool>(
+                                 meta::keys::state::active))
+                           *p = active;
 
                          // After the value update so button states reflect it.
                          set_active(active);
