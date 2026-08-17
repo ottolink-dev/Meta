@@ -238,13 +238,14 @@ template <> struct WidgetRenderer<glm::vec2>
     }
     else if (widget_type == "RangeBar") // --- RangeBar
     {
-      // Guard value sentinel: {-1, 0} means "disabled / no range".
-      const bool initially_active = !(value.x == -1.f && value.y == 0.f);
+      bool is_active = true;
+      if (const auto *p = attr.state().try_value<bool>(
+              meta::keys::state::active))
+        is_active = *p;
 
       // Restore the last meaningful range when toggling back on.
       // Seeded from the current value if it's valid, otherwise full domain.
-      glm::vec2 last_active_value = initially_active ? value
-                                                     : glm::vec2{min, max};
+      glm::vec2 last_active_value = is_active ? value : glm::vec2{min, max};
 
       auto *bar = new RangeBar(value, min, max, decimals, widget);
 
@@ -279,9 +280,8 @@ template <> struct WidgetRenderer<glm::vec2>
       auto *unit_btn = new QPushButton(QObject::tr("[0, 1]"), widget);
 
       toggle_btn->setCheckable(true);
-      toggle_btn->setChecked(initially_active);
-      toggle_btn->setText(initially_active ? QObject::tr("On")
-                                           : QObject::tr("Off"));
+      toggle_btn->setChecked(is_active);
+      toggle_btn->setText(is_active ? QObject::tr("On") : QObject::tr("Off"));
       toggle_btn->setFixedHeight(22);
       toggle_btn->setFixedWidth(40);
 
@@ -314,7 +314,7 @@ template <> struct WidgetRenderer<glm::vec2>
         unit_btn->setEnabled(active);
       };
 
-      set_active(initially_active);
+      set_active(is_active);
 
       widget->set_sync_from_model(
           [&value, bar, toggle_btn, set_active, widget, range_provider]()
