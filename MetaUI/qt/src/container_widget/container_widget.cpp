@@ -115,7 +115,7 @@ void render_category(meta::AttributeContainer  &container,
 
     // UI state management
     {
-      const std::string is_collapsed_key = title + ".is_collapsed";
+      const std::string is_expanded_key = title + ".is_expanded";
 
       // the attribute container cannot have itself an attribute container and
       // so on recursively => use a dummy attribute to store some data related
@@ -123,20 +123,20 @@ void render_category(meta::AttributeContainer  &container,
       auto *dummy_attr = container.try_add(meta::keys::state::dummy, true);
 
       // apply stored state if available
-      if (dummy_attr->state().contains(is_collapsed_key))
+      if (dummy_attr->state().contains(is_expanded_key))
       {
-        bool current_state = dummy_attr->state().value<bool>(is_collapsed_key);
+        bool current_state = dummy_attr->state().value<bool>(is_expanded_key);
         section->set_expanded(current_state);
       }
 
       QObject::connect(
           section,
           &CollapsibleSection::expanded_state_changed,
-          [&container, is_collapsed_key](bool new_state)
+          [&container, is_expanded_key](bool new_state)
           {
             auto *dummy_attr = container.try_add(meta::keys::state::dummy,
                                                  true);
-            dummy_attr->state().try_add(is_collapsed_key, new_state)->value() =
+            dummy_attr->state().try_add(is_expanded_key, new_state)->value() =
                 new_state;
           });
     }
@@ -217,7 +217,7 @@ void render_category_merged(meta::AttributeContainer        &container,
 
     // UI state management
     {
-      const std::string is_collapsed_key = title + ".is_collapsed";
+      const std::string is_expanded_key = title + ".is_expanded";
 
       // the attribute container cannot have itself an attribute container and
       // so on recursively => use a dummy attribute to store some data related
@@ -225,20 +225,20 @@ void render_category_merged(meta::AttributeContainer        &container,
       auto *dummy_attr = container.try_add(meta::keys::state::dummy, true);
 
       // apply stored state if available
-      if (dummy_attr->state().contains(is_collapsed_key))
+      if (dummy_attr->state().contains(is_expanded_key))
       {
-        bool current_state = dummy_attr->state().value<bool>(is_collapsed_key);
+        bool current_state = dummy_attr->state().value<bool>(is_expanded_key);
         section->set_expanded(current_state);
       }
 
       QObject::connect(
           section,
           &CollapsibleSection::expanded_state_changed,
-          [&container, is_collapsed_key](bool new_state)
+          [&container, is_expanded_key](bool new_state)
           {
             auto *dummy_attr = container.try_add(meta::keys::state::dummy,
                                                  true);
-            dummy_attr->state().try_add(is_collapsed_key, new_state)->value() =
+            dummy_attr->state().try_add(is_expanded_key, new_state)->value() =
                 new_state;
           });
     }
