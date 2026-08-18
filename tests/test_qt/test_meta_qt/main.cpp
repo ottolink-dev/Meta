@@ -672,7 +672,7 @@ void add_color_gradient_tests(meta::AttributeContainer &container)
   auto *a = container.add("ColorGradient", meta::ColorGradient());
 
   a->metadata().add(meta::keys::ui::presets,
-                    meta::GradientPresets{generate_random_presets(16)});
+                    meta::GradientPresets{generate_random_presets(512)});
 }
 
 #endif
@@ -860,7 +860,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
-  const bool base_color_gradient = false;
+  const bool base_color_gradient = true;
 #else
   const bool base_color_gradient = false;
 #endif

@@ -59,7 +59,12 @@ template <> struct WidgetRenderer<meta::ColorGradient>
                                         widget);
       layout->addWidget(picker);
 
-      widget->set_sync_from_model([picker]() { picker->update(); });
+      widget->set_sync_from_model(
+          [picker]()
+          {
+            picker->update_bar();
+            picker->update();
+          });
 
       // Live edits
       QObject::connect(picker,
