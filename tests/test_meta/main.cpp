@@ -247,6 +247,26 @@ int main()
   std::cout << "\nUI-facing access:\n";
   std::cout << "draw_bounds = " << ui.value<bool>("draw_bounds") << "\n";
 
+  // Serialization test for ContainerGroup
+  {
+    auto j_group = group.json_to();
+    assert(j_group.contains("current"));
+    assert(j_group["current"] == "debug_settings");
+    assert(j_group.contains("containers"));
+    assert(j_group["containers"].contains("node_settings"));
+    assert(j_group["containers"].contains("ui_settings"));
+    assert(j_group["containers"].contains("debug_settings"));
+
+    ContainerGroup group2;
+    group2.json_from(j_group);
+    assert(group2.size() == 3);
+    assert(group2.current_container_name().value() == "debug_settings");
+    assert(group2.find("node_settings")->value<float>("threshold") == 0.5f);
+    assert(group2.find("ui_settings")->value<std::string>("theme") == "dark");
+    assert(group2.find("debug_settings")->value<int>("log_level") == 2);
+    std::cout << "[container_group] serialization round-trip OK" << std::endl;
+  }
+
   {
     struct TestData
     {
@@ -395,7 +415,7 @@ int main()
 
     auto &r =
         meta::presets::range(pc, "r", "Range", {0.f, 1.f}, -1.f, 2.f, false);
-    assert(r.state().value<bool>("ui.active") == false);
+    assert(r.state().value<bool>(meta::keys::state::active) == false);
 
     auto &ch = meta::presets::string_choice(pc, "c", "Choice", {"x", "y"}, "x");
     assert(ch.value() == "x");

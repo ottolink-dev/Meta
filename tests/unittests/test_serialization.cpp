@@ -128,3 +128,101 @@ TEST(SerializationTest, ContainerStateModeRoundTrip)
   ASSERT_TRUE(dst.state().contains("section.is_expanded"));
   EXPECT_EQ(dst.state().value<bool>("section.is_expanded"), false);
 }
+
+TEST(SerializationTest, ContainerGroupFullModeRoundTrip)
+{
+  meta::ContainerGroup src;
+  auto &v1 = src.add("view1");
+  auto *a1 = v1.add("param1", 42);
+  a1->metadata().add("desc", std::string("description 1"));
+  a1->state().add("active", true);
+
+  auto &v2 = src.add("view2");
+  v2.add("param2", 3.14f);
+
+  src.set_current("view2");
+
+  nlohmann::json j = src.json_to(meta::SerializationMode::full);
+
+  EXPECT_TRUE(j.contains("current"));
+  EXPECT_EQ(j["current"], "view2");
+  EXPECT_TRUE(j.contains("containers"));
+  EXPECT_TRUE(j["containers"].contains("view1"));
+  EXPECT_TRUE(j["containers"].contains("view2"));
+
+  meta::ContainerGroup dst;
+  dst.json_from(j, meta::SerializationMode::full);
+
+  EXPECT_EQ(dst.size(), 2);
+  ASSERT_TRUE(dst.contains("view1"));
+  ASSERT_TRUE(dst.contains("view2"));
+
+  ASSERT_TRUE(dst.current_container_name().has_value());
+  EXPECT_EQ(dst.current_container_name().value(), "view2");
+
+  auto *dst_v1 = dst.find("view1");
+  ASSERT_NE(dst_v1, nullptr);
+  EXPECT_EQ(dst_v1->value<int>("param1"), 42);
+  auto *dst_a1 = dst_v1->find("param1");
+  ASSERT_NE(dst_a1, nullptr);
+  EXPECT_EQ(dst_a1->metadata().value<std::string>("desc"), "description 1");
+  EXPECT_EQ(dst_a1->state().value<bool>("active"), true);
+
+  auto *dst_v2 = dst.find("view2");
+  ASSERT_NE(dst_v2, nullptr);
+  EXPECT_FLOAT_EQ(dst_v2->value<float>("param2"), 3.14f);
+
+  const auto &order = dst.insertion_order();
+  ASSERT_EQ(order.size(), 2);
+  EXPECT_EQ(order[0], "view1");
+  EXPECT_EQ(order[1], "view2");
+}
+
+TEST(SerializationTest, ContainerGroupStateMode)
+{
+  meta::ContainerGroup src;
+  auto &v1 = src.add("view1");
+  auto *a1 = v1.add("param1", 100);
+  a1->metadata().add("desc", std::string("static desc"));
+  a1->state().add("active", true);
+
+  nlohmann::json j = src.json_to(meta::SerializationMode::state);
+
+  meta::ContainerGroup dst;
+  auto &dst_v1 = dst.add("view1");
+  auto *dst_a1 = dst_v1.add("param1", 10);
+  dst_a1->metadata().add("desc", std::string("dst static desc"));
+
+  dst.json_from(j, meta::SerializationMode::state);
+
+  EXPECT_EQ(dst_v1.value<int>("param1"), 100);
+  EXPECT_EQ(dst_a1->metadata().value<std::string>("desc"), "dst static desc");
+  EXPECT_EQ(dst_a1->state().value<bool>("active"), true);
+
+  // Undeclared containers are skipped in state mode
+  nlohmann::json save_json = {
+      {"current", "undeclared_view"},
+      {"containers",
+       {{"undeclared_view", {{"paramX", {{"value", 999}}}}}}}};
+
+  dst.json_from(save_json, meta::SerializationMode::state);
+  EXPECT_FALSE(dst.contains("undeclared_view"));
+}
+
+TEST(SerializationTest, ContainerGroupClear)
+{
+  meta::ContainerGroup group;
+  group.add("c1");
+  group.add("c2");
+  group.set_current("c2");
+
+  EXPECT_EQ(group.size(), 2);
+  EXPECT_TRUE(group.current_container_name().has_value());
+
+  group.clear();
+
+  EXPECT_EQ(group.size(), 0);
+  EXPECT_FALSE(group.current_container_name().has_value());
+  EXPECT_TRUE(group.insertion_order().empty());
+}
+

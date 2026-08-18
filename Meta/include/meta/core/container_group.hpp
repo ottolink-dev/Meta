@@ -90,6 +90,41 @@ public:
    */
   void set_current(const std::string &key);
 
+  /// Clear all containers.
+  void clear();
+
+  // -------------------------------------------------------------------------
+  // Serialization
+  // -------------------------------------------------------------------------
+
+  /**
+   * @brief Serializes the container group to JSON.
+   * @param mode Serialization mode (full or state).
+   * @return JSON representation of the container group.
+   */
+  nlohmann::json json_to(
+      SerializationMode mode = SerializationMode::full) const;
+
+  /**
+   * @brief Deserializes the container group from JSON.
+   * @param j JSON object containing the container group data.
+   * @param exclude_snapshot_manager Whether to exclude snapshot manager when deserializing individual containers.
+   */
+  void json_from(const nlohmann::json &j, bool exclude_snapshot_manager)
+  {
+    json_from(j, SerializationMode::full, exclude_snapshot_manager);
+  }
+
+  /**
+   * @brief Deserializes the container group from JSON.
+   * @param j JSON object containing the container group data.
+   * @param mode Serialization mode (full or state).
+   * @param exclude_snapshot_manager Whether to exclude snapshot manager when deserializing individual containers.
+   */
+  void json_from(const nlohmann::json &j,
+                 SerializationMode     mode = SerializationMode::full,
+                 bool                  exclude_snapshot_manager = true);
+
   /// Returns the number of groups.
   size_t size() const;
 
