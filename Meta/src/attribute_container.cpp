@@ -125,9 +125,9 @@ void AttributeContainer::json_from(const nlohmann::json &j,
 
   for (auto &[name, value] : j.items())
   {
-    // Reserved entry
-    if (name == "snapshot_manager" || name == "__metadata__" ||
-        name == "__state__")
+    // Reserved entries
+    if (name == "snapshot_manager" || name == "state" || name == "__state__" ||
+        name == "metadata" || name == "__metadata__")
       continue;
 
     if (!value.is_object())
@@ -198,12 +198,23 @@ void AttributeContainer::json_from(const nlohmann::json &j,
     }
   }
 
-  if (mode == SerializationMode::full && j.contains("__metadata__"))
+  if (mode == SerializationMode::full)
   {
-    deserialize_metadata(metadata(), j.at("__metadata__"));
+    if (j.contains("metadata"))
+    {
+      deserialize_metadata(metadata(), j.at("metadata"));
+    }
+    else if (j.contains("__metadata__"))
+    {
+      deserialize_metadata(metadata(), j.at("__metadata__"));
+    }
   }
 
-  if (j.contains("__state__"))
+  if (j.contains("state"))
+  {
+    deserialize_state(state(), j.at("state"));
+  }
+  else if (j.contains("__state__"))
   {
     deserialize_state(state(), j.at("__state__"));
   }
@@ -246,7 +257,7 @@ nlohmann::json AttributeContainer::json_to(SerializationMode mode) const
     nlohmann::json meta_json = serialize_metadata(metadata());
     if (!meta_json.empty())
     {
-      j["__metadata__"] = meta_json;
+      j["metadata"] = meta_json;
     }
   }
 
@@ -255,7 +266,7 @@ nlohmann::json AttributeContainer::json_to(SerializationMode mode) const
     nlohmann::json state_json = serialize_state(state());
     if (!state_json.empty())
     {
-      j["__state__"] = state_json;
+      j["state"] = state_json;
     }
   }
 

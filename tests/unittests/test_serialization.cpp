@@ -106,3 +106,26 @@ TEST(SerializationTest, StateModeReconstructsDynamicStateAttributes)
   ASSERT_TRUE(attr->state().contains("custom_tag"));
   EXPECT_EQ(attr->state().value<std::string>("custom_tag"), "dynamic");
 }
+
+TEST(SerializationTest, ContainerStateModeRoundTrip)
+{
+  meta::AttributeContainer src;
+  src.add("param", 42);
+  src.state().add("section.is_expanded", false);
+
+  nlohmann::json j = src.json_to(meta::SerializationMode::state);
+
+  EXPECT_TRUE(j.contains("param"));
+  EXPECT_TRUE(j.contains("state"));
+  EXPECT_TRUE(j["state"].contains("section.is_expanded"));
+  EXPECT_EQ(j["state"]["section.is_expanded"]["value"], false);
+
+  meta::AttributeContainer dst;
+  dst.add("param", 0);
+  dst.json_from(j, meta::SerializationMode::state);
+
+  EXPECT_EQ(dst.value<int>("param"), 42);
+  ASSERT_TRUE(dst.state().contains("section.is_expanded"));
+  EXPECT_EQ(dst.state().value<bool>("section.is_expanded"), false);
+}
+
