@@ -153,6 +153,128 @@ void ContainerGroup::set_current(const std::string &key)
   Logger::log()->trace("ContainerGroup::set_current: success = {}", key);
 }
 
+void ContainerGroup::clear()
+{
+  Logger::log()->trace("ContainerGroup::clear");
+  containers_.clear();
+  insertion_order_.clear();
+  current_ = nullptr;
+}
+
+nlohmann::json ContainerGroup::json_to(SerializationMode mode) const
+{
+  Logger::log()->trace("ContainerGroup::json_to");
+
+  nlohmann::json j = nlohmann::json::object();
+
+  if (auto current_name = current_container_name())
+  {
+    j["current"] = *current_name;
+  }
+
+  nlohmann::json containers_json = nlohmann::json::object();
+  for (const auto &name : insertion_order_)
+  {
+    auto it = containers_.find(name);
+    if (it != containers_.end() && it->second)
+    {
+      containers_json[name] = it->second->json_to(mode);
+    }
+  }
+
+  for (const auto &[name, container] : containers_)
+  {
+    if (!containers_json.contains(name) && container)
+    {
+      containers_json[name] = container->json_to(mode);
+    }
+  }
+
+  j["containers"] = std::move(containers_json);
+
+  return j;
+}
+
+void ContainerGroup::json_from(const nlohmann::json &j,
+                               SerializationMode     mode,
+                               bool                  exclude_snapshot_manager)
+{
+  Logger::log()->trace("ContainerGroup::json_from");
+
+  if (!j.is_object())
+  {
+    Logger::log()->error("ContainerGroup::json_from: expected JSON object");
+    return;
+  }
+
+  const nlohmann::json *containers_json = nullptr;
+
+  if (j.contains("containers") && j["containers"].is_object())
+  {
+    containers_json = &j["containers"];
+  }
+  else
+  {
+    containers_json = &j;
+  }
+
+  for (const auto &[name, container_val] : containers_json->items())
+  {
+    if (name == "current")
+    {
+      continue;
+    }
+
+    if (!container_val.is_object())
+    {
+      Logger::log()->warn("ContainerGroup::json_from: skipping container '{}' "
+                          "because value is not an object",
+                          name);
+      continue;
+    }
+
+    auto it = containers_.find(name);
+
+    if (it == containers_.end())
+    {
+      if (mode == SerializationMode::state)
+      {
+        Logger::log()->trace("ContainerGroup::json_from: skipping undeclared "
+                             "container '{}' in state mode",
+                             name);
+        continue;
+      }
+
+      Logger::log()->trace("ContainerGroup::json_from: creating container '{}'",
+                           name);
+      AttributeContainer &new_container = add(name);
+      new_container.json_from(container_val, mode, exclude_snapshot_manager);
+    }
+    else
+    {
+      Logger::log()->trace("ContainerGroup::json_from: updating container '{}'",
+                           name);
+      it->second->json_from(container_val, mode, exclude_snapshot_manager);
+    }
+  }
+
+  if (j.contains("current") && j["current"].is_string())
+  {
+    const std::string current_name = j["current"].get<std::string>();
+    if (contains(current_name))
+    {
+      set_current(current_name);
+    }
+    else
+    {
+      Logger::log()->warn(
+          "ContainerGroup::json_from: current container '{}' not found",
+          current_name);
+    }
+  }
+}
+
 size_t ContainerGroup::size() const { return containers_.size(); }
 
 } // namespace meta
+
