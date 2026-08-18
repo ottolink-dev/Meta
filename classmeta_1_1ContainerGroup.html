@@ -125,15 +125,16 @@ Collaboration diagram for meta::ContainerGroup:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmeta_1_1ContainerGroup__coll__graph.png" border="0" usemap="#ameta_1_1ContainerGroup_coll__map" alt="Collaboration graph"/></div>
 <map name="ameta_1_1ContainerGroup_coll__map" id="ameta_1_1ContainerGroup_coll__map">
-<area shape="rect" title="Collection of named attribute containers." alt="" coords="49,269,215,295"/>
-<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,181,144,207"/>
-<area shape="poly" title=" " alt="" coords="92,217,126,267,122,270,88,220"/>
-<area shape="rect" href="classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="168,181,352,207"/>
-<area shape="poly" title=" " alt="" coords="233,217,151,271,148,267,230,212"/>
-<area shape="rect" href="classmeta_1_1SnapshotManager.html" title=" " alt="" coords="169,93,351,119"/>
-<area shape="poly" title=" " alt="" coords="263,133,263,181,257,181,257,133"/>
-<area shape="rect" href="classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="180,5,340,31"/>
-<area shape="poly" title=" " alt="" coords="263,45,263,93,257,93,257,45"/>
+<area shape="rect" title="Collection of named attribute containers." alt="" coords="13,269,179,295"/>
+<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,93,144,119"/>
+<area shape="poly" title=" " alt="" coords="80,132,97,269,92,269,75,133"/>
+<area shape="rect" href="classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="112,181,296,207"/>
+<area shape="poly" title=" " alt="" coords="105,124,188,179,185,183,102,128"/>
+<area shape="poly" title=" " alt="" coords="180,217,112,271,109,267,177,213"/>
+<area shape="rect" href="classmeta_1_1SnapshotManager.html" title=" " alt="" coords="168,93,349,119"/>
+<area shape="poly" title=" " alt="" coords="246,132,214,182,209,179,242,129"/>
+<area shape="rect" href="classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="179,5,339,31"/>
+<area shape="poly" title=" " alt="" coords="261,45,261,93,256,93,256,45"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -181,18 +182,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a9c03b68dbd3ad3bcdc4f6eaec65db3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of groups.  <br /></td></tr>
 <tr class="separator:a9c03b68dbd3ad3bcdc4f6eaec65db3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmeta_1_1MetaObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmeta_1_1MetaObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmeta_1_1MetaObject.html">meta::MetaObject</a></td></tr>
-<tr class="memitem:a54d756b3460ed63bcfa00d711cb442c2 inherit pub_methods_classmeta_1_1MetaObject" id="r_a54d756b3460ed63bcfa00d711cb442c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a54d756b3460ed63bcfa00d711cb442c2">MetaObject</a> ()</td></tr>
-<tr class="memdesc:a54d756b3460ed63bcfa00d711cb442c2 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment.">MetaObject</a> with an empty metadata container.  <br /></td></tr>
-<tr class="separator:a54d756b3460ed63bcfa00d711cb442c2 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02f25da378981a22e8afd9f31ba1da21 inherit pub_methods_classmeta_1_1MetaObject" id="r_a02f25da378981a22e8afd9f31ba1da21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a02f25da378981a22e8afd9f31ba1da21">~MetaObject</a> ()=default</td></tr>
-<tr class="memdesc:a02f25da378981a22e8afd9f31ba1da21 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
-<tr class="separator:a02f25da378981a22e8afd9f31ba1da21 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e180f295609578275b12d19c0ed248d inherit pub_methods_classmeta_1_1MetaObject" id="r_a8e180f295609578275b12d19c0ed248d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a8e180f295609578275b12d19c0ed248d">MetaObject</a> ()=default</td></tr>
+<tr class="memdesc:a8e180f295609578275b12d19c0ed248d inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment.">MetaObject</a> with lazy metadata and state containers.  <br /></td></tr>
+<tr class="separator:a8e180f295609578275b12d19c0ed248d inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30ca1f5307323b57ddb4151c602fe0b0 inherit pub_methods_classmeta_1_1MetaObject" id="r_a30ca1f5307323b57ddb4151c602fe0b0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a30ca1f5307323b57ddb4151c602fe0b0">~MetaObject</a> ()=default</td></tr>
+<tr class="memdesc:a30ca1f5307323b57ddb4151c602fe0b0 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
+<tr class="separator:a30ca1f5307323b57ddb4151c602fe0b0 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject" id="r_aaa64bfdc3ebb1c26290067a1e3dc5bf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#aaa64bfdc3ebb1c26290067a1e3dc5bf6">metadata</a> ()</td></tr>
-<tr class="memdesc:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access mutable metadata container.  <br /></td></tr>
+<tr class="memdesc:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access mutable metadata container (allocated on-demand).  <br /></td></tr>
 <tr class="separator:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a155c8e64f91d97387c8cc10bf63783a9 inherit pub_methods_classmeta_1_1MetaObject" id="r_a155c8e64f91d97387c8cc10bf63783a9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a155c8e64f91d97387c8cc10bf63783a9">metadata</a> () const</td></tr>
 <tr class="memdesc:a155c8e64f91d97387c8cc10bf63783a9 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access immutable metadata container.  <br /></td></tr>
 <tr class="separator:a155c8e64f91d97387c8cc10bf63783a9 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc76dbdce3a6a7191bbd18d39da495aa inherit pub_methods_classmeta_1_1MetaObject" id="r_adc76dbdce3a6a7191bbd18d39da495aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#adc76dbdce3a6a7191bbd18d39da495aa">state</a> ()</td></tr>
+<tr class="memdesc:adc76dbdce3a6a7191bbd18d39da495aa inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access mutable state container (allocated on-demand).  <br /></td></tr>
+<tr class="separator:adc76dbdce3a6a7191bbd18d39da495aa inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8bade3d273f966e674df89c4c7f228 inherit pub_methods_classmeta_1_1MetaObject" id="r_a3d8bade3d273f966e674df89c4c7f228"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a3d8bade3d273f966e674df89c4c7f228">state</a> () const</td></tr>
+<tr class="memdesc:a3d8bade3d273f966e674df89c4c7f228 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access immutable state container.  <br /></td></tr>
+<tr class="separator:a3d8bade3d273f966e674df89c4c7f228 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a573cd8ecdfdc82afa5b194f42f97aed2 inherit pub_methods_classmeta_1_1MetaObject" id="r_a573cd8ecdfdc82afa5b194f42f97aed2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a573cd8ecdfdc82afa5b194f42f97aed2">has_metadata</a> () const noexcept</td></tr>
+<tr class="memdesc:a573cd8ecdfdc82afa5b194f42f97aed2 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if metadata container has been allocated and is non-empty.  <br /></td></tr>
+<tr class="separator:a573cd8ecdfdc82afa5b194f42f97aed2 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject" id="r_a924439f1c248e199649136b83630ca6f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a924439f1c248e199649136b83630ca6f">has_state</a> () const noexcept</td></tr>
+<tr class="memdesc:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if state container has been allocated and is non-empty.  <br /></td></tr>
+<tr class="separator:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>

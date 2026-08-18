@@ -22,19 +22,29 @@ Inheritance diagram for meta\+::Meta\+Object\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classmeta_1_1MetaObject_a54d756b3460ed63bcfa00d711cb442c2}{Meta\+Object}} ()
-\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with an empty metadata container. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classmeta_1_1MetaObject_a02f25da378981a22e8afd9f31ba1da21}{\texorpdfstring{$\sim$}{\string~}\+Meta\+Object}} ()=default
+\mbox{\hyperlink{classmeta_1_1MetaObject_a8e180f295609578275b12d19c0ed248d}{Meta\+Object}} ()=default
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with lazy metadata and state containers. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classmeta_1_1MetaObject_a30ca1f5307323b57ddb4151c602fe0b0}{\texorpdfstring{$\sim$}{\string~}\+Meta\+Object}} ()=default
 \begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}} ()
-\begin{DoxyCompactList}\small\item\em Access mutable metadata container. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Access mutable metadata container (allocated on-\/demand). \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_a155c8e64f91d97387c8cc10bf63783a9}{metadata}} () const
-\begin{DoxyCompactList}\small\item\em Access immutable metadata container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Access immutable metadata container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}} ()
+\begin{DoxyCompactList}\small\item\em Access mutable state container (allocated on-\/demand). \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_a3d8bade3d273f966e674df89c4c7f228}{state}} () const
+\begin{DoxyCompactList}\small\item\em Access immutable state container. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1MetaObject_a573cd8ecdfdc82afa5b194f42f97aed2}{has\+\_\+metadata}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if metadata container has been allocated and is non-\/empty. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f}{has\+\_\+state}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if state container has been allocated and is non-\/empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} $>$ \mbox{\hyperlink{classmeta_1_1MetaObject_a0e939f50d4c16e99377a41c465a12b1f}{metadata\+\_\+}}
-\begin{DoxyCompactList}\small\item\em Owned metadata container storing arbitrary attributes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} $>$ \mbox{\hyperlink{classmeta_1_1MetaObject_a0e939f50d4c16e99377a41c465a12b1f}{metadata\+\_\+}} \{nullptr\}
+\begin{DoxyCompactList}\small\item\em Owned metadata container storing arbitrary attributes (lazily allocated). \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} $>$ \mbox{\hyperlink{classmeta_1_1MetaObject_af63dabade288830a366db45e7887bdfd}{state\+\_\+}} \{nullptr\}
+\begin{DoxyCompactList}\small\item\em Owned state container storing runtime/user state attributes (lazily allocated). \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -58,21 +68,21 @@ Ownership model\+:
 \end{DoxyItemize}
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classmeta_1_1MetaObject_a54d756b3460ed63bcfa00d711cb442c2}\label{classmeta_1_1MetaObject_a54d756b3460ed63bcfa00d711cb442c2} 
+\Hypertarget{classmeta_1_1MetaObject_a8e180f295609578275b12d19c0ed248d}\label{classmeta_1_1MetaObject_a8e180f295609578275b12d19c0ed248d} 
 \index{meta::MetaObject@{meta::MetaObject}!MetaObject@{MetaObject}}
 \index{MetaObject@{MetaObject}!meta::MetaObject@{meta::MetaObject}}
 \doxysubsubsection{\texorpdfstring{MetaObject()}{MetaObject()}}
-{\footnotesize\ttfamily meta\+::\+Meta\+Object\+::\+Meta\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily meta\+::\+Meta\+Object\+::\+Meta\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
 
 
-Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with an empty metadata container. 
+Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with lazy metadata and state containers. 
 
-\Hypertarget{classmeta_1_1MetaObject_a02f25da378981a22e8afd9f31ba1da21}\label{classmeta_1_1MetaObject_a02f25da378981a22e8afd9f31ba1da21} 
+\Hypertarget{classmeta_1_1MetaObject_a30ca1f5307323b57ddb4151c602fe0b0}\label{classmeta_1_1MetaObject_a30ca1f5307323b57ddb4151c602fe0b0} 
 \index{meta::MetaObject@{meta::MetaObject}!````~MetaObject@{\texorpdfstring{$\sim$}{\string~}MetaObject}}
 \index{````~MetaObject@{\texorpdfstring{$\sim$}{\string~}MetaObject}!meta::MetaObject@{meta::MetaObject}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MetaObject()}{\string~MetaObject()}}
-{\footnotesize\ttfamily meta\+::\+Meta\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Meta\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+{\footnotesize\ttfamily virtual meta\+::\+Meta\+Object\+::\texorpdfstring{$\sim$}{\string~}\+Meta\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
 
 
 
@@ -81,6 +91,26 @@ Default destructor.
 
 
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classmeta_1_1MetaObject_a573cd8ecdfdc82afa5b194f42f97aed2}\label{classmeta_1_1MetaObject_a573cd8ecdfdc82afa5b194f42f97aed2} 
+\index{meta::MetaObject@{meta::MetaObject}!has\_metadata@{has\_metadata}}
+\index{has\_metadata@{has\_metadata}!meta::MetaObject@{meta::MetaObject}}
+\doxysubsubsection{\texorpdfstring{has\_metadata()}{has\_metadata()}}
+{\footnotesize\ttfamily bool meta\+::\+Meta\+Object\+::has\+\_\+metadata (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Checks if metadata container has been allocated and is non-\/empty. 
+
+\Hypertarget{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f}\label{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f} 
+\index{meta::MetaObject@{meta::MetaObject}!has\_state@{has\_state}}
+\index{has\_state@{has\_state}!meta::MetaObject@{meta::MetaObject}}
+\doxysubsubsection{\texorpdfstring{has\_state()}{has\_state()}}
+{\footnotesize\ttfamily bool meta\+::\+Meta\+Object\+::has\+\_\+state (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Checks if state container has been allocated and is non-\/empty. 
+
 \Hypertarget{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}\label{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6} 
 \index{meta::MetaObject@{meta::MetaObject}!metadata@{metadata}}
 \index{metadata@{metadata}!meta::MetaObject@{meta::MetaObject}}
@@ -89,7 +119,7 @@ Default destructor.
 
 
 
-Access mutable metadata container. 
+Access mutable metadata container (allocated on-\/demand). 
 
 \begin{DoxyReturn}{Returns}
 Reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attribute\+Container}. 
@@ -105,7 +135,33 @@ Reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attribute\+
 Access immutable metadata container. 
 
 \begin{DoxyReturn}{Returns}
-Const reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attribute\+Container}. 
+Const reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attribute\+Container} (or static empty container if unallocated). 
+\end{DoxyReturn}
+\Hypertarget{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}\label{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa} 
+\index{meta::MetaObject@{meta::MetaObject}!state@{state}}
+\index{state@{state}!meta::MetaObject@{meta::MetaObject}}
+\doxysubsubsection{\texorpdfstring{state()}{state()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Meta\+Object\+::state (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Access mutable state container (allocated on-\/demand). 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attribute\+Container}. 
+\end{DoxyReturn}
+\Hypertarget{classmeta_1_1MetaObject_a3d8bade3d273f966e674df89c4c7f228}\label{classmeta_1_1MetaObject_a3d8bade3d273f966e674df89c4c7f228} 
+\index{meta::MetaObject@{meta::MetaObject}!state@{state}}
+\index{state@{state}!meta::MetaObject@{meta::MetaObject}}
+\doxysubsubsection{\texorpdfstring{state()}{state()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Meta\+Object\+::state (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access immutable state container. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attribute\+Container} (or static empty container if unallocated). 
 \end{DoxyReturn}
 
 
@@ -114,11 +170,21 @@ Const reference to the internal \doxylink{classmeta_1_1AttributeContainer}{Attri
 \index{meta::MetaObject@{meta::MetaObject}!metadata\_@{metadata\_}}
 \index{metadata\_@{metadata\_}!meta::MetaObject@{meta::MetaObject}}
 \doxysubsubsection{\texorpdfstring{metadata\_}{metadata\_}}
-{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}$>$ meta\+::\+Meta\+Object\+::metadata\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}$>$ meta\+::\+Meta\+Object\+::metadata\+\_\+ \{nullptr\}\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
 
 
 
-Owned metadata container storing arbitrary attributes. 
+Owned metadata container storing arbitrary attributes (lazily allocated). 
+
+\Hypertarget{classmeta_1_1MetaObject_af63dabade288830a366db45e7887bdfd}\label{classmeta_1_1MetaObject_af63dabade288830a366db45e7887bdfd} 
+\index{meta::MetaObject@{meta::MetaObject}!state\_@{state\_}}
+\index{state\_@{state\_}!meta::MetaObject@{meta::MetaObject}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}$>$ meta\+::\+Meta\+Object\+::state\+\_\+ \{nullptr\}\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Owned state container storing runtime/user state attributes (lazily allocated). 
 
 
 
