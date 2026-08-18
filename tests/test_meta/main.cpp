@@ -343,9 +343,9 @@ int main()
     std::cout << "[array] binary round-trip OK" << std::endl;
 
     // Text round-trip. nlohmann's binary type only survives binary formats;
-    // through dump()/parse() it degenerates into {"bytes": [...], "subtype": ...}.
-    // Hosts persisting to a text .json file take this path, so the reader has to
-    // recover the data from that form too.
+    // through dump()/parse() it degenerates into {"bytes": [...], "subtype":
+    // ...}. Hosts persisting to a text .json file take this path, so the reader
+    // has to recover the data from that form too.
     {
       auto const j_text = nlohmann::json::parse(c.json_to().dump());
       assert(!j_text["arr"]["value"]["vector"].is_binary());
@@ -395,7 +395,7 @@ int main()
 
     auto &r =
         meta::presets::range(pc, "r", "Range", {0.f, 1.f}, -1.f, 2.f, false);
-    assert(r.metadata().value<bool>("ui.active") == false);
+    assert(r.state().value<bool>("ui.active") == false);
 
     auto &ch = meta::presets::string_choice(pc, "c", "Choice", {"x", "y"}, "x");
     assert(ch.value() == "x");
@@ -438,6 +438,90 @@ int main()
     } // ev destroyed; conn still alive
     // conn's destructor (end of this block) must NOT touch the freed Event.
     std::cout << "event teardown-safety OK" << std::endl;
+  }
+
+  // --- Attribute state_ member, state() accessor, and serialization
+  {
+    meta::Attribute<int> attr("counter", 42);
+    attr.metadata().add("description", std::string("A test counter"));
+    attr.state().add("expanded", true);
+
+    assert(attr.metadata().value<std::string>("description") ==
+           "A test counter");
+    assert(attr.state().value<bool>("expanded") == true);
+
+    nlohmann::json j = attr.json_to();
+    assert(j.contains("type") && j["type"] == "int");
+    assert(j.contains("value") && j["value"] == 42);
+    assert(j.contains("metadata") && j["metadata"].contains("description"));
+    assert(j.contains("state") && j["state"].contains("expanded"));
+    assert(j["state"]["expanded"]["value"] == true);
+
+    meta::Attribute<int> restored("counter", 0);
+    restored.json_from(j);
+    assert(restored.value() == 42);
+    assert(restored.metadata().value<std::string>("description") ==
+           "A test counter");
+    assert(restored.state().value<bool>("expanded") == true);
+
+    std::cout << "attribute state_ member and serialization OK" << std::endl;
+  }
+
+  // --- SerializationMode: full vs state
+  {
+    // 1. Container in state mode: json_to emits only value and state, no type
+    // or metadata
+    meta::AttributeContainer src;
+    auto                    *a1 = src.add("declared_attr", 100);
+    a1->metadata().add("unit", std::string("meters"));
+    a1->state().add("active", true);
+
+    auto *a2 = src.add("extra_attr", std::string("test"));
+    a2->metadata().add("label", std::string("Extra"));
+
+    nlohmann::json full_json = src.json_to(meta::SerializationMode::full);
+    assert(full_json["declared_attr"].contains("type"));
+    assert(full_json["declared_attr"].contains("metadata"));
+    assert(full_json["declared_attr"].contains("state"));
+
+    nlohmann::json state_json = src.json_to(meta::SerializationMode::state);
+    assert(!state_json["declared_attr"].contains("type"));
+    assert(!state_json["declared_attr"].contains("metadata"));
+    assert(state_json["declared_attr"].contains("value") &&
+           state_json["declared_attr"]["value"] == 100);
+    assert(state_json["declared_attr"].contains("state") &&
+           state_json["declared_attr"]["state"].contains("active"));
+
+    // 2. Container in state mode: skips undeclared top-level attributes,
+    // ignores metadata, restores state via factory
+    meta::AttributeContainer dst;
+    auto                    *d1 = dst.add("declared_attr", 0);
+    d1->metadata().add(
+        "unit",
+        std::string("default_unit")); // consumer-defined metadata
+
+    // Deserializing in state mode:
+    dst.json_from(full_json, meta::SerializationMode::state);
+
+    // Declared attribute value and state updated:
+    assert(dst.value<int>("declared_attr") == 100);
+    assert(d1->state().value<bool>("active") == true);
+    // Metadata remained untouched:
+    assert(d1->metadata().value<std::string>("unit") == "default_unit");
+    // Undeclared attribute was skipped:
+    assert(!dst.contains("extra_attr"));
+
+    // 3. Container in full mode: creates undeclared attribute and restores
+    // metadata
+    meta::AttributeContainer dst_full;
+    dst_full.json_from(full_json, meta::SerializationMode::full);
+    assert(dst_full.contains("extra_attr"));
+    assert(dst_full.value<std::string>("extra_attr") == "test");
+    assert(
+        dst_full.find("extra_attr")->metadata().value<std::string>("label") ==
+        "Extra");
+
+    std::cout << "SerializationMode full and state OK" << std::endl;
   }
 
   return 0;

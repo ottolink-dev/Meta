@@ -3,10 +3,10 @@
    this software. */
 #include <mutex>
 
-#include "meta/serialization/attribute_factory.hpp"
 #include "meta/core/abstract_attribute.hpp"
 #include "meta/core/attribute_container.hpp"
 #include "meta/logger.hpp"
+#include "meta/serialization/attribute_factory.hpp"
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
 #include "meta/ext/color_gradient/color_gradient.hpp"

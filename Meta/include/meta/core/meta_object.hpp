@@ -47,27 +47,55 @@ class AttributeContainer;
 class MetaObject
 {
 public:
-  /// Construct a MetaObject with an empty metadata container.
-  MetaObject();
+  /// Construct a MetaObject with lazy metadata and state containers.
+  MetaObject() = default;
 
   /// Default destructor.
-  ~MetaObject() = default;
+  virtual ~MetaObject() = default;
 
   /**
-   * @brief Access mutable metadata container.
+   * @brief Access mutable metadata container (allocated on-demand).
    * @return Reference to the internal AttributeContainer.
    */
   AttributeContainer &metadata();
 
   /**
    * @brief Access immutable metadata container.
-   * @return Const reference to the internal AttributeContainer.
+   * @return Const reference to the internal AttributeContainer (or static empty
+   * container if unallocated).
    */
   const AttributeContainer &metadata() const;
 
+  /**
+   * @brief Access mutable state container (allocated on-demand).
+   * @return Reference to the internal AttributeContainer.
+   */
+  AttributeContainer &state();
+
+  /**
+   * @brief Access immutable state container.
+   * @return Const reference to the internal AttributeContainer (or static empty
+   * container if unallocated).
+   */
+  const AttributeContainer &state() const;
+
+  /**
+   * @brief Checks if metadata container has been allocated and is non-empty.
+   */
+  bool has_metadata() const noexcept;
+
+  /**
+   * @brief Checks if state container has been allocated and is non-empty.
+   */
+  bool has_state() const noexcept;
+
 private:
-  /// Owned metadata container storing arbitrary attributes.
-  std::unique_ptr<AttributeContainer> metadata_;
+  /// Owned metadata container storing arbitrary attributes (lazily allocated).
+  mutable std::unique_ptr<AttributeContainer> metadata_{nullptr};
+
+  /// Owned state container storing runtime/user state attributes (lazily
+  /// allocated).
+  mutable std::unique_ptr<AttributeContainer> state_{nullptr};
 };
 
 } // namespace meta

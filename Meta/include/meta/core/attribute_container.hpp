@@ -18,6 +18,7 @@
 #include <nlohmann/json.hpp>
 
 #include "meta/core/attribute.hpp"
+#include "meta/core/meta_object.hpp"
 #include "meta/serialization/snapshot_manager.hpp"
 
 #include <iostream>
@@ -55,7 +56,7 @@ concept StringLike = std::is_same_v<std::decay_t<T>, std::string> ||
  * - iteration support
  * - JSON serialization/deserialization
  */
-class AttributeContainer
+class AttributeContainer : public MetaObject
 {
 public:
   // -------------------------------------------------------------------------
@@ -319,14 +320,24 @@ public:
   // -------------------------------------------------------------------------
 
   /// Serializes container to JSON.
-  nlohmann::json json_to() const;
+  nlohmann::json json_to(
+      SerializationMode mode = SerializationMode::full) const;
 
   /**
    * @brief Deserializes container from JSON.
    *
-   * Existing attributes are updated; missing ones are created via factory.
+   * In Full mode: existing attributes are updated; missing ones are created via
+   * factory. In State mode: only declared attributes are updated; undeclared
+   * ones are skipped.
    */
-  void json_from(const nlohmann::json &j, bool exclude_snapshot_manager = true);
+  void json_from(const nlohmann::json &j, bool exclude_snapshot_manager)
+  {
+    json_from(j, SerializationMode::full, exclude_snapshot_manager);
+  }
+
+  void json_from(const nlohmann::json &j,
+                 SerializationMode     mode = SerializationMode::full,
+                 bool                  exclude_snapshot_manager = true);
 
   /**
    * @brief Access the snapshot manager.
@@ -353,7 +364,7 @@ private:
 };
 
 // -----------------------------------------------------------------------------
-// Metadata helpers (external API)
+// Metadata / State helpers (external API)
 // -----------------------------------------------------------------------------
 
 /// Serialize metadata container to JSON.
@@ -361,5 +372,11 @@ nlohmann::json serialize_metadata(const AttributeContainer &m);
 
 /// Deserialize metadata container from JSON.
 void deserialize_metadata(AttributeContainer &m, const nlohmann::json &j);
+
+/// Serialize state container to JSON.
+nlohmann::json serialize_state(const AttributeContainer &s);
+
+/// Deserialize state container from JSON.
+void deserialize_state(AttributeContainer &s, const nlohmann::json &j);
 
 } // namespace meta

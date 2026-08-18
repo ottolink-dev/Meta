@@ -511,7 +511,7 @@ void add_glm_tests(meta::AttributeContainer &container)
     a->metadata().add(meta::keys::ui::widget_type, "VectorEditor");
     a->metadata().add(meta::keys::constraints::min, 0.f);
     a->metadata().add(meta::keys::constraints::max, 128.f);
-    a->metadata().add("ui.locked_xy", true);
+    a->state().add(meta::keys::state::locked_xy, true);
   }
 
   {
@@ -520,7 +520,7 @@ void add_glm_tests(meta::AttributeContainer &container)
     a->metadata().add(meta::keys::ui::widget_type, "LinkedSliders");
     a->metadata().add(meta::keys::constraints::min, 0.f);
     a->metadata().add(meta::keys::constraints::max, 64.f);
-    a->metadata().add("ui.locked_xy", true);
+    a->state().add(meta::keys::state::locked_xy, true);
     a->metadata().add("ui.label_x", "kx");
     a->metadata().add("ui.label_y", "ky");
     a->metadata().add(meta::keys::ui::format, "{:.1f}");
@@ -532,7 +532,7 @@ void add_glm_tests(meta::AttributeContainer &container)
     a->metadata().add(meta::keys::ui::widget_type, "LinkedSliders");
     a->metadata().add(meta::keys::constraints::min, 0.f);
     a->metadata().add(meta::keys::constraints::max, FLT_MAX);
-    a->metadata().add("ui.locked_xy", true);
+    a->state().add(meta::keys::state::locked_xy, true);
     a->metadata().add("ui.label_x", "kx");
     a->metadata().add("ui.label_y", "ky");
     a->metadata().add(meta::keys::ui::format, "{:.1f}");
@@ -1067,7 +1067,7 @@ int main(int argc, char *argv[])
   // Multiple render test
   // ---------------------------------------------------------------------------
 
-  if (false)
+  if (true)
   {
     auto *widget1 = meta::qt::render(float_container);
     auto *widget2 = meta::qt::render(float_container);
@@ -1080,7 +1080,7 @@ int main(int argc, char *argv[])
   // NEW WIDGET test
   // ---------------------------------------------------------------------------
 
-  if (false)
+  if (true)
   {
     auto *button = new QPushButton("NEW WIDGET");
 

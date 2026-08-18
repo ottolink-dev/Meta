@@ -15,6 +15,7 @@
 #include "meta/type/type_name.hpp"
 
 #include "meta/serialization/attribute_factory.hpp"
+#include "meta/serialization/serialization_mode.hpp"
 
 #include "meta/undo_redo/command.hpp"
 #include "meta/undo_redo/command_group.hpp"

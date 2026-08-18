@@ -23,7 +23,7 @@ namespace meta
 {
 
 // -----------------------------------------------------------------------------
-// Forward declarations (metadata coupling avoidance)
+// Forward declarations (metadata / state coupling avoidance)
 // -----------------------------------------------------------------------------
 
 class AttributeContainer;
@@ -33,6 +33,12 @@ nlohmann::json serialize_metadata(const AttributeContainer &m);
 
 /// Deserialize attribute metadata from JSON.
 void deserialize_metadata(AttributeContainer &m, const nlohmann::json &j);
+
+/// Serialize attribute state to JSON.
+nlohmann::json serialize_state(const AttributeContainer &s);
+
+/// Deserialize attribute state from JSON.
+void deserialize_state(AttributeContainer &s, const nlohmann::json &j);
 
 // -----------------------------------------------------------------------------
 // Attribute
@@ -107,19 +113,41 @@ public:
   /**
    * @brief Serialize attribute to JSON.
    *
-   * Includes:
+   * In Full mode:
    * - type identifier
    * - value serialization
    * - metadata container
+   * - state container
+   *
+   * In State mode:
+   * - value serialization
+   * - state container
    */
-  nlohmann::json json_to() const override
+  nlohmann::json json_to(
+      SerializationMode mode = SerializationMode::full) const override
   {
+    if (mode == SerializationMode::state)
+    {
+      nlohmann::json j = {{"value", AttributeTraits<T>::json_to(value_)}};
+      nlohmann::json state_json = serialize_state(state());
+      if (!state_json.empty())
+      {
+        j["state"] = state_json;
+      }
+      return j;
+    }
+
     nlohmann::json j = {{"type", TypeName<T>::name},
                         {"value", AttributeTraits<T>::json_to(value_)}};
     nlohmann::json meta_json = serialize_metadata(metadata());
     if (!meta_json.empty())
     {
       j["metadata"] = meta_json;
+    }
+    nlohmann::json state_json = serialize_state(state());
+    if (!state_json.empty())
+    {
+      j["state"] = state_json;
     }
     return j;
   }
@@ -129,15 +157,24 @@ public:
    *
    * Restores:
    * - value
-   * - metadata container
+   * - metadata container (only in Full mode)
+   * - state container (reconstructed via factory)
    */
-  void json_from(const nlohmann::json &j) override
+  void json_from(const nlohmann::json &j,
+                 SerializationMode     mode = SerializationMode::full) override
   {
-    value_ = AttributeTraits<T>::json_from(j.at("value"));
-    value_changed.notify(value_);
-    if (j.contains("metadata"))
+    if (j.contains("value"))
+    {
+      value_ = AttributeTraits<T>::json_from(j.at("value"));
+      value_changed.notify(value_);
+    }
+    if (mode == SerializationMode::full && j.contains("metadata"))
     {
       deserialize_metadata(metadata(), j.at("metadata"));
+    }
+    if (j.contains("state"))
+    {
+      deserialize_state(state(), j.at("state"));
     }
   }
 

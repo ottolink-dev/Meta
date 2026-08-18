@@ -53,7 +53,7 @@ void MetaWidget::sync_widget_from_model()
     // firing toggled/value_changed signals back to the model, which
     // could cause feedback loops or crashes during teardown.
     const auto children_list = this->findChildren<QWidget *>();
-    
+
     std::vector<bool> blocked_states;
     blocked_states.reserve(children_list.size());
 

@@ -110,6 +110,7 @@ bool AttributeContainer::set_insertion_order(
 }
 
 void AttributeContainer::json_from(const nlohmann::json &j,
+                                   SerializationMode     mode,
                                    bool exclude_snapshot_manager)
 {
   Logger::log()->trace("AttributeContainer::json_from: {} entries", j.size());
@@ -124,8 +125,10 @@ void AttributeContainer::json_from(const nlohmann::json &j,
 
   for (auto &[name, value] : j.items())
   {
-    // Reserved entry
-    if (name == "snapshot_manager") continue;
+    // Reserved entries
+    if (name == "snapshot_manager" || name == "state" || name == "__state__" ||
+        name == "metadata" || name == "__metadata__")
+      continue;
 
     if (!value.is_object())
     {
@@ -139,6 +142,14 @@ void AttributeContainer::json_from(const nlohmann::json &j,
 
     if (it == attributes_.end())
     {
+      if (mode == SerializationMode::state)
+      {
+        Logger::log()->trace(
+            "json_from: skipping undeclared attribute '{}' in state mode",
+            name);
+        continue;
+      }
+
       if (!value.contains("type") || !value["type"].is_string())
       {
         Logger::log()->warn(
@@ -176,7 +187,7 @@ void AttributeContainer::json_from(const nlohmann::json &j,
 
     try
     {
-      it->second->json_from(value);
+      it->second->json_from(value, mode);
     }
     catch (const std::exception &e)
     {
@@ -187,7 +198,29 @@ void AttributeContainer::json_from(const nlohmann::json &j,
     }
   }
 
-  if (!exclude_snapshot_manager && j.contains("snapshot_manager"))
+  if (mode == SerializationMode::full)
+  {
+    if (j.contains("metadata"))
+    {
+      deserialize_metadata(metadata(), j.at("metadata"));
+    }
+    else if (j.contains("__metadata__"))
+    {
+      deserialize_metadata(metadata(), j.at("__metadata__"));
+    }
+  }
+
+  if (j.contains("state"))
+  {
+    deserialize_state(state(), j.at("state"));
+  }
+  else if (j.contains("__state__"))
+  {
+    deserialize_state(state(), j.at("__state__"));
+  }
+
+  if (mode == SerializationMode::full && !exclude_snapshot_manager &&
+      j.contains("snapshot_manager"))
   {
     try
     {
@@ -202,7 +235,7 @@ void AttributeContainer::json_from(const nlohmann::json &j,
   }
 }
 
-nlohmann::json AttributeContainer::json_to() const
+nlohmann::json AttributeContainer::json_to(SerializationMode mode) const
 {
   Logger::log()->trace("AttributeContainer::json_to");
 
@@ -216,10 +249,28 @@ nlohmann::json AttributeContainer::json_to() const
     if (attr->type() == std::type_index(typeid(meta::GradientPresets)))
       continue; // non-serializable host configuration
 #endif
-    j[name] = attr->json_to();
+    j[name] = attr->json_to(mode);
   }
 
-  if (!snapshot_manager_.empty())
+  if (mode == SerializationMode::full && has_metadata())
+  {
+    nlohmann::json meta_json = serialize_metadata(metadata());
+    if (!meta_json.empty())
+    {
+      j["metadata"] = meta_json;
+    }
+  }
+
+  if (has_state())
+  {
+    nlohmann::json state_json = serialize_state(state());
+    if (!state_json.empty())
+    {
+      j["state"] = state_json;
+    }
+  }
+
+  if (mode == SerializationMode::full && !snapshot_manager_.empty())
   {
     j["snapshot_manager"] = snapshot_manager_.json_to();
   }
@@ -254,6 +305,18 @@ nlohmann::json serialize_metadata(const AttributeContainer &m)
 {
   Logger::log()->trace("serialize_metadata");
   return m.json_to();
+}
+
+void deserialize_state(AttributeContainer &s, const nlohmann::json &j)
+{
+  Logger::log()->trace("deserialize_state");
+  s.json_from(j);
+}
+
+nlohmann::json serialize_state(const AttributeContainer &s)
+{
+  Logger::log()->trace("serialize_state");
+  return s.json_to();
 }
 
 } // namespace meta
