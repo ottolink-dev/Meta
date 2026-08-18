@@ -101,15 +101,13 @@ protected:
 
 private:
   void rebuild_preset_grid();
-  void update_content_height();
 
   std::vector<Stop>  &stops_;
   std::vector<Preset> presets_;
 
-  QScrollArea       *scroll_area_ = nullptr;
   GradientBarWidget *bar_widget_ = nullptr;
+  QScrollArea       *scroll_area_ = nullptr;
   PresetGridWidget  *preset_grid_ = nullptr;
-  QWidget           *content_widget_ = nullptr;
 
   static constexpr int SWATCH_W = 60; // each preset swatch width
   static constexpr int SWATCH_H = 32; // each preset swatch height

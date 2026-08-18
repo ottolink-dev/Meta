@@ -281,7 +281,12 @@ public:
     if (buttons_.empty()) return;
 
     const int cols = compute_cols(avail_w);
-    if (cols == current_cols_) return;
+    if (cols == current_cols_)
+    {
+      const int h = heightForWidth(avail_w);
+      setMinimumHeight(h);
+      return;
+    }
     current_cols_ = cols;
 
     // Destroy old layout to fully reset QGridLayout internal column
@@ -294,6 +299,8 @@ public:
                        static_cast<int>(i / cols),
                        static_cast<int>(i % cols));
 
+    const int h = heightForWidth(avail_w);
+    setMinimumHeight(h);
     updateGeometry();
   }
 
@@ -317,7 +324,9 @@ public:
 
   QSize minimumSizeHint() const override
   {
-    return QSize(swatch_w_ + 4, swatch_h_ + 4);
+    if (buttons_.empty()) return QSize(0, 0);
+    return QSize(swatch_w_ + 4,
+                 heightForWidth(width() > 0 ? width() : swatch_w_ + 4));
   }
 
 protected:
@@ -365,8 +374,13 @@ GradientPicker::GradientPicker(std::vector<Stop>         &stops,
 
   auto *main_layout = new QVBoxLayout(this);
   main_layout->setContentsMargins(0, 0, 0, 0);
-  main_layout->setSpacing(0);
+  main_layout->setSpacing(4);
 
+  // Gradient bar pinned at the top (fixed height, never scrolls)
+  bar_widget_ = new GradientBarWidget(stops_, this);
+  main_layout->addWidget(bar_widget_);
+
+  // Preset selection grid inside scroll area
   scroll_area_ = new QScrollArea(this);
   scroll_area_->setFrameShape(QFrame::NoFrame);
   scroll_area_->setWidgetResizable(true);
@@ -374,22 +388,13 @@ GradientPicker::GradientPicker(std::vector<Stop>         &stops,
   scroll_area_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   scroll_area_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-  content_widget_ = new QWidget(scroll_area_);
-  auto *content_layout = new QVBoxLayout(content_widget_);
-  content_layout->setContentsMargins(0, 0, 0, 0);
-  content_layout->setSpacing(4);
+  preset_grid_ = new PresetGridWidget(SWATCH_W, SWATCH_H, 4, scroll_area_);
+  scroll_area_->setWidget(preset_grid_);
 
-  bar_widget_ = new GradientBarWidget(stops_, content_widget_);
-  content_layout->addWidget(bar_widget_);
-
-  preset_grid_ = new PresetGridWidget(SWATCH_W, SWATCH_H, 4, content_widget_);
-  content_layout->addWidget(preset_grid_);
-
-  scroll_area_->setWidget(content_widget_);
   if (scroll_area_->viewport())
     scroll_area_->viewport()->installEventFilter(this);
 
-  main_layout->addWidget(scroll_area_);
+  main_layout->addWidget(scroll_area_, 1);
 
   connect(bar_widget_,
           &GradientBarWidget::value_changed,
@@ -401,7 +406,6 @@ GradientPicker::GradientPicker(std::vector<Stop>         &stops,
           &GradientPicker::edit_ended);
 
   rebuild_preset_grid();
-  update_content_height();
 }
 
 // ---------------------------------------------------------------------------
@@ -421,7 +425,7 @@ void GradientPicker::update_bar()
 
 void GradientPicker::rebuild_preset_grid()
 {
-  preset_grid_->setVisible(!presets_.empty());
+  scroll_area_->setVisible(!presets_.empty());
 
   // Delete all existing child buttons inside preset_grid_
   qDeleteAll(
@@ -486,13 +490,17 @@ void GradientPicker::rebuild_preset_grid()
   }
 
   preset_grid_->set_buttons(buttons);
-  update_content_height();
+  if (scroll_area_ && scroll_area_->viewport())
+    preset_grid_->reflow(scroll_area_->viewport()->width());
 }
 
 void GradientPicker::resizeEvent(QResizeEvent *e)
 {
   QWidget::resizeEvent(e);
-  update_content_height();
+  if (scroll_area_ && scroll_area_->viewport() && preset_grid_)
+  {
+    preset_grid_->reflow(scroll_area_->viewport()->width());
+  }
 }
 
 bool GradientPicker::eventFilter(QObject *watched, QEvent *event)
@@ -500,47 +508,24 @@ bool GradientPicker::eventFilter(QObject *watched, QEvent *event)
   if (scroll_area_ && watched == scroll_area_->viewport() &&
       event->type() == QEvent::Resize)
   {
-    update_content_height();
+    auto *re = static_cast<QResizeEvent *>(event);
+    if (preset_grid_) preset_grid_->reflow(re->size().width());
   }
   return QWidget::eventFilter(watched, event);
-}
-
-void GradientPicker::update_content_height()
-{
-  if (!scroll_area_ || !content_widget_ || !preset_grid_ || !bar_widget_)
-    return;
-
-  const int avail_w = scroll_area_->viewport()
-                          ? scroll_area_->viewport()->width()
-                          : content_widget_->width();
-
-  // Make sure the grid's column count matches this width first, so
-  // heightForWidth() below reflects the up-to-date row count.
-  preset_grid_->reflow(avail_w);
-
-  constexpr int spacing = 4; // must match content_layout's setSpacing()
-  int           total_h = GradientBarWidget::TOTAL_H;
-  if (preset_grid_->isVisible())
-    total_h += spacing + preset_grid_->heightForWidth(avail_w);
-
-  // QScrollArea (with setWidgetResizable(true)) decides whether the content
-  // needs to be taller than the viewport by looking at minimumSizeHint(),
-  // NOT heightForWidth(). Pushing the computed height in as a minimum is
-  // what actually makes the vertical scrollbar engage instead of the grid
-  // being squashed into stale geometry.
-  content_widget_->setMinimumHeight(total_h);
 }
 
 QSize GradientPicker::sizeHint() const
 {
   const int top_h = GradientBarWidget::TOTAL_H;
   const int preset_h = presets_.empty() ? 0 : (SWATCH_H + 4) * 3 + 8;
-  return {300, top_h + 4 + preset_h};
+  return {300, top_h + (presets_.empty() ? 0 : 4 + preset_h)};
 }
 
 QSize GradientPicker::minimumSizeHint() const
 {
-  return {120, GradientBarWidget::TOTAL_H};
+  const int top_h = GradientBarWidget::TOTAL_H;
+  const int preset_h = presets_.empty() ? 0 : SWATCH_H + 8;
+  return {120, top_h + (presets_.empty() ? 0 : 4 + preset_h)};
 }
 
 } // namespace meta::qt
