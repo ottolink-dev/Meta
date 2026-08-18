@@ -277,4 +277,3 @@ void ContainerGroup::json_from(const nlohmann::json &j,
 size_t ContainerGroup::size() const { return containers_.size(); }
 
 } // namespace meta
-

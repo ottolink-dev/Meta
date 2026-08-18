@@ -21,49 +21,78 @@ ContainerGroupWidget::ContainerGroupWidget(meta::ContainerGroup  &group,
   auto *root = new QVBoxLayout(this);
   this->setLayout(root);
 
-  // --- Selector
-
-  combo = new QComboBox(this);
-  root->addWidget(combo);
-
-  stacked = new QStackedWidget(this);
-  root->addWidget(stacked);
-
-  // fill containers
-  for (const auto &key : group.insertion_order())
+  if (options.group_switch_mode == GroupSwitchMode::GSM_TABS)
   {
-    Logger::log()->trace(
-        "ContainerGroupWidget::ContainerGroupWidget: adding page '{}'",
-        key);
+    tabs = new QTabWidget(this);
+    root->addWidget(tabs);
 
-    combo->addItem(QString::fromStdString(key));
+    for (const auto &key : group.insertion_order())
+    {
+      Logger::log()->trace(
+          "ContainerGroupWidget::ContainerGroupWidget: adding tab '{}'",
+          key);
 
-    // build widget ONCE
-    auto *w = build_container_widget(key);
-    pages[key] = w;
-    stacked->addWidget(w);
+      auto *w = build_container_widget(key);
+      pages[key] = w;
+      tabs->addTab(w, QString::fromStdString(key));
+    }
+
+    connect(
+        tabs,
+        &QTabWidget::currentChanged,
+        this,
+        [this](int index)
+        {
+          if (index < 0 || index >= tabs->count()) return;
+          const std::string new_current = tabs->tabText(index).toStdString();
+
+          Logger::log()->trace("ContainerGroupWidget: switching to '{}'",
+                               new_current);
+
+          this->group.set_current(new_current);
+          Q_EMIT current_container_changed(new_current);
+        });
+  }
+  else
+  {
+    combo = new QComboBox(this);
+    root->addWidget(combo);
+
+    stacked = new QStackedWidget(this);
+    root->addWidget(stacked);
+
+    for (const auto &key : group.insertion_order())
+    {
+      Logger::log()->trace(
+          "ContainerGroupWidget::ContainerGroupWidget: adding page '{}'",
+          key);
+
+      combo->addItem(QString::fromStdString(key));
+
+      auto *w = build_container_widget(key);
+      pages[key] = w;
+      stacked->addWidget(w);
+    }
+
+    connect(combo,
+            &QComboBox::currentTextChanged,
+            this,
+            [this](const QString &text)
+            {
+              const std::string new_current = text.toStdString();
+
+              Logger::log()->trace("ContainerGroupWidget: switching to '{}'",
+                                   new_current);
+
+              this->group.set_current(new_current);
+              sync_stack();
+
+              Q_EMIT current_container_changed(new_current);
+            });
   }
 
   // set initial
   sync_stack();
-
-  // --- Switching
-
-  connect(combo,
-          &QComboBox::currentTextChanged,
-          this,
-          [this](const QString &text)
-          {
-            const std::string new_current = text.toStdString();
-
-            Logger::log()->trace("ContainerGroupWidget: switching to '{}'",
-                                 new_current);
-
-            this->group.set_current(new_current);
-            sync_stack();
-
-            Q_EMIT current_container_changed(new_current);
-          });
 
   // pass through for the synching from the model (the
   // ContainerGroupWidget is derived from a MetaWidget)
@@ -111,12 +140,9 @@ void ContainerGroupWidget::on_sync_meta_widgets_from_model()
 {
   Logger::log()->trace("ContainerGroupWidget::on_sync_meta_widgets_from_model");
 
-  for (int i = 0; i < stacked->count(); ++i)
+  for (const auto &[key, widget] : pages)
   {
-    // those MetaWidgets are container widgets, passing the sync to
-    // the individual MetaWidgets is carried out by the container
-    // widget
-    if (auto *meta_widget = qobject_cast<MetaWidget *>(stacked->widget(i)))
+    if (auto *meta_widget = qobject_cast<MetaWidget *>(widget))
       meta_widget->sync_widget_from_model();
   }
 }
@@ -135,23 +161,46 @@ void ContainerGroupWidget::sync_stack()
     return;
   }
 
-  int index = combo->findText(QString::fromStdString(*current_name));
-
-  if (index >= 0)
+  if (tabs)
   {
-    Logger::log()->trace(
-        "ContainerGroupWidget::sync_stack: current='{}' index={}",
-        *current_name,
-        index);
+    for (int i = 0; i < tabs->count(); ++i)
+    {
+      if (tabs->tabText(i).toStdString() == *current_name)
+      {
+        Logger::log()->trace(
+            "ContainerGroupWidget::sync_stack: current='{}' index={}",
+            *current_name,
+            i);
 
-    stacked->setCurrentIndex(index);
-    combo->setCurrentIndex(index);
-  }
-  else
-  {
+        tabs->setCurrentIndex(i);
+        return;
+      }
+    }
+
     Logger::log()->warn(
-        "ContainerGroupWidget::sync_stack: container '{}' not found in combo",
+        "ContainerGroupWidget::sync_stack: container '{}' not found in tabs",
         *current_name);
+  }
+  else if (combo && stacked)
+  {
+    int index = combo->findText(QString::fromStdString(*current_name));
+
+    if (index >= 0)
+    {
+      Logger::log()->trace(
+          "ContainerGroupWidget::sync_stack: current='{}' index={}",
+          *current_name,
+          index);
+
+      stacked->setCurrentIndex(index);
+      combo->setCurrentIndex(index);
+    }
+    else
+    {
+      Logger::log()->warn(
+          "ContainerGroupWidget::sync_stack: container '{}' not found in combo",
+          *current_name);
+    }
   }
 }
 
