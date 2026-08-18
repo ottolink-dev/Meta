@@ -219,10 +219,6 @@ void render_category_merged(
       bool current_state = container.state().value<bool>(is_expanded_key);
       section->set_expanded(current_state);
 
-      Logger::log()->debug("current state: {} / {}",
-                           is_expanded_key,
-                           current_state ? "T" : "F");
-
       collected_sections.emplace_back(section, is_expanded_key);
 
       QObject::connect(section,

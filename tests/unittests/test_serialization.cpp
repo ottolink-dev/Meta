@@ -128,4 +128,3 @@ TEST(SerializationTest, ContainerStateModeRoundTrip)
   ASSERT_TRUE(dst.state().contains("section.is_expanded"));
   EXPECT_EQ(dst.state().value<bool>("section.is_expanded"), false);
 }
-
