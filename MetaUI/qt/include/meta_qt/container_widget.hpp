@@ -24,15 +24,23 @@ enum CategoryPolicy
   CP_SMART   ///< Heuristic-based hybrid organization
 };
 
+/// Policy used to switch between groups in a ContainerGroup.
+enum GroupSwitchMode
+{
+  GSM_TABS,     ///< Use tabs for switching groups
+  GSM_COMBO_BOX ///< Use a combo box for switching groups
+};
+
 /// Options controlling how attribute containers are rendered.
 struct ContainerRenderOptions
 {
   // clang-format off
-  CategoryPolicy category_policy = CategoryPolicy::CP_SMART;    ///< Category organization strategy
-  std::string root_category_name = META_ROOT_CATEGORY;          ///< Optional root category label
-  std::vector<std::string> insertion_order = {};                ///< Explicit ordering of categories
-  std::optional<std::regex> collapse_regex = std::nullopt;      ///< Regex used to collapse categories
-  bool snapshot_manager = false;                                ///< Add snapshot manager widget
+  CategoryPolicy category_policy = CategoryPolicy::CP_SMART;     ///< Category organization strategy
+  GroupSwitchMode group_switch_mode = GroupSwitchMode::GSM_TABS; ///< Container group switching style
+  std::string root_category_name = META_ROOT_CATEGORY;           ///< Optional root category label
+  std::vector<std::string> insertion_order = {};                 ///< Explicit ordering of categories
+  std::optional<std::regex> collapse_regex = std::nullopt;       ///< Regex used to collapse categories
+  bool snapshot_manager = false;                                 ///< Add snapshot manager widget
   // clang-format on
 };
 

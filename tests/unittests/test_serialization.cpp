@@ -132,8 +132,8 @@ TEST(SerializationTest, ContainerStateModeRoundTrip)
 TEST(SerializationTest, ContainerGroupFullModeRoundTrip)
 {
   meta::ContainerGroup src;
-  auto &v1 = src.add("view1");
-  auto *a1 = v1.add("param1", 42);
+  auto                &v1 = src.add("view1");
+  auto                *a1 = v1.add("param1", 42);
   a1->metadata().add("desc", std::string("description 1"));
   a1->state().add("active", true);
 
@@ -181,16 +181,16 @@ TEST(SerializationTest, ContainerGroupFullModeRoundTrip)
 TEST(SerializationTest, ContainerGroupStateMode)
 {
   meta::ContainerGroup src;
-  auto &v1 = src.add("view1");
-  auto *a1 = v1.add("param1", 100);
+  auto                &v1 = src.add("view1");
+  auto                *a1 = v1.add("param1", 100);
   a1->metadata().add("desc", std::string("static desc"));
   a1->state().add("active", true);
 
   nlohmann::json j = src.json_to(meta::SerializationMode::state);
 
   meta::ContainerGroup dst;
-  auto &dst_v1 = dst.add("view1");
-  auto *dst_a1 = dst_v1.add("param1", 10);
+  auto                &dst_v1 = dst.add("view1");
+  auto                *dst_a1 = dst_v1.add("param1", 10);
   dst_a1->metadata().add("desc", std::string("dst static desc"));
 
   dst.json_from(j, meta::SerializationMode::state);
@@ -202,8 +202,7 @@ TEST(SerializationTest, ContainerGroupStateMode)
   // Undeclared containers are skipped in state mode
   nlohmann::json save_json = {
       {"current", "undeclared_view"},
-      {"containers",
-       {{"undeclared_view", {{"paramX", {{"value", 999}}}}}}}};
+      {"containers", {{"undeclared_view", {{"paramX", {{"value", 999}}}}}}}};
 
   dst.json_from(save_json, meta::SerializationMode::state);
   EXPECT_FALSE(dst.contains("undeclared_view"));
@@ -225,4 +224,3 @@ TEST(SerializationTest, ContainerGroupClear)
   EXPECT_FALSE(group.current_container_name().has_value());
   EXPECT_TRUE(group.insertion_order().empty());
 }
-

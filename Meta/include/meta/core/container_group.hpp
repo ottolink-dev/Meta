@@ -108,7 +108,8 @@ public:
   /**
    * @brief Deserializes the container group from JSON.
    * @param j JSON object containing the container group data.
-   * @param exclude_snapshot_manager Whether to exclude snapshot manager when deserializing individual containers.
+   * @param exclude_snapshot_manager Whether to exclude snapshot manager when
+   * deserializing individual containers.
    */
   void json_from(const nlohmann::json &j, bool exclude_snapshot_manager)
   {
@@ -119,7 +120,8 @@ public:
    * @brief Deserializes the container group from JSON.
    * @param j JSON object containing the container group data.
    * @param mode Serialization mode (full or state).
-   * @param exclude_snapshot_manager Whether to exclude snapshot manager when deserializing individual containers.
+   * @param exclude_snapshot_manager Whether to exclude snapshot manager when
+   * deserializing individual containers.
    */
   void json_from(const nlohmann::json &j,
                  SerializationMode     mode = SerializationMode::full,

@@ -6,6 +6,7 @@
 
 #include <QComboBox>
 #include <QStackedWidget>
+#include <QTabWidget>
 
 #include "meta/core/container_group.hpp"
 
@@ -15,7 +16,7 @@
 namespace meta::qt
 {
 
-/// Widget that displays and edits a ContainerGroup using a stacked UI.
+/// Widget that displays and edits a ContainerGroup using a stacked UI or tabs.
 class ContainerGroupWidget : public MetaWidget
 {
   Q_OBJECT
@@ -39,15 +40,18 @@ private:
   /// Build a widget for a single container entry.
   QWidget *build_container_widget(const std::string &key);
 
-  /// Synchronize combo box selection with stacked widget page.
+  /// Synchronize tab or combo box selection with stacked widget page.
   void sync_stack();
 
 private:
   meta::ContainerGroup  &group;   /// Underlying container group
   ContainerRenderOptions options; /// Rendering options
 
-  QComboBox      *combo = nullptr;   /// Selector for container keys
-  QStackedWidget *stacked = nullptr; /// Stacked pages for each container
+  QTabWidget *tabs = nullptr; /// Tab widget (when using GSM_TABS)
+  QComboBox  *combo =
+      nullptr; /// Selector for container keys (when using GSM_COMBO_BOX)
+  QStackedWidget *stacked =
+      nullptr; /// Stacked pages for each container (when using GSM_COMBO_BOX)
 
   std::unordered_map<std::string, QWidget *> pages; /// Cached page widgets
 };
