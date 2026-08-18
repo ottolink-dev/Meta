@@ -59,6 +59,14 @@ const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classmeta_1_1Contai
 \begin{DoxyCompactList}\small\item\em Returns the attribute names in insertion order. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a}{set\+\_\+current}} (const std\+::string \&key)
 \begin{DoxyCompactList}\small\item\em Set the active container. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all containers. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5}{json\+\_\+to}} (\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} mode=\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}) const
+\begin{DoxyCompactList}\small\item\em Serializes the container group to JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9}{json\+\_\+from}} (const nlohmann\+::json \&j, bool exclude\+\_\+snapshot\+\_\+manager)
+\begin{DoxyCompactList}\small\item\em Deserializes the container group from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c}{json\+\_\+from}} (const nlohmann\+::json \&j, \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} mode=\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}, bool exclude\+\_\+snapshot\+\_\+manager=true)
+\begin{DoxyCompactList}\small\item\em Deserializes the container group from JSON. \end{DoxyCompactList}\item 
 size\+\_\+t \mbox{\hyperlink{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9}{size}} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of groups. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classmeta_1_1MetaObject}{meta\+::\+Meta\+Object}}}
@@ -134,6 +142,16 @@ Reference to the created container.
 {\em std\+::runtime\+\_\+error} & if the key already exists. \\
 \hline
 \end{DoxyExceptions}
+\Hypertarget{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd}\label{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd} 
+\index{meta::ContainerGroup@{meta::ContainerGroup}!clear@{clear}}
+\index{clear@{clear}!meta::ContainerGroup@{meta::ContainerGroup}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all containers. 
+
 \Hypertarget{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7}\label{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7} 
 \index{meta::ContainerGroup@{meta::ContainerGroup}!compact\_insertion\_order@{compact\_insertion\_order}}
 \index{compact\_insertion\_order@{compact\_insertion\_order}!meta::ContainerGroup@{meta::ContainerGroup}}
@@ -249,6 +267,60 @@ Pointer to container or nullptr.
 
 Returns the attribute names in insertion order. 
 
+\Hypertarget{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9}\label{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9} 
+\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_from@{json\_from}}
+\index{json\_from@{json\_from}!meta::ContainerGroup@{meta::ContainerGroup}}
+\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deserializes the container group from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & JSON object containing the container group data. \\
+\hline
+{\em exclude\+\_\+snapshot\+\_\+manager} & Whether to exclude snapshot manager when deserializing individual containers. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c}\label{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c} 
+\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_from@{json\_from}}
+\index{json\_from@{json\_from}!meta::ContainerGroup@{meta::ContainerGroup}}
+\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}},  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Deserializes the container group from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & JSON object containing the container group data. \\
+\hline
+{\em mode} & Serialization mode (full or state). \\
+\hline
+{\em exclude\+\_\+snapshot\+\_\+manager} & Whether to exclude snapshot manager when deserializing individual containers. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5}\label{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5} 
+\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_to@{json\_to}}
+\index{json\_to@{json\_to}!meta::ContainerGroup@{meta::ContainerGroup}}
+\doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
+{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Container\+Group\+::json\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}} }\end{DoxyParamCaption}) const}
+
+
+
+Serializes the container group to JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & Serialization mode (full or state). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+JSON representation of the container group. 
+\end{DoxyReturn}
 \Hypertarget{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a}\label{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a} 
 \index{meta::ContainerGroup@{meta::ContainerGroup}!set\_current@{set\_current}}
 \index{set\_current@{set\_current}!meta::ContainerGroup@{meta::ContainerGroup}}

@@ -9,7 +9,7 @@ var searchData=
   ['cend_6',['cend',['../classmeta_1_1AttributeContainer.html#a705a07cdbe0585efb11efe74dea9a859',1,'meta::AttributeContainer']]],
   ['checkbox_7',['checkbox',['../namespacemeta_1_1presets.html#ac6020ea6cccd122a6fcac8d1e9a43131',1,'meta::presets']]],
   ['choice_2ehpp_8',['choice.hpp',['../choice_8hpp.html',1,'']]],
-  ['clear_9',['clear',['../classmeta_1_1CommandStack.html#a2082d1a50774d7fb485f2854f22553aa',1,'meta::CommandStack::clear()'],['../classmeta_1_1AttributeContainer.html#a6dd055c517a101779178fc455fcba2ed',1,'meta::AttributeContainer::clear()'],['../classmeta_1_1SnapshotManager.html#aadb5e379aba37d8ac345420fbfda533f',1,'meta::SnapshotManager::clear()']]],
+  ['clear_9',['clear',['../classmeta_1_1SnapshotManager.html#aadb5e379aba37d8ac345420fbfda533f',1,'meta::SnapshotManager::clear()'],['../classmeta_1_1AttributeContainer.html#a6dd055c517a101779178fc455fcba2ed',1,'meta::AttributeContainer::clear()'],['../classmeta_1_1ContainerGroup.html#acce79df218caceaf4afdc435e5b292cd',1,'meta::ContainerGroup::clear()'],['../classmeta_1_1CommandStack.html#a2082d1a50774d7fb485f2854f22553aa',1,'meta::CommandStack::clear()']]],
   ['closed_10',['closed',['../namespacemeta_1_1keys_1_1ui.html#a742596fce7cefc8fe16bbb4db637749d',1,'meta::keys::ui']]],
   ['color_11',['color',['../structmeta_1_1Stop.html#a82a3136e71ff3995b02146b686224cf5',1,'meta::Stop']]],
   ['color_5fgradient_2ehpp_12',['color_gradient.hpp',['../presets_2color__gradient_8hpp.html',1,'(Global Namespace)'],['../ext_2color__gradient_2color__gradient_8hpp.html',1,'(Global Namespace)']]],

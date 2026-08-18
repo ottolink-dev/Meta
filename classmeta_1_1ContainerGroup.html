@@ -178,6 +178,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a869e7c2de22d43cd0a9bf5f55c35229a" id="r_a869e7c2de22d43cd0a9bf5f55c35229a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a869e7c2de22d43cd0a9bf5f55c35229a">set_current</a> (const std::string &amp;key)</td></tr>
 <tr class="memdesc:a869e7c2de22d43cd0a9bf5f55c35229a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the active container.  <br /></td></tr>
 <tr class="separator:a869e7c2de22d43cd0a9bf5f55c35229a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acce79df218caceaf4afdc435e5b292cd" id="r_acce79df218caceaf4afdc435e5b292cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#acce79df218caceaf4afdc435e5b292cd">clear</a> ()</td></tr>
+<tr class="memdesc:acce79df218caceaf4afdc435e5b292cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all containers.  <br /></td></tr>
+<tr class="separator:acce79df218caceaf4afdc435e5b292cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a594a60bbe32c08c81508bdfbe1112bb5" id="r_a594a60bbe32c08c81508bdfbe1112bb5"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a594a60bbe32c08c81508bdfbe1112bb5">json_to</a> (<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> mode=<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a>) const</td></tr>
+<tr class="memdesc:a594a60bbe32c08c81508bdfbe1112bb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the container group to JSON.  <br /></td></tr>
+<tr class="separator:a594a60bbe32c08c81508bdfbe1112bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ff54e1e6b75fd624fdad7e7bd2ade9" id="r_a66ff54e1e6b75fd624fdad7e7bd2ade9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a66ff54e1e6b75fd624fdad7e7bd2ade9">json_from</a> (const nlohmann::json &amp;j, bool exclude_snapshot_manager)</td></tr>
+<tr class="memdesc:a66ff54e1e6b75fd624fdad7e7bd2ade9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserializes the container group from JSON.  <br /></td></tr>
+<tr class="separator:a66ff54e1e6b75fd624fdad7e7bd2ade9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07017cde81c9403a87f28afa3b4da18c" id="r_a07017cde81c9403a87f28afa3b4da18c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a07017cde81c9403a87f28afa3b4da18c">json_from</a> (const nlohmann::json &amp;j, <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> mode=<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a>, bool exclude_snapshot_manager=true)</td></tr>
+<tr class="memdesc:a07017cde81c9403a87f28afa3b4da18c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserializes the container group from JSON.  <br /></td></tr>
+<tr class="separator:a07017cde81c9403a87f28afa3b4da18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c03b68dbd3ad3bcdc4f6eaec65db3a9" id="r_a9c03b68dbd3ad3bcdc4f6eaec65db3a9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a9c03b68dbd3ad3bcdc4f6eaec65db3a9">size</a> () const</td></tr>
 <tr class="memdesc:a9c03b68dbd3ad3bcdc4f6eaec65db3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of groups.  <br /></td></tr>
 <tr class="separator:a9c03b68dbd3ad3bcdc4f6eaec65db3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -271,6 +283,25 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="acce79df218caceaf4afdc435e5b292cd" name="acce79df218caceaf4afdc435e5b292cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acce79df218caceaf4afdc435e5b292cd">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear all containers. </p>
 
 </div>
 </div>
@@ -479,6 +510,122 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the attribute names in insertion order. </p>
+
+</div>
+</div>
+<a id="a66ff54e1e6b75fd624fdad7e7bd2ade9" name="a66ff54e1e6b75fd624fdad7e7bd2ade9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66ff54e1e6b75fd624fdad7e7bd2ade9">&#9670;&#160;</a></span>json_from() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::json_from </td>
+          <td>(</td>
+          <td class="paramtype">const nlohmann::json &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>exclude_snapshot_manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deserializes the container group from JSON. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>JSON object containing the container group data. </td></tr>
+    <tr><td class="paramname">exclude_snapshot_manager</td><td>Whether to exclude snapshot manager when deserializing individual containers. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a07017cde81c9403a87f28afa3b4da18c" name="a07017cde81c9403a87f28afa3b4da18c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07017cde81c9403a87f28afa3b4da18c">&#9670;&#160;</a></span>json_from() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::json_from </td>
+          <td>(</td>
+          <td class="paramtype">const nlohmann::json &amp;&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>exclude_snapshot_manager</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deserializes the container group from JSON. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>JSON object containing the container group data. </td></tr>
+    <tr><td class="paramname">mode</td><td>Serialization mode (full or state). </td></tr>
+    <tr><td class="paramname">exclude_snapshot_manager</td><td>Whether to exclude snapshot manager when deserializing individual containers. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a594a60bbe32c08c81508bdfbe1112bb5" name="a594a60bbe32c08c81508bdfbe1112bb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a594a60bbe32c08c81508bdfbe1112bb5">&#9670;&#160;</a></span>json_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nlohmann::json meta::ContainerGroup::json_to </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a></code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Serializes the container group to JSON. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>Serialization mode (full or state). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>JSON representation of the container group. </dd></dl>
 
 </div>
 </div>
