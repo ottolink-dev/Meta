@@ -126,7 +126,9 @@ void AttributeContainer::json_from(const nlohmann::json &j,
   for (auto &[name, value] : j.items())
   {
     // Reserved entry
-    if (name == "snapshot_manager") continue;
+    if (name == "snapshot_manager" || name == "__metadata__" ||
+        name == "__state__")
+      continue;
 
     if (!value.is_object())
     {
@@ -196,6 +198,16 @@ void AttributeContainer::json_from(const nlohmann::json &j,
     }
   }
 
+  if (mode == SerializationMode::full && j.contains("__metadata__"))
+  {
+    deserialize_metadata(metadata(), j.at("__metadata__"));
+  }
+
+  if (j.contains("__state__"))
+  {
+    deserialize_state(state(), j.at("__state__"));
+  }
+
   if (mode == SerializationMode::full && !exclude_snapshot_manager &&
       j.contains("snapshot_manager"))
   {
@@ -227,6 +239,24 @@ nlohmann::json AttributeContainer::json_to(SerializationMode mode) const
       continue; // non-serializable host configuration
 #endif
     j[name] = attr->json_to(mode);
+  }
+
+  if (mode == SerializationMode::full && has_metadata())
+  {
+    nlohmann::json meta_json = serialize_metadata(metadata());
+    if (!meta_json.empty())
+    {
+      j["__metadata__"] = meta_json;
+    }
+  }
+
+  if (has_state())
+  {
+    nlohmann::json state_json = serialize_state(state());
+    if (!state_json.empty())
+    {
+      j["__state__"] = state_json;
+    }
   }
 
   if (mode == SerializationMode::full && !snapshot_manager_.empty())

@@ -18,6 +18,7 @@
 #include <nlohmann/json.hpp>
 
 #include "meta/core/attribute.hpp"
+#include "meta/core/meta_object.hpp"
 #include "meta/serialization/snapshot_manager.hpp"
 
 #include <iostream>
@@ -55,7 +56,7 @@ concept StringLike = std::is_same_v<std::decay_t<T>, std::string> ||
  * - iteration support
  * - JSON serialization/deserialization
  */
-class AttributeContainer
+class AttributeContainer : public MetaObject
 {
 public:
   // -------------------------------------------------------------------------

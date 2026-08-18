@@ -74,13 +74,13 @@ void render_flat(CategoryNode              &node,
     Logger::log()->trace("container_widget::render_flat: '{}'",
                          p_attr ? p_attr->name() : std::string("null"));
 
-    MetaWidget *w = meta::qt::render(p_attr);
+    MetaWidget *w = qt::render(p_attr);
 
     if (w)
     {
-      if (const std::string tip = meta::common::try_get<std::string>(
+      if (const std::string tip = common::try_get<std::string>(
               *p_attr,
-              meta::keys::ui::tooltip,
+              keys::ui::tooltip,
               "");
           !tip.empty())
         w->setToolTip(QString::fromStdString(tip));
@@ -94,10 +94,12 @@ void render_flat(CategoryNode              &node,
     render_flat(*node.children.at(name), layout, collected_widgets);
 }
 
-void render_category(meta::AttributeContainer  &container,
+void render_category(AttributeContainer        &container,
                      CategoryNode              &node,
                      QVBoxLayout               *parent_layout,
-                     std::vector<MetaWidget *> &collected_widgets)
+                     std::vector<MetaWidget *> &collected_widgets,
+                     std::vector<std::pair<CollapsibleSection *, std::string>>
+                         &collected_sections)
 {
   Logger::log()->trace("container_widget::render_category: '{}'", node.name);
 
@@ -117,28 +119,21 @@ void render_category(meta::AttributeContainer  &container,
     {
       const std::string is_expanded_key = title + ".is_expanded";
 
-      // the attribute container cannot have itself an attribute container and
-      // so on recursively => use a dummy attribute to store some data related
-      // to the container itself
-      auto *dummy_attr = container.try_add(meta::keys::state::dummy, true);
+      container.state().try_add<bool>(is_expanded_key, false);
 
-      // apply stored state if available
-      if (dummy_attr->state().contains(is_expanded_key))
-      {
-        bool current_state = dummy_attr->state().value<bool>(is_expanded_key);
-        section->set_expanded(current_state);
-      }
+      bool current_state = container.state().value<bool>(is_expanded_key);
+      section->set_expanded(current_state);
 
-      QObject::connect(
-          section,
-          &CollapsibleSection::expanded_state_changed,
-          [&container, is_expanded_key](bool new_state)
-          {
-            auto *dummy_attr = container.try_add(meta::keys::state::dummy,
-                                                 true);
-            dummy_attr->state().try_add(is_expanded_key, new_state)->value() =
-                new_state;
-          });
+      collected_sections.emplace_back(section, is_expanded_key);
+
+      QObject::connect(section,
+                       &CollapsibleSection::expanded_state_changed,
+                       [&container, is_expanded_key](bool new_state)
+                       {
+                         container.state()
+                             .try_add(is_expanded_key, new_state)
+                             ->value() = new_state;
+                       });
     }
 
     current_layout = section->content_layout;
@@ -149,13 +144,13 @@ void render_category(meta::AttributeContainer  &container,
     Logger::log()->trace("container_widget::render_category: '{}'",
                          p_attr ? p_attr->name() : std::string("null"));
 
-    MetaWidget *w = meta::qt::render(p_attr);
+    MetaWidget *w = qt::render(p_attr);
 
     if (w) // avoid 'None' type widgets
     {
-      if (const std::string tip = meta::common::try_get<std::string>(
+      if (const std::string tip = common::try_get<std::string>(
               *p_attr,
-              meta::keys::ui::tooltip,
+              keys::ui::tooltip,
               "");
           !tip.empty())
         w->setToolTip(QString::fromStdString(tip));
@@ -169,14 +164,18 @@ void render_category(meta::AttributeContainer  &container,
     render_category(container,
                     *node.children.at(name),
                     current_layout,
-                    collected_widgets);
+                    collected_widgets,
+                    collected_sections);
 }
 
-void render_category_merged(meta::AttributeContainer        &container,
-                            CategoryNode                    &node,
-                            QVBoxLayout                     *parent_layout,
-                            std::vector<MetaWidget *>       &collected_widgets,
-                            const std::optional<std::regex> &collapse_regex)
+void render_category_merged(
+    AttributeContainer        &container,
+    CategoryNode              &node,
+    QVBoxLayout               *parent_layout,
+    std::vector<MetaWidget *> &collected_widgets,
+    std::vector<std::pair<CollapsibleSection *, std::string>>
+                                    &collected_sections,
+    const std::optional<std::regex> &collapse_regex)
 {
   Logger::log()->trace("container_widget::render_category_merged");
 
@@ -206,41 +205,34 @@ void render_category_merged(meta::AttributeContainer        &container,
   {
     auto *section = new CollapsibleSection(title.c_str());
 
-    if (collapse_regex && std::regex_search(title, *collapse_regex))
-    {
-      Logger::log()->trace(
-          "container_widget::render_category_merged: auto-collapse '{}'",
-          title);
-
-      section->set_expanded(false);
-    }
+    const bool autocollapse = collapse_regex &&
+                              std::regex_search(title, *collapse_regex);
+    const bool default_expansion_value = !autocollapse;
 
     // UI state management
     {
       const std::string is_expanded_key = title + ".is_expanded";
 
-      // the attribute container cannot have itself an attribute container and
-      // so on recursively => use a dummy attribute to store some data related
-      // to the container itself
-      auto *dummy_attr = container.try_add(meta::keys::state::dummy, true);
+      container.state().try_add<bool>(is_expanded_key,
+                                      bool(default_expansion_value));
 
-      // apply stored state if available
-      if (dummy_attr->state().contains(is_expanded_key))
-      {
-        bool current_state = dummy_attr->state().value<bool>(is_expanded_key);
-        section->set_expanded(current_state);
-      }
+      bool current_state = container.state().value<bool>(is_expanded_key);
+      section->set_expanded(current_state);
 
-      QObject::connect(
-          section,
-          &CollapsibleSection::expanded_state_changed,
-          [&container, is_expanded_key](bool new_state)
-          {
-            auto *dummy_attr = container.try_add(meta::keys::state::dummy,
-                                                 true);
-            dummy_attr->state().try_add(is_expanded_key, new_state)->value() =
-                new_state;
-          });
+      Logger::log()->debug("current state: {} / {}",
+                           is_expanded_key,
+                           current_state ? "T" : "F");
+
+      collected_sections.emplace_back(section, is_expanded_key);
+
+      QObject::connect(section,
+                       &CollapsibleSection::expanded_state_changed,
+                       [&container, is_expanded_key](bool new_state)
+                       {
+                         container.state()
+                             .try_add(is_expanded_key, new_state)
+                             ->value() = new_state;
+                       });
     }
 
     parent_layout->addWidget(section);
@@ -253,13 +245,13 @@ void render_category_merged(meta::AttributeContainer        &container,
       Logger::log()->trace("container_widget::render_category_merged: '{}'",
                            p_attr ? p_attr->name() : std::string("null"));
 
-      MetaWidget *w = meta::qt::render(p_attr);
+      MetaWidget *w = qt::render(p_attr);
 
       if (w) // 'None' widget is possible
       {
-        if (const std::string tip = meta::common::try_get<std::string>(
+        if (const std::string tip = common::try_get<std::string>(
                 *p_attr,
-                meta::keys::ui::tooltip,
+                keys::ui::tooltip,
                 "");
             !tip.empty())
           w->setToolTip(QString::fromStdString(tip));
@@ -276,6 +268,7 @@ void render_category_merged(meta::AttributeContainer        &container,
                            *last->children.at(name),
                            layout,
                            collected_widgets,
+                           collected_sections,
                            collapse_regex);
 }
 
@@ -308,7 +301,7 @@ MetaWidget *render(AttributeContainer    &container,
       continue;
     }
 
-    const std::string category = meta::common::category(*attr);
+    const std::string category = common::category(*attr);
     insert_attribute(root, category, attr);
     has_no_categorys &= category.empty();
 
@@ -338,13 +331,18 @@ MetaWidget *render(AttributeContainer    &container,
 
   // --- Attribute widgets
 
-  std::vector<MetaWidget *> collected_widgets;
+  std::vector<MetaWidget *>                                 collected_widgets;
+  std::vector<std::pair<CollapsibleSection *, std::string>> collected_sections;
 
   switch (options.category_policy)
   {
   case CategoryPolicy::CP_TREE:
     Logger::log()->trace("container_widget::render: tree mode");
-    render_category(container, root, layout, collected_widgets);
+    render_category(container,
+                    root,
+                    layout,
+                    collected_widgets,
+                    collected_sections);
     break;
 
   case CategoryPolicy::CP_MERGED:
@@ -353,6 +351,7 @@ MetaWidget *render(AttributeContainer    &container,
                            root,
                            layout,
                            collected_widgets,
+                           collected_sections,
                            options.collapse_regex);
     break;
 
@@ -366,6 +365,7 @@ MetaWidget *render(AttributeContainer    &container,
                              root,
                              layout,
                              collected_widgets,
+                             collected_sections,
                              options.collapse_regex);
     break;
 
@@ -399,10 +399,22 @@ MetaWidget *render(AttributeContainer    &container,
 
   // chain the container update request with the collected widget syncing
   container_widget->set_sync_from_model(
-      [collected_widgets]()
+      [&container, collected_widgets, collected_sections]()
       {
+        // underlying widgets
         for (auto w : collected_widgets)
           w->sync_widget_from_model();
+
+        // collapsible section state
+        for (const auto &[section, is_expanded_key] : collected_sections)
+        {
+          if (container.state().contains(is_expanded_key))
+          {
+            const bool is_expanded = container.state().value<bool>(
+                is_expanded_key);
+            section->set_expanded(is_expanded);
+          }
+        }
       });
 
   Logger::log()->trace("container_widget::render: {} widgets created",
@@ -416,9 +428,9 @@ MetaWidget *render(AttributeContainer    &container,
         presets,
         &PresetComboBox::preset_selected,
         container_widget,
-        [&container,
-         collected_widgets,
-         container_widget](std::string /* name */, nlohmann::json snapshot)
+        [&container, collected_widgets, collected_sections, container_widget](
+            std::string /* name */,
+            nlohmann::json snapshot)
         {
           // update model first (do not overwrite the snapshot data)
           bool exclude_snapshot_manager = true;
@@ -429,6 +441,16 @@ MetaWidget *render(AttributeContainer    &container,
           {
             const QSignalBlocker blocker(w);
             w->sync_widget_from_model();
+          }
+
+          for (const auto &[section, is_expanded_key] : collected_sections)
+          {
+            if (container.state().contains(is_expanded_key))
+            {
+              const bool is_expanded = container.state().value<bool>(
+                  is_expanded_key);
+              section->set_expanded(is_expanded);
+            }
           }
 
           Q_EMIT container_widget->value_changed();
