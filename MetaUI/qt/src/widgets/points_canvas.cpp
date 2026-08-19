@@ -206,6 +206,7 @@ void PointsCanvas::mousePressEvent(QMouseEvent *e)
       }
       moved_during_drag_ = false;
       Q_EMIT points_changed();
+      Q_EMIT drag_ended(); // treat new point as a committed edit
       update();
     }
   }
