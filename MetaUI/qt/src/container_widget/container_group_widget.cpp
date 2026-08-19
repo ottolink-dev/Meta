@@ -19,14 +19,11 @@ ContainerGroupWidget::ContainerGroupWidget(meta::ContainerGroup  &group,
   Logger::log()->trace("ContainerGroupWidget::ContainerGroupWidget");
 
   auto *root = new QVBoxLayout(this);
-  root->setContentsMargins(0, 0, 0, 0);
   this->setLayout(root);
 
   if (options.group_switch_mode == GroupSwitchMode::GSM_TABS)
   {
     tabs = new QTabWidget(this);
-    tabs->setDocumentMode(true);
-    tabs->setStyleSheet("QTabBar::tab { height: 22px; padding: 2px 8px; }");
     root->addWidget(tabs);
 
     for (const auto &key : group.insertion_order())
