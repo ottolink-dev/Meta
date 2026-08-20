@@ -168,12 +168,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aec426db41ba7bc8fca0a722d11bb3c98" id="r_aec426db41ba7bc8fca0a722d11bb3c98"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#aec426db41ba7bc8fca0a722d11bb3c98">to_string</a> () const override</td></tr>
 <tr class="memdesc:aec426db41ba7bc8fca0a722d11bb3c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert value to human-readable string.  <br /></td></tr>
 <tr class="separator:aec426db41ba7bc8fca0a722d11bb3c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f218693e33cf75e8ba0c9470b965dc0" id="r_a8f218693e33cf75e8ba0c9470b965dc0"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#a8f218693e33cf75e8ba0c9470b965dc0">json_to</a> () const override</td></tr>
-<tr class="memdesc:a8f218693e33cf75e8ba0c9470b965dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize attribute to JSON.  <br /></td></tr>
-<tr class="separator:a8f218693e33cf75e8ba0c9470b965dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8bef7eeb618f3c7c8072bd9d7f389f0" id="r_aa8bef7eeb618f3c7c8072bd9d7f389f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#aa8bef7eeb618f3c7c8072bd9d7f389f0">json_from</a> (const nlohmann::json &amp;j) override</td></tr>
-<tr class="memdesc:aa8bef7eeb618f3c7c8072bd9d7f389f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize attribute from JSON.  <br /></td></tr>
-<tr class="separator:aa8bef7eeb618f3c7c8072bd9d7f389f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3881931c9179f4c66bafb2272aab49f4" id="r_a3881931c9179f4c66bafb2272aab49f4"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#a3881931c9179f4c66bafb2272aab49f4">json_to</a> (<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> mode=<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a>) const override</td></tr>
+<tr class="memdesc:a3881931c9179f4c66bafb2272aab49f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize attribute to JSON.  <br /></td></tr>
+<tr class="separator:a3881931c9179f4c66bafb2272aab49f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1194b6473605f6a389b518e9d9c36e6f" id="r_a1194b6473605f6a389b518e9d9c36e6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#a1194b6473605f6a389b518e9d9c36e6f">json_from</a> (const nlohmann::json &amp;j, <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> mode=<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a>) override</td></tr>
+<tr class="memdesc:a1194b6473605f6a389b518e9d9c36e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize attribute from JSON.  <br /></td></tr>
+<tr class="separator:a1194b6473605f6a389b518e9d9c36e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmeta_1_1AbstractAttribute"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmeta_1_1AbstractAttribute')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmeta_1_1AbstractAttribute.html">meta::AbstractAttribute</a></td></tr>
 <tr class="memitem:ac0cb03d2d91011c750e98db7209a9cd0 inherit pub_methods_classmeta_1_1AbstractAttribute" id="r_ac0cb03d2d91011c750e98db7209a9cd0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1AbstractAttribute.html#ac0cb03d2d91011c750e98db7209a9cd0">~AbstractAttribute</a> ()=default</td></tr>
 <tr class="separator:ac0cb03d2d91011c750e98db7209a9cd0 inherit pub_methods_classmeta_1_1AbstractAttribute"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,18 +186,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af5f7d7e97f9ec75fc31766552cf107ec inherit pub_methods_classmeta_1_1AbstractAttribute"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to cast this attribute to the specified derived type.  <br /></td></tr>
 <tr class="separator:af5f7d7e97f9ec75fc31766552cf107ec inherit pub_methods_classmeta_1_1AbstractAttribute"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmeta_1_1MetaObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmeta_1_1MetaObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmeta_1_1MetaObject.html">meta::MetaObject</a></td></tr>
-<tr class="memitem:a54d756b3460ed63bcfa00d711cb442c2 inherit pub_methods_classmeta_1_1MetaObject" id="r_a54d756b3460ed63bcfa00d711cb442c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a54d756b3460ed63bcfa00d711cb442c2">MetaObject</a> ()</td></tr>
-<tr class="memdesc:a54d756b3460ed63bcfa00d711cb442c2 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment.">MetaObject</a> with an empty metadata container.  <br /></td></tr>
-<tr class="separator:a54d756b3460ed63bcfa00d711cb442c2 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02f25da378981a22e8afd9f31ba1da21 inherit pub_methods_classmeta_1_1MetaObject" id="r_a02f25da378981a22e8afd9f31ba1da21"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a02f25da378981a22e8afd9f31ba1da21">~MetaObject</a> ()=default</td></tr>
-<tr class="memdesc:a02f25da378981a22e8afd9f31ba1da21 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
-<tr class="separator:a02f25da378981a22e8afd9f31ba1da21 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e180f295609578275b12d19c0ed248d inherit pub_methods_classmeta_1_1MetaObject" id="r_a8e180f295609578275b12d19c0ed248d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a8e180f295609578275b12d19c0ed248d">MetaObject</a> ()=default</td></tr>
+<tr class="memdesc:a8e180f295609578275b12d19c0ed248d inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment.">MetaObject</a> with lazy metadata and state containers.  <br /></td></tr>
+<tr class="separator:a8e180f295609578275b12d19c0ed248d inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30ca1f5307323b57ddb4151c602fe0b0 inherit pub_methods_classmeta_1_1MetaObject" id="r_a30ca1f5307323b57ddb4151c602fe0b0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a30ca1f5307323b57ddb4151c602fe0b0">~MetaObject</a> ()=default</td></tr>
+<tr class="memdesc:a30ca1f5307323b57ddb4151c602fe0b0 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
+<tr class="separator:a30ca1f5307323b57ddb4151c602fe0b0 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject" id="r_aaa64bfdc3ebb1c26290067a1e3dc5bf6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#aaa64bfdc3ebb1c26290067a1e3dc5bf6">metadata</a> ()</td></tr>
-<tr class="memdesc:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access mutable metadata container.  <br /></td></tr>
+<tr class="memdesc:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access mutable metadata container (allocated on-demand).  <br /></td></tr>
 <tr class="separator:aaa64bfdc3ebb1c26290067a1e3dc5bf6 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a155c8e64f91d97387c8cc10bf63783a9 inherit pub_methods_classmeta_1_1MetaObject" id="r_a155c8e64f91d97387c8cc10bf63783a9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a155c8e64f91d97387c8cc10bf63783a9">metadata</a> () const</td></tr>
 <tr class="memdesc:a155c8e64f91d97387c8cc10bf63783a9 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access immutable metadata container.  <br /></td></tr>
 <tr class="separator:a155c8e64f91d97387c8cc10bf63783a9 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc76dbdce3a6a7191bbd18d39da495aa inherit pub_methods_classmeta_1_1MetaObject" id="r_adc76dbdce3a6a7191bbd18d39da495aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#adc76dbdce3a6a7191bbd18d39da495aa">state</a> ()</td></tr>
+<tr class="memdesc:adc76dbdce3a6a7191bbd18d39da495aa inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access mutable state container (allocated on-demand).  <br /></td></tr>
+<tr class="separator:adc76dbdce3a6a7191bbd18d39da495aa inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8bade3d273f966e674df89c4c7f228 inherit pub_methods_classmeta_1_1MetaObject" id="r_a3d8bade3d273f966e674df89c4c7f228"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a3d8bade3d273f966e674df89c4c7f228">state</a> () const</td></tr>
+<tr class="memdesc:a3d8bade3d273f966e674df89c4c7f228 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access immutable state container.  <br /></td></tr>
+<tr class="separator:a3d8bade3d273f966e674df89c4c7f228 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a573cd8ecdfdc82afa5b194f42f97aed2 inherit pub_methods_classmeta_1_1MetaObject" id="r_a573cd8ecdfdc82afa5b194f42f97aed2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a573cd8ecdfdc82afa5b194f42f97aed2">has_metadata</a> () const noexcept</td></tr>
+<tr class="memdesc:a573cd8ecdfdc82afa5b194f42f97aed2 inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if metadata container has been allocated and is non-empty.  <br /></td></tr>
+<tr class="separator:a573cd8ecdfdc82afa5b194f42f97aed2 inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject" id="r_a924439f1c248e199649136b83630ca6f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a924439f1c248e199649136b83630ca6f">has_state</a> () const noexcept</td></tr>
+<tr class="memdesc:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if state container has been allocated and is non-empty.  <br /></td></tr>
+<tr class="separator:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -272,8 +284,8 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa8bef7eeb618f3c7c8072bd9d7f389f0" name="aa8bef7eeb618f3c7c8072bd9d7f389f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8bef7eeb618f3c7c8072bd9d7f389f0">&#9670;&#160;</a></span>json_from()</h2>
+<a id="a1194b6473605f6a389b518e9d9c36e6f" name="a1194b6473605f6a389b518e9d9c36e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1194b6473605f6a389b518e9d9c36e6f">&#9670;&#160;</a></span>json_from()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,8 +299,18 @@ template&lt;typename T &gt; </div>
           <td class="memname">void <a class="el" href="classmeta_1_1Attribute.html">meta::Attribute</a>&lt; T &gt;::json_from </td>
           <td>(</td>
           <td class="paramtype">const nlohmann::json &amp;&#160;</td>
-          <td class="paramname"><em>j</em></td><td>)</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -301,15 +323,16 @@ template&lt;typename T &gt; </div>
 <p>Deserialize attribute from JSON. </p>
 <p>Restores:</p><ul>
 <li>value</li>
-<li>metadata container </li>
+<li>metadata container (only in Full mode)</li>
+<li>state container (reconstructed via factory) </li>
 </ul>
 
-<p>Implements <a class="el" href="classmeta_1_1AbstractAttribute.html#ad1c194300840bd9e5a2b626bca429ff1">meta::AbstractAttribute</a>.</p>
+<p>Implements <a class="el" href="classmeta_1_1AbstractAttribute.html#a60c24c3bfc5936a01b9806805ac4eff3">meta::AbstractAttribute</a>.</p>
 
 </div>
 </div>
-<a id="a8f218693e33cf75e8ba0c9470b965dc0" name="a8f218693e33cf75e8ba0c9470b965dc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f218693e33cf75e8ba0c9470b965dc0">&#9670;&#160;</a></span>json_to()</h2>
+<a id="a3881931c9179f4c66bafb2272aab49f4" name="a3881931c9179f4c66bafb2272aab49f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3881931c9179f4c66bafb2272aab49f4">&#9670;&#160;</a></span>json_to()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,7 +345,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">nlohmann::json <a class="el" href="classmeta_1_1Attribute.html">meta::Attribute</a>&lt; T &gt;::json_to </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a></code></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -334,13 +358,18 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Serialize attribute to JSON. </p>
-<p>Includes:</p><ul>
+<p>In Full mode:</p><ul>
 <li>type identifier</li>
 <li>value serialization</li>
-<li>metadata container </li>
+<li>metadata container</li>
+<li>state container</li>
+</ul>
+<p>In State mode:</p><ul>
+<li>value serialization</li>
+<li>state container </li>
 </ul>
 
-<p>Implements <a class="el" href="classmeta_1_1AbstractAttribute.html#ab7fc1ea1eb6d9fb141e39a857720b60f">meta::AbstractAttribute</a>.</p>
+<p>Implements <a class="el" href="classmeta_1_1AbstractAttribute.html#a5e009325b116d81921963ac4af9c46f3">meta::AbstractAttribute</a>.</p>
 
 </div>
 </div>

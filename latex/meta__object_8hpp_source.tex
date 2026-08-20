@@ -17,18 +17,28 @@
 \DoxyCodeLine{00047\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1MetaObject}{MetaObject}}}
 \DoxyCodeLine{00048\ \{}
 \DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{classmeta_1_1MetaObject_a54d756b3460ed63bcfa00d711cb442c2}{MetaObject}}();}
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{classmeta_1_1MetaObject_a8e180f295609578275b12d19c0ed248d}{MetaObject}}()\ =\ \textcolor{keywordflow}{default};}
 \DoxyCodeLine{00052\ }
-\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{classmeta_1_1MetaObject_a02f25da378981a22e8afd9f31ba1da21}{\string~MetaObject}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classmeta_1_1MetaObject_a30ca1f5307323b57ddb4151c602fe0b0}{\string~MetaObject}}()\ =\ \textcolor{keywordflow}{default};}
 \DoxyCodeLine{00055\ }
 \DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \&\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}();}
 \DoxyCodeLine{00061\ }
-\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \&\mbox{\hyperlink{classmeta_1_1MetaObject_a155c8e64f91d97387c8cc10bf63783a9}{metadata}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00070\ \ \ std::unique\_ptr<AttributeContainer>\ \mbox{\hyperlink{classmeta_1_1MetaObject_a0e939f50d4c16e99377a41c465a12b1f}{metadata\_}};}
-\DoxyCodeLine{00071\ \};}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \&\mbox{\hyperlink{classmeta_1_1MetaObject_a155c8e64f91d97387c8cc10bf63783a9}{metadata}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \&\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \&\mbox{\hyperlink{classmeta_1_1MetaObject_a3d8bade3d273f966e674df89c4c7f228}{state}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1MetaObject_a573cd8ecdfdc82afa5b194f42f97aed2}{has\_metadata}}()\ const\ noexcept;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f}{has\_state}}()\ const\ noexcept;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ private:}
+\DoxyCodeLine{00094\ \ \ mutable\ std::unique\_ptr<\mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}>\ \mbox{\hyperlink{classmeta_1_1MetaObject_a0e939f50d4c16e99377a41c465a12b1f}{metadata\_}}\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{mutable}\ std::unique\_ptr<AttributeContainer>\ \mbox{\hyperlink{classmeta_1_1MetaObject_af63dabade288830a366db45e7887bdfd}{state\_}}\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \}\ \textcolor{comment}{//\ namespace\ meta}}
 
 \end{DoxyCode}

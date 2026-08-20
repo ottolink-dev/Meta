@@ -11,12 +11,22 @@ Container of named runtime attributes.
 
 
 
+Inheritance diagram for meta\+::Attribute\+Container\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classmeta_1_1AttributeContainer__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for meta\+::Attribute\+Container\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=251pt]{classmeta_1_1AttributeContainer__coll__graph}
+\includegraphics[width=350pt]{classmeta_1_1AttributeContainer__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -70,14 +80,35 @@ bool \mbox{\hyperlink{classmeta_1_1AttributeContainer_af595c59d271648639f1cf0d73
 \begin{DoxyCompactList}\small\item\em Returns the attribute value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\const T \& \mbox{\hyperlink{classmeta_1_1AttributeContainer_a7489930ce58c927974e106426e2dbd04}{value}} (const std\+::string \&name) const
 \begin{DoxyCompactList}\small\item\em Returns the attribute value. \end{DoxyCompactList}\item 
-nlohmann\+::json \mbox{\hyperlink{classmeta_1_1AttributeContainer_af12dbed3c9932638b4d7c01ad81a25cd}{json\+\_\+to}} () const
+nlohmann\+::json \mbox{\hyperlink{classmeta_1_1AttributeContainer_a9ff22acdc798b51d676feec3d1638d46}{json\+\_\+to}} (\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} mode=\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}) const
 \begin{DoxyCompactList}\small\item\em Serializes container to JSON. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classmeta_1_1AttributeContainer_a4349aa8544d422d0fb90a520517a3c48}{json\+\_\+from}} (const nlohmann\+::json \&j, bool exclude\+\_\+snapshot\+\_\+manager=true)
+void \mbox{\hyperlink{classmeta_1_1AttributeContainer_a786e8c1bd40e4942038c06a6e9d553ec}{json\+\_\+from}} (const nlohmann\+::json \&j, bool exclude\+\_\+snapshot\+\_\+manager)
 \begin{DoxyCompactList}\small\item\em Deserializes container from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1AttributeContainer_ac645c984a8f8a6ea1f9430d82399a4a2}{json\+\_\+from}} (const nlohmann\+::json \&j, \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} mode=\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}, bool exclude\+\_\+snapshot\+\_\+manager=true)
+\item 
 \mbox{\hyperlink{classmeta_1_1SnapshotManager}{Snapshot\+Manager}} \& \mbox{\hyperlink{classmeta_1_1AttributeContainer_aeb6e6e1a9f188e3aa53896f9b0c94ebf}{snapshot\+\_\+manager}} ()
 \begin{DoxyCompactList}\small\item\em Access the snapshot manager. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classmeta_1_1SnapshotManager}{Snapshot\+Manager}} \& \mbox{\hyperlink{classmeta_1_1AttributeContainer_a7fb22ee2a8c63bbbf154b30b06d993cf}{snapshot\+\_\+manager}} () const
 \begin{DoxyCompactList}\small\item\em Access the snapshot manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classmeta_1_1MetaObject}{meta\+::\+Meta\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmeta_1_1MetaObject_a8e180f295609578275b12d19c0ed248d}{Meta\+Object}} ()=default
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with lazy metadata and state containers. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classmeta_1_1MetaObject_a30ca1f5307323b57ddb4151c602fe0b0}{\texorpdfstring{$\sim$}{\string~}\+Meta\+Object}} ()=default
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}} ()
+\begin{DoxyCompactList}\small\item\em Access mutable metadata container (allocated on-\/demand). \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_a155c8e64f91d97387c8cc10bf63783a9}{metadata}} () const
+\begin{DoxyCompactList}\small\item\em Access immutable metadata container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}} ()
+\begin{DoxyCompactList}\small\item\em Access mutable state container (allocated on-\/demand). \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_a3d8bade3d273f966e674df89c4c7f228}{state}} () const
+\begin{DoxyCompactList}\small\item\em Access immutable state container. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1MetaObject_a573cd8ecdfdc82afa5b194f42f97aed2}{has\+\_\+metadata}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if metadata container has been allocated and is non-\/empty. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f}{has\+\_\+state}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if state container has been allocated and is non-\/empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -276,21 +307,27 @@ Finds an attribute by name (const).
 
 Returns the attribute names in insertion order. 
 
-\Hypertarget{classmeta_1_1AttributeContainer_a4349aa8544d422d0fb90a520517a3c48}\label{classmeta_1_1AttributeContainer_a4349aa8544d422d0fb90a520517a3c48} 
+\Hypertarget{classmeta_1_1AttributeContainer_a786e8c1bd40e4942038c06a6e9d553ec}\label{classmeta_1_1AttributeContainer_a786e8c1bd40e4942038c06a6e9d553ec} 
 \index{meta::AttributeContainer@{meta::AttributeContainer}!json\_from@{json\_from}}
 \index{json\_from@{json\_from}!meta::AttributeContainer@{meta::AttributeContainer}}
-\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}}
-{\footnotesize\ttfamily void meta\+::\+Attribute\+Container\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager = {\ttfamily true} }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void meta\+::\+Attribute\+Container\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Deserializes container from JSON. 
 
-Existing attributes are updated; missing ones are created via factory. \Hypertarget{classmeta_1_1AttributeContainer_af12dbed3c9932638b4d7c01ad81a25cd}\label{classmeta_1_1AttributeContainer_af12dbed3c9932638b4d7c01ad81a25cd} 
+In Full mode\+: existing attributes are updated; missing ones are created via factory. In State mode\+: only declared attributes are updated; undeclared ones are skipped. \Hypertarget{classmeta_1_1AttributeContainer_ac645c984a8f8a6ea1f9430d82399a4a2}\label{classmeta_1_1AttributeContainer_ac645c984a8f8a6ea1f9430d82399a4a2} 
+\index{meta::AttributeContainer@{meta::AttributeContainer}!json\_from@{json\_from}}
+\index{json\_from@{json\_from}!meta::AttributeContainer@{meta::AttributeContainer}}
+\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void meta\+::\+Attribute\+Container\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}},  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\Hypertarget{classmeta_1_1AttributeContainer_a9ff22acdc798b51d676feec3d1638d46}\label{classmeta_1_1AttributeContainer_a9ff22acdc798b51d676feec3d1638d46} 
 \index{meta::AttributeContainer@{meta::AttributeContainer}!json\_to@{json\_to}}
 \index{json\_to@{json\_to}!meta::AttributeContainer@{meta::AttributeContainer}}
 \doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Attribute\+Container\+::json\+\_\+to (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Attribute\+Container\+::json\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}} }\end{DoxyParamCaption}) const}
 
 
 

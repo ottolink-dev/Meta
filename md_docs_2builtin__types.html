@@ -103,31 +103,81 @@ $(document).ready(function(){initNavTree('md_docs_2builtin__types.html',''); ini
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">type   </th><th class="markdownTableHeadNone">UI platform   </th><th class="markdownTableHeadNone">widget_type   </th><th class="markdownTableHeadNone">Description   </th><th class="markdownTableHeadNone">supported options    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">bool   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Toggle   </td><td class="markdownTableBodyNone">A single checkable QpushButton.   </td><td class="markdownTableBodyNone">label    </td></tr>
+<td class="markdownTableBodyNone">bool   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Toggle (default)   </td><td class="markdownTableBodyNone">A single checkable QPushButton.   </td><td class="markdownTableBodyNone">label    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">bool   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Checkbox   </td><td class="markdownTableBodyNone">A standard QcheckBox.   </td><td class="markdownTableBodyNone">label    </td></tr>
+<td class="markdownTableBodyNone">bool   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Checkbox   </td><td class="markdownTableBodyNone">A standard QCheckBox.   </td><td class="markdownTableBodyNone">label    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">bool   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">BinaryButtons   </td><td class="markdownTableBodyNone">Two mutually exclusive push buttons representing true and false.   </td><td class="markdownTableBodyNone">label, label_true, label_false    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">int   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input (default)   </td><td class="markdownTableBodyNone">Spin box for integer input.   </td><td class="markdownTableBodyNone">label, min, max, step    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Slider   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">int   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">EnumComboBox   </td><td class="markdownTableBodyNone">Drop-down list for enum values.   </td><td class="markdownTableBodyNone">label    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Dial   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">int   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Slider   </td><td class="markdownTableBodyNone">Horizontal slider widget.   </td><td class="markdownTableBodyNone">label, min, max    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ScrollBar   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">int   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ScrollBar   </td><td class="markdownTableBodyNone">Horizontal scroll bar widget.   </td><td class="markdownTableBodyNone">label, min, max    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">SliderFloat   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<td class="markdownTableBodyNone">int   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Dial   </td><td class="markdownTableBodyNone">Circular dial widget.   </td><td class="markdownTableBodyNone">label, min, max    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">int   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">SliderInt   </td><td class="markdownTableBodyNone">Custom slider widget with spinbox and +/- buttons.   </td><td class="markdownTableBodyNone">label, min, max, plus_minus, format    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input (default)   </td><td class="markdownTableBodyNone">Spin box for floating-point input.   </td><td class="markdownTableBodyNone">label, min, max, step, format    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Slider   </td><td class="markdownTableBodyNone">Horizontal slider widget.   </td><td class="markdownTableBodyNone">label, min, max    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ScrollBar   </td><td class="markdownTableBodyNone">Horizontal scroll bar widget.   </td><td class="markdownTableBodyNone">label, min, max    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Dial   </td><td class="markdownTableBodyNone">Circular dial widget.   </td><td class="markdownTableBodyNone">label, min, max    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">float   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">SliderFloat   </td><td class="markdownTableBodyNone">Custom slider widget with spinbox, +/- buttons, and log scale support.   </td><td class="markdownTableBodyNone">label, min, max, plus_minus, format, log_scale    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">SingleLineText (default)   </td><td class="markdownTableBodyNone">Single-line text field with an Apply button.   </td><td class="markdownTableBodyNone">label, placeholder, max_length    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">MultilineText   </td><td class="markdownTableBodyNone">Multi-line text editor with an Apply button.   </td><td class="markdownTableBodyNone">label, placeholder, min_lines, max_lines    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">CodeEditor   </td><td class="markdownTableBodyNone">Fixed-width multi-line editor for code.   </td><td class="markdownTableBodyNone">label, placeholder, min_lines, max_lines, tab_width    </td></tr>
+<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">CodeEditor   </td><td class="markdownTableBodyNone">Fixed-width multi-line editor for code with an Apply button.   </td><td class="markdownTableBodyNone">label, placeholder, min_lines, max_lines, tab_width    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ComboBox (default when allowed_values is defined)   </td><td class="markdownTableBodyNone">Drop-down list of allowed values.   </td><td class="markdownTableBodyNone">label, allowed_values    </td></tr>
+<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ReadOnlyText   </td><td class="markdownTableBodyNone">Read-only text label display.   </td><td class="markdownTableBodyNone">label    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ButtonGrid   </td><td class="markdownTableBodyNone">Grid of selectable buttons.   </td><td class="markdownTableBodyNone">label, allowed_values, columns, exclusive   </td></tr>
+<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ComboBox (default when allowed_values is defined)   </td><td class="markdownTableBodyNone">Drop-down list of allowed values.   </td><td class="markdownTableBodyNone">label, allowed_values    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">std::string   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ButtonGrid   </td><td class="markdownTableBodyNone">Grid of selectable buttons.   </td><td class="markdownTableBodyNone">label, allowed_values, columns, exclusive    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">std::filesystem::path   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">OpenFile (default)   </td><td class="markdownTableBodyNone">File open dialog picker with path line display and clear button.   </td><td class="markdownTableBodyNone">label, file_filter, start_dir    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">std::filesystem::path   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">SaveFile   </td><td class="markdownTableBodyNone">File save dialog picker with path line display and clear button.   </td><td class="markdownTableBodyNone">label, file_filter, start_dir    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">std::filesystem::path   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Directory   </td><td class="markdownTableBodyNone">Directory selection dialog picker with path line display and clear button.   </td><td class="markdownTableBodyNone">label, start_dir    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">glm::ivec2   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input (default)   </td><td class="markdownTableBodyNone">Spin boxes for X and Y integer components.   </td><td class="markdownTableBodyNone">label, min, max, step, power_of_two, aspect_ratio    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">glm::vec2   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input (default)   </td><td class="markdownTableBodyNone">Spin boxes for X and Y floating-point components.   </td><td class="markdownTableBodyNone">label, min, max, step, format    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">glm::vec2   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">XYCanvas   </td><td class="markdownTableBodyNone">Interactive 2D coordinate grid canvas.   </td><td class="markdownTableBodyNone">label, min, max, min_x, max_x, min_y, max_y, show_grid    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">glm::vec2   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">RangeBar   </td><td class="markdownTableBodyNone">Dual-handle range selection bar with histogram support.   </td><td class="markdownTableBodyNone">label, min, max, format, has_active_toggle, active, data_provider    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">glm::vec2   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">VectorEditor   </td><td class="markdownTableBodyNone">Interactive 2D vector canvas with magnitude and angle controls.   </td><td class="markdownTableBodyNone">label, max, locked_xy, format    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">glm::vec2   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">LinkedSliders   </td><td class="markdownTableBodyNone">Dual linked float sliders with X=Y lock button.   </td><td class="markdownTableBodyNone">label, min, max, format, locked_xy, label_x, label_y    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">glm::vec3   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input (default)   </td><td class="markdownTableBodyNone">Spin boxes for X, Y, and Z floating-point components.   </td><td class="markdownTableBodyNone">label, min, max, step, format    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">glm::vec3   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ColorPicker   </td><td class="markdownTableBodyNone">Color swatch button opening a color dialog with RGB hex display.   </td><td class="markdownTableBodyNone">label    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">glm::vec4   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">Input (default)   </td><td class="markdownTableBodyNone">Spin boxes for X, Y, Z, and W floating-point components.   </td><td class="markdownTableBodyNone">label, min, max, step, format    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">glm::vec4   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ColorPicker   </td><td class="markdownTableBodyNone">Color swatch button opening a color dialog with RGBA alpha support and hex display.   </td><td class="markdownTableBodyNone">label    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">std::vector&lt;float&gt;   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">CurveEditor (default)   </td><td class="markdownTableBodyNone">Interactive 2D curve canvas editor.   </td><td class="markdownTableBodyNone">label, curve_size, min_x, max_x, min_y, max_y    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">std::vector&lt;glm::vec3&gt;   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">PointsEditor (default)   </td><td class="markdownTableBodyNone">Interactive 2D/3D points canvas editor with toolbar actions and background image provider.   </td><td class="markdownTableBodyNone">label, min_x, max_x, min_y, max_y, z_step, closed, data_provider    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">std::vector&lt;glm::vec3&gt;   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">PathEditor   </td><td class="markdownTableBodyNone">Interactive connected path editor canvas with toolbar actions and background image provider.   </td><td class="markdownTableBodyNone">label, min_x, max_x, min_y, max_y, z_step, closed, data_provider    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="classmeta_1_1ColorGradient.html" title="Editable color gradient.">meta::ColorGradient</a>   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">GradientEditor (default)   </td><td class="markdownTableBodyNone">Interactive color gradient picker with stops and presets.   </td><td class="markdownTableBodyNone">label, presets    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="structmeta_1_1Array.html" title="A structure representing an array with dimensions (shape) and flat data (vector).">meta::Array</a>   </td><td class="markdownTableBodyNone">Qt   </td><td class="markdownTableBodyNone">ArrayEditor (default)   </td><td class="markdownTableBodyNone">2D array drawing canvas with background image provider support.   </td><td class="markdownTableBodyNone">label, width, height, data_provider   </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

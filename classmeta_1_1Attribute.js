@@ -1,8 +1,8 @@
 var classmeta_1_1Attribute =
 [
     [ "Attribute", "classmeta_1_1Attribute.html#aab5fcf9b3b29920763760209b7649a0d", null ],
-    [ "json_from", "classmeta_1_1Attribute.html#aa8bef7eeb618f3c7c8072bd9d7f389f0", null ],
-    [ "json_to", "classmeta_1_1Attribute.html#a8f218693e33cf75e8ba0c9470b965dc0", null ],
+    [ "json_from", "classmeta_1_1Attribute.html#a1194b6473605f6a389b518e9d9c36e6f", null ],
+    [ "json_to", "classmeta_1_1Attribute.html#a3881931c9179f4c66bafb2272aab49f4", null ],
     [ "name", "classmeta_1_1Attribute.html#acd53b61f4daeb870c1de2f64cc623b2d", null ],
     [ "raw_ptr", "classmeta_1_1Attribute.html#a63d1191849012bd333c44758dbab4f7f", null ],
     [ "raw_ptr", "classmeta_1_1Attribute.html#aaa7d5cb0af74669327d86fec1bdaccd4", null ],

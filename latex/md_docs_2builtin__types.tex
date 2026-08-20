@@ -12,17 +12,42 @@
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ UI platform   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ widget\+\_\+type   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ supported options    }\\\cline{1-5}
 \endhead
-bool   &Qt   &Toggle   &A single checkable Qpush\+Button.   &label    \\\cline{1-5}
-bool   &Qt   &Checkbox   &A standard Qcheck\+Box.   &label    \\\cline{1-5}
+bool   &Qt   &Toggle (default)   &A single checkable QPush\+Button.   &label    \\\cline{1-5}
+bool   &Qt   &Checkbox   &A standard QCheck\+Box.   &label    \\\cline{1-5}
 bool   &Qt   &Binary\+Buttons   &Two mutually exclusive push buttons representing true and false.   &label, label\+\_\+true, label\+\_\+false    \\\cline{1-5}
-float   &Qt   &Input   &&\\\cline{1-5}
-float   &Qt   &Slider   &&\\\cline{1-5}
-float   &Qt   &Dial   &&\\\cline{1-5}
-float   &Qt   &Scroll\+Bar   &&\\\cline{1-5}
-float   &Qt   &Slider\+Float   &&\\\cline{1-5}
+int   &Qt   &Input (default)   &Spin box for integer input.   &label, min, max, step    \\\cline{1-5}
+int   &Qt   &Enum\+Combo\+Box   &Drop-\/down list for enum values.   &label    \\\cline{1-5}
+int   &Qt   &Slider   &Horizontal slider widget.   &label, min, max    \\\cline{1-5}
+int   &Qt   &Scroll\+Bar   &Horizontal scroll bar widget.   &label, min, max    \\\cline{1-5}
+int   &Qt   &Dial   &Circular dial widget.   &label, min, max    \\\cline{1-5}
+int   &Qt   &Slider\+Int   &Custom slider widget with spinbox and +/-\/ buttons.   &label, min, max, plus\+\_\+minus, format    \\\cline{1-5}
+float   &Qt   &Input (default)   &Spin box for floating-\/point input.   &label, min, max, step, format    \\\cline{1-5}
+float   &Qt   &Slider   &Horizontal slider widget.   &label, min, max    \\\cline{1-5}
+float   &Qt   &Scroll\+Bar   &Horizontal scroll bar widget.   &label, min, max    \\\cline{1-5}
+float   &Qt   &Dial   &Circular dial widget.   &label, min, max    \\\cline{1-5}
+float   &Qt   &Slider\+Float   &Custom slider widget with spinbox, +/-\/ buttons, and log scale support.   &label, min, max, plus\+\_\+minus, format, log\+\_\+scale    \\\cline{1-5}
 std\+::string   &Qt   &Single\+Line\+Text (default)   &Single-\/line text field with an Apply button.   &label, placeholder, max\+\_\+length    \\\cline{1-5}
 std\+::string   &Qt   &Multiline\+Text   &Multi-\/line text editor with an Apply button.   &label, placeholder, min\+\_\+lines, max\+\_\+lines    \\\cline{1-5}
-std\+::string   &Qt   &Code\+Editor   &Fixed-\/width multi-\/line editor for code.   &label, placeholder, min\+\_\+lines, max\+\_\+lines, tab\+\_\+width    \\\cline{1-5}
+std\+::string   &Qt   &Code\+Editor   &Fixed-\/width multi-\/line editor for code with an Apply button.   &label, placeholder, min\+\_\+lines, max\+\_\+lines, tab\+\_\+width    \\\cline{1-5}
+std\+::string   &Qt   &Read\+Only\+Text   &Read-\/only text label display.   &label    \\\cline{1-5}
 std\+::string   &Qt   &Combo\+Box (default when allowed\+\_\+values is defined)   &Drop-\/down list of allowed values.   &label, allowed\+\_\+values    \\\cline{1-5}
-std\+::string   &Qt   &Button\+Grid   &Grid of selectable buttons.   &label, allowed\+\_\+values, columns, exclusive   \\\cline{1-5}
+std\+::string   &Qt   &Button\+Grid   &Grid of selectable buttons.   &label, allowed\+\_\+values, columns, exclusive    \\\cline{1-5}
+std\+::filesystem\+::path   &Qt   &Open\+File (default)   &File open dialog picker with path line display and clear button.   &label, file\+\_\+filter, start\+\_\+dir    \\\cline{1-5}
+std\+::filesystem\+::path   &Qt   &Save\+File   &File save dialog picker with path line display and clear button.   &label, file\+\_\+filter, start\+\_\+dir    \\\cline{1-5}
+std\+::filesystem\+::path   &Qt   &Directory   &Directory selection dialog picker with path line display and clear button.   &label, start\+\_\+dir    \\\cline{1-5}
+glm\+::ivec2   &Qt   &Input (default)   &Spin boxes for X and Y integer components.   &label, min, max, step, power\+\_\+of\+\_\+two, aspect\+\_\+ratio    \\\cline{1-5}
+glm\+::vec2   &Qt   &Input (default)   &Spin boxes for X and Y floating-\/point components.   &label, min, max, step, format    \\\cline{1-5}
+glm\+::vec2   &Qt   &XYCanvas   &Interactive 2D coordinate grid canvas.   &label, min, max, min\+\_\+x, max\+\_\+x, min\+\_\+y, max\+\_\+y, show\+\_\+grid    \\\cline{1-5}
+glm\+::vec2   &Qt   &Range\+Bar   &Dual-\/handle range selection bar with histogram support.   &label, min, max, format, has\+\_\+active\+\_\+toggle, active, data\+\_\+provider    \\\cline{1-5}
+glm\+::vec2   &Qt   &Vector\+Editor   &Interactive 2D vector canvas with magnitude and angle controls.   &label, max, locked\+\_\+xy, format    \\\cline{1-5}
+glm\+::vec2   &Qt   &Linked\+Sliders   &Dual linked float sliders with X=Y lock button.   &label, min, max, format, locked\+\_\+xy, label\+\_\+x, label\+\_\+y    \\\cline{1-5}
+glm\+::vec3   &Qt   &Input (default)   &Spin boxes for X, Y, and Z floating-\/point components.   &label, min, max, step, format    \\\cline{1-5}
+glm\+::vec3   &Qt   &Color\+Picker   &Color swatch button opening a color dialog with RGB hex display.   &label    \\\cline{1-5}
+glm\+::vec4   &Qt   &Input (default)   &Spin boxes for X, Y, Z, and W floating-\/point components.   &label, min, max, step, format    \\\cline{1-5}
+glm\+::vec4   &Qt   &Color\+Picker   &Color swatch button opening a color dialog with RGBA alpha support and hex display.   &label    \\\cline{1-5}
+std\+::vector$<$float$>$   &Qt   &Curve\+Editor (default)   &Interactive 2D curve canvas editor.   &label, curve\+\_\+size, min\+\_\+x, max\+\_\+x, min\+\_\+y, max\+\_\+y    \\\cline{1-5}
+std\+::vector$<$glm\+::vec3$>$   &Qt   &Points\+Editor (default)   &Interactive 2D/3D points canvas editor with toolbar actions and background image provider.   &label, min\+\_\+x, max\+\_\+x, min\+\_\+y, max\+\_\+y, z\+\_\+step, closed, data\+\_\+provider    \\\cline{1-5}
+std\+::vector$<$glm\+::vec3$>$   &Qt   &Path\+Editor   &Interactive connected path editor canvas with toolbar actions and background image provider.   &label, min\+\_\+x, max\+\_\+x, min\+\_\+y, max\+\_\+y, z\+\_\+step, closed, data\+\_\+provider    \\\cline{1-5}
+\doxylink{classmeta_1_1ColorGradient}{meta\+::\+Color\+Gradient}   &Qt   &Gradient\+Editor (default)   &Interactive color gradient picker with stops and presets.   &label, presets    \\\cline{1-5}
+\doxylink{structmeta_1_1Array}{meta\+::\+Array}   &Qt   &Array\+Editor (default)   &2D array drawing canvas with background image provider support.   &label, width, height, data\+\_\+provider   \\\cline{1-5}
 \end{longtabu}

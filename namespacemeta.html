@@ -101,6 +101,7 @@ $(document).ready(function(){initNavTree('namespacemeta.html',''); initResizable
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#concepts">Concepts</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">meta Namespace Reference</div></div>
@@ -221,6 +222,14 @@ Typedefs</h2></td></tr>
 <tr class="memdesc:afd4af6ca658fc67dcb0d6c5545d15423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Host-supplied callback returning fresh display data on each call.  <br /></td></tr>
 <tr class="separator:afd4af6ca658fc67dcb0d6c5545d15423"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a51c4cfffa1e177f08174aced5ccc8901" id="r_a51c4cfffa1e177f08174aced5ccc8901"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> { <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">full</a>
+, <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e">state</a>
+ }</td></tr>
+<tr class="memdesc:a51c4cfffa1e177f08174aced5ccc8901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Controls the scope and behavior of attribute serialization.  <a href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">More...</a><br /></td></tr>
+<tr class="separator:a51c4cfffa1e177f08174aced5ccc8901"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7bc00a3e6c82bebf50d9bd6b724d8128" id="r_a7bc00a3e6c82bebf50d9bd6b724d8128"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a7bc00a3e6c82bebf50d9bd6b724d8128">serialize_metadata</a> (const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;m)</td></tr>
@@ -229,6 +238,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a1ec007edebf611446a66ccb33aff0311" id="r_a1ec007edebf611446a66ccb33aff0311"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a1ec007edebf611446a66ccb33aff0311">deserialize_metadata</a> (<a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;m, const nlohmann::json &amp;j)</td></tr>
 <tr class="memdesc:a1ec007edebf611446a66ccb33aff0311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize attribute metadata from JSON.  <br /></td></tr>
 <tr class="separator:a1ec007edebf611446a66ccb33aff0311"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae9e5a9de8bd2327d4d016478a582d0e" id="r_aae9e5a9de8bd2327d4d016478a582d0e"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#aae9e5a9de8bd2327d4d016478a582d0e">serialize_state</a> (const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;s)</td></tr>
+<tr class="memdesc:aae9e5a9de8bd2327d4d016478a582d0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize attribute state to JSON.  <br /></td></tr>
+<tr class="separator:aae9e5a9de8bd2327d4d016478a582d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86700a5afa8d165942a704ecd155cbff" id="r_a86700a5afa8d165942a704ecd155cbff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a86700a5afa8d165942a704ecd155cbff">deserialize_state</a> (<a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;s, const nlohmann::json &amp;j)</td></tr>
+<tr class="memdesc:a86700a5afa8d165942a704ecd155cbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize attribute state from JSON.  <br /></td></tr>
+<tr class="separator:a86700a5afa8d165942a704ecd155cbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37f460e894944044779e1ee21eca8881" id="r_a37f460e894944044779e1ee21eca8881"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a37f460e894944044779e1ee21eca8881"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a37f460e894944044779e1ee21eca8881">register_attribute_type</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a37f460e894944044779e1ee21eca8881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a concrete attribute type in the factory.  <br /></td></tr>
@@ -311,6 +326,37 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a51c4cfffa1e177f08174aced5ccc8901" name="a51c4cfffa1e177f08174aced5ccc8901"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c4cfffa1e177f08174aced5ccc8901">&#9670;&#160;</a></span>SerializationMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">meta::SerializationMode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Controls the scope and behavior of attribute serialization. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0" name="a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0"></a>full&#160;</td><td class="fielddoc"><p>Full serialization: types, values, metadata, and state (default). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e" name="a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e"></a>state&#160;</td><td class="fielddoc"><p>State-only serialization: only values and state container, no metadata. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a1ec007edebf611446a66ccb33aff0311" name="a1ec007edebf611446a66ccb33aff0311"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ec007edebf611446a66ccb33aff0311">&#9670;&#160;</a></span>deserialize_metadata()</h2>
@@ -340,6 +386,37 @@ Variables</h2></td></tr>
 
 <p>Deserialize attribute metadata from JSON. </p>
 <p>Deserialize metadata container from JSON. </p>
+
+</div>
+</div>
+<a id="a86700a5afa8d165942a704ecd155cbff" name="a86700a5afa8d165942a704ecd155cbff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86700a5afa8d165942a704ecd155cbff">&#9670;&#160;</a></span>deserialize_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::deserialize_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const nlohmann::json &amp;&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Deserialize attribute state from JSON. </p>
+<p>Deserialize state container from JSON. </p>
 
 </div>
 </div>
@@ -393,7 +470,7 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p>Register all built-in attribute types. </p>
-<p>Typically called once at application startup or before deserialization. </p>
+<p>Invoked automatically on first use of <a class="el" href="classmeta_1_1AttributeFactory.html#ad0cf99a93945ab0e5f1345d0dae45b05" title="Create an attribute from a type name.">AttributeFactory::create()</a>; hosts do not need to call it. Calling it manually remains safe. </p>
 
 </div>
 </div>
@@ -415,6 +492,27 @@ template&lt;typename T &gt; </div>
 
 <p>Serialize attribute metadata to JSON. </p>
 <p>Serialize metadata container to JSON. </p>
+
+</div>
+</div>
+<a id="aae9e5a9de8bd2327d4d016478a582d0e" name="aae9e5a9de8bd2327d4d016478a582d0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae9e5a9de8bd2327d4d016478a582d0e">&#9670;&#160;</a></span>serialize_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nlohmann::json meta::serialize_state </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Serialize attribute state to JSON. </p>
+<p>Serialize state container to JSON. </p>
 
 </div>
 </div>
