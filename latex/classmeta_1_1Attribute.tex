@@ -52,9 +52,9 @@ const T \& \mbox{\hyperlink{classmeta_1_1Attribute_ad47f6582520fa58007d30c43cd80
 \begin{DoxyCompactList}\small\item\em Access const value. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classmeta_1_1Attribute_aec426db41ba7bc8fca0a722d11bb3c98}{to\+\_\+string}} () const override
 \begin{DoxyCompactList}\small\item\em Convert value to human-\/readable string. \end{DoxyCompactList}\item 
-nlohmann\+::json \mbox{\hyperlink{classmeta_1_1Attribute_a3881931c9179f4c66bafb2272aab49f4}{json\+\_\+to}} (\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} mode=\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}) const override
+nlohmann\+::json \mbox{\hyperlink{classmeta_1_1Attribute_a8f218693e33cf75e8ba0c9470b965dc0}{json\+\_\+to}} () const override
 \begin{DoxyCompactList}\small\item\em Serialize attribute to JSON. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classmeta_1_1Attribute_a1194b6473605f6a389b518e9d9c36e6f}{json\+\_\+from}} (const nlohmann\+::json \&j, \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} mode=\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}) override
+void \mbox{\hyperlink{classmeta_1_1Attribute_aa8bef7eeb618f3c7c8072bd9d7f389f0}{json\+\_\+from}} (const nlohmann\+::json \&j) override
 \begin{DoxyCompactList}\small\item\em Deserialize attribute from JSON. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{meta\+::\+Abstract\+Attribute}}}
 \begin{DoxyCompactItemize}
@@ -68,22 +68,14 @@ virtual \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ac0cb03d2d91011c750e98db
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classmeta_1_1MetaObject}{meta\+::\+Meta\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classmeta_1_1MetaObject_a8e180f295609578275b12d19c0ed248d}{Meta\+Object}} ()=default
-\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with lazy metadata and state containers. \end{DoxyCompactList}\item 
-virtual \mbox{\hyperlink{classmeta_1_1MetaObject_a30ca1f5307323b57ddb4151c602fe0b0}{\texorpdfstring{$\sim$}{\string~}\+Meta\+Object}} ()=default
+\mbox{\hyperlink{classmeta_1_1MetaObject_a54d756b3460ed63bcfa00d711cb442c2}{Meta\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classmeta_1_1MetaObject}{Meta\+Object} with an empty metadata container. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmeta_1_1MetaObject_a02f25da378981a22e8afd9f31ba1da21}{\texorpdfstring{$\sim$}{\string~}\+Meta\+Object}} ()=default
 \begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}} ()
-\begin{DoxyCompactList}\small\item\em Access mutable metadata container (allocated on-\/demand). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Access mutable metadata container. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_a155c8e64f91d97387c8cc10bf63783a9}{metadata}} () const
-\begin{DoxyCompactList}\small\item\em Access immutable metadata container. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}} ()
-\begin{DoxyCompactList}\small\item\em Access mutable state container (allocated on-\/demand). \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1MetaObject_a3d8bade3d273f966e674df89c4c7f228}{state}} () const
-\begin{DoxyCompactList}\small\item\em Access immutable state container. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classmeta_1_1MetaObject_a573cd8ecdfdc82afa5b194f42f97aed2}{has\+\_\+metadata}} () const noexcept
-\begin{DoxyCompactList}\small\item\em Checks if metadata container has been allocated and is non-\/empty. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f}{has\+\_\+state}} () const noexcept
-\begin{DoxyCompactList}\small\item\em Checks if state container has been allocated and is non-\/empty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Access immutable metadata container. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -136,12 +128,12 @@ Construct an attribute with a name and initial value.
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classmeta_1_1Attribute_a1194b6473605f6a389b518e9d9c36e6f}\label{classmeta_1_1Attribute_a1194b6473605f6a389b518e9d9c36e6f} 
+\Hypertarget{classmeta_1_1Attribute_aa8bef7eeb618f3c7c8072bd9d7f389f0}\label{classmeta_1_1Attribute_aa8bef7eeb618f3c7c8072bd9d7f389f0} 
 \index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!json\_from@{json\_from}}
 \index{json\_from@{json\_from}!meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-void \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+void \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -150,38 +142,30 @@ Deserialize attribute from JSON.
 Restores\+:
 \begin{DoxyItemize}
 \item value
-\item metadata container (only in Full mode)
-\item state container (reconstructed via factory) 
+\item metadata container 
 \end{DoxyItemize}
 
-Implements \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a60c24c3bfc5936a01b9806805ac4eff3}{meta\+::\+Abstract\+Attribute}}.
+Implements \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ad1c194300840bd9e5a2b626bca429ff1}{meta\+::\+Abstract\+Attribute}}.
 
-\Hypertarget{classmeta_1_1Attribute_a3881931c9179f4c66bafb2272aab49f4}\label{classmeta_1_1Attribute_a3881931c9179f4c66bafb2272aab49f4} 
+\Hypertarget{classmeta_1_1Attribute_a8f218693e33cf75e8ba0c9470b965dc0}\label{classmeta_1_1Attribute_a8f218693e33cf75e8ba0c9470b965dc0} 
 \index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!json\_to@{json\_to}}
 \index{json\_to@{json\_to}!meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-nlohmann\+::json \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::json\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+nlohmann\+::json \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::json\+\_\+to (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
 Serialize attribute to JSON. 
 
-In Full mode\+:
+Includes\+:
 \begin{DoxyItemize}
 \item type identifier
 \item value serialization
-\item metadata container
-\item state container
+\item metadata container 
 \end{DoxyItemize}
 
-In State mode\+:
-\begin{DoxyItemize}
-\item value serialization
-\item state container 
-\end{DoxyItemize}
-
-Implements \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a5e009325b116d81921963ac4af9c46f3}{meta\+::\+Abstract\+Attribute}}.
+Implements \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ab7fc1ea1eb6d9fb141e39a857720b60f}{meta\+::\+Abstract\+Attribute}}.
 
 \Hypertarget{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}\label{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d} 
 \index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!name@{name}}

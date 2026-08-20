@@ -52,15 +52,9 @@ var namespacemeta =
     [ "AttrIterator", "namespacemeta.html#a041b3b46016d4565e45294279f021fa4", null ],
     [ "ConstAttrIterator", "namespacemeta.html#a3819cf59692150303d5cd95dc4bd2979", null ],
     [ "DataProvider", "namespacemeta.html#afd4af6ca658fc67dcb0d6c5545d15423", null ],
-    [ "SerializationMode", "namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901", [
-      [ "full", "namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0", null ],
-      [ "state", "namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e", null ]
-    ] ],
     [ "deserialize_metadata", "namespacemeta.html#a1ec007edebf611446a66ccb33aff0311", null ],
-    [ "deserialize_state", "namespacemeta.html#a86700a5afa8d165942a704ecd155cbff", null ],
     [ "register_attribute_type", "namespacemeta.html#a37f460e894944044779e1ee21eca8881", null ],
     [ "register_builtin_types", "namespacemeta.html#aa568359dcd9dfc14b28fdd87e4a06dd3", null ],
     [ "serialize_metadata", "namespacemeta.html#a7bc00a3e6c82bebf50d9bd6b724d8128", null ],
-    [ "serialize_state", "namespacemeta.html#aae9e5a9de8bd2327d4d016478a582d0e", null ],
     [ "has_type_name_v", "namespacemeta.html#a75366aee356107c1efb503fd31f08fd1", null ]
 ];

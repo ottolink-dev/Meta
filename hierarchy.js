@@ -4,6 +4,7 @@ var hierarchy =
       [ "meta::Any", "structmeta_1_1Any.html", null ]
     ] ],
     [ "meta::Array", "structmeta_1_1Array.html", null ],
+    [ "meta::AttributeContainer", "classmeta_1_1AttributeContainer.html", null ],
     [ "meta::AttributeFactory", "classmeta_1_1AttributeFactory.html", null ],
     [ "meta::AttributeTraits< T >", "structmeta_1_1AttributeTraits.html", null ],
     [ "meta::AttributeTraits< DataProvider >", "structmeta_1_1AttributeTraits_3_01DataProvider_01_4.html", null ],
@@ -23,7 +24,6 @@ var hierarchy =
       [ "meta::AbstractAttribute", "classmeta_1_1AbstractAttribute.html", [
         [ "meta::Attribute< T >", "classmeta_1_1Attribute.html", null ]
       ] ],
-      [ "meta::AttributeContainer", "classmeta_1_1AttributeContainer.html", null ],
       [ "meta::ContainerGroup", "classmeta_1_1ContainerGroup.html", null ]
     ] ],
     [ "meta::Preset", "structmeta_1_1Preset.html", null ],

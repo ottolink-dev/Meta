@@ -45,34 +45,16 @@
 \DoxyCodeLine{00086\ }
 \DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a}{set\_current}}(\textcolor{keyword}{const}\ std::string\ \&key);}
 \DoxyCodeLine{00092\ }
-\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd}{clear}}();}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9}{size}}()\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00097\ \ \ \textcolor{comment}{//\ Serialization}}
-\DoxyCodeLine{00098\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00105\ \ \ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5}{json\_to}}(}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{ContainerMap}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb}{containers\_}};}
+\DoxyCodeLine{00098\ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6}{insertion\_order\_}};}
+\DoxyCodeLine{00099\ \ \ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \ \ \ \ \ *\mbox{\hyperlink{classmeta_1_1ContainerGroup_a8e98dc31a645f4f50a43d03c64c58f0b}{current\_}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7}{compact\_insertion\_order}}();}
+\DoxyCodeLine{00106\ \};}
 \DoxyCodeLine{00107\ }
-\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j,\ \textcolor{keywordtype}{bool}\ exclude\_snapshot\_manager)}
-\DoxyCodeLine{00115\ \ \ \{}
-\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9}{json\_from}}(j,\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}},\ exclude\_snapshot\_manager);}
-\DoxyCodeLine{00117\ \ \ \}}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00126\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j,}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ \ \ \ \ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}},}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ exclude\_snapshot\_manager\ =\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9}{size}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00132\ }
-\DoxyCodeLine{00133\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00134\ \ \ \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{ContainerMap}}\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb}{containers\_}};}
-\DoxyCodeLine{00135\ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6}{insertion\_order\_}};}
-\DoxyCodeLine{00136\ \ \ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{AttributeContainer}}\ \ \ \ \ \ *\mbox{\hyperlink{classmeta_1_1ContainerGroup_a8e98dc31a645f4f50a43d03c64c58f0b}{current\_}}\ =\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00137\ }
-\DoxyCodeLine{00142\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7}{compact\_insertion\_order}}();}
-\DoxyCodeLine{00143\ \};}
-\DoxyCodeLine{00144\ }
-\DoxyCodeLine{00145\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+\DoxyCodeLine{00108\ \}\ \textcolor{comment}{//\ namespace\ meta}}
 
 \end{DoxyCode}

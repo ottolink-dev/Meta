@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classmeta_1_1Logger.html" title=" " alt="" coords="5,5,113,31"/>
+<area shape="rect" id="Node000000" href="$classmeta_1_1ICommand.html" title="Abstract interface for reversible operations." alt="" coords="5,31,140,56"/>
+<area shape="rect" id="Node000001" href="$classmeta_1_1CommandGroup.html" title="Command that groups multiple commands into a single undo/redo step." alt="" coords="226,5,397,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="153,32,225,24,226,30,154,37"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1SetAttributeCommand.html" title=" " alt="" coords="188,55,435,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="154,49,188,52,188,58,154,54"/>
 </map>

@@ -90,13 +90,6 @@ using \mbox{\hyperlink{namespacemeta_a3819cf59692150303d5cd95dc4bd2979}{Const\+A
 \begin{DoxyCompactList}\small\item\em Const iterator over attributes. \end{DoxyCompactList}\item 
 using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{Data\+Provider}} = std\+::function$<$ \mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$
 \begin{DoxyCompactList}\small\item\em Host-\/supplied callback returning fresh display data on each call. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum class \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} \{ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{full}}
-, \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e}{state}}
- \}
-\begin{DoxyCompactList}\small\item\em Controls the scope and behavior of attribute serialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -104,10 +97,6 @@ nlohmann\+::json \mbox{\hyperlink{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d812
 \begin{DoxyCompactList}\small\item\em Serialize attribute metadata to JSON. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemeta_a1ec007edebf611446a66ccb33aff0311}{deserialize\+\_\+metadata}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&m, const nlohmann\+::json \&j)
 \begin{DoxyCompactList}\small\item\em Deserialize attribute metadata from JSON. \end{DoxyCompactList}\item 
-nlohmann\+::json \mbox{\hyperlink{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}{serialize\+\_\+state}} (const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&s)
-\begin{DoxyCompactList}\small\item\em Serialize attribute state to JSON. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{namespacemeta_a86700a5afa8d165942a704ecd155cbff}{deserialize\+\_\+state}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&s, const nlohmann\+::json \&j)
-\begin{DoxyCompactList}\small\item\em Deserialize attribute state from JSON. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacemeta_a37f460e894944044779e1ee21eca8881}{register\+\_\+attribute\+\_\+type}} (const std\+::string \&name)
 \begin{DoxyCompactList}\small\item\em Register a concrete attribute type in the factory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3}{register\+\_\+builtin\+\_\+types}} ()
@@ -162,29 +151,6 @@ Host-\/supplied callback returning fresh display data on each call.
 
 Non-\/serializable. 
 
-\doxysubsection{Enumeration Type Documentation}
-\Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}\label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901} 
-\index{meta@{meta}!SerializationMode@{SerializationMode}}
-\index{SerializationMode@{SerializationMode}!meta@{meta}}
-\doxysubsubsection{\texorpdfstring{SerializationMode}{SerializationMode}}
-{\footnotesize\ttfamily enum class \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{meta\+::\+Serialization\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
-
-
-
-Controls the scope and behavior of attribute serialization. 
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{full@{full}!meta@{meta}}\index{meta@{meta}!full@{full}}}\Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}\label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0} 
-full&Full serialization\+: types, values, metadata, and state (default). \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{state@{state}!meta@{meta}}\index{meta@{meta}!state@{state}}}\Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e}\label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e} 
-state&State-\/only serialization\+: only values and state container, no metadata. \\
-\hline
-
-\end{DoxyEnumFields}
-
-
 \doxysubsection{Function Documentation}
 \Hypertarget{namespacemeta_a1ec007edebf611446a66ccb33aff0311}\label{namespacemeta_a1ec007edebf611446a66ccb33aff0311} 
 \index{meta@{meta}!deserialize\_metadata@{deserialize\_metadata}}
@@ -196,17 +162,7 @@ state&State-\/only serialization\+: only values and state container, no metadata
 
 Deserialize attribute metadata from JSON. 
 
-Deserialize metadata container from JSON. \Hypertarget{namespacemeta_a86700a5afa8d165942a704ecd155cbff}\label{namespacemeta_a86700a5afa8d165942a704ecd155cbff} 
-\index{meta@{meta}!deserialize\_state@{deserialize\_state}}
-\index{deserialize\_state@{deserialize\_state}!meta@{meta}}
-\doxysubsubsection{\texorpdfstring{deserialize\_state()}{deserialize\_state()}}
-{\footnotesize\ttfamily void meta\+::deserialize\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{s,  }\item[{const nlohmann\+::json \&}]{j }\end{DoxyParamCaption})}
-
-
-
-Deserialize attribute state from JSON. 
-
-Deserialize state container from JSON. \Hypertarget{namespacemeta_a37f460e894944044779e1ee21eca8881}\label{namespacemeta_a37f460e894944044779e1ee21eca8881} 
+Deserialize metadata container from JSON. \Hypertarget{namespacemeta_a37f460e894944044779e1ee21eca8881}\label{namespacemeta_a37f460e894944044779e1ee21eca8881} 
 \index{meta@{meta}!register\_attribute\_type@{register\_attribute\_type}}
 \index{register\_attribute\_type@{register\_attribute\_type}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{register\_attribute\_type()}{register\_attribute\_type()}}
@@ -237,7 +193,7 @@ Register a concrete attribute type in the factory.
 
 Register all built-\/in attribute types. 
 
-Invoked automatically on first use of \doxylink{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}{Attribute\+Factory\+::create()}; hosts do not need to call it. Calling it manually remains safe. \Hypertarget{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}\label{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128} 
+Typically called once at application startup or before deserialization. \Hypertarget{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}\label{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128} 
 \index{meta@{meta}!serialize\_metadata@{serialize\_metadata}}
 \index{serialize\_metadata@{serialize\_metadata}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{serialize\_metadata()}{serialize\_metadata()}}
@@ -247,17 +203,7 @@ Invoked automatically on first use of \doxylink{classmeta_1_1AttributeFactory_ad
 
 Serialize attribute metadata to JSON. 
 
-Serialize metadata container to JSON. \Hypertarget{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}\label{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e} 
-\index{meta@{meta}!serialize\_state@{serialize\_state}}
-\index{serialize\_state@{serialize\_state}!meta@{meta}}
-\doxysubsubsection{\texorpdfstring{serialize\_state()}{serialize\_state()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::serialize\+\_\+state (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{s }\end{DoxyParamCaption})}
-
-
-
-Serialize attribute state to JSON. 
-
-Serialize state container to JSON. 
+Serialize metadata container to JSON. 
 
 \doxysubsection{Variable Documentation}
 \Hypertarget{namespacemeta_a75366aee356107c1efb503fd31f08fd1}\label{namespacemeta_a75366aee356107c1efb503fd31f08fd1} 

@@ -14,55 +14,52 @@
 \DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <nlohmann/json.hpp>}}
 \DoxyCodeLine{00016\ }
 \DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{meta__object_8hpp}{meta/core/meta\_object.hpp}}"{}}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{serialization__mode_8hpp}{meta/serialization/serialization\_mode.hpp}}"{}}}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemeta}{meta}}}
-\DoxyCodeLine{00021\ \{}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{AbstractAttribute}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmeta_1_1MetaObject}{MetaObject}}}
-\DoxyCodeLine{00035\ \{}
-\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ac0cb03d2d91011c750e98db7209a9cd0}{\string~AbstractAttribute}}()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a34e05959e427fca417caeff45b8c9f6f}{name}}()\ \textcolor{keyword}{const}\ =\ 0;}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{virtual}\ std::type\_index\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ac1f5eaf615853ea540df93afc1a1c3ba}{type}}()\ \textcolor{keyword}{const}\ =\ 0;}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a8036b49592728401259c9305647ff0d8}{raw\_ptr}}()\ =\ 0;}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a8c2a253296045faa49c90c7baf24abb7}{raw\_ptr}}()\ \textcolor{keyword}{const}\ =\ 0;}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a04b9468d19cc59456c5e761a36eba6a0}{set\_from\_any}}(\textcolor{keyword}{const}\ std::any\ \&value)\ =\ 0;}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{virtual}\ std::any\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a59306a20794501bed4930fe66429b3a9}{to\_any}}()\ \textcolor{keyword}{const}\ =\ 0;}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a76510ce5f809db3bc993b66d9204bba3}{to\_string}}()\ \textcolor{keyword}{const}\ =\ 0;}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00064\ \ \ \textcolor{keyword}{virtual}\ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a5e009325b116d81921963ac4af9c46f3}{json\_to}}(}
-\DoxyCodeLine{00065\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\ \textcolor{keyword}{const}\ =\ 0;}
-\DoxyCodeLine{00066\ }
-\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a60c24c3bfc5936a01b9806805ac4eff3}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j,}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\ =\ 0;}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T\ =\ \textcolor{keywordtype}{void}>\ T\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a42191aa5e226ddc092dca9946924533d}{try\_cast}}()}
-\DoxyCodeLine{00076\ \ \ \{}
-\DoxyCodeLine{00077\ \ \ \ \ T\ *ptr\ =\ \textcolor{keyword}{dynamic\_cast<}T\ *\textcolor{keyword}{>}(\textcolor{keyword}{this});}
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr)}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
-\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00082\ \ \ \}}
-\DoxyCodeLine{00083\ }
-\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T\ =\ \textcolor{keywordtype}{void}>\ \textcolor{keyword}{const}\ T\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_af5f7d7e97f9ec75fc31766552cf107ec}{try\_cast}}()\textcolor{keyword}{\ const}}
-\DoxyCodeLine{00089\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{const}\ T\ *ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }T\ *\textcolor{keyword}{>}(\textcolor{keyword}{this});}
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr)}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
-\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
-\DoxyCodeLine{00095\ \ \ \}}
-\DoxyCodeLine{00096\ \};}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemeta}{meta}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{AbstractAttribute}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classmeta_1_1MetaObject}{MetaObject}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ac0cb03d2d91011c750e98db7209a9cd0}{\string~AbstractAttribute}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a34e05959e427fca417caeff45b8c9f6f}{name}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{virtual}\ std::type\_index\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ac1f5eaf615853ea540df93afc1a1c3ba}{type}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a8036b49592728401259c9305647ff0d8}{raw\_ptr}}()\ =\ 0;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a8c2a253296045faa49c90c7baf24abb7}{raw\_ptr}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a04b9468d19cc59456c5e761a36eba6a0}{set\_from\_any}}(\textcolor{keyword}{const}\ std::any\ \&value)\ =\ 0;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{virtual}\ std::any\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a59306a20794501bed4930fe66429b3a9}{to\_any}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a76510ce5f809db3bc993b66d9204bba3}{to\_string}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{virtual}\ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ab7fc1ea1eb6d9fb141e39a857720b60f}{json\_to}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ad1c194300840bd9e5a2b626bca429ff1}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j)\ =\ 0;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T\ =\ \textcolor{keywordtype}{void}>\ T\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_a42191aa5e226ddc092dca9946924533d}{try\_cast}}()}
+\DoxyCodeLine{00073\ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ T\ *ptr\ =\ \textcolor{keyword}{dynamic\_cast<}T\ *\textcolor{keyword}{>}(\textcolor{keyword}{this});}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr)}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00079\ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T\ =\ \textcolor{keywordtype}{void}>\ \textcolor{keyword}{const}\ T\ *\mbox{\hyperlink{classmeta_1_1AbstractAttribute_af5f7d7e97f9ec75fc31766552cf107ec}{try\_cast}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00086\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{const}\ T\ *ptr\ =\ \textcolor{keyword}{dynamic\_cast<}\textcolor{keyword}{const\ }T\ *\textcolor{keyword}{>}(\textcolor{keyword}{this});}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr)}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00092\ \ \ \}}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \}\ \textcolor{comment}{//\ namespace\ meta}}
 
 \end{DoxyCode}
