@@ -29,7 +29,99 @@ AttributeContainer &ContainerGroup::add(const std::string &key)
 
   insertion_order_.push_back(key);
 
+  bind_container(key, *it->second);
+
   return *it->second;
+}
+
+void ContainerGroup::bind_container(const std::string  &key,
+                                    AttributeContainer &container)
+{
+  Logger::log()->trace("ContainerGroup::bind_container: key = {}", key);
+
+  auto &conns = container_connections_[key];
+
+  // Subscribe to attribute_added
+  conns.push_back(container.attribute_added.subscribe(
+      [this, key](AbstractAttribute &attr)
+      {
+        bind_attribute(key, attr);
+        if (is_synchronized(attr.name()))
+        {
+          if (!is_synchronizing_)
+          {
+            // Find a source container that has this attribute
+            AbstractAttribute *source = nullptr;
+            if (current_ && current_ != find(key))
+            {
+              source = current_->find(attr.name());
+            }
+            if (!source)
+            {
+              for (const auto &cname : insertion_order_)
+              {
+                if (cname == key) continue;
+                auto *c = find(cname);
+                if (c && (source = c->find(attr.name()))) break;
+              }
+            }
+            if (source && source->type() == attr.type())
+            {
+              is_synchronizing_ = true;
+              attr.set_from_any(source->to_any());
+              is_synchronizing_ = false;
+            }
+          }
+        }
+      }));
+
+  // Bind any attributes already in the container
+  for (auto &attr : container)
+  {
+    bind_attribute(key, *attr.second);
+  }
+}
+
+void ContainerGroup::bind_attribute(const std::string &container_key,
+                                    AbstractAttribute &attr)
+{
+  auto &conns = container_connections_[container_key];
+  conns.push_back(attr.value_changed_event.subscribe(
+      [this, attr_name = attr.name()](AbstractAttribute &source)
+      {
+        if (is_synchronizing_) return;
+        if (!is_synchronized(attr_name)) return;
+
+        is_synchronizing_ = true;
+        sync_attribute_across_containers(attr_name, source);
+        is_synchronizing_ = false;
+      }));
+}
+
+void ContainerGroup::sync_attribute_across_containers(const std::string &key,
+                                                      AbstractAttribute &source)
+{
+  std::any        val = source.to_any();
+  std::type_index src_type = source.type();
+
+  for (auto &[cname, container] : containers_)
+  {
+    if (!container) continue;
+    auto *target_attr = container->find(key);
+    if (!target_attr || target_attr == &source) continue;
+
+    if (target_attr->type() == src_type)
+    {
+      target_attr->set_from_any(val);
+    }
+    else
+    {
+      Logger::log()->warn("ContainerGroup::sync_attribute: type mismatch for "
+                          "attribute '{}' in container '{}'",
+                          key,
+                          cname);
+    }
+  }
 }
 
 void ContainerGroup::compact_insertion_order()
@@ -101,6 +193,7 @@ bool ContainerGroup::erase(const std::string &key)
 
   const bool was_current = (current_ == it->second.get());
 
+  container_connections_.erase(key);
   containers_.erase(it);
 
   if (was_current)
@@ -156,9 +249,152 @@ void ContainerGroup::set_current(const std::string &key)
 void ContainerGroup::clear()
 {
   Logger::log()->trace("ContainerGroup::clear");
+  container_connections_.clear();
   containers_.clear();
   insertion_order_.clear();
+  synchronized_attributes_.clear();
   current_ = nullptr;
+}
+
+std::vector<std::string> ContainerGroup::shared_attributes() const
+{
+  std::unordered_map<std::string, std::unordered_map<std::type_index, size_t>>
+                           counts;
+  std::vector<std::string> order;
+
+  for (const auto &cname : insertion_order_)
+  {
+    auto it = containers_.find(cname);
+    if (it == containers_.end() || !it->second) continue;
+
+    for (const auto &attr_name : it->second->insertion_order())
+    {
+      const auto *attr = it->second->find(attr_name);
+      if (!attr) continue;
+
+      if (!counts.contains(attr_name))
+      {
+        order.push_back(attr_name);
+      }
+      counts[attr_name][attr->type()]++;
+    }
+  }
+
+  std::vector<std::string> result;
+  for (const auto &attr_name : order)
+  {
+    for (const auto &[type, count] : counts[attr_name])
+    {
+      if (count >= 2)
+      {
+        result.push_back(attr_name);
+        break;
+      }
+    }
+  }
+  return result;
+}
+
+bool ContainerGroup::is_shared(const std::string &key) const
+{
+  std::unordered_map<std::type_index, size_t> type_counts;
+  for (const auto &[_, container] : containers_)
+  {
+    if (!container) continue;
+    if (const auto *attr = container->find(key))
+    {
+      type_counts[attr->type()]++;
+      if (type_counts[attr->type()] >= 2)
+      {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+void ContainerGroup::set_synchronized(const std::string &key, bool synchronize)
+{
+  Logger::log()->trace("ContainerGroup::set_synchronized: key='{}', sync={}",
+                       key,
+                       synchronize);
+
+  if (synchronize)
+  {
+    synchronized_attributes_.insert(key);
+    sync_attribute(key);
+  }
+  else
+  {
+    synchronized_attributes_.erase(key);
+  }
+}
+
+bool ContainerGroup::is_synchronized(const std::string &key) const
+{
+  return synchronized_attributes_.contains(key);
+}
+
+const std::unordered_set<std::string> &ContainerGroup::synchronized_attributes()
+    const
+{
+  return synchronized_attributes_;
+}
+
+void ContainerGroup::synchronize_all(bool synchronize)
+{
+  Logger::log()->trace("ContainerGroup::synchronize_all: sync={}", synchronize);
+
+  if (synchronize)
+  {
+    for (const auto &attr_name : shared_attributes())
+    {
+      set_synchronized(attr_name, true);
+    }
+  }
+  else
+  {
+    clear_synchronizations();
+  }
+}
+
+void ContainerGroup::clear_synchronizations()
+{
+  Logger::log()->trace("ContainerGroup::clear_synchronizations");
+  synchronized_attributes_.clear();
+}
+
+void ContainerGroup::sync_attribute(const std::string &key)
+{
+  Logger::log()->trace("ContainerGroup::sync_attribute: key='{}'", key);
+
+  AbstractAttribute *source = nullptr;
+  if (current_)
+  {
+    source = current_->find(key);
+  }
+
+  if (!source)
+  {
+    for (const auto &cname : insertion_order_)
+    {
+      auto it = containers_.find(cname);
+      if (it != containers_.end() && it->second)
+      {
+        if ((source = it->second->find(key)))
+        {
+          break;
+        }
+      }
+    }
+  }
+
+  if (source)
+  {
+    is_synchronizing_ = true;
+    sync_attribute_across_containers(key, *source);
+    is_synchronizing_ = false;
+  }
 }
 
 nlohmann::json ContainerGroup::json_to(SerializationMode mode) const
@@ -170,6 +406,11 @@ nlohmann::json ContainerGroup::json_to(SerializationMode mode) const
   if (auto current_name = current_container_name())
   {
     j["current"] = *current_name;
+  }
+
+  if (!synchronized_attributes_.empty())
+  {
+    j["synchronized_attributes"] = synchronized_attributes_;
   }
 
   nlohmann::json containers_json = nlohmann::json::object();
@@ -220,7 +461,7 @@ void ContainerGroup::json_from(const nlohmann::json &j,
 
   for (const auto &[name, container_val] : containers_json->items())
   {
-    if (name == "current")
+    if (name == "current" || name == "synchronized_attributes")
     {
       continue;
     }
@@ -270,6 +511,18 @@ void ContainerGroup::json_from(const nlohmann::json &j,
       Logger::log()->warn(
           "ContainerGroup::json_from: current container '{}' not found",
           current_name);
+    }
+  }
+
+  if (j.contains("synchronized_attributes") &&
+      j["synchronized_attributes"].is_array())
+  {
+    for (const auto &attr_val : j["synchronized_attributes"])
+    {
+      if (attr_val.is_string())
+      {
+        set_synchronized(attr_val.get<std::string>(), true);
+      }
     }
   }
 }

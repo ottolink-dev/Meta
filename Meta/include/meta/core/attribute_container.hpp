@@ -59,6 +59,9 @@ concept StringLike = std::is_same_v<std::decay_t<T>, std::string> ||
 class AttributeContainer : public MetaObject
 {
 public:
+  Event<AbstractAttribute &> attribute_added;
+  Event<const std::string &> attribute_removed;
+
   // -------------------------------------------------------------------------
   // Capacity
   // -------------------------------------------------------------------------
@@ -140,6 +143,8 @@ public:
     // keep track of insertion order
     insertion_order_.push_back(name);
 
+    attribute_added.notify(*ptr);
+
     return ptr;
   }
 
@@ -174,6 +179,8 @@ public:
     // keep track of insertion order
     insertion_order_.push_back(name);
 
+    attribute_added.notify(*ptr);
+
     return ptr;
   }
 
@@ -196,6 +203,8 @@ public:
 
     // keep track of insertion order
     insertion_order_.push_back(name);
+
+    attribute_added.notify(*ptr);
 
     return ptr;
   }
@@ -225,6 +234,8 @@ public:
 
     // keep track of insertion order
     insertion_order_.push_back(name);
+
+    attribute_added.notify(*ptr);
 
     return ptr;
   }

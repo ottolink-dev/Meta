@@ -776,9 +776,7 @@ void add_array_tests(meta::AttributeContainer &container)
 void add_group_tests(meta::ContainerGroup &group)
 {
   auto &node_settings = group.add("node_settings");
-
   auto &ui_settings = group.add("ui_settings");
-
   auto &debug_settings = group.add("debug_settings");
 
   group.set_current("node_settings");
@@ -791,11 +789,8 @@ void add_group_tests(meta::ContainerGroup &group)
     auto *a = node_settings.add("threshold", 0.5f);
 
     a->metadata().add(meta::keys::constraints::min, 0.f);
-
     a->metadata().add(meta::keys::constraints::max, 5.f);
-
     a->metadata().add(meta::keys::ui::widget_type, "Slider");
-
     a->metadata().add(meta::keys::ui::category, "Base/Something/Category 2");
   }
 
@@ -812,9 +807,7 @@ void add_group_tests(meta::ContainerGroup &group)
   // ---------------------------------------------------------------------------
 
   ui_settings.add("theme", std::string("dark"));
-
   ui_settings.add("font_size", 14.f);
-
   ui_settings.add("show_grid", true);
 
   // ---------------------------------------------------------------------------
@@ -822,18 +815,18 @@ void add_group_tests(meta::ContainerGroup &group)
   // ---------------------------------------------------------------------------
 
   debug_settings.add("log_level", 2);
-
   debug_settings.add("wireframe", false);
-
   debug_settings.add("draw_bounds", true);
+  debug_settings.add("show_grid", true);
 
   // ---------------------------------------------------------------------------
   // Presets
   // ---------------------------------------------------------------------------
 
   meta::presets::seed(node_settings, "seed", "Random Seed");
-
   meta::presets::angle(node_settings, "angle", "Angle");
+
+  group.synchronize_all();
 }
 
 // -----------------------------------------------------------------------------

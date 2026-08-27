@@ -23,6 +23,7 @@ add_executable(meta_unittests
   test_serialization.cpp
   test_attribute_factory.cpp
   test_event.cpp
+  test_container_group_sync.cpp
 )
 
 target_link_libraries(meta_unittests
