@@ -22,6 +22,7 @@ var classmeta_1_1ContainerGroup =
     [ "json_from", "classmeta_1_1ContainerGroup.html#a07017cde81c9403a87f28afa3b4da18c", null ],
     [ "json_to", "classmeta_1_1ContainerGroup.html#a594a60bbe32c08c81508bdfbe1112bb5", null ],
     [ "set_current", "classmeta_1_1ContainerGroup.html#a869e7c2de22d43cd0a9bf5f55c35229a", null ],
+    [ "set_current_to_first", "classmeta_1_1ContainerGroup.html#a28ed2f86713d3ebdd57b469c47409279", null ],
     [ "set_synchronized", "classmeta_1_1ContainerGroup.html#accb8dc4d9bd477b415e5e71c563fd42f", null ],
     [ "shared_attributes", "classmeta_1_1ContainerGroup.html#a89247e1e458ee41ece312baf05b42d03", null ],
     [ "size", "classmeta_1_1ContainerGroup.html#a9c03b68dbd3ad3bcdc4f6eaec65db3a9", null ],

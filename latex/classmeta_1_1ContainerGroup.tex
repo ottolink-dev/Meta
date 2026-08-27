@@ -59,6 +59,8 @@ const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classmeta_1_1Contai
 \begin{DoxyCompactList}\small\item\em Returns the container names in insertion order. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a}{set\+\_\+current}} (const std\+::string \&key)
 \begin{DoxyCompactList}\small\item\em Set the active container. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279}{set\+\_\+current\+\_\+to\+\_\+first}} ()
+\begin{DoxyCompactList}\small\item\em Set the active container to the first container in the list. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd}{clear}} ()
 \begin{DoxyCompactList}\small\item\em Clear all containers. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a89247e1e458ee41ece312baf05b42d03}{shared\+\_\+attributes}} () const
@@ -420,6 +422,21 @@ Set the active container.
 
 \begin{DoxyExceptions}{Exceptions}
 {\em std\+::runtime\+\_\+error} & if the container does not exist. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279}\label{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279} 
+\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_current\_to\_first@{set\_current\_to\_first}}
+\index{set\_current\_to\_first@{set\_current\_to\_first}!meta::ContainerGroup@{meta::ContainerGroup}}
+\doxysubsubsection{\texorpdfstring{set\_current\_to\_first()}{set\_current\_to\_first()}}
+{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::set\+\_\+current\+\_\+to\+\_\+first (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Set the active container to the first container in the list. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if there are no containers in the group. \\
 \hline
 \end{DoxyExceptions}
 \Hypertarget{classmeta_1_1ContainerGroup_accb8dc4d9bd477b415e5e71c563fd42f}\label{classmeta_1_1ContainerGroup_accb8dc4d9bd477b415e5e71c563fd42f} 
