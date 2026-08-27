@@ -11,5 +11,6 @@ var classmeta_1_1AbstractAttribute =
     [ "to_string", "classmeta_1_1AbstractAttribute.html#a76510ce5f809db3bc993b66d9204bba3", null ],
     [ "try_cast", "classmeta_1_1AbstractAttribute.html#a42191aa5e226ddc092dca9946924533d", null ],
     [ "try_cast", "classmeta_1_1AbstractAttribute.html#af5f7d7e97f9ec75fc31766552cf107ec", null ],
-    [ "type", "classmeta_1_1AbstractAttribute.html#ac1f5eaf615853ea540df93afc1a1c3ba", null ]
+    [ "type", "classmeta_1_1AbstractAttribute.html#ac1f5eaf615853ea540df93afc1a1c3ba", null ],
+    [ "value_changed_event", "classmeta_1_1AbstractAttribute.html#ae358b3ac24af66f2610aa74b5e1172ad", null ]
 ];

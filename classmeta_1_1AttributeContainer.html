@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('classmeta_1_1AttributeContainer.html',
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classmeta_1_1AttributeContainer-members.html">List of all members</a>  </div>
@@ -124,13 +125,17 @@ Collaboration diagram for meta::AttributeContainer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmeta_1_1AttributeContainer__coll__graph.png" border="0" usemap="#ameta_1_1AttributeContainer_coll__map" alt="Collaboration graph"/></div>
 <map name="ameta_1_1AttributeContainer_coll__map" id="ameta_1_1AttributeContainer_coll__map">
-<area shape="rect" title="Container of named runtime attributes." alt="" coords="39,181,223,207"/>
-<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,93,144,119"/>
-<area shape="poly" title=" " alt="" coords="92,129,125,179,121,182,87,132"/>
-<area shape="rect" href="classmeta_1_1SnapshotManager.html" title=" " alt="" coords="168,93,349,119"/>
-<area shape="poly" title=" " alt="" coords="232,129,150,183,147,179,229,124"/>
-<area shape="rect" href="classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="179,5,339,31"/>
-<area shape="poly" title=" " alt="" coords="261,45,261,93,256,93,256,45"/>
+<area shape="rect" title="Container of named runtime attributes." alt="" coords="713,95,897,120"/>
+<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="369,5,508,31"/>
+<area shape="poly" title=" " alt="" coords="522,28,604,43,690,63,774,92,772,97,689,69,603,48,521,33"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="357,55,520,95"/>
+<area shape="poly" title=" " alt="" coords="534,81,713,97,713,102,533,86"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="363,119,514,159"/>
+<area shape="poly" title=" " alt="" coords="528,129,689,115,713,113,713,118,690,121,528,135"/>
+<area shape="rect" href="classmeta_1_1SnapshotManager.html" title=" " alt="" coords="348,184,529,209"/>
+<area shape="poly" title=" " alt="" coords="541,179,614,165,689,147,773,118,775,123,690,153,615,171,542,184"/>
+<area shape="rect" href="classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="5,184,165,209"/>
+<area shape="poly" title=" " alt="" coords="179,194,348,194,348,199,179,199"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -252,6 +257,13 @@ requires (!StringLike&lt;T&gt;)</td></tr>
 <tr class="memitem:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject" id="r_a924439f1c248e199649136b83630ca6f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a924439f1c248e199649136b83630ca6f">has_state</a> () const noexcept</td></tr>
 <tr class="memdesc:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if state container has been allocated and is non-empty.  <br /></td></tr>
 <tr class="separator:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aa33697bc27d8e73fca160dc057c50bb2" id="r_aa33697bc27d8e73fca160dc057c50bb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt; <a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1AttributeContainer.html#aa33697bc27d8e73fca160dc057c50bb2">attribute_added</a></td></tr>
+<tr class="separator:aa33697bc27d8e73fca160dc057c50bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90465e041295aa6c6beb1ee1d7eaa0d7" id="r_a90465e041295aa6c6beb1ee1d7eaa0d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt; const std::string &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1AttributeContainer.html#a90465e041295aa6c6beb1ee1d7eaa0d7">attribute_removed</a></td></tr>
+<tr class="separator:a90465e041295aa6c6beb1ee1d7eaa0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -1070,6 +1082,34 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aa33697bc27d8e73fca160dc057c50bb2" name="aa33697bc27d8e73fca160dc057c50bb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa33697bc27d8e73fca160dc057c50bb2">&#9670;&#160;</a></span>attribute_added</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt;<a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp;&gt; meta::AttributeContainer::attribute_added</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a90465e041295aa6c6beb1ee1d7eaa0d7" name="a90465e041295aa6c6beb1ee1d7eaa0d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90465e041295aa6c6beb1ee1d7eaa0d7">&#9670;&#160;</a></span>attribute_removed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt;const std::string &amp;&gt; meta::AttributeContainer::attribute_removed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad2c463c8c6d97953e4b244101f3440a3" name="ad2c463c8c6d97953e4b244101f3440a3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2c463c8c6d97953e4b244101f3440a3">&#9670;&#160;</a></span>attributes_</h2>
 

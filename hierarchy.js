@@ -10,6 +10,8 @@ var hierarchy =
     [ "meta::ColorGradient", "classmeta_1_1ColorGradient.html", null ],
     [ "meta::CommandStack", "classmeta_1_1CommandStack.html", null ],
     [ "meta::Event< Args >", "classmeta_1_1Event.html", null ],
+    [ "meta::Event< const std::string & >", "classmeta_1_1Event.html", null ],
+    [ "meta::Event< meta::AbstractAttribute & >", "classmeta_1_1Event.html", null ],
     [ "meta::Event< T >", "classmeta_1_1Event.html", null ],
     [ "meta::EventConnection", "classmeta_1_1EventConnection.html", null ],
     [ "meta::GradientPresets", "structmeta_1_1GradientPresets.html", null ],

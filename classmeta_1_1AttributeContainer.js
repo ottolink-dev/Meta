@@ -29,6 +29,8 @@ var classmeta_1_1AttributeContainer =
     [ "try_value", "classmeta_1_1AttributeContainer.html#a9790de41aba2d3b34667707a563d3cb5", null ],
     [ "value", "classmeta_1_1AttributeContainer.html#ac04f35f24c44d2a8daf0313e594591c3", null ],
     [ "value", "classmeta_1_1AttributeContainer.html#a7489930ce58c927974e106426e2dbd04", null ],
+    [ "attribute_added", "classmeta_1_1AttributeContainer.html#aa33697bc27d8e73fca160dc057c50bb2", null ],
+    [ "attribute_removed", "classmeta_1_1AttributeContainer.html#a90465e041295aa6c6beb1ee1d7eaa0d7", null ],
     [ "attributes_", "classmeta_1_1AttributeContainer.html#ad2c463c8c6d97953e4b244101f3440a3", null ],
     [ "insertion_order_", "classmeta_1_1AttributeContainer.html#a9fbc2e4dc42987d7b32c49d211b0efeb", null ],
     [ "snapshot_manager_", "classmeta_1_1AttributeContainer.html#a70d2a3b47ee9de64a8d61a2fbbb844e2", null ]

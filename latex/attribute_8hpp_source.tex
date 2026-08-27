@@ -47,88 +47,103 @@
 \DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_aab5fcf9b3b29920763760209b7649a0d}{Attribute}}(std::string\ \mbox{\hyperlink{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}{name}},\ T\ \mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}})}
 \DoxyCodeLine{00067\ \ \ \ \ \ \ :\ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}}(std::move(\mbox{\hyperlink{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}{name}})),\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}(std::move(\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}}))}
 \DoxyCodeLine{00068\ \ \ \{}
-\DoxyCodeLine{00069\ \ \ \}}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}{name}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}};\ \}}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00075\ \ \ std::type\_index\ \mbox{\hyperlink{classmeta_1_1Attribute_a0fe15a25534b89f0c0b2bdea3b457ef6}{type}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{typeid}(T);\ \}}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1Attribute_aaa7d5cb0af74669327d86fec1bdaccd4}{raw\_ptr}}()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad74ef0adedd1f19aed8b2c758839a6f4}{value\_changed\_conn\_}}\ =\ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_ae9efe77a31419e5cb46d49f62e7dac09}{subscribe}}(}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this}](\textcolor{keyword}{const}\ T\ \&)\ \{\ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ae358b3ac24af66f2610aa74b5e1172ad}{value\_changed\_event}}.notify(*\textcolor{keyword}{this});\ \});}
+\DoxyCodeLine{00071\ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Attribute_a3f84fa8ffacc62c18207759fde4569dc}{set\_value}}(\textcolor{keyword}{const}\ T\ \&new\_value)}
+\DoxyCodeLine{00075\ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ new\_value;}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
+\DoxyCodeLine{00078\ \ \ \}}
 \DoxyCodeLine{00079\ }
-\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1Attribute_a63d1191849012bd333c44758dbab4f7f}{raw\_ptr}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00089\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1Attribute_a19bd7cfff14eac74dbea1fa64c3d2d06}{set\_from\_any}}(\textcolor{keyword}{const}\ std::any\ \&\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}})\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00090\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}}.type()\ !=\ \textcolor{keyword}{typeid}(T))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Attribute_ada2b82008a45532051e2a9181b8620d6}{set\_value}}(T\ \&\&new\_value)}
+\DoxyCodeLine{00082\ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ std::move(new\_value);}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}{name}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}};\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00091\ \ \ std::type\_index\ \mbox{\hyperlink{classmeta_1_1Attribute_a0fe15a25534b89f0c0b2bdea3b457ef6}{type}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{typeid}(T);\ \}}
 \DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ std::any\_cast<T>(\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}});}
-\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00096\ \ \ \}}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00099\ \ \ std::any\ \mbox{\hyperlink{classmeta_1_1Attribute_ae1cb2691dd9c89465095be4697eddd6d}{to\_any}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
-\DoxyCodeLine{00100\ }
-\DoxyCodeLine{00102\ \ \ T\ \&\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{const}\ T\ \&\mbox{\hyperlink{classmeta_1_1Attribute_ad47f6582520fa58007d30c43cd806592}{value}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
-\DoxyCodeLine{00106\ }
-\DoxyCodeLine{00108\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1Attribute_aec426db41ba7bc8fca0a722d11bb3c98}{to\_string}}()\textcolor{keyword}{\ const\ override}}
-\DoxyCodeLine{00109\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a1b7fc5fa6828ffb97345bfe9049eec13}{AttributeTraits<T>::to\_string}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
-\DoxyCodeLine{00111\ \ \ \}}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00126\ \ \ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1Attribute_a3881931c9179f4c66bafb2272aab49f4}{json\_to}}(}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\textcolor{keyword}{\ const\ override}}
-\DoxyCodeLine{00128\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e}{SerializationMode::state}})}
-\DoxyCodeLine{00130\ \ \ \ \ \{}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ nlohmann::json\ j\ =\ \{\{\textcolor{stringliteral}{"{}value"{}},\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a42be738ca9dd51c89cd9d995d830d771}{AttributeTraits<T>::json\_to}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}})\}\};}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ nlohmann::json\ state\_json\ =\ \mbox{\hyperlink{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}{serialize\_state}}(\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}());}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!state\_json.empty())}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}state"{}}]\ =\ state\_json;}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
-\DoxyCodeLine{00138\ \ \ \ \ \}}
-\DoxyCodeLine{00139\ }
-\DoxyCodeLine{00140\ \ \ \ \ nlohmann::json\ j\ =\ \{\{\textcolor{stringliteral}{"{}type"{}},\ \mbox{\hyperlink{structmeta_1_1TypeName}{TypeName<T>::name}}\},}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}value"{}},\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a42be738ca9dd51c89cd9d995d830d771}{AttributeTraits<T>::json\_to}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}})\}\};}
-\DoxyCodeLine{00142\ \ \ \ \ nlohmann::json\ meta\_json\ =\ \mbox{\hyperlink{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}{serialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}());}
-\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{if}\ (!meta\_json.empty())}
-\DoxyCodeLine{00144\ \ \ \ \ \{}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}metadata"{}}]\ =\ meta\_json;}
-\DoxyCodeLine{00146\ \ \ \ \ \}}
-\DoxyCodeLine{00147\ \ \ \ \ nlohmann::json\ state\_json\ =\ \mbox{\hyperlink{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}{serialize\_state}}(\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}());}
-\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordflow}{if}\ (!state\_json.empty())}
-\DoxyCodeLine{00149\ \ \ \ \ \{}
-\DoxyCodeLine{00150\ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}state"{}}]\ =\ state\_json;}
-\DoxyCodeLine{00151\ \ \ \ \ \}}
-\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
-\DoxyCodeLine{00153\ \ \ \}}
-\DoxyCodeLine{00154\ }
-\DoxyCodeLine{00163\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Attribute_a1194b6473605f6a389b518e9d9c36e6f}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j,}
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ \ \ \ \ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\textcolor{keyword}{\ override}}
-\DoxyCodeLine{00165\ \textcolor{keyword}{\ \ }\{}
-\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}value"{}}))}
-\DoxyCodeLine{00167\ \ \ \ \ \{}
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_aea52842559753728aa5b07153bb93732}{AttributeTraits<T>::json\_from}}(j.at(\textcolor{stringliteral}{"{}value"{}}));}
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
-\DoxyCodeLine{00170\ \ \ \ \ \}}
-\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}}\ \&\&\ j.contains(\textcolor{stringliteral}{"{}metadata"{}}))}
-\DoxyCodeLine{00172\ \ \ \ \ \{}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a1ec007edebf611446a66ccb33aff0311}{deserialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}(),\ j.at(\textcolor{stringliteral}{"{}metadata"{}}));}
-\DoxyCodeLine{00174\ \ \ \ \ \}}
-\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}state"{}}))}
-\DoxyCodeLine{00176\ \ \ \ \ \{}
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a86700a5afa8d165942a704ecd155cbff}{deserialize\_state}}(\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}(),\ j.at(\textcolor{stringliteral}{"{}state"{}}));}
-\DoxyCodeLine{00178\ \ \ \ \ \}}
-\DoxyCodeLine{00179\ \ \ \}}
-\DoxyCodeLine{00180\ }
-\DoxyCodeLine{00181\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00182\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}};}
-\DoxyCodeLine{00183\ \ \ T\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};}
-\DoxyCodeLine{00184\ \};}
-\DoxyCodeLine{00185\ }
-\DoxyCodeLine{00186\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1Attribute_aaa7d5cb0af74669327d86fec1bdaccd4}{raw\_ptr}}()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}\ *\mbox{\hyperlink{classmeta_1_1Attribute_a63d1191849012bd333c44758dbab4f7f}{raw\_ptr}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \&\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1Attribute_a19bd7cfff14eac74dbea1fa64c3d2d06}{set\_from\_any}}(\textcolor{keyword}{const}\ std::any\ \&\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}})\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00106\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}}.type()\ !=\ \textcolor{keyword}{typeid}(T))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ std::any\_cast<T>(\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}});}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00112\ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00115\ \ \ std::any\ \mbox{\hyperlink{classmeta_1_1Attribute_ae1cb2691dd9c89465095be4697eddd6d}{to\_any}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00118\ \ \ T\ \&\mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{const}\ T\ \&\mbox{\hyperlink{classmeta_1_1Attribute_ad47f6582520fa58007d30c43cd806592}{value}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00124\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1Attribute_aec426db41ba7bc8fca0a722d11bb3c98}{to\_string}}()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00125\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a1b7fc5fa6828ffb97345bfe9049eec13}{AttributeTraits<T>::to\_string}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
+\DoxyCodeLine{00127\ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00142\ \ \ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1Attribute_a3881931c9179f4c66bafb2272aab49f4}{json\_to}}(}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00144\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e}{SerializationMode::state}})}
+\DoxyCodeLine{00146\ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ nlohmann::json\ j\ =\ \{\{\textcolor{stringliteral}{"{}value"{}},\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a42be738ca9dd51c89cd9d995d830d771}{AttributeTraits<T>::json\_to}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}})\}\};}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ nlohmann::json\ state\_json\ =\ \mbox{\hyperlink{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}{serialize\_state}}(\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}());}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!state\_json.empty())}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}state"{}}]\ =\ state\_json;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ nlohmann::json\ j\ =\ \{\{\textcolor{stringliteral}{"{}type"{}},\ \mbox{\hyperlink{structmeta_1_1TypeName}{TypeName<T>::name}}\},}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}value"{}},\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_a42be738ca9dd51c89cd9d995d830d771}{AttributeTraits<T>::json\_to}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}})\}\};}
+\DoxyCodeLine{00158\ \ \ \ \ nlohmann::json\ meta\_json\ =\ \mbox{\hyperlink{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}{serialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}());}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{if}\ (!meta\_json.empty())}
+\DoxyCodeLine{00160\ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}metadata"{}}]\ =\ meta\_json;}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ nlohmann::json\ state\_json\ =\ \mbox{\hyperlink{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}{serialize\_state}}(\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}());}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{if}\ (!state\_json.empty())}
+\DoxyCodeLine{00165\ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}state"{}}]\ =\ state\_json;}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{00169\ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00179\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1Attribute_a1194b6473605f6a389b518e9d9c36e6f}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&j,}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{SerializationMode}}\ \ \ \ \ mode\ =\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}})\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00181\ \textcolor{keyword}{\ \ }\{}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}value"{}}))}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}}\ =\ \mbox{\hyperlink{structmeta_1_1AttributeTraits_aea52842559753728aa5b07153bb93732}{AttributeTraits<T>::json\_from}}(j.at(\textcolor{stringliteral}{"{}value"{}}));}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\_changed}}.\mbox{\hyperlink{classmeta_1_1Event_aff0616e49d75f14b6795c1a2b8b7a451}{notify}}(\mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}});}
+\DoxyCodeLine{00186\ \ \ \ \ \}}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{if}\ (mode\ ==\ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{SerializationMode::full}}\ \&\&\ j.contains(\textcolor{stringliteral}{"{}metadata"{}}))}
+\DoxyCodeLine{00188\ \ \ \ \ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a1ec007edebf611446a66ccb33aff0311}{deserialize\_metadata}}(\mbox{\hyperlink{classmeta_1_1MetaObject_aaa64bfdc3ebb1c26290067a1e3dc5bf6}{metadata}}(),\ j.at(\textcolor{stringliteral}{"{}metadata"{}}));}
+\DoxyCodeLine{00190\ \ \ \ \ \}}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordflow}{if}\ (j.contains(\textcolor{stringliteral}{"{}state"{}}))}
+\DoxyCodeLine{00192\ \ \ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \mbox{\hyperlink{namespacemeta_a86700a5afa8d165942a704ecd155cbff}{deserialize\_state}}(\mbox{\hyperlink{classmeta_1_1MetaObject_adc76dbdce3a6a7191bbd18d39da495aa}{state}}(),\ j.at(\textcolor{stringliteral}{"{}state"{}}));}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00198\ \ \ std::string\ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\_}};}
+\DoxyCodeLine{00199\ \ \ T\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\_}};}
+\DoxyCodeLine{00200\ \ \ \mbox{\hyperlink{classmeta_1_1EventConnection}{EventConnection}}\ \mbox{\hyperlink{classmeta_1_1Attribute_ad74ef0adedd1f19aed8b2c758839a6f4}{value\_changed\_conn\_}};}
+\DoxyCodeLine{00201\ \};}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \}\ \textcolor{comment}{//\ namespace\ meta}}
 
 \end{DoxyCode}

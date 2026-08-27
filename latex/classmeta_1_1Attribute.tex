@@ -26,7 +26,7 @@ Collaboration diagram for meta\+::Attribute\texorpdfstring{$<$}{<} T \texorpdfst
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=334pt]{classmeta_1_1Attribute__coll__graph}
+\includegraphics[width=350pt]{classmeta_1_1Attribute__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -34,6 +34,10 @@ Collaboration diagram for meta\+::Attribute\texorpdfstring{$<$}{<} T \texorpdfst
 \item 
 \mbox{\hyperlink{classmeta_1_1Attribute_aab5fcf9b3b29920763760209b7649a0d}{Attribute}} (std\+::string \mbox{\hyperlink{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}{name}}, T \mbox{\hyperlink{classmeta_1_1Attribute_a2db022681e9afc7664e5d8e47f4c8262}{value}})
 \begin{DoxyCompactList}\small\item\em Construct an attribute with a name and initial value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1Attribute_a3f84fa8ffacc62c18207759fde4569dc}{set\+\_\+value}} (const T \&new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Sets value and notifies subscribers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1Attribute_ada2b82008a45532051e2a9181b8620d6}{set\+\_\+value}} (T \&\&new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Sets value (by move) and notifies subscribers. \end{DoxyCompactList}\item 
 const std\+::string \& \mbox{\hyperlink{classmeta_1_1Attribute_acd53b61f4daeb870c1de2f64cc623b2d}{name}} () const override
 \begin{DoxyCompactList}\small\item\em Get attribute name. \end{DoxyCompactList}\item 
 std\+::type\+\_\+index \mbox{\hyperlink{classmeta_1_1Attribute_a0fe15a25534b89f0c0b2bdea3b457ef6}{type}} () const override
@@ -89,12 +93,19 @@ bool \mbox{\hyperlink{classmeta_1_1MetaObject_a924439f1c248e199649136b83630ca6f}
 \item 
 \mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$ T $>$ \mbox{\hyperlink{classmeta_1_1Attribute_a858e31369ceb320968290876aa5713c8}{value\+\_\+changed}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{meta\+::\+Abstract\+Attribute}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} \& $>$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute_ae358b3ac24af66f2610aa74b5e1172ad}{value\+\_\+changed\+\_\+event}}
+\begin{DoxyCompactList}\small\item\em Untyped event fired whenever the attribute value changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::string \mbox{\hyperlink{classmeta_1_1Attribute_a8b810f1d9c81c792a04161cab3dd6b08}{name\+\_\+}}
 \item 
 T \mbox{\hyperlink{classmeta_1_1Attribute_ad2532415a409e5467cac06bf06703565}{value\+\_\+}}
+\item 
+\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \mbox{\hyperlink{classmeta_1_1Attribute_ad74ef0adedd1f19aed8b2c758839a6f4}{value\+\_\+changed\+\_\+conn\+\_\+}}
 \end{DoxyCompactItemize}
 
 
@@ -251,6 +262,28 @@ true if type matches and assignment succeeded.
 
 Implements \mbox{\hyperlink{classmeta_1_1AbstractAttribute_a04b9468d19cc59456c5e761a36eba6a0}{meta\+::\+Abstract\+Attribute}}.
 
+\Hypertarget{classmeta_1_1Attribute_a3f84fa8ffacc62c18207759fde4569dc}\label{classmeta_1_1Attribute_a3f84fa8ffacc62c18207759fde4569dc} 
+\index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_value()}{set\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{const T \&}]{new\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets value and notifies subscribers. 
+
+\Hypertarget{classmeta_1_1Attribute_ada2b82008a45532051e2a9181b8620d6}\label{classmeta_1_1Attribute_ada2b82008a45532051e2a9181b8620d6} 
+\index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_value()}{set\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{T \&\&}]{new\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets value (by move) and notifies subscribers. 
+
 \Hypertarget{classmeta_1_1Attribute_ae1cb2691dd9c89465095be4697eddd6d}\label{classmeta_1_1Attribute_ae1cb2691dd9c89465095be4697eddd6d} 
 \index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!to\_any@{to\_any}}
 \index{to\_any@{to\_any}!meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}}
@@ -341,6 +374,13 @@ T \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::val
 \doxysubsubsection{\texorpdfstring{value\_changed}{value\_changed}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
 \mbox{\hyperlink{classmeta_1_1Event}{Event}}$<$T$>$ \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::value\+\_\+changed}
+
+\Hypertarget{classmeta_1_1Attribute_ad74ef0adedd1f19aed8b2c758839a6f4}\label{classmeta_1_1Attribute_ad74ef0adedd1f19aed8b2c758839a6f4} 
+\index{meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}!value\_changed\_conn\_@{value\_changed\_conn\_}}
+\index{value\_changed\_conn\_@{value\_changed\_conn\_}!meta::Attribute$<$ T $>$@{meta::Attribute$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value\_changed\_conn\_}{value\_changed\_conn\_}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}} \mbox{\hyperlink{classmeta_1_1Attribute}{meta\+::\+Attribute}}$<$ T $>$\+::value\+\_\+changed\+\_\+conn\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

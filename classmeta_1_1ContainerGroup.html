@@ -125,16 +125,20 @@ Collaboration diagram for meta::ContainerGroup:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmeta_1_1ContainerGroup__coll__graph.png" border="0" usemap="#ameta_1_1ContainerGroup_coll__map" alt="Collaboration graph"/></div>
 <map name="ameta_1_1ContainerGroup_coll__map" id="ameta_1_1ContainerGroup_coll__map">
-<area shape="rect" title="Collection of named attribute containers." alt="" coords="13,269,179,295"/>
-<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,93,144,119"/>
-<area shape="poly" title=" " alt="" coords="80,132,97,269,92,269,75,133"/>
-<area shape="rect" href="classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="112,181,296,207"/>
-<area shape="poly" title=" " alt="" coords="105,124,188,179,185,183,102,128"/>
-<area shape="poly" title=" " alt="" coords="180,217,112,271,109,267,177,213"/>
-<area shape="rect" href="classmeta_1_1SnapshotManager.html" title=" " alt="" coords="168,93,349,119"/>
-<area shape="poly" title=" " alt="" coords="246,132,214,182,209,179,242,129"/>
-<area shape="rect" href="classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="179,5,339,31"/>
-<area shape="poly" title=" " alt="" coords="261,45,261,93,256,93,256,45"/>
+<area shape="rect" title="Collection of named attribute containers." alt="" coords="1003,36,1169,61"/>
+<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="369,5,508,31"/>
+<area shape="poly" title=" " alt="" coords="522,19,979,41,1003,42,1002,47,979,46,522,24"/>
+<area shape="rect" href="classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="713,71,897,96"/>
+<area shape="poly" title=" " alt="" coords="522,30,734,68,733,73,521,35"/>
+<area shape="poly" title=" " alt="" coords="911,68,1002,56,1003,62,911,73"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="357,61,520,101"/>
+<area shape="poly" title=" " alt="" coords="534,79,553,79,713,80,713,86,553,85,534,84"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="363,125,514,165"/>
+<area shape="poly" title=" " alt="" coords="528,128,689,101,731,93,732,99,690,106,528,133"/>
+<area shape="rect" href="classmeta_1_1SnapshotManager.html" title=" " alt="" coords="348,189,529,215"/>
+<area shape="poly" title=" " alt="" coords="541,184,614,168,688,145,741,120,784,94,787,98,744,124,690,150,615,173,542,189"/>
+<area shape="rect" href="classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="5,189,165,215"/>
+<area shape="poly" title=" " alt="" coords="179,199,348,199,348,205,179,205"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -173,7 +177,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a044982d334e14c800ff69eff0428edcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find a container by key.  <br /></td></tr>
 <tr class="separator:a044982d334e14c800ff69eff0428edcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab50ef7edf1436674c9b04efbd19dd023" id="r_ab50ef7edf1436674c9b04efbd19dd023"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#ab50ef7edf1436674c9b04efbd19dd023">insertion_order</a> () const</td></tr>
-<tr class="memdesc:ab50ef7edf1436674c9b04efbd19dd023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the attribute names in insertion order.  <br /></td></tr>
+<tr class="memdesc:ab50ef7edf1436674c9b04efbd19dd023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the container names in insertion order.  <br /></td></tr>
 <tr class="separator:ab50ef7edf1436674c9b04efbd19dd023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a869e7c2de22d43cd0a9bf5f55c35229a" id="r_a869e7c2de22d43cd0a9bf5f55c35229a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a869e7c2de22d43cd0a9bf5f55c35229a">set_current</a> (const std::string &amp;key)</td></tr>
 <tr class="memdesc:a869e7c2de22d43cd0a9bf5f55c35229a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the active container.  <br /></td></tr>
@@ -181,6 +185,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acce79df218caceaf4afdc435e5b292cd" id="r_acce79df218caceaf4afdc435e5b292cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#acce79df218caceaf4afdc435e5b292cd">clear</a> ()</td></tr>
 <tr class="memdesc:acce79df218caceaf4afdc435e5b292cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all containers.  <br /></td></tr>
 <tr class="separator:acce79df218caceaf4afdc435e5b292cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89247e1e458ee41ece312baf05b42d03" id="r_a89247e1e458ee41ece312baf05b42d03"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a89247e1e458ee41ece312baf05b42d03">shared_attributes</a> () const</td></tr>
+<tr class="memdesc:a89247e1e458ee41ece312baf05b42d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects attribute keys shared across at least two containers with matching types.  <br /></td></tr>
+<tr class="separator:a89247e1e458ee41ece312baf05b42d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afccb12ec965d859dd28ec1f68795c783" id="r_afccb12ec965d859dd28ec1f68795c783"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#afccb12ec965d859dd28ec1f68795c783">is_shared</a> (const std::string &amp;key) const</td></tr>
+<tr class="memdesc:afccb12ec965d859dd28ec1f68795c783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether an attribute key is shared across at least two containers with matching types.  <br /></td></tr>
+<tr class="separator:afccb12ec965d859dd28ec1f68795c783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accb8dc4d9bd477b415e5e71c563fd42f" id="r_accb8dc4d9bd477b415e5e71c563fd42f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#accb8dc4d9bd477b415e5e71c563fd42f">set_synchronized</a> (const std::string &amp;key, bool synchronize=true)</td></tr>
+<tr class="memdesc:accb8dc4d9bd477b415e5e71c563fd42f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable synchronization for an attribute key across containers in this group.  <br /></td></tr>
+<tr class="separator:accb8dc4d9bd477b415e5e71c563fd42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa9a85ee02ea912f0d0e1edef4775ef2" id="r_aaa9a85ee02ea912f0d0e1edef4775ef2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#aaa9a85ee02ea912f0d0e1edef4775ef2">is_synchronized</a> (const std::string &amp;key) const</td></tr>
+<tr class="memdesc:aaa9a85ee02ea912f0d0e1edef4775ef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether an attribute is marked for synchronization.  <br /></td></tr>
+<tr class="separator:aaa9a85ee02ea912f0d0e1edef4775ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34a596c7759e9ec4ba1e7b3eb0b0dc25" id="r_a34a596c7759e9ec4ba1e7b3eb0b0dc25"><td class="memItemLeft" align="right" valign="top">const std::unordered_set&lt; std::string &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a34a596c7759e9ec4ba1e7b3eb0b0dc25">synchronized_attributes</a> () const</td></tr>
+<tr class="memdesc:a34a596c7759e9ec4ba1e7b3eb0b0dc25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the set of currently synchronized attribute keys.  <br /></td></tr>
+<tr class="separator:a34a596c7759e9ec4ba1e7b3eb0b0dc25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee1b02d0ffda778717622c910e6344a8" id="r_aee1b02d0ffda778717622c910e6344a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#aee1b02d0ffda778717622c910e6344a8">synchronize_all</a> (bool synchronize=true)</td></tr>
+<tr class="memdesc:aee1b02d0ffda778717622c910e6344a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronizes all detected shared attributes across containers.  <br /></td></tr>
+<tr class="separator:aee1b02d0ffda778717622c910e6344a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f62da662394a4d772f49ef04b701b56" id="r_a6f62da662394a4d772f49ef04b701b56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a6f62da662394a4d772f49ef04b701b56">clear_synchronizations</a> ()</td></tr>
+<tr class="memdesc:a6f62da662394a4d772f49ef04b701b56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables synchronization for all attributes.  <br /></td></tr>
+<tr class="separator:a6f62da662394a4d772f49ef04b701b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dde409a177c45795bd880eefcf9379c" id="r_a4dde409a177c45795bd880eefcf9379c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a4dde409a177c45795bd880eefcf9379c">sync_attribute</a> (const std::string &amp;key)</td></tr>
+<tr class="memdesc:a4dde409a177c45795bd880eefcf9379c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually propagate the value of an attribute from the active container (or first containing container) to all other matching containers in the group.  <br /></td></tr>
+<tr class="separator:a4dde409a177c45795bd880eefcf9379c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a594a60bbe32c08c81508bdfbe1112bb5" id="r_a594a60bbe32c08c81508bdfbe1112bb5"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a594a60bbe32c08c81508bdfbe1112bb5">json_to</a> (<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> mode=<a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">SerializationMode::full</a>) const</td></tr>
 <tr class="memdesc:a594a60bbe32c08c81508bdfbe1112bb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serializes the container group to JSON.  <br /></td></tr>
 <tr class="separator:a594a60bbe32c08c81508bdfbe1112bb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,6 +249,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a957ab04b6e11917581dfa89acc80366a" id="r_a957ab04b6e11917581dfa89acc80366a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a957ab04b6e11917581dfa89acc80366a">bind_container</a> (const std::string &amp;key, <a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;container)</td></tr>
+<tr class="separator:a957ab04b6e11917581dfa89acc80366a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a232d21844cbb0dd38366d060caaefb5a" id="r_a232d21844cbb0dd38366d060caaefb5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a232d21844cbb0dd38366d060caaefb5a">bind_attribute</a> (const std::string &amp;container_key, <a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp;attr)</td></tr>
+<tr class="separator:a232d21844cbb0dd38366d060caaefb5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2805b319223592a3e645b3503b3d8d95" id="r_a2805b319223592a3e645b3503b3d8d95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a2805b319223592a3e645b3503b3d8d95">sync_attribute_across_containers</a> (const std::string &amp;key, <a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp;source)</td></tr>
+<tr class="separator:a2805b319223592a3e645b3503b3d8d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afff92035db82abbbd2dc995c41aa15c7" id="r_afff92035db82abbbd2dc995c41aa15c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#afff92035db82abbbd2dc995c41aa15c7">compact_insertion_order</a> ()</td></tr>
 <tr class="memdesc:afff92035db82abbbd2dc995c41aa15c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes stale entries from insertion_order_ that no longer exist in attributes_ (e.g.  <br /></td></tr>
 <tr class="separator:afff92035db82abbbd2dc995c41aa15c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -233,6 +267,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a9fc3d761be570b229a6e6f7a3260eff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e98dc31a645f4f50a43d03c64c58f0b" id="r_a8e98dc31a645f4f50a43d03c64c58f0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a8e98dc31a645f4f50a43d03c64c58f0b">current_</a> = nullptr</td></tr>
 <tr class="separator:a8e98dc31a645f4f50a43d03c64c58f0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0c8f3654704317dcf3b64a1b5c7b16" id="r_a5a0c8f3654704317dcf3b64a1b5c7b16"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a5a0c8f3654704317dcf3b64a1b5c7b16">synchronized_attributes_</a></td></tr>
+<tr class="separator:a5a0c8f3654704317dcf3b64a1b5c7b16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fea8ff088c79310d06bdc5b5073939b" id="r_a7fea8ff088c79310d06bdc5b5073939b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a7fea8ff088c79310d06bdc5b5073939b">is_synchronizing_</a> = false</td></tr>
+<tr class="separator:a7fea8ff088c79310d06bdc5b5073939b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f023afa246811dfe2d851a02ee720d2" id="r_a0f023afa246811dfe2d851a02ee720d2"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::vector&lt; <a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1ContainerGroup.html#a0f023afa246811dfe2d851a02ee720d2">container_connections_</a></td></tr>
+<tr class="separator:a0f023afa246811dfe2d851a02ee720d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Collection of named attribute containers. </p>
@@ -286,6 +326,78 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a232d21844cbb0dd38366d060caaefb5a" name="a232d21844cbb0dd38366d060caaefb5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a232d21844cbb0dd38366d060caaefb5a">&#9670;&#160;</a></span>bind_attribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::bind_attribute </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>container_key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp;&#160;</td>
+          <td class="paramname"><em>attr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a957ab04b6e11917581dfa89acc80366a" name="a957ab04b6e11917581dfa89acc80366a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957ab04b6e11917581dfa89acc80366a">&#9670;&#160;</a></span>bind_container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::bind_container </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;&#160;</td>
+          <td class="paramname"><em>container</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="acce79df218caceaf4afdc435e5b292cd" name="acce79df218caceaf4afdc435e5b292cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acce79df218caceaf4afdc435e5b292cd">&#9670;&#160;</a></span>clear()</h2>
 
@@ -302,6 +414,25 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clear all containers. </p>
+
+</div>
+</div>
+<a id="a6f62da662394a4d772f49ef04b701b56" name="a6f62da662394a4d772f49ef04b701b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f62da662394a4d772f49ef04b701b56">&#9670;&#160;</a></span>clear_synchronizations()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::clear_synchronizations </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disables synchronization for all attributes. </p>
 
 </div>
 </div>
@@ -509,7 +640,61 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the attribute names in insertion order. </p>
+<p>Returns the container names in insertion order. </p>
+
+</div>
+</div>
+<a id="afccb12ec965d859dd28ec1f68795c783" name="afccb12ec965d859dd28ec1f68795c783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afccb12ec965d859dd28ec1f68795c783">&#9670;&#160;</a></span>is_shared()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool meta::ContainerGroup::is_shared </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether an attribute key is shared across at least two containers with matching types. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td><a class="el" href="classmeta_1_1Attribute.html" title="Typed runtime attribute with reflection support.">Attribute</a> identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if shared, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aaa9a85ee02ea912f0d0e1edef4775ef2" name="aaa9a85ee02ea912f0d0e1edef4775ef2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa9a85ee02ea912f0d0e1edef4775ef2">&#9670;&#160;</a></span>is_synchronized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool meta::ContainerGroup::is_synchronized </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check whether an attribute is marked for synchronization. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td><a class="el" href="classmeta_1_1Attribute.html" title="Typed runtime attribute with reflection support.">Attribute</a> identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if synchronized. </dd></dl>
 
 </div>
 </div>
@@ -655,6 +840,64 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="accb8dc4d9bd477b415e5e71c563fd42f" name="accb8dc4d9bd477b415e5e71c563fd42f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accb8dc4d9bd477b415e5e71c563fd42f">&#9670;&#160;</a></span>set_synchronized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::set_synchronized </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>synchronize</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable or disable synchronization for an attribute key across containers in this group. </p>
+<p>When enabled, the attribute's current value (from the active container, or the first container containing it) is propagated to all matching containers, and subsequent updates in any container are kept in sync.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td><a class="el" href="classmeta_1_1Attribute.html" title="Typed runtime attribute with reflection support.">Attribute</a> identifier. </td></tr>
+    <tr><td class="paramname">synchronize</td><td>Whether to synchronize. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a89247e1e458ee41ece312baf05b42d03" name="a89247e1e458ee41ece312baf05b42d03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89247e1e458ee41ece312baf05b42d03">&#9670;&#160;</a></span>shared_attributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; meta::ContainerGroup::shared_attributes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Detects attribute keys shared across at least two containers with matching types. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector of shared attribute keys in insertion order. </dd></dl>
+
+</div>
+</div>
 <a id="a9c03b68dbd3ad3bcdc4f6eaec65db3a9" name="a9c03b68dbd3ad3bcdc4f6eaec65db3a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c03b68dbd3ad3bcdc4f6eaec65db3a9">&#9670;&#160;</a></span>size()</h2>
 
@@ -674,7 +917,137 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4dde409a177c45795bd880eefcf9379c" name="a4dde409a177c45795bd880eefcf9379c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dde409a177c45795bd880eefcf9379c">&#9670;&#160;</a></span>sync_attribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::sync_attribute </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Manually propagate the value of an attribute from the active container (or first containing container) to all other matching containers in the group. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td><a class="el" href="classmeta_1_1Attribute.html" title="Typed runtime attribute with reflection support.">Attribute</a> identifier. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2805b319223592a3e645b3503b3d8d95" name="a2805b319223592a3e645b3503b3d8d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2805b319223592a3e645b3503b3d8d95">&#9670;&#160;</a></span>sync_attribute_across_containers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::sync_attribute_across_containers </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aee1b02d0ffda778717622c910e6344a8" name="aee1b02d0ffda778717622c910e6344a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee1b02d0ffda778717622c910e6344a8">&#9670;&#160;</a></span>synchronize_all()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void meta::ContainerGroup::synchronize_all </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>synchronize</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Synchronizes all detected shared attributes across containers. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">synchronize</td><td>Whether to enable or disable synchronization for all. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a34a596c7759e9ec4ba1e7b3eb0b0dc25" name="a34a596c7759e9ec4ba1e7b3eb0b0dc25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34a596c7759e9ec4ba1e7b3eb0b0dc25">&#9670;&#160;</a></span>synchronized_attributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::unordered_set&lt; std::string &gt; &amp; meta::ContainerGroup::synchronized_attributes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the set of currently synchronized attribute keys. </p>
+<dl class="section return"><dt>Returns</dt><dd>Constant reference to the set of synchronized attribute names. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0f023afa246811dfe2d851a02ee720d2" name="a0f023afa246811dfe2d851a02ee720d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f023afa246811dfe2d851a02ee720d2">&#9670;&#160;</a></span>container_connections_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, std::vector&lt;<a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a>&gt; &gt; meta::ContainerGroup::container_connections_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae59f77d5182a0796a6f3e652fb0de9cb" name="ae59f77d5182a0796a6f3e652fb0de9cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae59f77d5182a0796a6f3e652fb0de9cb">&#9670;&#160;</a></span>containers_</h2>
 
@@ -730,6 +1103,50 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;std::string&gt; meta::ContainerGroup::insertion_order_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7fea8ff088c79310d06bdc5b5073939b" name="a7fea8ff088c79310d06bdc5b5073939b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fea8ff088c79310d06bdc5b5073939b">&#9670;&#160;</a></span>is_synchronizing_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool meta::ContainerGroup::is_synchronizing_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a0c8f3654704317dcf3b64a1b5c7b16" name="a5a0c8f3654704317dcf3b64a1b5c7b16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a0c8f3654704317dcf3b64a1b5c7b16">&#9670;&#160;</a></span>synchronized_attributes_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_set&lt;std::string&gt; meta::ContainerGroup::synchronized_attributes_</td>
         </tr>
       </table>
   </td>

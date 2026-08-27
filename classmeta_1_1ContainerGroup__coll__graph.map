@@ -1,12 +1,16 @@
 <map id="meta::ContainerGroup" name="meta::ContainerGroup">
-<area shape="rect" id="Node000001" title="Collection of named attribute containers." alt="" coords="13,269,179,295"/>
-<area shape="rect" id="Node000002" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,93,144,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,132,97,269,92,269,75,133"/>
-<area shape="rect" id="Node000003" href="$classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="112,181,296,207"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="105,124,188,179,185,183,102,128"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="180,217,112,271,109,267,177,213"/>
-<area shape="rect" id="Node000004" href="$classmeta_1_1SnapshotManager.html" title=" " alt="" coords="168,93,349,119"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="246,132,214,182,209,179,242,129"/>
-<area shape="rect" id="Node000005" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="179,5,339,31"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="261,45,261,93,256,93,256,45"/>
+<area shape="rect" id="Node000001" title="Collection of named attribute containers." alt="" coords="1003,36,1169,61"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="369,5,508,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="522,19,979,41,1003,42,1002,47,979,46,522,24"/>
+<area shape="rect" id="Node000003" href="$classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="713,71,897,96"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="522,30,734,68,733,73,521,35"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="911,68,1002,56,1003,62,911,73"/>
+<area shape="rect" id="Node000004" href="$classmeta_1_1Event.html" title=" " alt="" coords="357,61,520,101"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="534,79,553,79,713,80,713,86,553,85,534,84"/>
+<area shape="rect" id="Node000005" href="$classmeta_1_1Event.html" title=" " alt="" coords="363,125,514,165"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="528,128,689,101,731,93,732,99,690,106,528,133"/>
+<area shape="rect" id="Node000006" href="$classmeta_1_1SnapshotManager.html" title=" " alt="" coords="348,189,529,215"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="541,184,614,168,688,145,741,120,784,94,787,98,744,124,690,150,615,173,542,189"/>
+<area shape="rect" id="Node000007" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="5,189,165,215"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="179,199,348,199,348,205,179,205"/>
 </map>

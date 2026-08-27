@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('classmeta_1_1AbstractAttribute.html','
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classmeta_1_1AbstractAttribute-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">meta::AbstractAttribute Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -124,9 +125,11 @@ Collaboration diagram for meta::AbstractAttribute:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmeta_1_1AbstractAttribute__coll__graph.png" border="0" usemap="#ameta_1_1AbstractAttribute_coll__map" alt="Collaboration graph"/></div>
 <map name="ameta_1_1AbstractAttribute_coll__map" id="ameta_1_1AbstractAttribute_coll__map">
-<area shape="rect" title="Base class for all attribute types stored in the reflection system." alt="" coords="5,79,180,104"/>
-<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="23,5,162,31"/>
-<area shape="poly" title=" " alt="" coords="95,44,95,79,90,79,90,44"/>
+<area shape="rect" title="Base class for all attribute types stored in the reflection system." alt="" coords="74,108,249,133"/>
+<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,13,144,38"/>
+<area shape="poly" title=" " alt="" coords="97,46,153,106,149,110,93,50"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="168,5,331,45"/>
+<area shape="poly" title=" " alt="" coords="224,57,174,109,171,106,220,53"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -194,6 +197,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject" id="r_a924439f1c248e199649136b83630ca6f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1MetaObject.html#a924439f1c248e199649136b83630ca6f">has_state</a> () const noexcept</td></tr>
 <tr class="memdesc:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if state container has been allocated and is non-empty.  <br /></td></tr>
 <tr class="separator:a924439f1c248e199649136b83630ca6f inherit pub_methods_classmeta_1_1MetaObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ae358b3ac24af66f2610aa74b5e1172ad" id="r_ae358b3ac24af66f2610aa74b5e1172ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt; <a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1AbstractAttribute.html#ae358b3ac24af66f2610aa74b5e1172ad">value_changed_event</a></td></tr>
+<tr class="memdesc:ae358b3ac24af66f2610aa74b5e1172ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Untyped event fired whenever the attribute value changes.  <br /></td></tr>
+<tr class="separator:ae358b3ac24af66f2610aa74b5e1172ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for all attribute types stored in the reflection system. </p>
@@ -563,6 +572,23 @@ template&lt;class T  = void&gt; </div>
 <p>Returns the C++ type identifier of the stored value. </p>
 
 <p>Implemented in <a class="el" href="classmeta_1_1Attribute.html#a0fe15a25534b89f0c0b2bdea3b457ef6">meta::Attribute&lt; T &gt;</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae358b3ac24af66f2610aa74b5e1172ad" name="ae358b3ac24af66f2610aa74b5e1172ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae358b3ac24af66f2610aa74b5e1172ad">&#9670;&#160;</a></span>value_changed_event</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt;<a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp;&gt; meta::AbstractAttribute::value_changed_event</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Untyped event fired whenever the attribute value changes. </p>
 
 </div>
 </div>

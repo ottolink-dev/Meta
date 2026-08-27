@@ -126,13 +126,17 @@ Collaboration diagram for meta::Attribute&lt; T &gt;:</div>
 <div class="dyncontent">
 <div class="center"><img src="classmeta_1_1Attribute__coll__graph.png" border="0" usemap="#ameta_1_1Attribute_3_01T_01_4_coll__map" alt="Collaboration graph"/></div>
 <map name="ameta_1_1Attribute_3_01T_01_4_coll__map" id="ameta_1_1Attribute_3_01T_01_4_coll__map">
-<area shape="rect" title="Typed runtime attribute with reflection support." alt="" coords="104,168,263,193"/>
-<area shape="rect" href="classmeta_1_1AbstractAttribute.html" title="Base class for all attribute types stored in the reflection system." alt="" coords="5,80,180,105"/>
-<area shape="poly" title=" " alt="" coords="117,113,173,166,169,169,113,117"/>
-<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="23,5,162,31"/>
-<area shape="poly" title=" " alt="" coords="95,45,95,80,90,80,90,45"/>
-<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="205,80,343,105"/>
-<area shape="poly" title=" " alt="" coords="254,117,198,169,194,166,250,113"/>
+<area shape="rect" title="Typed runtime attribute with reflection support." alt="" coords="263,196,422,221"/>
+<area shape="rect" href="classmeta_1_1AbstractAttribute.html" title="Base class for all attribute types stored in the reflection system." alt="" coords="74,108,249,133"/>
+<area shape="poly" title=" " alt="" coords="199,137,319,193,317,198,197,142"/>
+<area shape="rect" href="classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="5,13,144,38"/>
+<area shape="poly" title=" " alt="" coords="97,46,153,106,149,110,93,50"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="168,5,331,45"/>
+<area shape="poly" title=" " alt="" coords="224,57,174,109,171,106,220,53"/>
+<area shape="rect" href="classmeta_1_1Event.html" title=" " alt="" coords="273,108,412,133"/>
+<area shape="poly" title=" " alt="" coords="345,147,345,195,340,195,340,147"/>
+<area shape="rect" href="classmeta_1_1EventConnection.html" title="Manages the lifetime of a subscription to an Event." alt="" coords="437,108,611,133"/>
+<area shape="poly" title=" " alt="" coords="500,144,452,174,388,198,386,193,449,170,497,140"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -141,6 +145,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aab5fcf9b3b29920763760209b7649a0d" id="r_aab5fcf9b3b29920763760209b7649a0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#aab5fcf9b3b29920763760209b7649a0d">Attribute</a> (std::string <a class="el" href="classmeta_1_1Attribute.html#acd53b61f4daeb870c1de2f64cc623b2d">name</a>, T <a class="el" href="classmeta_1_1Attribute.html#a2db022681e9afc7664e5d8e47f4c8262">value</a>)</td></tr>
 <tr class="memdesc:aab5fcf9b3b29920763760209b7649a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an attribute with a name and initial value.  <br /></td></tr>
 <tr class="separator:aab5fcf9b3b29920763760209b7649a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f84fa8ffacc62c18207759fde4569dc" id="r_a3f84fa8ffacc62c18207759fde4569dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#a3f84fa8ffacc62c18207759fde4569dc">set_value</a> (const T &amp;new_value)</td></tr>
+<tr class="memdesc:a3f84fa8ffacc62c18207759fde4569dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets value and notifies subscribers.  <br /></td></tr>
+<tr class="separator:a3f84fa8ffacc62c18207759fde4569dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada2b82008a45532051e2a9181b8620d6" id="r_ada2b82008a45532051e2a9181b8620d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#ada2b82008a45532051e2a9181b8620d6">set_value</a> (T &amp;&amp;new_value)</td></tr>
+<tr class="memdesc:ada2b82008a45532051e2a9181b8620d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets value (by move) and notifies subscribers.  <br /></td></tr>
+<tr class="separator:ada2b82008a45532051e2a9181b8620d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd53b61f4daeb870c1de2f64cc623b2d" id="r_acd53b61f4daeb870c1de2f64cc623b2d"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#acd53b61f4daeb870c1de2f64cc623b2d">name</a> () const override</td></tr>
 <tr class="memdesc:acd53b61f4daeb870c1de2f64cc623b2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get attribute name.  <br /></td></tr>
 <tr class="separator:acd53b61f4daeb870c1de2f64cc623b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,6 +225,10 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a858e31369ceb320968290876aa5713c8" id="r_a858e31369ceb320968290876aa5713c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#a858e31369ceb320968290876aa5713c8">value_changed</a></td></tr>
 <tr class="separator:a858e31369ceb320968290876aa5713c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classmeta_1_1AbstractAttribute"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classmeta_1_1AbstractAttribute')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classmeta_1_1AbstractAttribute.html">meta::AbstractAttribute</a></td></tr>
+<tr class="memitem:ae358b3ac24af66f2610aa74b5e1172ad inherit pub_attribs_classmeta_1_1AbstractAttribute" id="r_ae358b3ac24af66f2610aa74b5e1172ad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt; <a class="el" href="classmeta_1_1AbstractAttribute.html">AbstractAttribute</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1AbstractAttribute.html#ae358b3ac24af66f2610aa74b5e1172ad">value_changed_event</a></td></tr>
+<tr class="memdesc:ae358b3ac24af66f2610aa74b5e1172ad inherit pub_attribs_classmeta_1_1AbstractAttribute"><td class="mdescLeft">&#160;</td><td class="mdescRight">Untyped event fired whenever the attribute value changes.  <br /></td></tr>
+<tr class="separator:ae358b3ac24af66f2610aa74b5e1172ad inherit pub_attribs_classmeta_1_1AbstractAttribute"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -222,6 +236,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a8b810f1d9c81c792a04161cab3dd6b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2532415a409e5467cac06bf06703565" id="r_ad2532415a409e5467cac06bf06703565"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#ad2532415a409e5467cac06bf06703565">value_</a></td></tr>
 <tr class="separator:ad2532415a409e5467cac06bf06703565"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74ef0adedd1f19aed8b2c758839a6f4" id="r_ad74ef0adedd1f19aed8b2c758839a6f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1Attribute.html#ad74ef0adedd1f19aed8b2c758839a6f4">value_changed_conn_</a></td></tr>
+<tr class="separator:ad74ef0adedd1f19aed8b2c758839a6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -505,6 +521,66 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="a3f84fa8ffacc62c18207759fde4569dc" name="a3f84fa8ffacc62c18207759fde4569dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f84fa8ffacc62c18207759fde4569dc">&#9670;&#160;</a></span>set_value() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmeta_1_1Attribute.html">meta::Attribute</a>&lt; T &gt;::set_value </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>new_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets value and notifies subscribers. </p>
+
+</div>
+</div>
+<a id="ada2b82008a45532051e2a9181b8620d6" name="ada2b82008a45532051e2a9181b8620d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada2b82008a45532051e2a9181b8620d6">&#9670;&#160;</a></span>set_value() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmeta_1_1Attribute.html">meta::Attribute</a>&lt; T &gt;::set_value </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>new_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets value (by move) and notifies subscribers. </p>
+
+</div>
+</div>
 <a id="ae1cb2691dd9c89465095be4697eddd6d" name="ae1cb2691dd9c89465095be4697eddd6d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae1cb2691dd9c89465095be4697eddd6d">&#9670;&#160;</a></span>to_any()</h2>
 
@@ -717,6 +793,30 @@ template&lt;typename T &gt; </div>
           <td class="memname"><a class="el" href="classmeta_1_1Event.html">Event</a>&lt;T&gt; <a class="el" href="classmeta_1_1Attribute.html">meta::Attribute</a>&lt; T &gt;::value_changed</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad74ef0adedd1f19aed8b2c758839a6f4" name="ad74ef0adedd1f19aed8b2c758839a6f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad74ef0adedd1f19aed8b2c758839a6f4">&#9670;&#160;</a></span>value_changed_conn_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a> <a class="el" href="classmeta_1_1Attribute.html">meta::Attribute</a>&lt; T &gt;::value_changed_conn_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

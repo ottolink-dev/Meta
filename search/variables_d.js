@@ -6,5 +6,6 @@ var searchData=
   ['snapshots_5fmodified_3',['snapshots_modified',['../classmeta_1_1SnapshotManager.html#a0f3ed776e809b4a200f4c32c536771d7',1,'meta::SnapshotManager']]],
   ['state_5f_4',['state_',['../classmeta_1_1MetaObject.html#af63dabade288830a366db45e7887bdfd',1,'meta::MetaObject']]],
   ['step_5',['step',['../namespacemeta_1_1keys_1_1constraints.html#a572252adc3aacfe9c5759f4015ec65ab',1,'meta::keys::constraints']]],
-  ['stops_6',['stops',['../structmeta_1_1Preset.html#a29d14720e9b223e7c901b917dabaacec',1,'meta::Preset']]]
+  ['stops_6',['stops',['../structmeta_1_1Preset.html#a29d14720e9b223e7c901b917dabaacec',1,'meta::Preset']]],
+  ['synchronized_5fattributes_5f_7',['synchronized_attributes_',['../classmeta_1_1ContainerGroup.html#a5a0c8f3654704317dcf3b64a1b5c7b16',1,'meta::ContainerGroup']]]
 ];
