@@ -38,6 +38,10 @@ ConstAttrIterator AttributeContainer::cend() const
 void AttributeContainer::clear()
 {
   Logger::log()->trace("AttributeContainer::clear");
+
+  for (const auto &name : insertion_order_)
+    attribute_removed.notify(name);
+
   attributes_.clear();
   compact_insertion_order();
 }
@@ -179,6 +183,7 @@ void AttributeContainer::json_from(const nlohmann::json &j,
                                                        std::move(new_attr));
 
       it = insert_it;
+      attribute_added.notify(*it->second);
     }
     else
     {

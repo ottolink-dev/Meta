@@ -12,6 +12,8 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <vector>
 
 #include "meta/core/attribute_container.hpp"
 #include "meta/core/meta_object.hpp"
@@ -81,7 +83,7 @@ public:
    */
   const AttributeContainer *find(const std::string &key) const;
 
-  /// Returns the attribute names in insertion order.
+  /// Returns the container names in insertion order.
   const std::vector<std::string> &insertion_order() const;
 
   /**
@@ -92,6 +94,68 @@ public:
 
   /// Clear all containers.
   void clear();
+
+  // -------------------------------------------------------------------------
+  // Attribute Synchronization
+  // -------------------------------------------------------------------------
+
+  /**
+   * @brief Detects attribute keys shared across at least two containers with
+   *        matching types.
+   * @return Vector of shared attribute keys in insertion order.
+   */
+  std::vector<std::string> shared_attributes() const;
+
+  /**
+   * @brief Checks whether an attribute key is shared across at least two
+   *        containers with matching types.
+   * @param key Attribute identifier.
+   * @return true if shared, false otherwise.
+   */
+  bool is_shared(const std::string &key) const;
+
+  /**
+   * @brief Enable or disable synchronization for an attribute key across
+   *        containers in this group.
+   *
+   * When enabled, the attribute's current value (from the active container, or
+   * the first container containing it) is propagated to all matching
+   * containers, and subsequent updates in any container are kept in sync.
+   *
+   * @param key Attribute identifier.
+   * @param synchronize Whether to synchronize.
+   */
+  void set_synchronized(const std::string &key, bool synchronize = true);
+
+  /**
+   * @brief Check whether an attribute is marked for synchronization.
+   * @param key Attribute identifier.
+   * @return true if synchronized.
+   */
+  bool is_synchronized(const std::string &key) const;
+
+  /**
+   * @brief Get the set of currently synchronized attribute keys.
+   * @return Constant reference to the set of synchronized attribute names.
+   */
+  const std::unordered_set<std::string> &synchronized_attributes() const;
+
+  /**
+   * @brief Synchronizes all detected shared attributes across containers.
+   * @param synchronize Whether to enable or disable synchronization for all.
+   */
+  void synchronize_all(bool synchronize = true);
+
+  /// Disables synchronization for all attributes.
+  void clear_synchronizations();
+
+  /**
+   * @brief Manually propagate the value of an attribute from the active
+   *        container (or first containing container) to all other matching
+   *        containers in the group.
+   * @param key Attribute identifier.
+   */
+  void sync_attribute(const std::string &key);
 
   // -------------------------------------------------------------------------
   // Serialization
@@ -134,6 +198,19 @@ private:
   ContainerMap             containers_;
   std::vector<std::string> insertion_order_;
   AttributeContainer      *current_ = nullptr;
+
+  std::unordered_set<std::string> synchronized_attributes_;
+  bool                            is_synchronizing_ = false;
+
+  // Track event connections per container
+  std::unordered_map<std::string, std::vector<EventConnection>>
+      container_connections_;
+
+  void bind_container(const std::string &key, AttributeContainer &container);
+  void bind_attribute(const std::string &container_key,
+                      AbstractAttribute &attr);
+  void sync_attribute_across_containers(const std::string &key,
+                                        AbstractAttribute &source);
 
   /**
    * @brief Removes stale entries from insertion_order_ that no longer exist

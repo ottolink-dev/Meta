@@ -66,6 +66,22 @@ public:
   Attribute(std::string name, T value)
       : name_(std::move(name)), value_(std::move(value))
   {
+    value_changed_conn_ = value_changed.subscribe(
+        [this](const T &) { value_changed_event.notify(*this); });
+  }
+
+  /// Sets value and notifies subscribers.
+  void set_value(const T &new_value)
+  {
+    value_ = new_value;
+    value_changed.notify(value_);
+  }
+
+  /// Sets value (by move) and notifies subscribers.
+  void set_value(T &&new_value)
+  {
+    value_ = std::move(new_value);
+    value_changed.notify(value_);
   }
 
   /// Get attribute name.
@@ -179,8 +195,9 @@ public:
   }
 
 private:
-  std::string name_;
-  T           value_;
+  std::string     name_;
+  T               value_;
+  EventConnection value_changed_conn_;
 };
 
 } // namespace meta

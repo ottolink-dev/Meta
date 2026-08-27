@@ -14,6 +14,7 @@
 
 #include <nlohmann/json.hpp>
 
+#include "meta/core/event.hpp"
 #include "meta/core/meta_object.hpp"
 #include "meta/serialization/serialization_mode.hpp"
 
@@ -35,6 +36,9 @@ class AbstractAttribute : public MetaObject
 {
 public:
   virtual ~AbstractAttribute() = default;
+
+  /// Untyped event fired whenever the attribute value changes.
+  Event<AbstractAttribute &> value_changed_event;
 
   /// Returns the attribute name.
   virtual const std::string &name() const = 0;
