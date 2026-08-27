@@ -92,6 +92,12 @@ public:
    */
   void set_current(const std::string &key);
 
+  /**
+   * @brief Set the active container to the first container in the list.
+   * @throws std::runtime_error if there are no containers in the group.
+   */
+  void set_current_to_first();
+
   /// Clear all containers.
   void clear();
 

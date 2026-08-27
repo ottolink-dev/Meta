@@ -274,3 +274,34 @@ TEST(ContainerGroupSyncTest, JsonRoundTripPreservesSync)
   EXPECT_FLOAT_EQ(dst_c1->value<float>("scale"), 88.0f);
   EXPECT_FLOAT_EQ(dst_c2->value<float>("scale"), 88.0f);
 }
+
+TEST(ContainerGroupSyncTest, SetCurrentToFirst)
+{
+  meta::ContainerGroup group;
+
+  // Expect exception when group is empty
+  EXPECT_THROW(group.set_current_to_first(), std::runtime_error);
+
+  group.add("Feature1");
+  group.add("Feature2");
+  group.add("Feature3");
+
+  // Initial current is Feature1
+  EXPECT_EQ(group.current_container_name(), "Feature1");
+
+  // Switch to Feature3
+  group.set_current("Feature3");
+  EXPECT_EQ(group.current_container_name(), "Feature3");
+
+  // Reset to first
+  group.set_current_to_first();
+  EXPECT_EQ(group.current_container_name(), "Feature1");
+
+  // Erase the first one, now Feature2 is first
+  group.erase("Feature1");
+  group.set_current("Feature3");
+  EXPECT_EQ(group.current_container_name(), "Feature3");
+
+  group.set_current_to_first();
+  EXPECT_EQ(group.current_container_name(), "Feature2");
+}

@@ -246,6 +246,19 @@ void ContainerGroup::set_current(const std::string &key)
   Logger::log()->trace("ContainerGroup::set_current: success = {}", key);
 }
 
+void ContainerGroup::set_current_to_first()
+{
+  Logger::log()->trace("ContainerGroup::set_current_to_first");
+
+  if (insertion_order_.empty())
+  {
+    Logger::log()->trace("ContainerGroup::set_current_to_first: no containers");
+    throw std::runtime_error("No containers in group");
+  }
+
+  set_current(insertion_order_.front());
+}
+
 void ContainerGroup::clear()
 {
   Logger::log()->trace("ContainerGroup::clear");
