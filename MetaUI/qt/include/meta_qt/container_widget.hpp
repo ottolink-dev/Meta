@@ -31,6 +31,14 @@ enum GroupSwitchMode
   GSM_COMBO_BOX ///< Use a combo box for switching groups
 };
 
+/** @brief Builds the widget for a single attribute.
+ *
+ * The indirection that lets a host supply an alternative widget design without
+ * the container layer knowing any design exists. Leave unset for the stock
+ * renderer; see meta_qt/ui/design_registry.hpp for the registry-backed one.
+ */
+using AttributeRowRenderer = std::function<MetaWidget *(AbstractAttribute *)>;
+
 /// Options controlling how attribute containers are rendered.
 struct ContainerRenderOptions
 {
@@ -41,6 +49,7 @@ struct ContainerRenderOptions
   std::vector<std::string> insertion_order = {};                 ///< Explicit ordering of categories
   std::optional<std::regex> collapse_regex = std::nullopt;       ///< Regex used to collapse categories
   bool snapshot_manager = false;                                 ///< Add snapshot manager widget
+  AttributeRowRenderer row_renderer = {};                        ///< Per-attribute widget builder; empty = stock
   // clang-format on
 };
 
@@ -64,9 +73,10 @@ void insert_attribute(CategoryNode            &root,
 std::string compute_flattened_path(CategoryNode *node);
 
 /// Renders a flat list of attributes into a Qt layout.
-void render_flat(CategoryNode              &node,
-                 QVBoxLayout               *layout,
-                 std::vector<MetaWidget *> &collected_widgets);
+void render_flat(CategoryNode               &node,
+                 QVBoxLayout                *layout,
+                 std::vector<MetaWidget *>  &collected_widgets,
+                 const AttributeRowRenderer &row_renderer = {});
 
 /// Renders a category tree using hierarchical grouping.
 void render_category(meta::AttributeContainer  &container,
