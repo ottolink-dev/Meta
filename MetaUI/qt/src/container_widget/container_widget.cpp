@@ -63,9 +63,21 @@ void insert_attribute(CategoryNode      &root,
   node->attributes.push_back(attr);
 }
 
-void render_flat(CategoryNode              &node,
-                 QVBoxLayout               *layout,
-                 std::vector<MetaWidget *> &collected_widgets)
+namespace
+{
+
+/// The stock renderer unless the caller supplied a design-aware one.
+MetaWidget *build_row(const AttributeRowRenderer &row_renderer, AbstractAttribute *p_attr)
+{
+  return row_renderer ? row_renderer(p_attr) : qt::render(p_attr);
+}
+
+} // namespace
+
+void render_flat(CategoryNode               &node,
+                 QVBoxLayout                *layout,
+                 std::vector<MetaWidget *>  &collected_widgets,
+                 const AttributeRowRenderer &row_renderer)
 {
   Logger::log()->trace("container_widget::render_flat");
 
@@ -74,7 +86,7 @@ void render_flat(CategoryNode              &node,
     Logger::log()->trace("container_widget::render_flat: '{}'",
                          p_attr ? p_attr->name() : std::string("null"));
 
-    MetaWidget *w = qt::render(p_attr);
+    MetaWidget *w = build_row(row_renderer, p_attr);
 
     if (w)
     {
@@ -91,7 +103,7 @@ void render_flat(CategoryNode              &node,
   }
 
   for (const auto &name : node.children_order)
-    render_flat(*node.children.at(name), layout, collected_widgets);
+    render_flat(*node.children.at(name), layout, collected_widgets, row_renderer);
 }
 
 void render_category(AttributeContainer        &container,
@@ -99,7 +111,8 @@ void render_category(AttributeContainer        &container,
                      QVBoxLayout               *parent_layout,
                      std::vector<MetaWidget *> &collected_widgets,
                      std::vector<std::pair<CollapsibleSection *, std::string>>
-                         &collected_sections)
+                                                &collected_sections,
+                     const AttributeRowRenderer &row_renderer)
 {
   Logger::log()->trace("container_widget::render_category: '{}'", node.name);
 
@@ -144,7 +157,7 @@ void render_category(AttributeContainer        &container,
     Logger::log()->trace("container_widget::render_category: '{}'",
                          p_attr ? p_attr->name() : std::string("null"));
 
-    MetaWidget *w = qt::render(p_attr);
+    MetaWidget *w = build_row(row_renderer, p_attr);
 
     if (w) // avoid 'None' type widgets
     {
@@ -165,7 +178,8 @@ void render_category(AttributeContainer        &container,
                     *node.children.at(name),
                     current_layout,
                     collected_widgets,
-                    collected_sections);
+                    collected_sections,
+                    row_renderer);
 }
 
 void render_category_merged(
@@ -175,7 +189,8 @@ void render_category_merged(
     std::vector<MetaWidget *> &collected_widgets,
     std::vector<std::pair<CollapsibleSection *, std::string>>
                                     &collected_sections,
-    const std::optional<std::regex> &collapse_regex)
+    const std::optional<std::regex> &collapse_regex,
+    const AttributeRowRenderer      &row_renderer)
 {
   Logger::log()->trace("container_widget::render_category_merged");
 
@@ -241,7 +256,7 @@ void render_category_merged(
       Logger::log()->trace("container_widget::render_category_merged: '{}'",
                            p_attr ? p_attr->name() : std::string("null"));
 
-      MetaWidget *w = qt::render(p_attr);
+      MetaWidget *w = build_row(row_renderer, p_attr);
 
       if (w) // 'None' widget is possible
       {
@@ -265,7 +280,8 @@ void render_category_merged(
                            layout,
                            collected_widgets,
                            collected_sections,
-                           collapse_regex);
+                           collapse_regex,
+                           row_renderer);
 }
 
 MetaWidget *render(AttributeContainer    &container,
@@ -338,7 +354,8 @@ MetaWidget *render(AttributeContainer    &container,
                     root,
                     layout,
                     collected_widgets,
-                    collected_sections);
+                    collected_sections,
+                    options.row_renderer);
     break;
 
   case CategoryPolicy::CP_MERGED:
@@ -348,21 +365,23 @@ MetaWidget *render(AttributeContainer    &container,
                            layout,
                            collected_widgets,
                            collected_sections,
-                           options.collapse_regex);
+                           options.collapse_regex,
+                           options.row_renderer);
     break;
 
   case CategoryPolicy::CP_SMART:
     Logger::log()->trace("container_widget::render: smart mode");
 
     if (has_no_categorys)
-      render_flat(root, layout, collected_widgets);
+      render_flat(root, layout, collected_widgets, options.row_renderer);
     else
       render_category_merged(container,
                              root,
                              layout,
                              collected_widgets,
                              collected_sections,
-                             options.collapse_regex);
+                             options.collapse_regex,
+                             options.row_renderer);
     break;
 
 #pragma GCC diagnostic push
@@ -370,7 +389,9 @@ MetaWidget *render(AttributeContainer    &container,
 
   case CategoryPolicy::CP_FLAT:
     Logger::log()->trace("container_widget::render: flat mode");
-  default: render_flat(root, layout, collected_widgets); break;
+  default:
+    render_flat(root, layout, collected_widgets, options.row_renderer);
+    break;
 
 #pragma GCC diagnostic pop
   }
