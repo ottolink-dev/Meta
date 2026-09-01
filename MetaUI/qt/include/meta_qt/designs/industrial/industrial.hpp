@@ -14,14 +14,14 @@ inline constexpr char kDesignName[] = "industrial";
  *
  * Idempotent, so a host may call it unconditionally at startup.
  *
- * Only the widget types this design actually implements are registered.
- * Everything else resolves to nothing and falls back to the stock renderer,
- * which is what keeps a partial design a usable panel rather than a broken one.
+ * Only the widget types this design actually implements are registered. It also
+ * registers the stock design and declares stock as its fallback, so anything
+ * not yet ported still renders -- a partial design stays a usable panel rather
+ * than a handful of rows with gaps between them.
  *
- * Note there is deliberately no "stock" design to register: an unknown design
- * name finds no factories and every row falls back, so `design = "stock"` gives
- * the unmodified Qt look for free. That makes A/B comparison a settings change
- * rather than a build.
+ * "stock" is a peer flavour, not a privileged fallback: selecting it directly
+ * gives the unmodified Qt look, which makes A/B comparison a settings change
+ * rather than a rebuild.
  */
 void register_design();
 

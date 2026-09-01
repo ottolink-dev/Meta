@@ -5,6 +5,7 @@
 
 #include "meta_qt/designs/industrial/check_row.hpp"
 #include "meta_qt/designs/industrial/param_slider.hpp"
+#include "meta_qt/designs/stock/stock.hpp"
 #include "meta_qt/ui/design_registry.hpp"
 
 namespace meta::qt::industrial
@@ -26,6 +27,12 @@ void register_design()
   // branch inside CheckRow.
   registry.register_control<bool, CheckRow>(kDesignName, "Toggle");
   registry.register_control<bool, CheckRow>(kDesignName, "Checkbox");
+
+  // Anything not covered above resolves through stock, so a design still under
+  // construction yields a complete panel rather than a handful of rows. Drop
+  // this line and the unported widget types simply render nothing.
+  stock::register_design();
+  registry.set_fallback(kDesignName, stock::kDesignName);
 }
 
 } // namespace meta::qt::industrial

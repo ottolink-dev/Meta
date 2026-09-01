@@ -3,9 +3,9 @@
    this software. */
 #include "meta_qt/ui/design_registry.hpp"
 
-#include "meta/logger.hpp"
+#include <set>
 
-#include "meta_qt/widget_renderer.hpp"
+#include "meta/logger.hpp"
 
 namespace meta::qt
 {
@@ -24,17 +24,17 @@ void DesignRegistry::add(const std::string &design,
   factories_[design][Key{type, widget_type}] = std::move(factory);
 }
 
+void DesignRegistry::set_fallback(const std::string &design, const std::string &fallback)
+{
+  fallbacks_[design] = fallback;
+}
+
 MetaWidget *DesignRegistry::render(AbstractAttribute *p_attr,
                                    const std::string &design,
                                    const RowContext  &ctx,
                                    QWidget           *parent) const
 {
   if (!p_attr) return nullptr;
-
-  auto design_it = factories_.find(design);
-  if (design_it == factories_.end()) return nullptr;
-
-  const auto &table = design_it->second;
 
   // meta::common::widget_type() only has an Attribute<T> overload; on an
   // AbstractAttribute the key has to be read directly.
@@ -45,11 +45,31 @@ MetaWidget *DesignRegistry::render(AbstractAttribute *p_attr,
 
   const std::type_index type{p_attr->type()};
 
-  if (auto it = table.find(Key{type, widget_type}); it != table.end())
-    return it->second(*p_attr, ctx, parent);
+  std::set<std::string> visited;
+  std::string           current = design;
 
-  if (auto it = table.find(Key{type, kAnyWidgetType}); it != table.end())
-    return it->second(*p_attr, ctx, parent);
+  while (!current.empty() && visited.insert(current).second)
+  {
+    auto design_it = factories_.find(current);
+
+    if (design_it != factories_.end())
+    {
+      const auto &table = design_it->second;
+
+      // A factory may decline (nullptr) -- can_render() said no -- in which
+      // case the walk continues rather than stopping at a blank row.
+      if (auto it = table.find(Key{type, widget_type}); it != table.end())
+        if (MetaWidget *row = it->second(*p_attr, ctx, parent))
+          return row;
+
+      if (auto it = table.find(Key{type, kAnyWidgetType}); it != table.end())
+        if (MetaWidget *row = it->second(*p_attr, ctx, parent))
+          return row;
+    }
+
+    auto fallback_it = fallbacks_.find(current);
+    current = fallback_it == fallbacks_.end() ? std::string{} : fallback_it->second;
+  }
 
   return nullptr;
 }
@@ -79,14 +99,17 @@ MetaWidget *render_row(AbstractAttribute *p_attr,
     return nullptr;
   }
 
-  if (MetaWidget *row = DesignRegistry::instance().render(p_attr, design, ctx, parent))
-    return row;
+  MetaWidget *row = DesignRegistry::instance().render(p_attr, design, ctx, parent);
 
-  // Either nothing is registered for this (design, type, widget_type), or the
-  // registered control declined the attribute via can_render(). The stock
-  // renderer covers every type Meta supports, so an unported -- or unrenderable
-  // -- attribute degrades to a plain widget rather than leaving a gap.
-  return render(p_attr, parent);
+  if (!row)
+    Logger::log()->error(
+        "render_row: no factory in design '{}' (or its fallbacks) for attribute "
+        "'{}' of type '{}'",
+        design,
+        p_attr->name(),
+        p_attr->type().name());
+
+  return row;
 }
 
 } // namespace meta::qt
