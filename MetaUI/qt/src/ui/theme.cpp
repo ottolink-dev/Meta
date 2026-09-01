@@ -3,6 +3,7 @@
    this software. */
 #include "meta_qt/ui/theme.hpp"
 
+#include <QApplication>
 #include <QFontDatabase>
 
 namespace meta::qt
@@ -50,6 +51,92 @@ QFont ui_font(int pixel_size, bool bold, qreal letter_spacing)
 
 // --- Theme
 
+namespace
+{
+
+/// Linear blend in RGB. `t` = 0 keeps `a`, `t` = 1 gives `b`.
+QColor mix(const QColor &a, const QColor &b, qreal t)
+{
+  return QColor::fromRgbF(a.redF() * (1.0 - t) + b.redF() * t,
+                          a.greenF() * (1.0 - t) + b.greenF() * t,
+                          a.blueF() * (1.0 - t) + b.blueF() * t);
+}
+
+/// Push a surface down (recessed). Same direction on light and dark schemes.
+QColor sink(const QColor &c, qreal t) { return mix(c, QColor(0, 0, 0), t); }
+
+/// Push a surface up (raised). Same direction on light and dark schemes.
+QColor lift(const QColor &c, qreal t) { return mix(c, QColor(255, 255, 255), t); }
+
+} // namespace
+
+Theme Theme::from_palette(const QPalette &palette, const std::string &name)
+{
+  Theme t;
+  t.name = name;
+
+  const QColor window = palette.color(QPalette::Active, QPalette::Window);
+  const QColor base = palette.color(QPalette::Active, QPalette::Base);
+  const QColor text = palette.color(QPalette::Active, QPalette::Text);
+  const QColor mid = palette.color(QPalette::Active, QPalette::Mid);
+  const QColor light = palette.color(QPalette::Active, QPalette::Light);
+
+  // --- surfaces
+  t.page = window;
+  t.bar = sink(window, 0.06);
+  t.section_header = lift(window, 0.06);
+  t.section_header_hover = lift(window, 0.10);
+  t.section_header_press = lift(window, 0.03);
+  t.rail_well = sink(window, 0.35);
+  t.field = base;
+  t.field_hover = lift(base, 0.05);
+  t.field_editing = sink(base, 0.25);
+  t.switch_track_off = base;
+
+  // --- hairlines and bevels
+  t.bevel_top = lift(window, 0.12);
+  t.bevel_bottom = sink(window, 0.10);
+  t.hairline = sink(window, 0.40);
+  t.rail_well_border = sink(window, 0.50);
+  t.field_border = mid;
+  t.field_border_hover = lift(mid, 0.15);
+
+  // --- ink. Dimming blends towards the window, so it reads as "less
+  // prominent" whichever side of the light/dark line the scheme sits on.
+  t.ink_primary = text;
+  t.ink_section_title = mix(text, window, 0.12);
+  t.ink_secondary = mix(text, window, 0.38);
+  t.ink_dim = mix(text, window, 0.48);
+  t.ink_icon = mix(text, window, 0.20);
+  t.ink_locked = palette.color(QPalette::Disabled, QPalette::Text);
+
+  // BrightText is the maximum-contrast ink, which is exactly what "modified"
+  // wants. Some palettes leave it equal to Text, in which case push away from
+  // the window instead so the modified state stays visibly distinct.
+  const QColor bright = palette.color(QPalette::Active, QPalette::BrightText);
+  t.ink_modified = bright == text ? mix(text, window.lightness() < 128
+                                                  ? QColor(255, 255, 255)
+                                                  : QColor(0, 0, 0),
+                                        0.45)
+                                  : bright;
+
+  // --- metal
+  t.thumb_top = light;
+  t.thumb_bottom = sink(light, 0.22);
+  t.thumb_border = sink(window, 0.55);
+  t.thumb_grip = mid;
+  t.knob_on_top = light;
+  t.knob_on_bottom = sink(light, 0.18);
+  t.knob_off_top = mid;
+  t.knob_off_bottom = sink(mid, 0.18);
+
+  // --- accent. Follow the host rather than imposing one; assign over this
+  // afterwards to pin a specific accent.
+  t.accent = palette.color(QPalette::Active, QPalette::Highlight);
+
+  return t;
+}
+
 QColor Theme::group_accent(const std::string &category) const
 {
   auto it = group_accents.find(category);
@@ -76,61 +163,17 @@ QColor Theme::state_ink(bool modified, bool locked) const
 namespace
 {
 
-/// The reference colourway, sampled from a render rather than copied from notes.
+/** @brief The reference colourway, sampled from a render rather than notes.
+ *
+ * Kept as an explicit option so the design can be seen exactly as it was
+ * drawn, independent of whatever palette the host happens to run. The *default*
+ * is the palette-derived theme, not this.
+ */
 Theme make_industrial_dark()
 {
   Theme t;
   t.name = "industrial-dark";
-  return t; // the struct defaults *are* industrial-dark
-}
-
-/** @brief A light colourway over the same geometry.
- *
- * Present so the theme layer has more than one occupant from day one -- a
- * mechanism with a single implementation is untested by construction, and this
- * is what proves the palette is genuinely swappable rather than nominally so.
- */
-Theme make_industrial_light()
-{
-  Theme t;
-  t.name = "industrial-light";
-
-  t.page = QColor("#d9d9d9");
-  t.bar = QColor("#cfcfcf");
-  t.section_header = QColor("#c4c4c4");
-  t.section_header_hover = QColor("#bcbcbc");
-  t.section_header_press = QColor("#c9c9c9");
-  t.rail_well = QColor("#b8b8b8");
-  t.field = QColor("#ececec");
-  t.field_hover = QColor("#e2e2e2");
-  t.field_editing = QColor("#ffffff");
-  t.switch_track_off = QColor("#b8b8b8");
-
-  t.bevel_top = QColor("#e8e8e8");
-  t.bevel_bottom = QColor("#b0b0b0");
-  t.hairline = QColor("#a8a8a8");
-  t.rail_well_border = QColor("#9e9e9e");
-  t.field_border = QColor("#8a8a8a");
-  t.field_border_hover = QColor("#6e6e6e");
-
-  t.ink_primary = QColor("#1f1f1f");
-  t.ink_section_title = QColor("#2b2b2b");
-  t.ink_secondary = QColor("#5a5a5a");
-  t.ink_dim = QColor("#6e6e6e");
-  t.ink_locked = QColor("#a0a0a0");
-  t.ink_modified = QColor("#000000");
-  t.ink_icon = QColor("#3a3a3a");
-
-  t.thumb_top = QColor("#fbfbfb");
-  t.thumb_bottom = QColor("#d0d0d0");
-  t.thumb_border = QColor("#8a8a8a");
-  t.thumb_grip = QColor("#a8a8a8");
-  t.knob_on_top = QColor("#ffffff");
-  t.knob_on_bottom = QColor("#e0e0e0");
-  t.knob_off_top = QColor("#f0f0f0");
-  t.knob_off_bottom = QColor("#d4d4d4");
-
-  return t;
+  return t; // the struct's member initialisers are industrial-dark
 }
 
 } // namespace
@@ -138,8 +181,15 @@ Theme make_industrial_light()
 ThemeRegistry::ThemeRegistry()
 {
   add(make_industrial_dark());
-  add(make_industrial_light());
-  fallback_name_ = "industrial-dark";
+  fallback_name_ = kPaletteTheme;
+}
+
+void ThemeRegistry::ensure_palette_theme() const
+{
+  if (themes_.find(kPaletteTheme) != themes_.end()) return;
+
+  const QPalette palette = QApplication::palette();
+  themes_[kPaletteTheme] = Theme::from_palette(palette, kPaletteTheme);
 }
 
 ThemeRegistry &ThemeRegistry::instance()
@@ -156,17 +206,22 @@ void ThemeRegistry::add(Theme theme)
 
 const Theme &ThemeRegistry::get(const std::string &name) const
 {
+  ensure_palette_theme();
+
   auto it = themes_.find(name);
   return it == themes_.end() ? fallback() : it->second;
 }
 
 const Theme &ThemeRegistry::fallback() const
 {
+  ensure_palette_theme();
   return themes_.at(fallback_name_);
 }
 
 std::vector<std::string> ThemeRegistry::names() const
 {
+  ensure_palette_theme();
+
   std::vector<std::string> out;
   out.reserve(themes_.size());
   for (const auto &[name, _] : themes_)

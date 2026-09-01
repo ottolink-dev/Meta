@@ -8,6 +8,7 @@
 
 #include <QColor>
 #include <QFont>
+#include <QPalette>
 
 namespace meta::qt
 {
@@ -80,10 +81,34 @@ struct Metrics
  *
  * Derived colours are exposed as *functions* rather than baked swatches, because
  * the formula is the thing that must survive an accent change.
+ *
+ * The member initialisers below are the reference colourway, kept so a
+ * default-constructed Theme paints something sane and so the sampled values stay
+ * documented. They are not the intended source of colour: see from_palette(),
+ * which is what lets the design sit on top of somebody else's palette.
  */
 struct Theme
 {
   std::string name = "industrial-dark";
+
+  /** @brief Derive a whole theme from a QPalette.
+   *
+   * The base theme has to follow the host application's palette, otherwise the
+   * design only works against the one colour scheme it was sampled from.
+   *
+   * Surfaces blend towards black or white rather than using darker()/lighter()
+   * on the palette role, because a recessed well is darker and a top bevel is
+   * lighter in *both* light and dark schemes, whereas darker() on a near-black
+   * window barely moves. Dimmed ink instead blends towards the window colour,
+   * so "less prominent text" automatically means darker on a light scheme and
+   * lighter on a dark one without branching on which we are in.
+   *
+   * Accent comes from QPalette::Highlight, so the design picks up the host's
+   * accent rather than imposing one. Assign over `accent` afterwards to pin it.
+   *
+   * Geometry (Metrics) is untouched: it is not a palette concern.
+   */
+  static Theme from_palette(const QPalette &palette, const std::string &name = "palette");
 
   // --- surfaces
   QColor page{"#2b2b2b"};
@@ -127,7 +152,13 @@ struct Theme
   // --- accent
   QColor accent{"#e08a2e"};
 
-  /// Per-group accents, keyed by attribute category. Falls back to `accent`.
+  /** @brief Per-group accents, keyed by attribute category. Falls back to `accent`.
+   *
+   * Deliberately not palette-derived: these encode *meaning* (which family of
+   * operation a parameter belongs to), so they have to stay distinguishable
+   * from each other rather than track a host accent. from_palette() leaves them
+   * alone.
+   */
   std::map<std::string, QColor> group_accents = {{"Erosion", QColor("#cfa143")},
                                                  {"Downcutting", QColor("#3aa899")},
                                                  {"Scale", QColor("#7d9cc0")},
@@ -163,14 +194,21 @@ struct Theme
 
 /** @brief Owns the built-in themes and any registered by a host.
  *
- * Themes are resolved once at construction time. Switching requires a restart:
- * controls cache brushes and pixmaps derived from the theme, and invalidating
- * those on every theme change would cost more than the feature is worth until a
- * second colourway actually exists.
+ * Themes are resolved once, when a panel is built. Switching requires a
+ * restart: controls cache brushes and pixmaps derived from the theme, and
+ * invalidating those on every change would cost more than the feature is worth.
+ *
+ * The default is "palette", derived from the application palette via
+ * Theme::from_palette(). It is built lazily because the registry is a static
+ * singleton and may well be constructed before QApplication exists, and cached
+ * afterwards, so a palette change mid-session is not picked up (again: restart).
  */
 class ThemeRegistry
 {
 public:
+  /// Derived from the application palette. The default.
+  static constexpr char kPaletteTheme[] = "palette";
+
   static ThemeRegistry &instance();
 
   /// Register a theme under `theme.name`, replacing any existing entry.
@@ -192,8 +230,11 @@ public:
 private:
   ThemeRegistry();
 
-  std::map<std::string, Theme> themes_;
-  std::string                  fallback_name_;
+  /// Build and cache the palette-derived theme on first use.
+  void ensure_palette_theme() const;
+
+  mutable std::map<std::string, Theme> themes_;
+  std::string                          fallback_name_;
 };
 
 } // namespace meta::qt
