@@ -66,6 +66,13 @@ void insert_attribute(CategoryNode      &root,
 namespace
 {
 
+/// The stock section unless the caller supplied a design-aware factory.
+CollapsibleSection *build_section(const SectionFactory &section_factory,
+                                  const QString      &title)
+{
+  return section_factory ? section_factory(title) : new CollapsibleSection(title);
+}
+
 /// The stock renderer unless the caller supplied a design-aware one.
 MetaWidget *build_row(const AttributeRowRenderer &row_renderer, AbstractAttribute *p_attr)
 {
@@ -112,7 +119,8 @@ void render_category(AttributeContainer        &container,
                      std::vector<MetaWidget *> &collected_widgets,
                      std::vector<std::pair<CollapsibleSection *, std::string>>
                                                 &collected_sections,
-                     const AttributeRowRenderer &row_renderer)
+                     const AttributeRowRenderer &row_renderer,
+                     const SectionFactory       &section_factory)
 {
   Logger::log()->trace("container_widget::render_category: '{}'", node.name);
 
@@ -122,7 +130,7 @@ void render_category(AttributeContainer        &container,
   {
     const std::string title = node.name;
 
-    auto *section = new CollapsibleSection(title.c_str());
+    auto *section = build_section(section_factory, title.c_str());
     parent_layout->addWidget(section);
 
     Logger::log()->trace("container_widget::render_category: section '{}'",
@@ -179,7 +187,8 @@ void render_category(AttributeContainer        &container,
                     current_layout,
                     collected_widgets,
                     collected_sections,
-                    row_renderer);
+                    row_renderer,
+                    section_factory);
 }
 
 void render_category_merged(
@@ -190,7 +199,8 @@ void render_category_merged(
     std::vector<std::pair<CollapsibleSection *, std::string>>
                                     &collected_sections,
     const std::optional<std::regex> &collapse_regex,
-    const AttributeRowRenderer      &row_renderer)
+    const AttributeRowRenderer      &row_renderer,
+    const SectionFactory            &section_factory)
 {
   Logger::log()->trace("container_widget::render_category_merged");
 
@@ -218,7 +228,7 @@ void render_category_merged(
 
   if (!title.empty())
   {
-    auto *section = new CollapsibleSection(title.c_str());
+    auto *section = build_section(section_factory, title.c_str());
 
     const bool autocollapse = collapse_regex &&
                               std::regex_search(title, *collapse_regex);
@@ -281,7 +291,8 @@ void render_category_merged(
                            collected_widgets,
                            collected_sections,
                            collapse_regex,
-                           row_renderer);
+                           row_renderer,
+                           section_factory);
 }
 
 MetaWidget *render(AttributeContainer    &container,
@@ -355,7 +366,8 @@ MetaWidget *render(AttributeContainer    &container,
                     layout,
                     collected_widgets,
                     collected_sections,
-                    options.row_renderer);
+                    options.row_renderer,
+                    options.section_factory);
     break;
 
   case CategoryPolicy::CP_MERGED:
@@ -366,7 +378,8 @@ MetaWidget *render(AttributeContainer    &container,
                            collected_widgets,
                            collected_sections,
                            options.collapse_regex,
-                           options.row_renderer);
+                           options.row_renderer,
+                           options.section_factory);
     break;
 
   case CategoryPolicy::CP_SMART:
@@ -381,7 +394,8 @@ MetaWidget *render(AttributeContainer    &container,
                              collected_widgets,
                              collected_sections,
                              options.collapse_regex,
-                             options.row_renderer);
+                             options.row_renderer,
+                             options.section_factory);
     break;
 
 #pragma GCC diagnostic push

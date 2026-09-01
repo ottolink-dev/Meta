@@ -6,6 +6,7 @@
 
 #include "meta_common.hpp"
 
+#include "meta_qt/designs/industrial/slider_chrome.hpp"
 #include "meta_qt/ui/control.hpp"
 #include "meta_qt/ui/glide.hpp"
 
@@ -57,12 +58,6 @@ protected:
   bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
-  // --- geometry, recomputed from the row's own width (not the window's)
-  int    label_width() const;
-  int    field_width() const;
-  QRect  rail_rect() const;
-  QRect  thumb_rect() const;
-
   // --- value <-> normalised position
   qreal to_norm(float value) const;
   float from_norm(qreal t) const;

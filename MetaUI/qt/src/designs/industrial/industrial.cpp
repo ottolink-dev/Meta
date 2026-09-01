@@ -4,6 +4,7 @@
 #include "meta_qt/designs/industrial/industrial.hpp"
 
 #include "meta_qt/designs/industrial/check_row.hpp"
+#include "meta_qt/designs/industrial/int_slider.hpp"
 #include "meta_qt/designs/industrial/param_slider.hpp"
 #include "meta_qt/designs/stock/stock.hpp"
 #include "meta_qt/ui/design_registry.hpp"
@@ -27,6 +28,10 @@ void register_design()
   // branch inside CheckRow.
   registry.register_control<bool, CheckRow>(kDesignName, "Toggle");
   registry.register_control<bool, CheckRow>(kDesignName, "Checkbox");
+
+  // --- int: 13%, counting Seed. Shares its chrome with ParamSlider via
+  // slider_chrome so the two rows cannot drift apart.
+  registry.register_control<int, IntSlider>(kDesignName, "SliderInt");
 
   // Anything not covered above resolves through stock, so a design still under
   // construction yields a complete panel rather than a handful of rows. Drop

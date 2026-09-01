@@ -1,12 +1,11 @@
 /* Copyright (c) 2026 Otto Link. Distributed under the terms of the GNU General
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
-#include "meta_qt/designs/industrial/param_slider.hpp"
+#include "meta_qt/designs/industrial/int_slider.hpp"
 
 #include <algorithm>
 #include <cmath>
 
-#include <QLinearGradient>
 #include <QLineEdit>
 #include <QMouseEvent>
 #include <QPainter>
@@ -16,25 +15,14 @@
 namespace meta::qt::industrial
 {
 
-namespace
-{
-constexpr qreal kLogFloor = 1e-6; ///< below this a log mapping is undefined
-}
-
-ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget *parent)
-    : Control<float>(ctx, parent)
+IntSlider::IntSlider(Attribute<int> &attr, const RowContext &ctx, QWidget *parent)
+    : Control<int>(ctx, parent)
 {
   key_ = attr.name();
   label_ = meta::common::label(attr);
   category_ = meta::common::category(attr);
   min_ = meta::common::min(attr);
   max_ = meta::common::max(attr);
-  log_scale_ = meta::common::try_get<bool>(attr, meta::keys::ui::log_scale, false);
-  decimals_ = meta::common::try_get_format_decimals(meta::common::format(attr));
-
-  // A log mapping needs a strictly positive lower bound; fall back to linear
-  // rather than producing NaNs across the whole rail.
-  if (log_scale_ && min_ <= kLogFloor) log_scale_ = false;
 
   value_ = std::clamp(attr.value(), min_, max_);
   norm_ = to_norm(value_);
@@ -43,29 +31,26 @@ ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget 
   setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 
   glide_ = new Glide(theme().metrics.glide_ms, this);
+
+  // The glide drives the painted position only. value_ is set up front by
+  // apply_value(), so neither the readout nor the model ever shows an
+  // intermediate fractional value that an int attribute cannot hold.
   connect(glide_,
           &Glide::tick,
           this,
           [this](qreal t)
           {
             norm_ = t;
-            value_ = from_norm(t);
-            refresh_field();
             update();
           });
 
-  // The commit rides the animation's completion. Emitting it when the glide
-  // starts would publish the value the control still held a frame ago.
   connect(glide_,
           &Glide::finished,
           this,
           [this](qreal t)
           {
             norm_ = t;
-            value_ = from_norm(t);
-            refresh_field();
             update();
-            notify_value_changed();
             end_edit();
           });
   glide_->jump(norm_);
@@ -83,8 +68,8 @@ ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget 
           this,
           [this]()
           {
-            bool        ok = false;
-            const float typed = field_->text().toFloat(&ok);
+            bool      ok = false;
+            const int typed = field_->text().toInt(&ok);
             if (!ok)
             {
               refresh_field(); // reject silently, restore the real value
@@ -92,16 +77,14 @@ ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget 
             }
 
             begin_edit();
-            glide_->to(to_norm(std::clamp(typed, min_, max_)));
+            apply_value(std::clamp(typed, min_, max_), true);
           });
 
   connect(field_, &QLineEdit::textEdited, this, [this]() { restyle_field(true); });
 }
 
-bool ParamSlider::can_render(const Attribute<float> &attr)
+bool IntSlider::can_render(const Attribute<int> &attr)
 {
-  // contains_all_keys() is non-const, so probe with find() instead of taking a
-  // mutable reference just to ask a question.
   const auto &metadata = attr.metadata();
   if (!metadata.find(meta::keys::constraints::min) ||
       !metadata.find(meta::keys::constraints::max))
@@ -110,59 +93,34 @@ bool ParamSlider::can_render(const Attribute<float> &attr)
   return meta::common::max(attr) > meta::common::min(attr);
 }
 
-void ParamSlider::set(const float &value)
+void IntSlider::set(const int &value)
 {
-  const float clamped = std::clamp(value, min_, max_);
-
-  // jump() emits tick(), which derives value_ back out of the normalised
-  // position -- lossy under a log mapping. Seat the authoritative value after.
-  glide_->jump(to_norm(clamped)); // a model sync seats immediately, no glide
-  value_ = clamped;
-
+  value_ = std::clamp(value, min_, max_);
+  glide_->jump(to_norm(value_)); // a model sync seats immediately
+  norm_ = to_norm(value_);
   refresh_field();
   update();
 }
 
-QSize ParamSlider::sizeHint() const
+QSize IntSlider::sizeHint() const
 {
   return QSize(theme().metrics.label_min_width + 200, theme().metrics.row_height);
 }
 
-// --- value mapping
-
-qreal ParamSlider::to_norm(float value) const
+qreal IntSlider::to_norm(int value) const
 {
   if (max_ <= min_) return 0.0;
-
-  if (log_scale_)
-  {
-    const qreal lo = std::log(qreal(min_));
-    const qreal hi = std::log(qreal(max_));
-    const qreal v = std::log(std::max(qreal(value), kLogFloor));
-    return std::clamp((v - lo) / (hi - lo), 0.0, 1.0);
-  }
-
   return std::clamp(qreal(value - min_) / qreal(max_ - min_), 0.0, 1.0);
 }
 
-float ParamSlider::from_norm(qreal t) const
+int IntSlider::from_norm(qreal t) const
 {
-  t = std::clamp(t, 0.0, 1.0);
-
-  if (log_scale_)
-  {
-    const qreal lo = std::log(qreal(min_));
-    const qreal hi = std::log(qreal(max_));
-    return float(std::exp(lo + t * (hi - lo)));
-  }
-
-  return float(min_ + t * qreal(max_ - min_));
+  // Round rather than truncate, or the top step is unreachable and dragging
+  // right never quite arrives at max.
+  return int(std::lround(min_ + std::clamp(t, 0.0, 1.0) * qreal(max_ - min_)));
 }
 
-// --- painting
-
-
-void ParamSlider::paintEvent(QPaintEvent *)
+void IntSlider::paintEvent(QPaintEvent *)
 {
   QPainter painter(this);
 
@@ -185,10 +143,8 @@ void ParamSlider::paintEvent(QPaintEvent *)
   paint_slider_row(painter, theme(), geometry, visual, height());
 }
 
-void ParamSlider::resizeEvent(QResizeEvent *event)
+void IntSlider::resizeEvent(QResizeEvent *event)
 {
-  // Nothing here derives height from width, so a pure-height resize would be a
-  // wasted layout pass. Bail before touching child geometry.
   if (event->oldSize().width() == event->size().width())
   {
     QWidget::resizeEvent(event);
@@ -200,9 +156,7 @@ void ParamSlider::resizeEvent(QResizeEvent *event)
   QWidget::resizeEvent(event);
 }
 
-// --- interaction
-
-void ParamSlider::mousePressEvent(QMouseEvent *event)
+void IntSlider::mousePressEvent(QMouseEvent *event)
 {
   if (is_locked() || event->button() != Qt::LeftButton)
   {
@@ -223,13 +177,13 @@ void ParamSlider::mousePressEvent(QMouseEvent *event)
   set_from_position(event->pos().x());
 }
 
-void ParamSlider::mouseMoveEvent(QMouseEvent *event)
+void IntSlider::mouseMoveEvent(QMouseEvent *event)
 {
   if (!dragging_) return;
   set_from_position(event->pos().x());
 }
 
-void ParamSlider::mouseReleaseEvent(QMouseEvent *event)
+void IntSlider::mouseReleaseEvent(QMouseEvent *event)
 {
   if (!dragging_) return;
 
@@ -238,7 +192,7 @@ void ParamSlider::mouseReleaseEvent(QMouseEvent *event)
   end_edit();
 }
 
-void ParamSlider::mouseDoubleClickEvent(QMouseEvent *event)
+void IntSlider::mouseDoubleClickEvent(QMouseEvent *event)
 {
   if (is_locked()) return;
 
@@ -250,10 +204,9 @@ void ParamSlider::mouseDoubleClickEvent(QMouseEvent *event)
 
   try
   {
-    const float target = std::clamp(std::any_cast<float>(def), min_, max_);
     dragging_ = false;
     begin_edit();
-    glide_->to(to_norm(target)); // the reset glides like everything else
+    apply_value(std::clamp(std::any_cast<int>(def), min_, max_), true);
   }
   catch (const std::bad_any_cast &)
   {
@@ -263,7 +216,7 @@ void ParamSlider::mouseDoubleClickEvent(QMouseEvent *event)
   event->accept();
 }
 
-void ParamSlider::handle_wheel(QWheelEvent *event)
+void IntSlider::handle_wheel(QWheelEvent *event)
 {
   const int steps = event->angleDelta().y() / 120;
   if (steps == 0)
@@ -272,90 +225,82 @@ void ParamSlider::handle_wheel(QWheelEvent *event)
     return;
   }
 
-  // One notch moves 1% of the rail, which stays sane under a log mapping.
+  // One notch is one unit, which is what an integer control should do
+  // regardless of how wide its range happens to be.
   begin_edit();
-  glide_->to(std::clamp(norm_ + steps * 0.01, 0.0, 1.0));
+  apply_value(std::clamp(value_ + steps, min_, max_), true);
   event->accept();
 }
 
-void ParamSlider::on_state_changed()
+void IntSlider::on_state_changed()
 {
   restyle_field(field_ && field_->hasFocus());
   update();
 }
 
-// --- helpers
-
-bool ParamSlider::eventFilter(QObject *watched, QEvent *event)
+bool IntSlider::eventFilter(QObject *watched, QEvent *event)
 {
   if (watched == field_ &&
       (event->type() == QEvent::FocusIn || event->type() == QEvent::FocusOut))
   {
-    // hasFocus() is not yet settled while the event is being delivered, so the
-    // event type is the authority on which way the transition goes.
     const bool editing = event->type() == QEvent::FocusIn;
     if (!editing) refresh_field();
     restyle_field(editing);
   }
 
-  return Control<float>::eventFilter(watched, event);
+  return Control<int>::eventFilter(watched, event);
 }
 
-void ParamSlider::set_from_position(int x)
+void IntSlider::set_from_position(int x)
 {
   const Metrics       &m = theme().metrics;
   const SliderGeometry g = SliderGeometry::compute(theme(), width(), height(), norm_);
-  const QRect          rail = g.rail;
-  const int            travel = std::max(1, rail.width() - m.thumb_width);
+  const int            travel = std::max(1, g.rail.width() - m.thumb_width);
 
-  apply_norm(std::clamp(qreal(x - rail.x() - m.thumb_width / 2) / travel, 0.0, 1.0));
+  const qreal t = std::clamp(qreal(x - g.rail.x() - m.thumb_width / 2) / travel,
+                             0.0,
+                             1.0);
+
+  // Quantise to the integer the rail actually represents, so the thumb sits on
+  // whole values during a drag rather than between them.
+  apply_value(from_norm(t), false);
 }
 
-void ParamSlider::apply_norm(qreal t)
+void IntSlider::apply_value(int value, bool glide)
 {
-  // A drag tracks the cursor directly; gliding here would lag the pointer.
-  glide_->jump(t);
-  norm_ = t;
-  value_ = from_norm(t);
+  const bool changed = value != value_;
+  value_ = value;
+
+  if (glide)
+  {
+    glide_->to(to_norm(value_));
+  }
+  else
+  {
+    glide_->jump(to_norm(value_)); // a drag tracks the cursor, no glide
+    norm_ = to_norm(value_);
+  }
+
   refresh_field();
   update();
-  notify_value_changed();
+
+  if (changed) notify_value_changed();
 }
 
-QString ParamSlider::format_value(float value) const
-{
-  return QString::number(value, 'f', decimals_);
-}
-
-void ParamSlider::refresh_field()
+void IntSlider::refresh_field()
 {
   if (!field_ || field_->hasFocus()) return; // never overwrite mid-typing
 
   const QSignalBlocker blocker(field_);
-  field_->setText(format_value(value_));
+  field_->setText(QString::number(value_));
 }
 
-void ParamSlider::restyle_field(bool editing)
+void IntSlider::restyle_field(bool editing)
 {
   if (!field_) return;
 
-  const Theme &t = theme();
-
-  const QColor bg = editing ? t.field_editing : t.field;
-  const QColor border = editing ? t.accent : t.field_border;
-
   field_->setReadOnly(is_locked());
-  field_->setStyleSheet(QString("QLineEdit {"
-                                " background: %1;"
-                                " border: 1px solid %2;"
-                                " border-radius: %3px;"
-                                " color: %4;"
-                                " padding-right: 4px;"
-                                "}")
-                            .arg(bg.name())
-                            .arg(border.name())
-                            .arg(t.metrics.radius)
-                            .arg(t.state_ink(is_modified(), is_locked()).name()));
+  field_->setStyleSheet(field_stylesheet(theme(), editing, is_modified(), is_locked()));
 }
 
 } // namespace meta::qt::industrial

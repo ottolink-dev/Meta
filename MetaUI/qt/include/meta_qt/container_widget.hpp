@@ -11,6 +11,7 @@
 #include "meta_common.hpp"
 
 #include "meta_qt/meta_widget.hpp"
+#include "meta_qt/widgets/collapsible_section.hpp"
 
 namespace meta::qt
 {
@@ -39,6 +40,15 @@ enum GroupSwitchMode
  */
 using AttributeRowRenderer = std::function<MetaWidget *(AbstractAttribute *)>;
 
+/** @brief Builds the collapsible section used for a category.
+ *
+ * Same indirection as AttributeRowRenderer, for the chrome around the rows
+ * rather than the rows themselves. A section is not bound to an attribute, so
+ * it cannot go through the design registry; it is supplied here instead.
+ * Leave unset for the stock section.
+ */
+using SectionFactory = std::function<CollapsibleSection *(const QString &title)>;
+
 /// Options controlling how attribute containers are rendered.
 struct ContainerRenderOptions
 {
@@ -50,6 +60,7 @@ struct ContainerRenderOptions
   std::optional<std::regex> collapse_regex = std::nullopt;       ///< Regex used to collapse categories
   bool snapshot_manager = false;                                 ///< Add snapshot manager widget
   AttributeRowRenderer row_renderer = {};                        ///< Per-attribute widget builder; empty = stock
+  SectionFactory section_factory = {};                           ///< Category section builder; empty = stock
   // clang-format on
 };
 
