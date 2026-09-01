@@ -54,7 +54,7 @@ template <class T, class ControlT> RowFactory make_row_factory()
     auto       *control = new ControlT(attr, ctx, host);
 
     host->layout()->addWidget(control);
-    bind<T>(attr, *control, *host);
+    bind_control<T>(attr, *control, *host);
 
     return host;
   };

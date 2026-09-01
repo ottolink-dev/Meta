@@ -4,6 +4,7 @@
 #include "meta_qt/designs/industrial/industrial.hpp"
 
 #include "meta_qt/designs/industrial/check_row.hpp"
+#include "meta_qt/designs/industrial/combo.hpp"
 #include "meta_qt/designs/industrial/int_slider.hpp"
 #include "meta_qt/designs/industrial/param_slider.hpp"
 #include "meta_qt/designs/stock/stock.hpp"
@@ -32,6 +33,13 @@ void register_design()
   // --- int: 13%, counting Seed. Shares its chrome with ParamSlider via
   // slider_chrome so the two rows cannot drift apart.
   registry.register_control<int, IntSlider>(kDesignName, "SliderInt");
+
+  // --- dropdowns. Both use a popup of our own rather than QComboBox: the stock
+  // popup composites a separately styled frame and item view, which is why it
+  // shows one surface mid-open and another once settled.
+  registry.register_control<int, EnumCombo>(kDesignName, "EnumComboBox");
+  registry.register_control<std::string, StringCombo>(kDesignName, "ComboBox");
+  registry.register_control<std::string, StringCombo>(kDesignName, "ButtonGrid");
 
   // Anything not covered above resolves through stock, so a design still under
   // construction yields a complete panel rather than a handful of rows. Drop

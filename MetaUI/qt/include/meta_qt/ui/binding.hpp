@@ -36,6 +36,10 @@ template <> struct ValueCompare<double>
 
 /** @brief Wire an attribute to a control, both directions.
  *
+ * Named bind_control rather than bind: an unqualified bind<T>() call with a std
+ * type such as std::string pulls std::bind in through ADL and fails somewhere
+ * deep inside <functional>, nowhere near the actual mistake.
+ *
  * Written once per *type* and never per design. Every visual variant of a float
  * control shares this function, so the races below are fixed in one place:
  *
@@ -53,7 +57,8 @@ template <> struct ValueCompare<double>
  * edit_started/value_changed/edit_ended on `host` and the host chooses which to
  * act on -- that is where a live-update setting belongs.
  */
-template <class T> void bind(Attribute<T> &attr, Control<T> &control, MetaWidget &host)
+template <class T>
+void bind_control(Attribute<T> &attr, Control<T> &control, MetaWidget &host)
 {
   const std::string key = attr.name();
 

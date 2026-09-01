@@ -41,7 +41,30 @@ QFont mono_font(int pixel_size)
 
 QFont ui_font(int pixel_size, bool bold, qreal letter_spacing)
 {
+  // Probed rather than left to the default. Qt's fallback is whatever the
+  // platform hands out, which on some setups is a wide, soft face that reads
+  // nothing like the rest of the chrome. Every candidate here is a neutral
+  // grotesque; if none is installed we fall through to the platform default,
+  // which is the current behaviour rather than a regression.
+  static const QString family = []() -> QString
+  {
+    const QStringList candidates = {"Inter",
+                                    "Roboto",
+                                    "Segoe UI Variable Text",
+                                    "Segoe UI",
+                                    "Noto Sans",
+                                    "DejaVu Sans"};
+
+    const QStringList available = QFontDatabase::families();
+    for (const QString &candidate : candidates)
+      if (available.contains(candidate))
+        return candidate;
+
+    return QString();
+  }();
+
   QFont font;
+  if (!family.isEmpty()) font.setFamily(family);
   font.setPixelSize(pixel_size);
   font.setBold(bold);
   if (letter_spacing != 0.0)
