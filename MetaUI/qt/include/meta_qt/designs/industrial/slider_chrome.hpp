@@ -2,6 +2,7 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
+#include <QPainterPath>
 #include <QRect>
 #include <QString>
 
@@ -19,11 +20,11 @@ namespace meta::qt::industrial
  */
 struct SliderGeometry
 {
-  int   label_width = 0;
-  int   field_width = 0;
-  QRect rail;
-  QRect thumb;
-  QRect field;
+  QRect label; ///< label column, left
+  QRect rail;  ///< recessed well the fill and thumb sit in
+  QRect fill;  ///< accent portion of the rail, left of the thumb
+  QRect thumb; ///< machined handle
+  QRect field; ///< value readout, right
 
   static SliderGeometry compute(const Theme &theme, int width, int height, qreal norm);
 };
@@ -32,7 +33,7 @@ struct SliderGeometry
 struct SliderVisual
 {
   QString     label;
-  std::string category;  ///< selects the group accent for the rail fill
+  std::string category; ///< selects the group accent for the rail fill
   bool        modified = false;
   bool        locked = false;
 };

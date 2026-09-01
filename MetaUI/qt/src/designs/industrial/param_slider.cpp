@@ -180,7 +180,7 @@ void ParamSlider::paintEvent(QPaintEvent *)
   label_font.setCapitalization(QFont::AllUppercase);
   visual.label = elide_label(QString::fromStdString(label_),
                              label_font,
-                             geometry.label_width);
+                             geometry.label.width());
 
   paint_slider_row(painter, theme(), geometry, visual, height());
 }
@@ -305,10 +305,10 @@ void ParamSlider::set_from_position(int x)
 {
   const Metrics       &m = theme().metrics;
   const SliderGeometry g = SliderGeometry::compute(theme(), width(), height(), norm_);
-  const QRect          rail = g.rail;
-  const int            travel = std::max(1, rail.width() - m.thumb_width);
+  const int            travel = std::max(1, g.rail.width() - m.thumb_width);
 
-  apply_norm(std::clamp(qreal(x - rail.x() - m.thumb_width / 2) / travel, 0.0, 1.0));
+  apply_norm(
+      std::clamp(qreal(x - g.rail.x() - m.thumb_width / 2) / travel, 0.0, 1.0));
 }
 
 void ParamSlider::apply_norm(qreal t)

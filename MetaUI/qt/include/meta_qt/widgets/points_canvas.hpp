@@ -67,6 +67,10 @@ Q_SIGNALS:
   void drag_ended();
 
 protected:
+  /// Keeps the canvas square: the point domain is square, so a fixed height
+  /// only matches it at one panel width.
+  void resizeEvent(QResizeEvent *event) override;
+
   void paintEvent(QPaintEvent *) override;
   void mousePressEvent(QMouseEvent *e) override;
   void mouseMoveEvent(QMouseEvent *e) override;

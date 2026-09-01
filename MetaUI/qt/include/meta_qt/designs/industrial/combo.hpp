@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include <QRect>
 #include <QStringList>
 #include <QWidget>
 
@@ -60,13 +61,20 @@ protected:
   void hideEvent(QHideEvent *event) override;
 
 private:
-  int index_at(const QPoint &pos) const;
-  int row_height() const;
+  int   index_at(const QPoint &pos) const;
+  int   row_height() const;
 
-  const Theme *theme_ = nullptr;
-  QStringList  items_;
-  int          current_ = -1;
-  int          hovered_ = -1;
+  /// Portion of the fixed-size window currently revealed by the open animation.
+  QRect card_rect() const;
+
+  const Theme       *theme_ = nullptr;
+  QStringList        items_;
+  int                current_ = -1;
+  int                hovered_ = -1;
+  QVariantAnimation *open_animation_ = nullptr;
+  int                full_height_ = 0;
+  int                revealed_ = 0;
+  bool               flipped_ = false;
 };
 
 /// Shared closed-state painting for both combo flavours.

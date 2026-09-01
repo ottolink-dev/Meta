@@ -11,7 +11,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
+#include <QEasingCurve>
 #include <QScreen>
+#include <QVariantAnimation>
 
 namespace meta::qt::industrial
 {
@@ -37,6 +39,14 @@ ComboPopup::ComboPopup(const Theme       &theme,
     : QWidget(parent, Qt::Popup), theme_(&theme), items_(items), current_(current),
       hovered_(current)
 {
+  // Must be set before the native window is created, which happens on the first
+  // show(). Setting it later leaves the unrevealed part of the surface painting
+  // opaque black instead of nothing.
+  //
+  // WA_NoSystemBackground is deliberately *not* set alongside it: together they
+  // leave the surface undefined here rather than clear.
+  setAttribute(Qt::WA_TranslucentBackground);
+
   setAttribute(Qt::WA_DeleteOnClose);
   setMouseTracking(true);
   setFocusPolicy(Qt::StrongFocus);
@@ -52,27 +62,59 @@ bool ComboPopup::should_swallow_reopen()
 void ComboPopup::popup_for(const QRect &field_global)
 {
   const int visible = std::min<int>(items_.size(), kMaxVisibleRows);
-  const int height = visible * row_height() + 2 * kPopupPadding;
+  full_height_ = visible * row_height() + 2 * kPopupPadding;
+
   const int width = std::max(field_global.width(), 120);
 
   const QRect screen = QApplication::primaryScreen()->availableGeometry();
+  const bool  fits_below = field_global.bottom() + full_height_ <= screen.bottom();
 
-  const bool fits_below = field_global.bottom() + height <= screen.bottom();
+  const int left = field_global.left();
+  flipped_ = !fits_below;
 
-  // A flipped popup already sits at its final top edge, so growing downward
-  // would make it appear to fall from the ceiling rather than open out of the
-  // control. Pin the bottom edge instead.
   const int y = fits_below ? field_global.bottom() + 2
-                           : field_global.top() - height - 2;
+                           : field_global.top() - 2 - full_height_;
 
-  setGeometry(field_global.left(), y, width, height);
+  // The window is created at its final size and never resized. Animating a
+  // top-level window is geometry does not work here: the platform enforces a
+  // minimum window size and coalesces rapid resizes, so the popup simply snaps
+  // to full size, and resizing a native window every frame is expensive anyway.
+  // Reveal the card inside a fixed, translucent window instead.
+  setGeometry(left, y, width, full_height_);
   show();
   setFocus(Qt::PopupFocusReason);
+
+  open_animation_ = new QVariantAnimation(this);
+  open_animation_->setDuration(theme_->metrics.section_ms);
+  open_animation_->setEasingCurve(QEasingCurve::OutCubic);
+  open_animation_->setStartValue(0);
+  open_animation_->setEndValue(full_height_);
+
+  connect(open_animation_,
+          &QVariantAnimation::valueChanged,
+          this,
+          [this](const QVariant &v)
+          {
+            revealed_ = v.toInt();
+            update();
+          });
+
+  open_animation_->start();
+}
+
+QRect ComboPopup::card_rect() const
+{
+  const int h = revealed_ > 0 ? revealed_ : full_height_;
+
+  // Opening downward, the card grows from its top edge, which sits against the
+  // field. Flipped, it grows upward from its bottom edge, which is the edge
+  // touching the field -- otherwise it looks like it falls from the ceiling.
+  return flipped_ ? QRect(0, full_height_ - h, width(), h) : QRect(0, 0, width(), h);
 }
 
 int ComboPopup::index_at(const QPoint &pos) const
 {
-  if (!rect().adjusted(0, kPopupPadding, 0, -kPopupPadding).contains(pos)) return -1;
+  if (!rect().contains(pos)) return -1;
 
   const int index = (pos.y() - kPopupPadding) / row_height();
   return index >= 0 && index < items_.size() ? index : -1;
@@ -84,12 +126,18 @@ void ComboPopup::paintEvent(QPaintEvent *)
   painter.setRenderHint(QPainter::Antialiasing, true);
 
   const Theme &t = *theme_;
+  const QRect  card = card_rect();
+
+  // Everything is clipped to the revealed card, so the rows stay put and are
+  // uncovered rather than sliding. Laying them out against the animating height
+  // would read as the list scrolling instead of opening.
+  painter.setClipRect(card);
 
   // One surface, painted once: frame and rows come from the same pass so they
   // cannot disagree about colour part-way through opening.
   painter.setPen(QPen(t.hairline, 1));
   painter.setBrush(t.bar);
-  painter.drawRoundedRect(QRectF(rect()).adjusted(0.5, 0.5, -0.5, -0.5),
+  painter.drawRoundedRect(QRectF(card).adjusted(0.5, 0.5, -0.5, -0.5),
                           t.metrics.radius,
                           t.metrics.radius);
 
@@ -98,7 +146,7 @@ void ComboPopup::paintEvent(QPaintEvent *)
   for (int i = 0; i < items_.size(); ++i)
   {
     const QRect row(1, kPopupPadding + i * row_height(), width() - 2, row_height());
-    if (!row.intersects(rect())) continue;
+    if (!row.intersects(card)) continue;
 
     if (i == hovered_)
     {

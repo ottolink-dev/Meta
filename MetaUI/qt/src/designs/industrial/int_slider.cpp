@@ -138,7 +138,7 @@ void IntSlider::paintEvent(QPaintEvent *)
   label_font.setCapitalization(QFont::AllUppercase);
   visual.label = elide_label(QString::fromStdString(label_),
                              label_font,
-                             geometry.label_width);
+                             geometry.label.width());
 
   paint_slider_row(painter, theme(), geometry, visual, height());
 }

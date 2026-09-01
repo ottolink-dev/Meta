@@ -64,6 +64,10 @@ struct Metrics
   int section_body_padding_x_narrow = 12;
   int section_body_padding_y = 12;
   int section_row_spacing = 10;
+  int section_card_margin = 14;  ///< inset of a card from the panel edge
+  int section_card_gap = 10;     ///< vertical gap between consecutive cards
+  int section_card_radius = 6;
+  int row_bar_height = 30;       ///< the bar a value row is drawn inside
 
   // --- shared
   int radius = 2;
@@ -113,9 +117,10 @@ struct Theme
   // --- surfaces
   QColor page{"#2b2b2b"};
   QColor bar{"#262626"};
-  QColor section_header{"#333333"};
-  QColor section_header_hover{"#383838"};
-  QColor section_header_press{"#303030"};
+  QColor section_surface{"#4a4a4a"}; ///< card behind a whole section, header + body
+  QColor section_header{"#4a4a4a"};       ///< always equal to section_surface
+  QColor section_header_hover{"#545454"};
+  QColor section_header_press{"#444444"};
   QColor rail_well{"#1c1c1c"};
   QColor field{"#1f1f1f"};
   QColor field_hover{"#262626"};

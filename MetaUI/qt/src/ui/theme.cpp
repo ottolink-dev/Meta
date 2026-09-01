@@ -107,9 +107,16 @@ Theme Theme::from_palette(const QPalette &palette, const std::string &name)
   // --- surfaces
   t.page = window;
   t.bar = sink(window, 0.06);
-  t.section_header = lift(window, 0.06);
-  t.section_header_hover = lift(window, 0.10);
-  t.section_header_press = lift(window, 0.03);
+  // Deliberately a clear step off the page, not a hint of one. A card that is
+  // barely lighter than its background does not group anything.
+  t.section_surface = lift(window, 0.30);
+
+  // The header shares the card surface so a section reads as one block rather
+  // than a bar with a differently coloured body under it. Hover and press are
+  // small steps off that, not a different colour.
+  t.section_header = t.section_surface;
+  t.section_header_hover = lift(t.section_surface, 0.06);
+  t.section_header_press = sink(t.section_surface, 0.04);
   t.rail_well = sink(window, 0.35);
   t.field = base;
   t.field_hover = lift(base, 0.05);

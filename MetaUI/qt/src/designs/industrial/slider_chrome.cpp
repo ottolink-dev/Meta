@@ -21,16 +21,18 @@ SliderGeometry SliderGeometry::compute(const Theme &theme,
 
   SliderGeometry g;
 
-  g.label_width = int(std::clamp<qreal>(width * m.label_width_ratio,
-                                        m.label_min_width,
-                                        m.label_max_width));
+  const int label_width = int(std::clamp<qreal>(width * m.label_width_ratio,
+                                                m.label_min_width,
+                                                m.label_max_width));
 
   // The narrow branch keys off this row's own width, not the window's.
-  g.field_width = width < m.narrow_threshold ? m.value_field_width_narrow
-                                             : m.value_field_width;
+  const int field_width = width < m.narrow_threshold ? m.value_field_width_narrow
+                                                     : m.value_field_width;
 
-  const int x0 = g.label_width + m.gap;
-  const int x1 = width - g.field_width - m.gap;
+  g.label = QRect(0, 0, label_width, height);
+
+  const int x0 = label_width + m.gap;
+  const int x1 = width - field_width - m.gap;
 
   g.rail = QRect(x0, (height - m.rail_height) / 2, std::max(0, x1 - x0), m.rail_height);
 
@@ -40,9 +42,14 @@ SliderGeometry SliderGeometry::compute(const Theme &theme,
                   m.thumb_width,
                   m.thumb_height);
 
-  g.field = QRect(width - g.field_width,
+  g.fill = QRect(g.rail.x(),
+                 g.rail.y(),
+                 std::clamp(g.thumb.center().x() - g.rail.x(), 0, g.rail.width()),
+                 g.rail.height());
+
+  g.field = QRect(width - field_width,
                   (height - m.value_field_height) / 2,
-                  g.field_width,
+                  field_width,
                   m.value_field_height);
 
   return g;
@@ -52,7 +59,7 @@ void paint_slider_row(QPainter             &painter,
                       const Theme          &theme,
                       const SliderGeometry &geometry,
                       const SliderVisual   &visual,
-                      int                   height)
+                      int)
 {
   painter.setRenderHint(QPainter::Antialiasing, true);
 
@@ -63,9 +70,7 @@ void paint_slider_row(QPainter             &painter,
   label_font.setCapitalization(QFont::AllUppercase);
   painter.setFont(label_font);
   painter.setPen(theme.state_ink(visual.modified, visual.locked));
-  painter.drawText(QRect(0, 0, geometry.label_width, height),
-                   Qt::AlignLeft | Qt::AlignVCenter,
-                   visual.label);
+  painter.drawText(geometry.label, Qt::AlignLeft | Qt::AlignVCenter, visual.label);
 
   if (geometry.rail.width() <= 0) return;
 
@@ -77,14 +82,11 @@ void paint_slider_row(QPainter             &painter,
                           m.rail_radius);
 
   // --- fill. Always the group accent; never a state colour.
-  const int fill_w = geometry.thumb.center().x() - geometry.rail.x();
-  if (fill_w > 0)
+  if (geometry.fill.width() > 0)
   {
-    QRect fill = geometry.rail;
-    fill.setWidth(std::min(fill_w, geometry.rail.width()));
     painter.setPen(Qt::NoPen);
     painter.setBrush(theme.rail_fill(visual.category, visual.locked));
-    painter.drawRoundedRect(QRectF(fill).adjusted(0.5, 0.5, -0.5, -0.5),
+    painter.drawRoundedRect(QRectF(geometry.fill).adjusted(0.5, 0.5, -0.5, -0.5),
                             m.rail_radius,
                             m.rail_radius);
   }
@@ -102,6 +104,7 @@ void paint_slider_row(QPainter             &painter,
                           m.radius,
                           m.radius);
 
+  // grip notch, 2x8 centred
   painter.setPen(Qt::NoPen);
   painter.setBrush(theme.thumb_grip);
   painter.drawRect(
