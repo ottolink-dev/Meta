@@ -2,9 +2,10 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #pragma once
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/widgets/power_of_two_spin_box.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
 inline int ceil_power_of_two(int v)
@@ -19,7 +20,7 @@ inline int ceil_power_of_two(int v)
   return p;
 }
 
-template <> struct WidgetRenderer<glm::ivec2>
+template <> struct StockRenderer<glm::ivec2>
 {
   static MetaWidget *render(Attribute<glm::ivec2> &attr, QWidget *parent)
   {
@@ -201,4 +202,4 @@ template <> struct WidgetRenderer<glm::ivec2>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

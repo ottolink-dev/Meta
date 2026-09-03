@@ -13,14 +13,14 @@
 #include <glm/glm.hpp>
 
 #include "meta/core/data_provider.hpp"
-#include "meta_common.hpp"
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/widgets/points_canvas.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<std::vector<glm::vec3>>
+template <> struct StockRenderer<std::vector<glm::vec3>>
 {
   static MetaWidget *render(Attribute<std::vector<glm::vec3>> &attr,
                             QWidget                           *parent)
@@ -224,4 +224,4 @@ template <> struct WidgetRenderer<std::vector<glm::vec3>>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

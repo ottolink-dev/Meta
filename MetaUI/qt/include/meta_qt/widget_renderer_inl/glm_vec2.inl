@@ -7,15 +7,16 @@
 #include <QFormLayout>
 
 #include "meta/core/data_provider.hpp"
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/widgets/range_bar.hpp"
 #include "meta_qt/widgets/responsive_box.hpp"
 #include "meta_qt/widgets/vector_canvas.hpp"
 #include "meta_qt/widgets/xy_canvas.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<glm::vec2>
+template <> struct StockRenderer<glm::vec2>
 {
   static MetaWidget *render(Attribute<glm::vec2> &attr, QWidget *parent)
   {
@@ -862,4 +863,4 @@ template <> struct WidgetRenderer<glm::vec2>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

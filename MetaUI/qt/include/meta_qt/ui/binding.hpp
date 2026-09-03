@@ -81,7 +81,8 @@ void bind_control(Attribute<T> &attr, Control<T> &control, MetaWidget &host)
 
     try
     {
-      control.set_modified(!ValueCompare<T>::equal(attr.value(), std::any_cast<T>(def)));
+      control.set_modified(
+          !ValueCompare<T>::equal(attr.value(), std::any_cast<T>(def)));
     }
     catch (const std::bad_any_cast &)
     {
@@ -128,11 +129,12 @@ void bind_control(Attribute<T> &attr, Control<T> &control, MetaWidget &host)
       });
 
   // Dies with the widget: connection_ is declared before anything it captures.
-  host.connection_ = attr.value_changed.subscribe([&host](const T &)
-                                                  { host.sync_widget_from_model(); });
+  host.connection_ = attr.value_changed.subscribe(
+      [&host](const T &) { host.sync_widget_from_model(); });
 
   // --- initial state
-  control.set_locked(meta::common::try_get<bool>(attr, meta::keys::ui::read_only, false));
+  control.set_locked(
+      meta::common::try_get<bool>(attr, meta::keys::ui::read_only, false));
   refresh_modified();
 }
 

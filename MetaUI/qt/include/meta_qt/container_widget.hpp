@@ -11,6 +11,7 @@
 #include "meta_common.hpp"
 
 #include "meta_qt/meta_widget.hpp"
+#include "meta_qt/ui/control.hpp"
 #include "meta_qt/widgets/collapsible_section.hpp"
 
 namespace meta::qt
@@ -34,33 +35,33 @@ enum GroupSwitchMode
 
 /** @brief Builds the widget for a single attribute.
  *
- * The indirection that lets a host supply an alternative widget design without
- * the container layer knowing any design exists. Leave unset for the stock
- * renderer; see meta_qt/ui/design_registry.hpp for the registry-backed one.
+ * Optional override for per-attribute row rendering. If empty, rows are built
+ * using the DesignRegistry for options.design.
  */
 using AttributeRowRenderer = std::function<MetaWidget *(AbstractAttribute *)>;
 
 /** @brief Builds the collapsible section used for a category.
  *
- * Same indirection as AttributeRowRenderer, for the chrome around the rows
- * rather than the rows themselves. A section is not bound to an attribute, so
- * it cannot go through the design registry; it is supplied here instead.
- * Leave unset for the stock section.
+ * Optional override for category section chrome. If empty, the SectionFactory
+ * associated with options.design in DesignRegistry is used.
  */
-using SectionFactory = std::function<CollapsibleSection *(const QString &title)>;
+using SectionFactory =
+    std::function<CollapsibleSection *(const QString &title)>;
 
 /// Options controlling how attribute containers are rendered.
 struct ContainerRenderOptions
 {
   // clang-format off
+  std::string design = "stock";                                  ///< Visual design name from DesignRegistry
+  RowContext row_context = {};                                   ///< Context passed to row controls
   CategoryPolicy category_policy = CategoryPolicy::CP_SMART;     ///< Category organization strategy
   GroupSwitchMode group_switch_mode = GroupSwitchMode::GSM_TABS; ///< Container group switching style
   std::string root_category_name = META_ROOT_CATEGORY;           ///< Optional root category label
   std::vector<std::string> insertion_order = {};                 ///< Explicit ordering of categories
   std::optional<std::regex> collapse_regex = std::nullopt;       ///< Regex used to collapse categories
   bool snapshot_manager = false;                                 ///< Add snapshot manager widget
-  AttributeRowRenderer row_renderer = {};                        ///< Per-attribute widget builder; empty = stock
-  SectionFactory section_factory = {};                           ///< Category section builder; empty = stock
+  AttributeRowRenderer row_renderer = {};                        ///< Optional custom row builder override
+  SectionFactory section_factory = {};                           ///< Optional custom section builder override
   // clang-format on
 };
 

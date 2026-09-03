@@ -15,7 +15,9 @@
 namespace meta::qt::industrial
 {
 
-IntSlider::IntSlider(Attribute<int> &attr, const RowContext &ctx, QWidget *parent)
+IntSlider::IntSlider(Attribute<int>   &attr,
+                     const RowContext &ctx,
+                     QWidget          *parent)
     : Control<int>(ctx, parent)
 {
   key_ = attr.name();
@@ -80,7 +82,10 @@ IntSlider::IntSlider(Attribute<int> &attr, const RowContext &ctx, QWidget *paren
             apply_value(std::clamp(typed, min_, max_), true);
           });
 
-  connect(field_, &QLineEdit::textEdited, this, [this]() { restyle_field(true); });
+  connect(field_,
+          &QLineEdit::textEdited,
+          this,
+          [this]() { restyle_field(true); });
 }
 
 bool IntSlider::can_render(const Attribute<int> &attr)
@@ -104,7 +109,8 @@ void IntSlider::set(const int &value)
 
 QSize IntSlider::sizeHint() const
 {
-  return QSize(theme().metrics.label_min_width + 200, theme().metrics.row_height);
+  return QSize(theme().metrics.label_min_width + 200,
+               theme().metrics.row_height);
 }
 
 qreal IntSlider::to_norm(int value) const
@@ -151,7 +157,8 @@ void IntSlider::resizeEvent(QResizeEvent *event)
     return;
   }
 
-  field_->setGeometry(SliderGeometry::compute(theme(), width(), height(), norm_).field);
+  field_->setGeometry(
+      SliderGeometry::compute(theme(), width(), height(), norm_).field);
 
   QWidget::resizeEvent(event);
 }
@@ -164,7 +171,8 @@ void IntSlider::mousePressEvent(QMouseEvent *event)
     return;
   }
 
-  const QRect rail = SliderGeometry::compute(theme(), width(), height(), norm_).rail;
+  const QRect rail = SliderGeometry::compute(theme(), width(), height(), norm_)
+                         .rail;
   if (!rail.adjusted(-4, -10, 4, 10).contains(event->pos()))
   {
     event->ignore();
@@ -254,7 +262,10 @@ bool IntSlider::eventFilter(QObject *watched, QEvent *event)
 void IntSlider::set_from_position(int x)
 {
   const Metrics       &m = theme().metrics;
-  const SliderGeometry g = SliderGeometry::compute(theme(), width(), height(), norm_);
+  const SliderGeometry g = SliderGeometry::compute(theme(),
+                                                   width(),
+                                                   height(),
+                                                   norm_);
   const int            travel = std::max(1, g.rail.width() - m.thumb_width);
 
   const qreal t = std::clamp(qreal(x - g.rail.x() - m.thumb_width / 2) / travel,
@@ -300,7 +311,8 @@ void IntSlider::restyle_field(bool editing)
   if (!field_) return;
 
   field_->setReadOnly(is_locked());
-  field_->setStyleSheet(field_stylesheet(theme(), editing, is_modified(), is_locked()));
+  field_->setStyleSheet(
+      field_stylesheet(theme(), editing, is_modified(), is_locked()));
 }
 
 } // namespace meta::qt::industrial

@@ -10,7 +10,8 @@ namespace meta::qt
 {
 
 ControlBase::ControlBase(const RowContext &ctx, QWidget *parent)
-    : QWidget(parent), ctx_(ctx),
+    : QWidget(parent),
+      ctx_(ctx),
       theme_(ctx.theme ? ctx.theme : &ThemeRegistry::instance().fallback())
 {
   setFocusPolicy(Qt::StrongFocus);
@@ -46,7 +47,9 @@ void ControlBase::end_edit()
 
 void ControlBase::notify_value_changed() { Q_EMIT value_changed(); }
 
-QString ControlBase::elide_label(const QString &text, const QFont &font, int width)
+QString ControlBase::elide_label(const QString &text,
+                                 const QFont   &font,
+                                 int            width)
 {
   const QFontMetrics metrics(font);
   const QString      elided = metrics.elidedText(text, Qt::ElideRight, width);

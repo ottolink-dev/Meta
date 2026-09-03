@@ -10,8 +10,8 @@
 #include <QImage>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QResizeEvent>
 #include <QPainterPath>
+#include <QResizeEvent>
 #include <QTextStream>
 #include <QWheelEvent>
 
@@ -50,7 +50,8 @@ void PointsCanvas::resizeEvent(QResizeEvent *event)
   // Only react to a width change. Recomputing height inside the layout pass
   // that just resized us re-invalidates it, turning one resize into several
   // full layout passes.
-  if (event->oldSize().width() != event->size().width()) setFixedHeight(width());
+  if (event->oldSize().width() != event->size().width())
+    setFixedHeight(width());
 
   QWidget::resizeEvent(event);
 }

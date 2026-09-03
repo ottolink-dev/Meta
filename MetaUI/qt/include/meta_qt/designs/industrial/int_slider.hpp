@@ -31,7 +31,9 @@ class IntSlider : public Control<int>
   Q_OBJECT
 
 public:
-  IntSlider(Attribute<int> &attr, const RowContext &ctx, QWidget *parent = nullptr);
+  IntSlider(Attribute<int>   &attr,
+            const RowContext &ctx,
+            QWidget          *parent = nullptr);
 
   /// A rail needs max > min to span; without it the row falls back to stock.
   static bool can_render(const Attribute<int> &attr);

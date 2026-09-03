@@ -25,7 +25,9 @@ class CheckRow : public Control<bool>
   Q_OBJECT
 
 public:
-  CheckRow(Attribute<bool> &attr, const RowContext &ctx, QWidget *parent = nullptr);
+  CheckRow(Attribute<bool>  &attr,
+           const RowContext &ctx,
+           QWidget          *parent = nullptr);
 
   /// A bool always has a renderable state; nothing to decline.
   static bool can_render(const Attribute<bool> &) { return true; }

@@ -41,12 +41,16 @@ class ComboPopup : public QWidget
   Q_OBJECT
 
 public:
-  ComboPopup(const Theme &theme, const QStringList &items, int current, QWidget *parent);
+  ComboPopup(const Theme       &theme,
+             const QStringList &items,
+             int                current,
+             QWidget           *parent);
 
   /// Show below `field_global`, flipping above when there is no room below.
   void popup_for(const QRect &field_global);
 
-  /// True while a click should be ignored because it is the reopen half of a close.
+  /// True while a click should be ignored because it is the reopen half of a
+  /// close.
   static bool should_swallow_reopen();
 
 signals:
@@ -61,8 +65,8 @@ protected:
   void hideEvent(QHideEvent *event) override;
 
 private:
-  int   index_at(const QPoint &pos) const;
-  int   row_height() const;
+  int index_at(const QPoint &pos) const;
+  int row_height() const;
 
   /// Portion of the fixed-size window currently revealed by the open animation.
   QRect card_rect() const;
@@ -95,7 +99,9 @@ class EnumCombo : public Control<int>
   Q_OBJECT
 
 public:
-  EnumCombo(Attribute<int> &attr, const RowContext &ctx, QWidget *parent = nullptr);
+  EnumCombo(Attribute<int>   &attr,
+            const RowContext &ctx,
+            QWidget          *parent = nullptr);
 
   /// Needs enum_items to have anything to show.
   static bool can_render(const Attribute<int> &attr);
@@ -113,10 +119,10 @@ protected:
 private:
   void open_popup();
 
-  int                                    value_ = 0;
+  int                                      value_ = 0;
   std::vector<std::pair<int, std::string>> items_;
-  std::string                            label_;
-  bool                                   open_ = false;
+  std::string                              label_;
+  bool                                     open_ = false;
 };
 
 /** @brief Dropdown for a string attribute carrying allowed_values.

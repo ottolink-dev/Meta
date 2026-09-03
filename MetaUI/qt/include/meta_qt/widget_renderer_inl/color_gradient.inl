@@ -7,17 +7,18 @@
 #include <QVBoxLayout>
 
 #include "meta_common.hpp"
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/widgets/gradient_picker.hpp"
 
 #include "meta/ext/color_gradient/color_gradient.hpp"
 #include "meta/metadata/keys.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
 // ---------------------------------------------------------------------------
-// WidgetRenderer<ColorGradient>
+// StockRenderer<ColorGradient>
 //
 // widget_type: "GradientEditor" (default)
 //
@@ -25,7 +26,7 @@ namespace meta::qt
 // metadata entry (GradientPresets), installed by the host at setup time.
 // ---------------------------------------------------------------------------
 
-template <> struct WidgetRenderer<meta::ColorGradient>
+template <> struct StockRenderer<meta::ColorGradient>
 {
   static MetaWidget *render(Attribute<meta::ColorGradient> &attr,
                             QWidget                        *parent)
@@ -103,4 +104,4 @@ template <> struct WidgetRenderer<meta::ColorGradient>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

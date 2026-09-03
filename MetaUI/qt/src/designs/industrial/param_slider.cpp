@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <cmath>
 
-#include <QLinearGradient>
 #include <QLineEdit>
+#include <QLinearGradient>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QResizeEvent>
@@ -21,7 +21,9 @@ namespace
 constexpr qreal kLogFloor = 1e-6; ///< below this a log mapping is undefined
 }
 
-ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget *parent)
+ParamSlider::ParamSlider(Attribute<float> &attr,
+                         const RowContext &ctx,
+                         QWidget          *parent)
     : Control<float>(ctx, parent)
 {
   key_ = attr.name();
@@ -29,7 +31,9 @@ ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget 
   category_ = meta::common::category(attr);
   min_ = meta::common::min(attr);
   max_ = meta::common::max(attr);
-  log_scale_ = meta::common::try_get<bool>(attr, meta::keys::ui::log_scale, false);
+  log_scale_ = meta::common::try_get<bool>(attr,
+                                           meta::keys::ui::log_scale,
+                                           false);
   decimals_ = meta::common::try_get_format_decimals(meta::common::format(attr));
 
   // A log mapping needs a strictly positive lower bound; fall back to linear
@@ -95,7 +99,10 @@ ParamSlider::ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget 
             glide_->to(to_norm(std::clamp(typed, min_, max_)));
           });
 
-  connect(field_, &QLineEdit::textEdited, this, [this]() { restyle_field(true); });
+  connect(field_,
+          &QLineEdit::textEdited,
+          this,
+          [this]() { restyle_field(true); });
 }
 
 bool ParamSlider::can_render(const Attribute<float> &attr)
@@ -125,7 +132,8 @@ void ParamSlider::set(const float &value)
 
 QSize ParamSlider::sizeHint() const
 {
-  return QSize(theme().metrics.label_min_width + 200, theme().metrics.row_height);
+  return QSize(theme().metrics.label_min_width + 200,
+               theme().metrics.row_height);
 }
 
 // --- value mapping
@@ -161,7 +169,6 @@ float ParamSlider::from_norm(qreal t) const
 
 // --- painting
 
-
 void ParamSlider::paintEvent(QPaintEvent *)
 {
   QPainter painter(this);
@@ -195,7 +202,8 @@ void ParamSlider::resizeEvent(QResizeEvent *event)
     return;
   }
 
-  field_->setGeometry(SliderGeometry::compute(theme(), width(), height(), norm_).field);
+  field_->setGeometry(
+      SliderGeometry::compute(theme(), width(), height(), norm_).field);
 
   QWidget::resizeEvent(event);
 }
@@ -210,7 +218,8 @@ void ParamSlider::mousePressEvent(QMouseEvent *event)
     return;
   }
 
-  const QRect rail = SliderGeometry::compute(theme(), width(), height(), norm_).rail;
+  const QRect rail = SliderGeometry::compute(theme(), width(), height(), norm_)
+                         .rail;
   if (!rail.adjusted(-4, -10, 4, 10).contains(event->pos()))
   {
     event->ignore();
@@ -304,7 +313,10 @@ bool ParamSlider::eventFilter(QObject *watched, QEvent *event)
 void ParamSlider::set_from_position(int x)
 {
   const Metrics       &m = theme().metrics;
-  const SliderGeometry g = SliderGeometry::compute(theme(), width(), height(), norm_);
+  const SliderGeometry g = SliderGeometry::compute(theme(),
+                                                   width(),
+                                                   height(),
+                                                   norm_);
   const int            travel = std::max(1, g.rail.width() - m.thumb_width);
 
   apply_norm(
@@ -345,17 +357,18 @@ void ParamSlider::restyle_field(bool editing)
   const QColor border = editing ? t.accent : t.field_border;
 
   field_->setReadOnly(is_locked());
-  field_->setStyleSheet(QString("QLineEdit {"
-                                " background: %1;"
-                                " border: 1px solid %2;"
-                                " border-radius: %3px;"
-                                " color: %4;"
-                                " padding-right: 4px;"
-                                "}")
-                            .arg(bg.name())
-                            .arg(border.name())
-                            .arg(t.metrics.radius)
-                            .arg(t.state_ink(is_modified(), is_locked()).name()));
+  field_->setStyleSheet(
+      QString("QLineEdit {"
+              " background: %1;"
+              " border: 1px solid %2;"
+              " border-radius: %3px;"
+              " color: %4;"
+              " padding-right: 4px;"
+              "}")
+          .arg(bg.name())
+          .arg(border.name())
+          .arg(t.metrics.radius)
+          .arg(t.state_ink(is_modified(), is_locked()).name()));
 }
 
 } // namespace meta::qt::industrial

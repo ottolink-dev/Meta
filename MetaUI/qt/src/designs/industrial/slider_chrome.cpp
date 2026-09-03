@@ -26,26 +26,32 @@ SliderGeometry SliderGeometry::compute(const Theme &theme,
                                                 m.label_max_width));
 
   // The narrow branch keys off this row's own width, not the window's.
-  const int field_width = width < m.narrow_threshold ? m.value_field_width_narrow
-                                                     : m.value_field_width;
+  const int field_width = width < m.narrow_threshold
+                              ? m.value_field_width_narrow
+                              : m.value_field_width;
 
   g.label = QRect(0, 0, label_width, height);
 
   const int x0 = label_width + m.gap;
   const int x1 = width - field_width - m.gap;
 
-  g.rail = QRect(x0, (height - m.rail_height) / 2, std::max(0, x1 - x0), m.rail_height);
+  g.rail = QRect(x0,
+                 (height - m.rail_height) / 2,
+                 std::max(0, x1 - x0),
+                 m.rail_height);
 
   const int travel = std::max(0, g.rail.width() - m.thumb_width);
-  g.thumb = QRect(g.rail.x() + int(std::round(std::clamp(norm, 0.0, 1.0) * travel)),
+  g.thumb = QRect(g.rail.x() +
+                      int(std::round(std::clamp(norm, 0.0, 1.0) * travel)),
                   (height - m.thumb_height) / 2,
                   m.thumb_width,
                   m.thumb_height);
 
-  g.fill = QRect(g.rail.x(),
-                 g.rail.y(),
-                 std::clamp(g.thumb.center().x() - g.rail.x(), 0, g.rail.width()),
-                 g.rail.height());
+  g.fill = QRect(
+      g.rail.x(),
+      g.rail.y(),
+      std::clamp(g.thumb.center().x() - g.rail.x(), 0, g.rail.width()),
+      g.rail.height());
 
   g.field = QRect(width - field_width,
                   (height - m.value_field_height) / 2,
@@ -70,7 +76,9 @@ void paint_slider_row(QPainter             &painter,
   label_font.setCapitalization(QFont::AllUppercase);
   painter.setFont(label_font);
   painter.setPen(theme.state_ink(visual.modified, visual.locked));
-  painter.drawText(geometry.label, Qt::AlignLeft | Qt::AlignVCenter, visual.label);
+  painter.drawText(geometry.label,
+                   Qt::AlignLeft | Qt::AlignVCenter,
+                   visual.label);
 
   if (geometry.rail.width() <= 0) return;
 
@@ -86,9 +94,10 @@ void paint_slider_row(QPainter             &painter,
   {
     painter.setPen(Qt::NoPen);
     painter.setBrush(theme.rail_fill(visual.category, visual.locked));
-    painter.drawRoundedRect(QRectF(geometry.fill).adjusted(0.5, 0.5, -0.5, -0.5),
-                            m.rail_radius,
-                            m.rail_radius);
+    painter.drawRoundedRect(
+        QRectF(geometry.fill).adjusted(0.5, 0.5, -0.5, -0.5),
+        m.rail_radius,
+        m.rail_radius);
   }
 
   // --- thumb
@@ -107,13 +116,18 @@ void paint_slider_row(QPainter             &painter,
   // grip notch, 2x8 centred
   painter.setPen(Qt::NoPen);
   painter.setBrush(theme.thumb_grip);
-  painter.drawRect(
-      QRect(geometry.thumb.center().x(), geometry.thumb.center().y() - 3, 2, 8));
+  painter.drawRect(QRect(geometry.thumb.center().x(),
+                         geometry.thumb.center().y() - 3,
+                         2,
+                         8));
 
   painter.setOpacity(1.0);
 }
 
-QString field_stylesheet(const Theme &theme, bool editing, bool modified, bool locked)
+QString field_stylesheet(const Theme &theme,
+                         bool         editing,
+                         bool         modified,
+                         bool         locked)
 {
   const QColor bg = editing ? theme.field_editing : theme.field;
   const QColor border = editing ? theme.accent : theme.field_border;

@@ -29,7 +29,9 @@ class ParamSlider : public Control<float>
   Q_OBJECT
 
 public:
-  ParamSlider(Attribute<float> &attr, const RowContext &ctx, QWidget *parent = nullptr);
+  ParamSlider(Attribute<float> &attr,
+              const RowContext &ctx,
+              QWidget          *parent = nullptr);
 
   /** @brief Decline attributes with no usable range.
    *
@@ -62,11 +64,11 @@ private:
   qreal to_norm(float value) const;
   float from_norm(qreal t) const;
 
-  void  set_from_position(int x);
-  void  apply_norm(qreal t);
+  void    set_from_position(int x);
+  void    apply_norm(qreal t);
   QString format_value(float value) const;
-  void  refresh_field();
-  void  restyle_field(bool editing = false);
+  void    refresh_field();
+  void    restyle_field(bool editing = false);
 
   float       min_ = 0.f;
   float       max_ = 1.f;

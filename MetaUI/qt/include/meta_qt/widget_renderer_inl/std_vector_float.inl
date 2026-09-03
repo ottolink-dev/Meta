@@ -8,14 +8,14 @@
 
 #include "meta/logger.hpp"
 
-#include "meta_common.hpp"
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/widgets/curve_canvas.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<std::vector<float>>
+template <> struct StockRenderer<std::vector<float>>
 {
   static MetaWidget *render(Attribute<std::vector<float>> &attr,
                             QWidget                       *parent)
@@ -147,4 +147,4 @@ template <> struct WidgetRenderer<std::vector<float>>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

@@ -9,8 +9,8 @@
 #include <QPainter>
 #include <QResizeEvent>
 #include <QToolButton>
-#include <QVariantAnimation>
 #include <QVBoxLayout>
+#include <QVariantAnimation>
 
 #include "meta/logger.hpp"
 

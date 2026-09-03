@@ -8,10 +8,12 @@
 #include <QFileDialog>
 #include <QLineEdit>
 
-namespace meta::qt
+#include "meta_qt/designs/stock/stock_renderer.hpp"
+
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<std::filesystem::path>
+template <> struct StockRenderer<std::filesystem::path>
 {
   static MetaWidget *render(Attribute<std::filesystem::path> &attr,
                             QWidget                          *parent)
@@ -168,4 +170,4 @@ template <> struct WidgetRenderer<std::filesystem::path>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

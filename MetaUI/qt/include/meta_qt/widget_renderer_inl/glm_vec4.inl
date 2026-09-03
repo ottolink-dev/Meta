@@ -5,10 +5,12 @@
 #include <QColorDialog>
 #include <QFontDatabase>
 
-namespace meta::qt
+#include "meta_qt/designs/stock/stock_renderer.hpp"
+
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<glm::vec4>
+template <> struct StockRenderer<glm::vec4>
 {
   static MetaWidget *render(Attribute<glm::vec4> &attr, QWidget *parent)
   {
@@ -301,4 +303,4 @@ template <> struct WidgetRenderer<glm::vec4>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

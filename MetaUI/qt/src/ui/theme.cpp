@@ -27,8 +27,7 @@ QFont mono_font(int pixel_size)
 
     const QStringList available = QFontDatabase::families();
     for (const QString &candidate : candidates)
-      if (available.contains(candidate))
-        return candidate;
+      if (available.contains(candidate)) return candidate;
 
     return QFontDatabase::systemFont(QFontDatabase::FixedFont).family();
   }();
@@ -57,8 +56,7 @@ QFont ui_font(int pixel_size, bool bold, qreal letter_spacing)
 
     const QStringList available = QFontDatabase::families();
     for (const QString &candidate : candidates)
-      if (available.contains(candidate))
-        return candidate;
+      if (available.contains(candidate)) return candidate;
 
     return QString();
   }();
@@ -89,7 +87,10 @@ QColor mix(const QColor &a, const QColor &b, qreal t)
 QColor sink(const QColor &c, qreal t) { return mix(c, QColor(0, 0, 0), t); }
 
 /// Push a surface up (raised). Same direction on light and dark schemes.
-QColor lift(const QColor &c, qreal t) { return mix(c, QColor(255, 255, 255), t); }
+QColor lift(const QColor &c, qreal t)
+{
+  return mix(c, QColor(255, 255, 255), t);
+}
 
 } // namespace
 
@@ -144,11 +145,12 @@ Theme Theme::from_palette(const QPalette &palette, const std::string &name)
   // wants. Some palettes leave it equal to Text, in which case push away from
   // the window instead so the modified state stays visibly distinct.
   const QColor bright = palette.color(QPalette::Active, QPalette::BrightText);
-  t.ink_modified = bright == text ? mix(text, window.lightness() < 128
-                                                  ? QColor(255, 255, 255)
-                                                  : QColor(0, 0, 0),
-                                        0.45)
-                                  : bright;
+  t.ink_modified = bright == text
+                       ? mix(text,
+                             window.lightness() < 128 ? QColor(255, 255, 255)
+                                                      : QColor(0, 0, 0),
+                             0.45)
+                       : bright;
 
   // --- metal
   t.thumb_top = light;
@@ -180,7 +182,10 @@ QColor Theme::rail_fill(const std::string &category, bool locked) const
   return c;
 }
 
-QColor Theme::switch_track_on() const { return accent.darker(int(switch_track_on_darker * 100)); }
+QColor Theme::switch_track_on() const
+{
+  return accent.darker(int(switch_track_on_darker * 100));
+}
 
 QColor Theme::state_ink(bool modified, bool locked) const
 {

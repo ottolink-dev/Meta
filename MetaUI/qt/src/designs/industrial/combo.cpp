@@ -7,11 +7,11 @@
 
 #include <QApplication>
 #include <QDateTime>
+#include <QEasingCurve>
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
-#include <QEasingCurve>
 #include <QScreen>
 #include <QVariantAnimation>
 
@@ -36,7 +36,10 @@ ComboPopup::ComboPopup(const Theme       &theme,
                        const QStringList &items,
                        int                current,
                        QWidget           *parent)
-    : QWidget(parent, Qt::Popup), theme_(&theme), items_(items), current_(current),
+    : QWidget(parent, Qt::Popup),
+      theme_(&theme),
+      items_(items),
+      current_(current),
       hovered_(current)
 {
   // Must be set before the native window is created, which happens on the first
@@ -67,7 +70,8 @@ void ComboPopup::popup_for(const QRect &field_global)
   const int width = std::max(field_global.width(), 120);
 
   const QRect screen = QApplication::primaryScreen()->availableGeometry();
-  const bool  fits_below = field_global.bottom() + full_height_ <= screen.bottom();
+  const bool  fits_below = field_global.bottom() + full_height_ <=
+                          screen.bottom();
 
   const int left = field_global.left();
   flipped_ = !fits_below;
@@ -109,7 +113,8 @@ QRect ComboPopup::card_rect() const
   // Opening downward, the card grows from its top edge, which sits against the
   // field. Flipped, it grows upward from its bottom edge, which is the edge
   // touching the field -- otherwise it looks like it falls from the ceiling.
-  return flipped_ ? QRect(0, full_height_ - h, width(), h) : QRect(0, 0, width(), h);
+  return flipped_ ? QRect(0, full_height_ - h, width(), h)
+                  : QRect(0, 0, width(), h);
 }
 
 int ComboPopup::index_at(const QPoint &pos) const
@@ -145,7 +150,10 @@ void ComboPopup::paintEvent(QPaintEvent *)
 
   for (int i = 0; i < items_.size(); ++i)
   {
-    const QRect row(1, kPopupPadding + i * row_height(), width() - 2, row_height());
+    const QRect row(1,
+                    kPopupPadding + i * row_height(),
+                    width() - 2,
+                    row_height());
     if (!row.intersects(card)) continue;
 
     if (i == hovered_)
@@ -247,9 +255,10 @@ void paint_combo_field(QWidget       &widget,
   const Metrics &m = theme.metrics;
   const int      height = widget.height();
 
-  const int label_width = int(std::clamp<qreal>(widget.width() * m.label_width_ratio,
-                                                m.label_min_width,
-                                                m.label_max_width));
+  const int label_width = int(
+      std::clamp<qreal>(widget.width() * m.label_width_ratio,
+                        m.label_min_width,
+                        m.label_max_width));
 
   QFont label_font = ui_font(12, false, 1.0);
   label_font.setCapitalization(QFont::AllUppercase);
@@ -297,7 +306,9 @@ void paint_combo_field(QWidget       &widget,
 
 // --- EnumCombo
 
-EnumCombo::EnumCombo(Attribute<int> &attr, const RowContext &ctx, QWidget *parent)
+EnumCombo::EnumCombo(Attribute<int>   &attr,
+                     const RowContext &ctx,
+                     QWidget          *parent)
     : Control<int>(ctx, parent)
 {
   label_ = meta::common::label(attr);
@@ -321,7 +332,8 @@ void EnumCombo::set(const int &value)
 
 QSize EnumCombo::sizeHint() const
 {
-  return QSize(theme().metrics.label_min_width + 160, theme().metrics.row_height);
+  return QSize(theme().metrics.label_min_width + 160,
+               theme().metrics.row_height);
 }
 
 void EnumCombo::paintEvent(QPaintEvent *)
@@ -389,10 +401,10 @@ void EnumCombo::open_popup()
   update();
 
   const Metrics &m = theme().metrics;
-  const int      label_width = int(std::clamp<qreal>(width() * m.label_width_ratio,
+  const int   label_width = int(std::clamp<qreal>(width() * m.label_width_ratio,
                                                 m.label_min_width,
                                                 m.label_max_width));
-  const QRect    field(label_width + m.gap,
+  const QRect field(label_width + m.gap,
                     (height() - m.value_field_height) / 2,
                     width() - label_width - m.gap,
                     m.value_field_height);
@@ -428,7 +440,8 @@ void StringCombo::set(const std::string &value)
 
 QSize StringCombo::sizeHint() const
 {
-  return QSize(theme().metrics.label_min_width + 160, theme().metrics.row_height);
+  return QSize(theme().metrics.label_min_width + 160,
+               theme().metrics.row_height);
 }
 
 void StringCombo::paintEvent(QPaintEvent *)
@@ -490,10 +503,10 @@ void StringCombo::open_popup()
   update();
 
   const Metrics &m = theme().metrics;
-  const int      label_width = int(std::clamp<qreal>(width() * m.label_width_ratio,
+  const int   label_width = int(std::clamp<qreal>(width() * m.label_width_ratio,
                                                 m.label_min_width,
                                                 m.label_max_width));
-  const QRect    field(label_width + m.gap,
+  const QRect field(label_width + m.gap,
                     (height() - m.value_field_height) / 2,
                     width() - label_width - m.gap,
                     m.value_field_height);

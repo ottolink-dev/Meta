@@ -15,9 +15,15 @@
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/ui/binding.hpp"
 #include "meta_qt/ui/control.hpp"
+#include "meta_qt/ui/theme.hpp"
+#include "meta_qt/widgets/collapsible_section.hpp"
 
 namespace meta::qt
 {
+
+/// Builds the collapsible section used for a category.
+using SectionFactory =
+    std::function<CollapsibleSection *(const QString &title)>;
 
 /// Builds a fully bound row for one attribute, or nullptr if it cannot.
 using RowFactory = std::function<
@@ -26,12 +32,13 @@ using RowFactory = std::function<
 /// Matches any widget_type for a given C++ type.
 inline constexpr char kAnyWidgetType[] = "*";
 
-/** @brief Construct-and-bind a control of type `ControlT` for attribute type `T`.
+/** @brief Construct-and-bind a control of type `ControlT` for attribute type
+ * `T`.
  *
  * The uniform control constructor is
- * `ControlT(Attribute<T> &, const RowContext &, QWidget *)`. A control reads its
- * own metadata; binding is identical for every control of a type and lives in
- * bind().
+ * `ControlT(Attribute<T> &, const RowContext &, QWidget *)`. A control reads
+ * its own metadata; binding is identical for every control of a type and lives
+ * in bind().
  *
  * A control must also provide `static bool can_render(const Attribute<T> &)`.
  * Returning false declines the attribute and resolution continues down the
@@ -104,9 +111,13 @@ public:
 
   /// Convenience wrapper around add() + make_row_factory().
   template <class T, class ControlT>
-  void register_control(const std::string &design, const std::string &widget_type)
+  void register_control(const std::string &design,
+                        const std::string &widget_type)
   {
-    add(design, std::type_index(typeid(T)), widget_type, make_row_factory<T, ControlT>());
+    add(design,
+        std::type_index(typeid(T)),
+        widget_type,
+        make_row_factory<T, ControlT>());
   }
 
   /** @brief Build a row for `p_attr` using `design`, following its fallbacks.
@@ -120,6 +131,28 @@ public:
                      const RowContext  &ctx,
                      QWidget           *parent = nullptr) const;
 
+  /// Register a custom section factory for category cards in a design.
+  void register_section_factory(const std::string &design,
+                                SectionFactory     factory);
+
+  /** @brief Look up the section factory for `design`, following its fallback
+   * chain.
+   *
+   * If neither `design` nor any fallback registered a factory, returns a
+   * default factory constructing a standard CollapsibleSection.
+   */
+  SectionFactory section_factory(const std::string &design) const;
+
+  /// Associate a theme name with a design.
+  void set_theme(const std::string &design, const std::string &theme_name);
+
+  /// Look up the theme for `design`, following its fallback chain.
+  const Theme &theme(const std::string &design) const;
+
+  bool has_control(const std::string &design,
+                   std::type_index    type,
+                   const std::string &widget_type) const;
+
   bool has_design(const std::string &design) const;
 
   /// Registered design names, for a settings UI.
@@ -132,6 +165,8 @@ private:
 
   std::map<std::string, std::map<Key, RowFactory>> factories_;
   std::map<std::string, std::string>               fallbacks_;
+  std::map<std::string, SectionFactory>            section_factories_;
+  std::map<std::string, std::string>               themes_;
 };
 
 /** @brief Render one attribute using `design`.

@@ -38,7 +38,8 @@ struct Metrics
   int   label_max_width = 168;
   qreal label_width_ratio = 0.3;
   int   gap = 12;
-  int   narrow_threshold = 430; ///< row width below which the narrow branch applies
+  int   narrow_threshold =
+      430; ///< row width below which the narrow branch applies
 
   // --- value field
   int value_field_width = 74;
@@ -64,10 +65,10 @@ struct Metrics
   int section_body_padding_x_narrow = 12;
   int section_body_padding_y = 12;
   int section_row_spacing = 10;
-  int section_card_margin = 14;  ///< inset of a card from the panel edge
-  int section_card_gap = 10;     ///< vertical gap between consecutive cards
+  int section_card_margin = 14; ///< inset of a card from the panel edge
+  int section_card_gap = 10;    ///< vertical gap between consecutive cards
   int section_card_radius = 6;
-  int row_bar_height = 30;       ///< the bar a value row is drawn inside
+  int row_bar_height = 30; ///< the bar a value row is drawn inside
 
   // --- shared
   int radius = 2;
@@ -83,13 +84,14 @@ struct Metrics
  * of process-wide state. Controls receive a `const Theme &` that outlives them
  * (owned by the ThemeRegistry) and read it at paint time.
  *
- * Derived colours are exposed as *functions* rather than baked swatches, because
- * the formula is the thing that must survive an accent change.
+ * Derived colours are exposed as *functions* rather than baked swatches,
+ * because the formula is the thing that must survive an accent change.
  *
  * The member initialisers below are the reference colourway, kept so a
- * default-constructed Theme paints something sane and so the sampled values stay
- * documented. They are not the intended source of colour: see from_palette(),
- * which is what lets the design sit on top of somebody else's palette.
+ * default-constructed Theme paints something sane and so the sampled values
+ * stay documented. They are not the intended source of colour: see
+ * from_palette(), which is what lets the design sit on top of somebody else's
+ * palette.
  */
 struct Theme
 {
@@ -112,13 +114,15 @@ struct Theme
    *
    * Geometry (Metrics) is untouched: it is not a palette concern.
    */
-  static Theme from_palette(const QPalette &palette, const std::string &name = "palette");
+  static Theme from_palette(const QPalette    &palette,
+                            const std::string &name = "palette");
 
   // --- surfaces
   QColor page{"#2b2b2b"};
   QColor bar{"#262626"};
-  QColor section_surface{"#4a4a4a"}; ///< card behind a whole section, header + body
-  QColor section_header{"#4a4a4a"};       ///< always equal to section_surface
+  QColor section_surface{
+      "#4a4a4a"}; ///< card behind a whole section, header + body
+  QColor section_header{"#4a4a4a"}; ///< always equal to section_surface
   QColor section_header_hover{"#545454"};
   QColor section_header_press{"#444444"};
   QColor rail_well{"#1c1c1c"};
@@ -157,19 +161,21 @@ struct Theme
   // --- accent
   QColor accent{"#e08a2e"};
 
-  /** @brief Per-group accents, keyed by attribute category. Falls back to `accent`.
+  /** @brief Per-group accents, keyed by attribute category. Falls back to
+   * `accent`.
    *
    * Deliberately not palette-derived: these encode *meaning* (which family of
    * operation a parameter belongs to), so they have to stay distinguishable
    * from each other rather than track a host accent. from_palette() leaves them
    * alone.
    */
-  std::map<std::string, QColor> group_accents = {{"Erosion", QColor("#cfa143")},
-                                                 {"Downcutting", QColor("#3aa899")},
-                                                 {"Scale", QColor("#7d9cc0")},
-                                                 {"Flow", QColor("#c06478")},
-                                                 {"Selective", QColor("#a08bb8")},
-                                                 {"Other", QColor("#9a9a9a")}};
+  std::map<std::string, QColor> group_accents = {
+      {"Erosion", QColor("#cfa143")},
+      {"Downcutting", QColor("#3aa899")},
+      {"Scale", QColor("#7d9cc0")},
+      {"Flow", QColor("#c06478")},
+      {"Selective", QColor("#a08bb8")},
+      {"Other", QColor("#9a9a9a")}};
 
   // --- derived-colour opacities. Port the formula, not the swatch.
   qreal rail_fill_alpha = 0.9;
@@ -206,7 +212,8 @@ struct Theme
  * The default is "palette", derived from the application palette via
  * Theme::from_palette(). It is built lazily because the registry is a static
  * singleton and may well be constructed before QApplication exists, and cached
- * afterwards, so a palette change mid-session is not picked up (again: restart).
+ * afterwards, so a palette change mid-session is not picked up (again:
+ * restart).
  */
 class ThemeRegistry
 {

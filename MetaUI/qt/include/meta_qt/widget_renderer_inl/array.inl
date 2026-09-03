@@ -3,21 +3,18 @@
    this software. */
 #pragma once
 
+#include "meta/ext/array/array.hpp"
+#include "meta_common.hpp"
+#include "meta_qt/designs/stock/stock_renderer.hpp"
+#include "meta_qt/meta_widget.hpp"
+#include "meta_qt/widgets/array_canvas.hpp"
+#include "meta_qt/widgets/points_canvas.hpp"
 #include <QLabel>
 #include <QVBoxLayout>
 #include <algorithm>
 #include <cmath>
-#include <vector>
 
-#include "meta_common.hpp"
-#include "meta_qt/meta_widget.hpp"
-#include "meta_qt/widgets/array_canvas.hpp"
-#include "meta_qt/widgets/points_canvas.hpp" // For ImageData definition
-
-#include "meta/ext/array/array.hpp"
-#include "meta/metadata/keys.hpp"
-
-namespace meta::qt
+namespace meta::qt::stock
 {
 
 // =====================================
@@ -126,10 +123,10 @@ inline std::vector<float> resample_bicubic_array(const std::vector<float> &src,
 }
 
 // ---------------------------------------------------------------------------
-// WidgetRenderer<meta::Array>
+// StockRenderer<meta::Array>
 // ---------------------------------------------------------------------------
 
-template <> struct WidgetRenderer<meta::Array>
+template <> struct StockRenderer<meta::Array>
 {
   static MetaWidget *render(Attribute<meta::Array> &attr, QWidget *parent)
   {
@@ -279,4 +276,4 @@ template <> struct WidgetRenderer<meta::Array>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

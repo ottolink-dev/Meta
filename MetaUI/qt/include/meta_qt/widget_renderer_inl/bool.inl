@@ -11,12 +11,13 @@
 #include "meta/type/type_name.hpp"
 #include "meta_common.hpp"
 
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/meta_widget.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<bool>
+template <> struct StockRenderer<bool>
 {
   static MetaWidget *render(Attribute<bool> &attr, QWidget *parent)
   {
@@ -176,4 +177,4 @@ template <> struct WidgetRenderer<bool>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

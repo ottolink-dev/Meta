@@ -11,6 +11,7 @@
 
 #include "meta_qt/container_widget.hpp"
 #include "meta_qt/meta_widget.hpp"
+#include "meta_qt/ui/design_registry.hpp"
 #include "meta_qt/widget_renderer.hpp"
 #include "meta_qt/widgets/collapsible_section.hpp"
 #include "meta_qt/widgets/preset_combo_box.hpp"
@@ -68,13 +69,15 @@ namespace
 
 /// The stock section unless the caller supplied a design-aware factory.
 CollapsibleSection *build_section(const SectionFactory &section_factory,
-                                  const QString      &title)
+                                  const QString        &title)
 {
-  return section_factory ? section_factory(title) : new CollapsibleSection(title);
+  return section_factory ? section_factory(title)
+                         : new CollapsibleSection(title);
 }
 
 /// The stock renderer unless the caller supplied a design-aware one.
-MetaWidget *build_row(const AttributeRowRenderer &row_renderer, AbstractAttribute *p_attr)
+MetaWidget *build_row(const AttributeRowRenderer &row_renderer,
+                      AbstractAttribute          *p_attr)
 {
   return row_renderer ? row_renderer(p_attr) : qt::render(p_attr);
 }
@@ -110,7 +113,10 @@ void render_flat(CategoryNode               &node,
   }
 
   for (const auto &name : node.children_order)
-    render_flat(*node.children.at(name), layout, collected_widgets, row_renderer);
+    render_flat(*node.children.at(name),
+                layout,
+                collected_widgets,
+                row_renderer);
 }
 
 void render_category(AttributeContainer        &container,
@@ -354,6 +360,22 @@ MetaWidget *render(AttributeContainer    &container,
 
   // --- Attribute widgets
 
+  AttributeRowRenderer effective_row_renderer = options.row_renderer;
+  if (!effective_row_renderer)
+  {
+    effective_row_renderer = [design = options.design,
+                              ctx = options.row_context,
+                              parent](AbstractAttribute *p_attr) -> MetaWidget *
+    { return render_row(p_attr, design, ctx, parent); };
+  }
+
+  SectionFactory effective_section_factory = options.section_factory;
+  if (!effective_section_factory)
+  {
+    effective_section_factory = DesignRegistry::instance().section_factory(
+        options.design);
+  }
+
   std::vector<MetaWidget *>                                 collected_widgets;
   std::vector<std::pair<CollapsibleSection *, std::string>> collected_sections;
 
@@ -366,8 +388,8 @@ MetaWidget *render(AttributeContainer    &container,
                     layout,
                     collected_widgets,
                     collected_sections,
-                    options.row_renderer,
-                    options.section_factory);
+                    effective_row_renderer,
+                    effective_section_factory);
     break;
 
   case CategoryPolicy::CP_MERGED:
@@ -378,15 +400,15 @@ MetaWidget *render(AttributeContainer    &container,
                            collected_widgets,
                            collected_sections,
                            options.collapse_regex,
-                           options.row_renderer,
-                           options.section_factory);
+                           effective_row_renderer,
+                           effective_section_factory);
     break;
 
   case CategoryPolicy::CP_SMART:
     Logger::log()->trace("container_widget::render: smart mode");
 
     if (has_no_categorys)
-      render_flat(root, layout, collected_widgets, options.row_renderer);
+      render_flat(root, layout, collected_widgets, effective_row_renderer);
     else
       render_category_merged(container,
                              root,
@@ -394,8 +416,8 @@ MetaWidget *render(AttributeContainer    &container,
                              collected_widgets,
                              collected_sections,
                              options.collapse_regex,
-                             options.row_renderer,
-                             options.section_factory);
+                             effective_row_renderer,
+                             effective_section_factory);
     break;
 
 #pragma GCC diagnostic push
@@ -404,7 +426,7 @@ MetaWidget *render(AttributeContainer    &container,
   case CategoryPolicy::CP_FLAT:
     Logger::log()->trace("container_widget::render: flat mode");
   default:
-    render_flat(root, layout, collected_widgets, options.row_renderer);
+    render_flat(root, layout, collected_widgets, effective_row_renderer);
     break;
 
 #pragma GCC diagnostic pop

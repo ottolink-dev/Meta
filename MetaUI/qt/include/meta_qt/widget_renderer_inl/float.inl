@@ -14,13 +14,14 @@
 #include "meta/type/type_name.hpp"
 #include "meta_common.hpp"
 
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/widgets/slider_float.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
-template <> struct WidgetRenderer<float>
+template <> struct StockRenderer<float>
 {
   static MetaWidget *render(Attribute<float> &attr, QWidget *parent)
   {
@@ -220,4 +221,4 @@ template <> struct WidgetRenderer<float>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

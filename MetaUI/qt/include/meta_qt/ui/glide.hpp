@@ -30,7 +30,8 @@ public:
   /// Animate towards `target`. Safe to call while already running.
   void to(qreal target);
 
-  /// Move immediately, cancelling any running animation. Emits tick(), not finished().
+  /// Move immediately, cancelling any running animation. Emits tick(), not
+  /// finished().
   void jump(qreal value);
 
   qreal current() const { return current_; }

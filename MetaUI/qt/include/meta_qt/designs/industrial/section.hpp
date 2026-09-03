@@ -83,7 +83,6 @@ protected:
   /// Draws the single card the header and rows sit on.
   void paintEvent(QPaintEvent *event) override;
 
-
 private:
   const Theme       *theme_ = nullptr;
   ClipBox           *clip_ = nullptr;

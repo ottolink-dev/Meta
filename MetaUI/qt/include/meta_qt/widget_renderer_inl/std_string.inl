@@ -14,10 +14,11 @@
 
 #include "meta/type/type_name.hpp"
 #include "meta_common.hpp"
+#include "meta_qt/designs/stock/stock_renderer.hpp"
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/widgets/helpers.hpp"
 
-namespace meta::qt
+namespace meta::qt::stock
 {
 
 namespace helpers
@@ -41,8 +42,8 @@ inline void apply_height_constraints(QPlainTextEdit         *te,
                                                    "ui.max_lines",
                                                    default_max);
 
-  te->setMinimumHeight(plain_text_height(te, min_lines));
-  te->setMaximumHeight(plain_text_height(te, max_lines));
+  te->setMinimumHeight(meta::qt::helpers::plain_text_height(te, min_lines));
+  te->setMaximumHeight(meta::qt::helpers::plain_text_height(te, max_lines));
 }
 
 // create a small right-aligned "Apply" button row.  Returns
@@ -50,12 +51,14 @@ inline void apply_height_constraints(QPlainTextEdit         *te,
 inline std::pair<QHBoxLayout *, QPushButton *> make_apply_button(
     QWidget *parent)
 {
+  auto *btn_row = new QHBoxLayout();
+  btn_row->setContentsMargins(0, 2, 0, 0);
+  btn_row->addStretch();
+
   auto *apply_btn = new QPushButton(QObject::tr("Apply"), parent);
   apply_btn->setFixedHeight(22);
   apply_btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-
-  auto *btn_row = new QHBoxLayout();
-  btn_row->addStretch();
+  apply_btn->setEnabled(false);
   btn_row->addWidget(apply_btn);
 
   return {btn_row, apply_btn};
@@ -63,7 +66,7 @@ inline std::pair<QHBoxLayout *, QPushButton *> make_apply_button(
 
 } // namespace helpers
 
-template <> struct WidgetRenderer<std::string>
+template <> struct StockRenderer<std::string>
 {
   static MetaWidget *render(Attribute<std::string> &attr, QWidget *parent)
   {
@@ -407,4 +410,4 @@ template <> struct WidgetRenderer<std::string>
   }
 };
 
-} // namespace meta::qt
+} // namespace meta::qt::stock

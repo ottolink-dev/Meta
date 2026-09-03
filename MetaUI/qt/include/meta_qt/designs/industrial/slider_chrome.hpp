@@ -26,7 +26,10 @@ struct SliderGeometry
   QRect thumb; ///< machined handle
   QRect field; ///< value readout, right
 
-  static SliderGeometry compute(const Theme &theme, int width, int height, qreal norm);
+  static SliderGeometry compute(const Theme &theme,
+                                int          width,
+                                int          height,
+                                qreal        norm);
 };
 
 /// What the shared painter needs to know about the row's current state.
@@ -53,6 +56,9 @@ void paint_slider_row(QPainter             &painter,
                       int                   height);
 
 /// Stylesheet for the value field, following the theme and row state.
-QString field_stylesheet(const Theme &theme, bool editing, bool modified, bool locked);
+QString field_stylesheet(const Theme &theme,
+                         bool         editing,
+                         bool         modified,
+                         bool         locked);
 
 } // namespace meta::qt::industrial

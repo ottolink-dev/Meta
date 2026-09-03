@@ -13,7 +13,9 @@
 namespace meta::qt::industrial
 {
 
-CheckRow::CheckRow(Attribute<bool> &attr, const RowContext &ctx, QWidget *parent)
+CheckRow::CheckRow(Attribute<bool>  &attr,
+                   const RowContext &ctx,
+                   QWidget          *parent)
     : Control<bool>(ctx, parent)
 {
   key_ = attr.name();
@@ -74,9 +76,10 @@ void CheckRow::paintEvent(QPaintEvent *)
   painter.setFont(label_font);
   painter.setPen(t.state_ink(is_modified(), locked));
   const int label_w = width() - m.switch_width - m.gap;
-  painter.drawText(QRect(0, 0, label_w, height()),
-                   Qt::AlignLeft | Qt::AlignVCenter,
-                   elide_label(QString::fromStdString(label_), label_font, label_w));
+  painter.drawText(
+      QRect(0, 0, label_w, height()),
+      Qt::AlignLeft | Qt::AlignVCenter,
+      elide_label(QString::fromStdString(label_), label_font, label_w));
 
   painter.setOpacity(locked ? t.locked_thumb_alpha : 1.0);
 
@@ -102,7 +105,7 @@ void CheckRow::paintEvent(QPaintEvent *)
                           m.radius);
 
   // --- knob
-  const int travel = m.switch_width - m.knob_size - 2 * m.knob_inset;
+  const int   travel = m.switch_width - m.knob_size - 2 * m.knob_inset;
   const QRect knob(track.x() + m.knob_inset + int(std::round(knob_ * travel)),
                    track.y() + m.knob_inset,
                    m.knob_size,
@@ -144,7 +147,8 @@ void CheckRow::mouseReleaseEvent(QMouseEvent *event)
 
 void CheckRow::keyPressEvent(QKeyEvent *event)
 {
-  if (!is_locked() && (event->key() == Qt::Key_Space || event->key() == Qt::Key_Return))
+  if (!is_locked() &&
+      (event->key() == Qt::Key_Space || event->key() == Qt::Key_Return))
   {
     toggle();
     event->accept();
