@@ -16,7 +16,7 @@ endif()
 
 enable_testing()
 
-add_executable(meta_unittests
+set(UNITTEST_SOURCES
   main.cpp
   test_attribute.cpp
   test_attribute_container.cpp
@@ -26,10 +26,30 @@ add_executable(meta_unittests
   test_container_group_sync.cpp
 )
 
+set(UNITTEST_LIBS
+  meta
+  GTest::gtest
+)
+
+if(META_ENABLE_QT_UI)
+  set(CMAKE_AUTOMOC ON)
+  list(APPEND UNITTEST_SOURCES test_design_registry.cpp)
+  list(APPEND UNITTEST_LIBS meta_qt)
+  find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+  list(APPEND UNITTEST_LIBS Qt6::Core Qt6::Widgets)
+endif()
+
+add_executable(meta_unittests
+  ${UNITTEST_SOURCES}
+)
+
+if(META_ENABLE_QT_UI)
+  target_compile_definitions(meta_unittests PRIVATE META_ENABLE_QT_UI)
+endif()
+
 target_link_libraries(meta_unittests
   PRIVATE
-    meta
-    GTest::gtest
+    ${UNITTEST_LIBS}
 )
 
 include(GoogleTest)

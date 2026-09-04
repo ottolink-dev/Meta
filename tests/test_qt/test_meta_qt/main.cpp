@@ -18,7 +18,10 @@
 #include <QWidget>
 
 #include "meta.hpp"
+#include "meta/core/data_provider.hpp"
 #include "meta_qt.hpp"
+#include "meta_qt/designs/industrial/industrial.hpp"
+#include "meta_qt/designs/stock/stock.hpp"
 #include "meta_qt/widgets/points_canvas.hpp"
 #include "meta_qt/widgets/range_bar.hpp"
 
@@ -148,7 +151,8 @@ QWidget *make_debug_view(meta::AbstractAttribute *p_attr,
 // -----------------------------------------------------------------------------
 
 QWidget *make_container_view(meta::AttributeContainer &container,
-                             bool                      snapshots = false)
+                             bool                      snapshots = false,
+                             const std::string        &design = "industrial")
 {
   auto *scroll = new QScrollArea();
   scroll->setWidgetResizable(true);
@@ -159,6 +163,7 @@ QWidget *make_container_view(meta::AttributeContainer &container,
   layout->setContentsMargins(4, 4, 4, 4);
 
   meta::qt::ContainerRenderOptions options;
+  options.design = design;
   options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
   options.snapshot_manager = snapshots;
 
@@ -186,7 +191,8 @@ QWidget *make_container_view(meta::AttributeContainer &container,
   return scroll;
 }
 
-QWidget *make_group_view(meta::ContainerGroup &group)
+QWidget *make_group_view(meta::ContainerGroup &group,
+                         const std::string    &design = "industrial")
 {
   auto *scroll = new QScrollArea();
   scroll->setWidgetResizable(true);
@@ -197,6 +203,7 @@ QWidget *make_group_view(meta::ContainerGroup &group)
   layout->setContentsMargins(4, 4, 4, 4);
 
   meta::qt::ContainerRenderOptions options;
+  options.design = design;
   options.category_policy = meta::qt::CategoryPolicy::CP_TREE;
   options.collapse_regex = std::regex("^Cat 1");
   options.snapshot_manager = true;
@@ -946,6 +953,8 @@ int main(int argc, char *argv[])
 
   QApplication app(argc, argv);
 
+  meta::qt::industrial::register_design();
+
   auto *tabs = new QTabWidget();
 
   tabs->setDocumentMode(true);
@@ -956,48 +965,64 @@ int main(int argc, char *argv[])
 
   if (base_bool)
   {
-    tabs->addTab(make_container_view(bool_container), "Bool");
+    tabs->addTab(make_container_view(bool_container, false, "industrial"),
+                 "Bool (Industrial)");
+    tabs->addTab(make_container_view(bool_container, false, "stock"),
+                 "Bool (Stock)");
   }
 
   if (base_float)
   {
-    tabs->addTab(make_container_view(float_container), "Float");
+    tabs->addTab(make_container_view(float_container, false, "industrial"),
+                 "Float (Industrial)");
+    tabs->addTab(make_container_view(float_container, false, "stock"),
+                 "Float (Stock)");
   }
 
   if (base_int)
   {
-    tabs->addTab(make_container_view(int_container), "Int");
+    tabs->addTab(make_container_view(int_container, false, "industrial"),
+                 "Int (Industrial)");
+    tabs->addTab(make_container_view(int_container, false, "stock"),
+                 "Int (Stock)");
   }
 
   if (base_string)
   {
-    tabs->addTab(make_container_view(string_container), "String");
+    tabs->addTab(make_container_view(string_container, false, "industrial"),
+                 "String (Industrial)");
+    tabs->addTab(make_container_view(string_container, false, "stock"),
+                 "String (Stock)");
   }
 
   if (base_std)
   {
-    tabs->addTab(make_container_view(std_container), "std");
+    tabs->addTab(make_container_view(std_container, false, "industrial"),
+                 "std");
   }
 
 #ifdef META_ENABLE_GLM_TYPES
   if (base_glm)
   {
-    tabs->addTab(make_container_view(glm_container), "GLM");
+    tabs->addTab(make_container_view(glm_container, false, "industrial"),
+                 "GLM");
   }
 #endif
 
 #ifdef META_ENABLE_COLOR_GRADIENT_TYPES
   if (base_color_gradient)
   {
-    tabs->addTab(make_container_view(color_gradient_container),
-                 "Color Gradient");
+    tabs->addTab(
+        make_container_view(color_gradient_container, false, "industrial"),
+        "Color Gradient");
   }
 #endif
 
 #ifdef META_ENABLE_ARRAY_TYPES
   if (base_array)
   {
-    tabs->addTab(make_container_view(array_container), "Array");
+    tabs->addTab(make_container_view(array_container, false, "industrial"),
+                 "Array");
   }
 #endif
 
@@ -1007,7 +1032,8 @@ int main(int argc, char *argv[])
 
   if (base_groups)
   {
-    tabs->addTab(make_group_view(group), "ContainerGroup");
+    tabs->addTab(make_group_view(group, "industrial"), "Group (Industrial)");
+    tabs->addTab(make_group_view(group, "stock"), "Group (Stock)");
   }
 
   // ---------------------------------------------------------------------------
@@ -1052,18 +1078,25 @@ int main(int argc, char *argv[])
     float_container.snapshot_manager().save("Some Config.",
                                             float_container.json_to());
 
-    tabs->addTab(make_container_view(float_container, true),
+    tabs->addTab(make_container_view(float_container, true, "industrial"),
                  "Float + Snapshots");
   }
 
   // ---------------------------------------------------------------------------
-  // Multiple render test
+  // Multiple render test (Industrial vs Stock)
   // ---------------------------------------------------------------------------
 
   if (true)
   {
-    auto *widget1 = meta::qt::render(float_container);
-    auto *widget2 = meta::qt::render(float_container);
+    meta::qt::ContainerRenderOptions opt_ind;
+    opt_ind.design = "industrial";
+    auto *widget1 = meta::qt::render(float_container, opt_ind);
+    widget1->setWindowTitle("Float Container - Industrial");
+
+    meta::qt::ContainerRenderOptions opt_stock;
+    opt_stock.design = "stock";
+    auto *widget2 = meta::qt::render(float_container, opt_stock);
+    widget2->setWindowTitle("Float Container - Stock");
 
     widget1->show();
     widget2->show();

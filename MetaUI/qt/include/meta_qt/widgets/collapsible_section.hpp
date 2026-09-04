@@ -14,15 +14,21 @@ class CollapsibleSection : public QWidget
 
 public:
   explicit CollapsibleSection(const QString &title, QWidget *parent = nullptr);
+  ~CollapsibleSection() override = default;
 
-  void set_expanded(bool new_state);
+  /// Virtual so a design can animate the transition rather than snapping.
+  virtual void set_expanded(bool new_state);
+
+  bool is_expanded() const;
 
   QVBoxLayout *content_layout;
 
 signals:
   void expanded_state_changed(bool new_state);
 
-private:
+protected:
+  // Protected rather than private so a design can restyle or animate the
+  // header and body without this class having to anticipate how.
   QToolButton *toggle_button;
   QWidget     *content;
 };
