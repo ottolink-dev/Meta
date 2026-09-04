@@ -29,9 +29,14 @@ void register_design()
       kDesignName,
       [](const QString &title)
       {
-        const Theme &theme = ThemeRegistry::instance().get(
-            ThemeRegistry::kPaletteTheme);
-        return new Section(title, theme);
+        // Read the design's theme rather than naming one. set_theme() exists so
+        // a host can pick the colourway, and pinning the palette theme here
+        // ignored it: the rows followed the setting while the section cards
+        // stayed on the app palette, so the two drew different greys.
+        //
+        // Resolved per section rather than captured, because the theme can be
+        // set after the design registers.
+        return new Section(title, DesignRegistry::instance().theme(kDesignName));
       });
 
   // --- float: 58% of the rows in a Hesiod node panel
