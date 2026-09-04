@@ -145,7 +145,12 @@ void GradientBarWidget::mouseDoubleClickEvent(QMouseEvent *e)
     {
       stops_.push_back({float(pos), {1.f, 1.f, 1.f, 1.f}});
       sort_stops();
-      selected_idx_ = hit_test(e->pos());
+      auto it = std::find_if(stops_.begin(),
+                             stops_.end(),
+                             [pos](const Stop &s)
+                             { return s.position == float(pos); });
+      if (it != stops_.end())
+        selected_idx_ = static_cast<int>(std::distance(stops_.begin(), it));
       update();
       Q_EMIT value_changed();
       Q_EMIT edit_ended();
@@ -165,24 +170,33 @@ void GradientBarWidget::mousePressEvent(QMouseEvent *e)
 
 void GradientBarWidget::mouseMoveEvent(QMouseEvent *e)
 {
-  if (!dragging_ || selected_idx_ < 0) return;
+  if (!dragging_ || selected_idx_ < 0 ||
+      selected_idx_ >= static_cast<int>(stops_.size()))
+    return;
 
   const QRectF br = bar_rect();
-  double pos = std::clamp((e->pos().x() - br.left()) / br.width(), 0.0, 1.0);
+  if (br.width() <= 0) return;
 
-  // Maintain minimum gap to avoid coincident positions.
-  constexpr double eps = 1e-3;
-  for (int i = 0; i < static_cast<int>(stops_.size()); ++i)
-  {
-    if (i == selected_idx_) continue;
-    if (std::abs(double(stops_[i].position) - pos) < eps)
-      pos = pos < double(stops_[i].position) ? double(stops_[i].position) - eps
-                                             : double(stops_[i].position) + eps;
-    pos = std::clamp(pos, 0.0, 1.0);
-  }
+  const double pos = std::clamp((e->pos().x() - br.left()) / br.width(),
+                                0.0,
+                                1.0);
 
   stops_[selected_idx_].position = float(pos);
-  sort_stops();
+
+  // Maintain sorted order while keeping selected_idx_ tracking the moved stop
+  while (selected_idx_ > 0 &&
+         stops_[selected_idx_].position < stops_[selected_idx_ - 1].position)
+  {
+    std::swap(stops_[selected_idx_], stops_[selected_idx_ - 1]);
+    --selected_idx_;
+  }
+  while (selected_idx_ + 1 < static_cast<int>(stops_.size()) &&
+         stops_[selected_idx_].position > stops_[selected_idx_ + 1].position)
+  {
+    std::swap(stops_[selected_idx_], stops_[selected_idx_ + 1]);
+    ++selected_idx_;
+  }
+
   update();
   Q_EMIT value_changed();
 }
@@ -237,7 +251,7 @@ QRectF GradientBarWidget::stop_rect(const Stop &s) const
 
 int GradientBarWidget::hit_test(const QPoint &pos) const
 {
-  for (int i = 0; i < static_cast<int>(stops_.size()); ++i)
+  for (int i = static_cast<int>(stops_.size()) - 1; i >= 0; --i)
     if (stop_rect(stops_[i]).adjusted(-2, -2, 2, 2).contains(QPointF(pos)))
       return i;
   return -1;

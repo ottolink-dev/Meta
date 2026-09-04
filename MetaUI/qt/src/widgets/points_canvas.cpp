@@ -11,6 +11,7 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
+#include <QResizeEvent>
 #include <QTextStream>
 #include <QWheelEvent>
 
@@ -38,11 +39,21 @@ PointsCanvas::PointsCanvas(std::vector<glm::vec3> &points,
       mode_(mode),
       closed_(closed)
 {
-  setMinimumSize(200, 180);
+  setMinimumSize(200, 200);
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-  setFixedHeight(220);
   setMouseTracking(true);
   setCursor(Qt::CrossCursor);
+}
+
+void PointsCanvas::resizeEvent(QResizeEvent *event)
+{
+  // Only react to a width change. Recomputing height inside the layout pass
+  // that just resized us re-invalidates it, turning one resize into several
+  // full layout passes.
+  if (event->oldSize().width() != event->size().width())
+    setFixedHeight(width());
+
+  QWidget::resizeEvent(event);
 }
 
 QRect PointsCanvas::canvas_rect() const

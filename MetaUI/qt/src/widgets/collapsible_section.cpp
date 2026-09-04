@@ -37,6 +37,8 @@ CollapsibleSection::CollapsibleSection(const QString &title, QWidget *parent)
           [this](bool checked) { this->set_expanded(checked); });
 }
 
+bool CollapsibleSection::is_expanded() const { return content->isVisible(); }
+
 void CollapsibleSection::set_expanded(bool new_state)
 {
   content->setVisible(new_state);
