@@ -114,7 +114,9 @@ bool ParamSlider::can_render(const Attribute<float> &attr)
       !metadata.find(meta::keys::constraints::max))
     return false;
 
-  return meta::common::max(attr) > meta::common::min(attr);
+  // Declines unbounded ranges so they fall through to the stock input, which is
+  // the right control for a number with no limits.
+  return has_usable_range(meta::common::min(attr), meta::common::max(attr));
 }
 
 void ParamSlider::set(const float &value)
@@ -183,8 +185,7 @@ void ParamSlider::paintEvent(QPaintEvent *)
   visual.modified = is_modified();
   visual.locked = is_locked();
 
-  QFont label_font = ui_font(12, false, 1.0);
-  label_font.setCapitalization(QFont::AllUppercase);
+  QFont label_font = row_label_font();
   visual.label = elide_label(QString::fromStdString(label_),
                              label_font,
                              geometry.label.width());
