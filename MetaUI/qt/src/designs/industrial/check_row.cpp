@@ -71,8 +71,7 @@ void CheckRow::paintEvent(QPaintEvent *)
   const bool     locked = is_locked();
 
   // --- label
-  QFont label_font = ui_font(12, false, 1.0);
-  label_font.setCapitalization(QFont::AllUppercase);
+  QFont label_font = row_label_font();
   painter.setFont(label_font);
   painter.setPen(t.state_ink(is_modified(), locked));
   const int label_w = width() - m.switch_width - m.gap;

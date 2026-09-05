@@ -70,6 +70,16 @@ QFont ui_font(int pixel_size, bool bold, qreal letter_spacing)
   return font;
 }
 
+QFont row_label_font()
+{
+  // QApplication::font() rather than ui_font(): the point is to match whatever
+  // the host is using, so the panel blends into the application instead of
+  // announcing itself.
+  QFont font = QApplication::font();
+  font.setPixelSize(12);
+  return font;
+}
+
 // --- Theme
 
 namespace
@@ -108,9 +118,14 @@ Theme Theme::from_palette(const QPalette &palette, const std::string &name)
   // --- surfaces
   t.page = window;
   t.bar = sink(window, 0.06);
-  // Deliberately a clear step off the page, not a hint of one. A card that is
-  // barely lighter than its background does not group anything.
-  t.section_surface = lift(window, 0.30);
+  // A clear step off the page, but only just. At a 0.30 lift the cards read as
+  // a separate piece of UI laid on top of the application rather than part of
+  // it, which is the main thing that made the panel stand out.
+  //
+  // 0.15 is roughly one step, and on a host whose window is #2B2B2B it lands on
+  // #4B4B4B, the same value such applications typically use for their secondary
+  // surface. Derived rather than hardcoded, so it still tracks the palette.
+  t.section_surface = lift(window, 0.15);
 
   // The header shares the card surface so a section reads as one block rather
   // than a bar with a differently coloured body under it. Hover and press are
