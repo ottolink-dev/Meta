@@ -873,6 +873,16 @@ int main(int argc, char *argv[])
 
   const bool base_groups = true;
 
+#ifdef META_ENABLE_COLOR_GRADIENT_TYPES
+  // Keep manual runs away from the real per-user gradient library.
+  {
+    auto &library = meta::GradientLibrary::instance();
+    library.set_path(std::filesystem::temp_directory_path() /
+                     "meta_test_gradients.json");
+    library.load();
+  }
+#endif
+
   // ---------------------------------------------------------------------------
   // Containers
   // ---------------------------------------------------------------------------

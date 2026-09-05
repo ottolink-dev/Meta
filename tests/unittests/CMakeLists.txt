@@ -35,7 +35,7 @@ set(UNITTEST_LIBS
 
 if(META_ENABLE_QT_UI)
   set(CMAKE_AUTOMOC ON)
-  list(APPEND UNITTEST_SOURCES test_design_registry.cpp)
+  list(APPEND UNITTEST_SOURCES test_design_registry.cpp test_gradient_picker.cpp)
   list(APPEND UNITTEST_LIBS meta_qt)
   find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
   list(APPEND UNITTEST_LIBS Qt6::Core Qt6::Widgets)
