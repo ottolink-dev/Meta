@@ -431,6 +431,9 @@ GradientPicker::GradientPicker(std::vector<Stop> &stops,
     scroll_area_->viewport()->installEventFilter(this);
 
   main_layout->addWidget(scroll_area_, 1);
+  // Absorbs the freed space when the grid is hidden (no presets at all), so
+  // the toolbar stays under the bar instead of floating mid-widget.
+  main_layout->addStretch(0);
 
   connect(bar_widget_, &GradientBarWidget::value_changed, this,
           &GradientPicker::value_changed);
