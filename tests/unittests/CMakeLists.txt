@@ -24,6 +24,7 @@ set(UNITTEST_SOURCES
   test_attribute_factory.cpp
   test_event.cpp
   test_container_group_sync.cpp
+  test_gradient_metrics.cpp
 )
 
 set(UNITTEST_LIBS

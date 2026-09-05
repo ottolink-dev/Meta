@@ -8,35 +8,35 @@
 
 #include <nlohmann/json.hpp>
 
-namespace meta
-{
+namespace meta {
 
 /// A color stop in a gradient.
-struct Stop
-{
+struct Stop {
   /// Position in the range [0, 1].
   float position;
 
   /// RGBA color.
   std::array<float, 4> color;
+
+  bool operator==(const Stop &) const = default;
 };
 
 /// A named color gradient preset.
-struct Preset
-{
+struct Preset {
   /// Preset name.
   std::string name;
 
   /// Gradient stops.
   std::vector<Stop> stops;
+
+  bool operator==(const Preset &) const = default;
 };
 
 /// Editable color gradient. Presets are deliberately NOT part of this value
 /// type: they are host configuration, carried in attribute metadata as a
 /// GradientPresets entry (keys::ui::presets), so that deserializing a value
 /// cannot clobber the preset library installed at setup time.
-class ColorGradient
-{
+class ColorGradient {
 public:
   /// Constructs a default black-to-white gradient.
   ColorGradient() = default;
@@ -72,8 +72,7 @@ private:
 /// Preset library for a gradient attribute, installed by the host into
 /// attribute metadata under keys::ui::presets. Runtime configuration, not
 /// document state: never serialized (mirrors meta::DataProvider).
-struct GradientPresets
-{
+struct GradientPresets {
   /// Available presets.
   std::vector<Preset> presets;
 };
