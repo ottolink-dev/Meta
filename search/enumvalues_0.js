@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['full_0',['full',['../namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0',1,'meta']]]
+  ['default_0',['Default',['../namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67',1,'meta']]]
 ];

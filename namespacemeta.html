@@ -159,6 +159,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1EventConnection.html">EventConnection</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manages the lifetime of a subscription to an <a class="el" href="classmeta_1_1Event.html" title="Thread-unsafe publisher-subscriber event stream.">Event</a>.  <a href="classmeta_1_1EventConnection.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmeta_1_1GradientImportReport.html">GradientImportReport</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outcome of <a class="el" href="classmeta_1_1GradientLibrary.html#ae28b9e75467380fba76b97e9934dd018" title="Merges the gradients of a file into the library.">GradientLibrary::import_file()</a>.  <a href="structmeta_1_1GradientImportReport.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmeta_1_1GradientLibrary.html">GradientLibrary</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The user's gradient presets, shared by every gradient widget in the process and persisted across projects.  <a href="classmeta_1_1GradientLibrary.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmeta_1_1GradientPresets.html">GradientPresets</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structmeta_1_1Preset.html" title="A named color gradient preset.">Preset</a> library for a gradient attribute, installed by the host into attribute metadata under <a class="el" href="namespacemeta_1_1keys_1_1ui.html#aa10c249df5f6548c5ee851d7d010eeb8">keys::ui::presets</a>.  <a href="structmeta_1_1GradientPresets.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,6 +230,13 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:ad3322e486b144bbdeb5e5e74056a51b4" id="r_ad3322e486b144bbdeb5e5e74056a51b4"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">GradientSort</a> { <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67">Default</a>
+, <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987">Name</a>
+, <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b">Luminance</a>
+, <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3">Hue</a>
+ }</td></tr>
+<tr class="memdesc:ad3322e486b144bbdeb5e5e74056a51b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ordering applied to preset grids. Favourites are always pinned first.  <a href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">More...</a><br /></td></tr>
+<tr class="separator:ad3322e486b144bbdeb5e5e74056a51b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51c4cfffa1e177f08174aced5ccc8901" id="r_a51c4cfffa1e177f08174aced5ccc8901"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901">SerializationMode</a> { <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0">full</a>
 , <a class="el" href="namespacemeta.html#a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e">state</a>
  }</td></tr>
@@ -244,6 +257,27 @@ Functions</h2></td></tr>
 <tr class="memitem:a86700a5afa8d165942a704ecd155cbff" id="r_a86700a5afa8d165942a704ecd155cbff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a86700a5afa8d165942a704ecd155cbff">deserialize_state</a> (<a class="el" href="classmeta_1_1AttributeContainer.html">AttributeContainer</a> &amp;s, const nlohmann::json &amp;j)</td></tr>
 <tr class="memdesc:a86700a5afa8d165942a704ecd155cbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize attribute state from JSON.  <br /></td></tr>
 <tr class="separator:a86700a5afa8d165942a704ecd155cbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62297b238ad02529168333feb2633f46" id="r_a62297b238ad02529168333feb2633f46"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a62297b238ad02529168333feb2633f46">to_string</a> (<a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">GradientSort</a> sort)</td></tr>
+<tr class="memdesc:a62297b238ad02529168333feb2633f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Persisted identifier of a sort key ("default", "name", "luminance", "hue").  <br /></td></tr>
+<tr class="separator:a62297b238ad02529168333feb2633f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad76f6cbce9bf6385439eadc80b20e7c5" id="r_ad76f6cbce9bf6385439eadc80b20e7c5"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">GradientSort</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#ad76f6cbce9bf6385439eadc80b20e7c5">gradient_sort_from_string</a> (std::string_view text)</td></tr>
+<tr class="memdesc:ad76f6cbce9bf6385439eadc80b20e7c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse of <a class="el" href="namespacemeta.html#a62297b238ad02529168333feb2633f46" title="Persisted identifier of a sort key (&quot;default&quot;, &quot;name&quot;, &quot;luminance&quot;, &quot;hue&quot;).">to_string(GradientSort)</a>; std::nullopt for unknown identifiers.  <br /></td></tr>
+<tr class="separator:ad76f6cbce9bf6385439eadc80b20e7c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac78753c79f3410338cdb05e143eb5a36" id="r_ac78753c79f3410338cdb05e143eb5a36"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#ac78753c79f3410338cdb05e143eb5a36">gradient_file_json</a> (const std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &amp;presets)</td></tr>
+<tr class="memdesc:ac78753c79f3410338cdb05e143eb5a36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gradient file document ("meta.gradients", version 1) for a list of presets:  <br /></td></tr>
+<tr class="separator:ac78753c79f3410338cdb05e143eb5a36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66b49cc676a33f4dc1aa12400c174b1" id="r_af66b49cc676a33f4dc1aa12400c174b1"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#af66b49cc676a33f4dc1aa12400c174b1">parse_gradient_file</a> (const nlohmann::json &amp;json, std::string_view fallback_name=&quot;Gradient&quot;)</td></tr>
+<tr class="memdesc:af66b49cc676a33f4dc1aa12400c174b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerant reader for gradient files.  <br /></td></tr>
+<tr class="separator:af66b49cc676a33f4dc1aa12400c174b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac923af7be2d00f1e3f6eb80e730ddd27" id="r_ac923af7be2d00f1e3f6eb80e730ddd27"><td class="memItemLeft" align="right" valign="top">std::array&lt; float, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#ac923af7be2d00f1e3f6eb80e730ddd27">sample_gradient</a> (const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;stops, float t)</td></tr>
+<tr class="memdesc:ac923af7be2d00f1e3f6eb80e730ddd27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colour of a gradient at position <code>t</code>.  <br /></td></tr>
+<tr class="separator:ac923af7be2d00f1e3f6eb80e730ddd27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaccf36f99bf4a4400c41184836650239" id="r_aaccf36f99bf4a4400c41184836650239"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#aaccf36f99bf4a4400c41184836650239">gradient_luminance</a> (const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;stops, int samples=32)</td></tr>
+<tr class="memdesc:aaccf36f99bf4a4400c41184836650239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mean Rec.709 luma of the gradient in [0, 1].  <br /></td></tr>
+<tr class="separator:aaccf36f99bf4a4400c41184836650239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b638ae2d2a2133e82d95229e0be47af" id="r_a6b638ae2d2a2133e82d95229e0be47af"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a6b638ae2d2a2133e82d95229e0be47af">gradient_hue</a> (const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;stops, int samples=32)</td></tr>
+<tr class="memdesc:a6b638ae2d2a2133e82d95229e0be47af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dominant hue of the gradient in degrees [0, 360).  <br /></td></tr>
+<tr class="separator:a6b638ae2d2a2133e82d95229e0be47af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37f460e894944044779e1ee21eca8881" id="r_a37f460e894944044779e1ee21eca8881"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a37f460e894944044779e1ee21eca8881"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacemeta.html#a37f460e894944044779e1ee21eca8881">register_attribute_type</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a37f460e894944044779e1ee21eca8881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a concrete attribute type in the factory.  <br /></td></tr>
@@ -327,6 +361,40 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ad3322e486b144bbdeb5e5e74056a51b4" name="ad3322e486b144bbdeb5e5e74056a51b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3322e486b144bbdeb5e5e74056a51b4">&#9670;&#160;</a></span>GradientSort</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">meta::GradientSort</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ordering applied to preset grids. Favourites are always pinned first. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67" name="ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67"></a>Default&#160;</td><td class="fielddoc"><p>host order, then library insertion order </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987" name="ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987"></a>Name&#160;</td><td class="fielddoc"><p>case-insensitive name </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b" name="ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b"></a>Luminance&#160;</td><td class="fielddoc"><p>dark to light (gradient_luminance) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3" name="ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3"></a>Hue&#160;</td><td class="fielddoc"><p>around the colour wheel, achromatic last (gradient_hue) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
 <a id="a51c4cfffa1e177f08174aced5ccc8901" name="a51c4cfffa1e177f08174aced5ccc8901"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51c4cfffa1e177f08174aced5ccc8901">&#9670;&#160;</a></span>SerializationMode</h2>
 
@@ -420,6 +488,143 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ac78753c79f3410338cdb05e143eb5a36" name="ac78753c79f3410338cdb05e143eb5a36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac78753c79f3410338cdb05e143eb5a36">&#9670;&#160;</a></span>gradient_file_json()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nlohmann::json meta::gradient_file_json </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>presets</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gradient file document ("meta.gradients", version 1) for a list of presets: </p>
+<div class="fragment"><div class="line">{<span class="stringliteral">&quot;format&quot;</span>: <span class="stringliteral">&quot;meta.gradients&quot;</span>, <span class="stringliteral">&quot;version&quot;</span>: 1,</div>
+<div class="line"> <span class="stringliteral">&quot;gradients&quot;</span>: [{<span class="stringliteral">&quot;name&quot;</span>: <span class="stringliteral">&quot;...&quot;</span>, <span class="stringliteral">&quot;stops&quot;</span>: [{<span class="stringliteral">&quot;position&quot;</span>: t, <span class="stringliteral">&quot;color&quot;</span>:</div>
+<div class="line">[r,g,b,a]}]}]}</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a6b638ae2d2a2133e82d95229e0be47af" name="a6b638ae2d2a2133e82d95229e0be47af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b638ae2d2a2133e82d95229e0be47af">&#9670;&#160;</a></span>gradient_hue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float meta::gradient_hue </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>stops</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>samples</em> = <code>32</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dominant hue of the gradient in degrees [0, 360). </p>
+<p>Saturation-weighted circular mean of the HSV hue over <code>samples</code> evenly spaced samples. Returns -1 when the gradient is achromatic (total saturation weight below 1e-4), so hue-sorted lists can push greys last. </p>
+
+</div>
+</div>
+<a id="aaccf36f99bf4a4400c41184836650239" name="aaccf36f99bf4a4400c41184836650239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaccf36f99bf4a4400c41184836650239">&#9670;&#160;</a></span>gradient_luminance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float meta::gradient_luminance </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>stops</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>samples</em> = <code>32</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mean Rec.709 luma of the gradient in [0, 1]. </p>
+<p>Averages <code>samples</code> evenly spaced samples of <code>0.2126 R + 0.7152 G + 0.0722 B</code> on the stored (sRGB-encoded) components; alpha is ignored. Used for the "Luminance" sort of preset grids. </p>
+
+</div>
+</div>
+<a id="ad76f6cbce9bf6385439eadc80b20e7c5" name="ad76f6cbce9bf6385439eadc80b20e7c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad76f6cbce9bf6385439eadc80b20e7c5">&#9670;&#160;</a></span>gradient_sort_from_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">GradientSort</a> &gt; meta::gradient_sort_from_string </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inverse of <a class="el" href="namespacemeta.html#a62297b238ad02529168333feb2633f46" title="Persisted identifier of a sort key (&quot;default&quot;, &quot;name&quot;, &quot;luminance&quot;, &quot;hue&quot;).">to_string(GradientSort)</a>; std::nullopt for unknown identifiers. </p>
+
+</div>
+</div>
+<a id="af66b49cc676a33f4dc1aa12400c174b1" name="af66b49cc676a33f4dc1aa12400c174b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af66b49cc676a33f4dc1aa12400c174b1">&#9670;&#160;</a></span>parse_gradient_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; std::vector&lt; <a class="el" href="structmeta_1_1Preset.html">Preset</a> &gt; &gt; meta::parse_gradient_file </td>
+          <td>(</td>
+          <td class="paramtype">const nlohmann::json &amp;&#160;</td>
+          <td class="paramname"><em>json</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>fallback_name</em> = <code>&quot;Gradient&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tolerant reader for gradient files. </p>
+<p>Accepts the document produced by <a class="el" href="namespacemeta.html#ac78753c79f3410338cdb05e143eb5a36" title="Gradient file document (&quot;meta.gradients&quot;, version 1) for a list of presets:">gradient_file_json()</a>, a bare array of gradients, or a single gradient object. A gradient's stops may live under "stops" or "value" (the <a class="el" href="classmeta_1_1ColorGradient.html#af237aee28617812c2124d1c1085fd6e2" title="Serializes the object to a JSON representation.">ColorGradient::json_to()</a> shape); a missing name falls back to <code>fallback_name</code> (numbered when the file holds several); colours with any component above 1 are read as 0-255; RGB colours get alpha 1; entries with fewer than two valid stops are dropped.</p>
+<dl class="section return"><dt>Returns</dt><dd>The parsed presets, or std::nullopt when nothing usable was found. </dd></dl>
+
+</div>
+</div>
 <a id="a37f460e894944044779e1ee21eca8881" name="a37f460e894944044779e1ee21eca8881"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a37f460e894944044779e1ee21eca8881">&#9670;&#160;</a></span>register_attribute_type()</h2>
 
@@ -474,6 +679,37 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ac923af7be2d00f1e3f6eb80e730ddd27" name="ac923af7be2d00f1e3f6eb80e730ddd27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac923af7be2d00f1e3f6eb80e730ddd27">&#9670;&#160;</a></span>sample_gradient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::array&lt; float, 4 &gt; meta::sample_gradient </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="structmeta_1_1Stop.html">Stop</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>stops</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Colour of a gradient at position <code>t</code>. </p>
+<p>Linear interpolation between the two stops bracketing <code>t</code> (clamped to [0, 1]); positions outside the stop range hold the end colours. Stops need not be sorted. An empty gradient samples as opaque black. </p>
+
+</div>
+</div>
 <a id="a7bc00a3e6c82bebf50d9bd6b724d8128" name="a7bc00a3e6c82bebf50d9bd6b724d8128"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7bc00a3e6c82bebf50d9bd6b724d8128">&#9670;&#160;</a></span>serialize_metadata()</h2>
 
@@ -513,6 +749,26 @@ template&lt;typename T &gt; </div>
 
 <p>Serialize attribute state to JSON. </p>
 <p>Serialize state container to JSON. </p>
+
+</div>
+</div>
+<a id="a62297b238ad02529168333feb2633f46" name="a62297b238ad02529168333feb2633f46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62297b238ad02529168333feb2633f46">&#9670;&#160;</a></span>to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view meta::to_string </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4">GradientSort</a>&#160;</td>
+          <td class="paramname"><em>sort</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Persisted identifier of a sort key ("default", "name", "luminance", "hue"). </p>
 
 </div>
 </div>

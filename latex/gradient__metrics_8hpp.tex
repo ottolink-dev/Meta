@@ -1,0 +1,16 @@
+\doxysection{Meta/include/meta/ext/color\+\_\+gradient/gradient\+\_\+metrics.hpp File Reference}
+\hypertarget{gradient__metrics_8hpp}{}\label{gradient__metrics_8hpp}\index{Meta/include/meta/ext/color\_gradient/gradient\_metrics.hpp@{Meta/include/meta/ext/color\_gradient/gradient\_metrics.hpp}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemeta}{meta}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ float, 4 $>$ \mbox{\hyperlink{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27}{meta\+::sample\+\_\+gradient}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, float t)
+\begin{DoxyCompactList}\small\item\em Colour of a gradient at position {\ttfamily t}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{namespacemeta_aaccf36f99bf4a4400c41184836650239}{meta\+::gradient\+\_\+luminance}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, int samples=32)
+\begin{DoxyCompactList}\small\item\em Mean Rec.\+709 luma of the gradient in \mbox{[}0, 1\mbox{]}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af}{meta\+::gradient\+\_\+hue}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, int samples=32)
+\begin{DoxyCompactList}\small\item\em Dominant hue of the gradient in degrees \mbox{[}0, 360). \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,26 +1,9 @@
 var searchData=
 [
-  ['save_0',['save',['../classmeta_1_1SnapshotManager.html#a4200e1706a8f509747228524b198de03',1,'meta::SnapshotManager']]],
-  ['seed_1',['seed',['../namespacemeta_1_1presets.html#ad1df577669955490b2d562a9a5a7f1e5',1,'meta::presets']]],
-  ['serialize_5fmetadata_2',['serialize_metadata',['../namespacemeta.html#a7bc00a3e6c82bebf50d9bd6b724d8128',1,'meta']]],
-  ['serialize_5fstate_3',['serialize_state',['../namespacemeta.html#aae9e5a9de8bd2327d4d016478a582d0e',1,'meta']]],
-  ['set_5fcurrent_4',['set_current',['../classmeta_1_1ContainerGroup.html#a869e7c2de22d43cd0a9bf5f55c35229a',1,'meta::ContainerGroup']]],
-  ['set_5fcurrent_5fto_5ffirst_5',['set_current_to_first',['../classmeta_1_1ContainerGroup.html#a28ed2f86713d3ebdd57b469c47409279',1,'meta::ContainerGroup']]],
-  ['set_5ffrom_5fany_6',['set_from_any',['../classmeta_1_1Attribute.html#a19bd7cfff14eac74dbea1fa64c3d2d06',1,'meta::Attribute::set_from_any()'],['../classmeta_1_1AbstractAttribute.html#a04b9468d19cc59456c5e761a36eba6a0',1,'meta::AbstractAttribute::set_from_any()']]],
-  ['set_5finsertion_5forder_7',['set_insertion_order',['../classmeta_1_1AttributeContainer.html#af595c59d271648639f1cf0d735bd5097',1,'meta::AttributeContainer']]],
-  ['set_5fsynchronized_8',['set_synchronized',['../classmeta_1_1ContainerGroup.html#accb8dc4d9bd477b415e5e71c563fd42f',1,'meta::ContainerGroup']]],
-  ['set_5fvalue_9',['set_value',['../classmeta_1_1Attribute.html#a3f84fa8ffacc62c18207759fde4569dc',1,'meta::Attribute::set_value(const T &amp;new_value)'],['../classmeta_1_1Attribute.html#ada2b82008a45532051e2a9181b8620d6',1,'meta::Attribute::set_value(T &amp;&amp;new_value)'],['../classmeta_1_1ColorGradient.html#a7e8778ea1096d97411ee37b8142cac57',1,'meta::ColorGradient::set_value()']]],
-  ['setattributecommand_10',['SetAttributeCommand',['../classmeta_1_1SetAttributeCommand.html#a53a701bd7af30efe5dd5616f3c4590cd',1,'meta::SetAttributeCommand']]],
-  ['shared_5fattributes_11',['shared_attributes',['../classmeta_1_1ContainerGroup.html#a89247e1e458ee41ece312baf05b42d03',1,'meta::ContainerGroup']]],
-  ['size_12',['size',['../classmeta_1_1AttributeContainer.html#a883f07e5f83ad0ccd7d68280164a795c',1,'meta::AttributeContainer::size()'],['../classmeta_1_1ContainerGroup.html#a9c03b68dbd3ad3bcdc4f6eaec65db3a9',1,'meta::ContainerGroup::size()']]],
-  ['slider_5ffloat_13',['slider_float',['../namespacemeta_1_1presets.html#af991d58b77084f624501f01008bed548',1,'meta::presets']]],
-  ['slider_5fint_14',['slider_int',['../namespacemeta_1_1presets.html#a09fb0fde5b87818eb69a5a950683eb26',1,'meta::presets']]],
-  ['snapshot_5fmanager_15',['snapshot_manager',['../classmeta_1_1AttributeContainer.html#aeb6e6e1a9f188e3aa53896f9b0c94ebf',1,'meta::AttributeContainer::snapshot_manager()'],['../classmeta_1_1AttributeContainer.html#a7fb22ee2a8c63bbbf154b30b06d993cf',1,'meta::AttributeContainer::snapshot_manager() const']]],
-  ['state_16',['state',['../classmeta_1_1MetaObject.html#a3d8bade3d273f966e674df89c4c7f228',1,'meta::MetaObject::state() const'],['../classmeta_1_1MetaObject.html#adc76dbdce3a6a7191bbd18d39da495aa',1,'meta::MetaObject::state()']]],
-  ['string_5fchoice_17',['string_choice',['../namespacemeta_1_1presets.html#ae1c8693829c612cf4a042a830c24ec90',1,'meta::presets']]],
-  ['subscribe_18',['subscribe',['../classmeta_1_1Event.html#ae9efe77a31419e5cb46d49f62e7dac09',1,'meta::Event']]],
-  ['sync_5fattribute_19',['sync_attribute',['../classmeta_1_1ContainerGroup.html#a4dde409a177c45795bd880eefcf9379c',1,'meta::ContainerGroup']]],
-  ['sync_5fattribute_5facross_5fcontainers_20',['sync_attribute_across_containers',['../classmeta_1_1ContainerGroup.html#a2805b319223592a3e645b3503b3d8d95',1,'meta::ContainerGroup']]],
-  ['synchronize_5fall_21',['synchronize_all',['../classmeta_1_1ContainerGroup.html#aee1b02d0ffda778717622c910e6344a8',1,'meta::ContainerGroup']]],
-  ['synchronized_5fattributes_22',['synchronized_attributes',['../classmeta_1_1ContainerGroup.html#a34a596c7759e9ec4ba1e7b3eb0b0dc25',1,'meta::ContainerGroup']]]
+  ['raw_5fptr_0',['raw_ptr',['../classmeta_1_1AbstractAttribute.html#a8036b49592728401259c9305647ff0d8',1,'meta::AbstractAttribute::raw_ptr()=0'],['../classmeta_1_1AbstractAttribute.html#a8c2a253296045faa49c90c7baf24abb7',1,'meta::AbstractAttribute::raw_ptr() const =0'],['../classmeta_1_1Attribute.html#aaa7d5cb0af74669327d86fec1bdaccd4',1,'meta::Attribute::raw_ptr() override'],['../classmeta_1_1Attribute.html#a63d1191849012bd333c44758dbab4f7f',1,'meta::Attribute::raw_ptr() const override']]],
+  ['redo_1',['redo',['../classmeta_1_1ICommand.html#abde54c0572caf5fe8e14ddaf956d0e42',1,'meta::ICommand::redo()'],['../classmeta_1_1CommandGroup.html#a2cc2ad365dc7a2381a63d57d9cb60194',1,'meta::CommandGroup::redo()'],['../classmeta_1_1CommandStack.html#ada6b37d9cd6bd95e76989d8a2b15e5b7',1,'meta::CommandStack::redo()'],['../classmeta_1_1SetAttributeCommand.html#a3716d6401bec3db98eb96311e3597131',1,'meta::SetAttributeCommand::redo()']]],
+  ['register_5fattribute_5ftype_2',['register_attribute_type',['../classmeta_1_1AttributeFactory.html#a173bb33e9292c6cd8c6bd17a7ce961d8',1,'meta::AttributeFactory::register_attribute_type()'],['../namespacemeta.html#a37f460e894944044779e1ee21eca8881',1,'meta::register_attribute_type(const std::string &amp;name)']]],
+  ['register_5fbuiltin_5ftypes_3',['register_builtin_types',['../namespacemeta.html#aa568359dcd9dfc14b28fdd87e4a06dd3',1,'meta']]],
+  ['remove_4',['remove',['../classmeta_1_1GradientLibrary.html#a17b93eeabcbf3f59553f243040a149d4',1,'meta::GradientLibrary']]],
+  ['rename_5',['rename',['../classmeta_1_1GradientLibrary.html#aad8cad804397615557b9a9c68d29d88f',1,'meta::GradientLibrary']]]
 ];

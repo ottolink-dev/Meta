@@ -38,6 +38,10 @@ class \mbox{\hyperlink{classmeta_1_1Event}{Event}}
 \begin{DoxyCompactList}\small\item\em Thread-\/unsafe publisher-\/subscriber event stream. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}}
 \begin{DoxyCompactList}\small\item\em Manages the lifetime of a subscription to an \doxylink{classmeta_1_1Event}{Event}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1GradientImportReport}{Gradient\+Import\+Report}}
+\begin{DoxyCompactList}\small\item\em Outcome of \doxylink{classmeta_1_1GradientLibrary_ae28b9e75467380fba76b97e9934dd018}{Gradient\+Library\+::import\+\_\+file()}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1GradientLibrary}{Gradient\+Library}}
+\begin{DoxyCompactList}\small\item\em The user\textquotesingle{}s gradient presets, shared by every gradient widget in the process and persisted across projects. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structmeta_1_1GradientPresets}{Gradient\+Presets}}
 \begin{DoxyCompactList}\small\item\em \doxylink{structmeta_1_1Preset}{Preset} library for a gradient attribute, installed by the host into attribute metadata under \doxylink{namespacemeta_1_1keys_1_1ui_aa10c249df5f6548c5ee851d7d010eeb8}{keys\+::ui\+::presets}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}
@@ -93,6 +97,12 @@ using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{Data\+Pr
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
+enum class \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} \{ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}{Default}}
+, \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987}{Name}}
+, \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b}{Luminance}}
+, \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3}{Hue}}
+ \}
+\begin{DoxyCompactList}\small\item\em Ordering applied to preset grids. Favourites are always pinned first. \end{DoxyCompactList}\item 
 enum class \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}} \{ \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{full}}
 , \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901a9ed39e2ea931586b6a985a6942ef573e}{state}}
  \}
@@ -108,6 +118,20 @@ nlohmann\+::json \mbox{\hyperlink{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0
 \begin{DoxyCompactList}\small\item\em Serialize attribute state to JSON. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemeta_a86700a5afa8d165942a704ecd155cbff}{deserialize\+\_\+state}} (\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&s, const nlohmann\+::json \&j)
 \begin{DoxyCompactList}\small\item\em Deserialize attribute state from JSON. \end{DoxyCompactList}\item 
+std\+::string\+\_\+view \mbox{\hyperlink{namespacemeta_a62297b238ad02529168333feb2633f46}{to\+\_\+string}} (\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} sort)
+\begin{DoxyCompactList}\small\item\em Persisted identifier of a sort key ("{}default"{}, "{}name"{}, "{}luminance"{}, "{}hue"{}). \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} $>$ \mbox{\hyperlink{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5}{gradient\+\_\+sort\+\_\+from\+\_\+string}} (std\+::string\+\_\+view text)
+\begin{DoxyCompactList}\small\item\em Inverse of \doxylink{namespacemeta_a62297b238ad02529168333feb2633f46}{to\+\_\+string(\+Gradient\+Sort)}; std\+::nullopt for unknown identifiers. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\+\_\+file\+\_\+json}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&presets)
+\begin{DoxyCompactList}\small\item\em Gradient file document ("{}meta.\+gradients"{}, version 1) for a list of presets\+: \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ $>$ \mbox{\hyperlink{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1}{parse\+\_\+gradient\+\_\+file}} (const nlohmann\+::json \&json, std\+::string\+\_\+view fallback\+\_\+name="{}Gradient"{})
+\begin{DoxyCompactList}\small\item\em Tolerant reader for gradient files. \end{DoxyCompactList}\item 
+std\+::array$<$ float, 4 $>$ \mbox{\hyperlink{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27}{sample\+\_\+gradient}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, float t)
+\begin{DoxyCompactList}\small\item\em Colour of a gradient at position {\ttfamily t}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{namespacemeta_aaccf36f99bf4a4400c41184836650239}{gradient\+\_\+luminance}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, int samples=32)
+\begin{DoxyCompactList}\small\item\em Mean Rec.\+709 luma of the gradient in \mbox{[}0, 1\mbox{]}. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af}{gradient\+\_\+hue}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, int samples=32)
+\begin{DoxyCompactList}\small\item\em Dominant hue of the gradient in degrees \mbox{[}0, 360). \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacemeta_a37f460e894944044779e1ee21eca8881}{register\+\_\+attribute\+\_\+type}} (const std\+::string \&name)
 \begin{DoxyCompactList}\small\item\em Register a concrete attribute type in the factory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3}{register\+\_\+builtin\+\_\+types}} ()
@@ -163,6 +187,34 @@ Host-\/supplied callback returning fresh display data on each call.
 Non-\/serializable. 
 
 \doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4} 
+\index{meta@{meta}!GradientSort@{GradientSort}}
+\index{GradientSort@{GradientSort}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{GradientSort}{GradientSort}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{meta\+::\+Gradient\+Sort}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Ordering applied to preset grids. Favourites are always pinned first. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Default@{Default}!meta@{meta}}\index{meta@{meta}!Default@{Default}}}\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67} 
+Default&host order, then library insertion order \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Name@{Name}!meta@{meta}}\index{meta@{meta}!Name@{Name}}}\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987} 
+Name&case-\/insensitive name \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Luminance@{Luminance}!meta@{meta}}\index{meta@{meta}!Luminance@{Luminance}}}\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b} 
+Luminance&dark to light (gradient\+\_\+luminance) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hue@{Hue}!meta@{meta}}\index{meta@{meta}!Hue@{Hue}}}\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3} 
+Hue&around the colour wheel, achromatic last (gradient\+\_\+hue) \\
+\hline
+
+\end{DoxyEnumFields}
 \Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}\label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901} 
 \index{meta@{meta}!SerializationMode@{SerializationMode}}
 \index{SerializationMode@{SerializationMode}!meta@{meta}}
@@ -206,7 +258,69 @@ Deserialize metadata container from JSON. \Hypertarget{namespacemeta_a86700a5afa
 
 Deserialize attribute state from JSON. 
 
-Deserialize state container from JSON. \Hypertarget{namespacemeta_a37f460e894944044779e1ee21eca8881}\label{namespacemeta_a37f460e894944044779e1ee21eca8881} 
+Deserialize state container from JSON. \Hypertarget{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}\label{namespacemeta_ac78753c79f3410338cdb05e143eb5a36} 
+\index{meta@{meta}!gradient\_file\_json@{gradient\_file\_json}}
+\index{gradient\_file\_json@{gradient\_file\_json}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{gradient\_file\_json()}{gradient\_file\_json()}}
+{\footnotesize\ttfamily nlohmann\+::json meta\+::gradient\+\_\+file\+\_\+json (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&}]{presets }\end{DoxyParamCaption})}
+
+
+
+Gradient file document ("{}meta.\+gradients"{}, version 1) for a list of presets\+: 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\textcolor{stringliteral}{"{}format"{}}:\ \textcolor{stringliteral}{"{}meta.gradients"{}},\ \textcolor{stringliteral}{"{}version"{}}:\ 1,}
+\DoxyCodeLine{\ \textcolor{stringliteral}{"{}gradients"{}}:\ [\{\textcolor{stringliteral}{"{}name"{}}:\ \textcolor{stringliteral}{"{}..."{}},\ \textcolor{stringliteral}{"{}stops"{}}:\ [\{\textcolor{stringliteral}{"{}position"{}}:\ t,\ \textcolor{stringliteral}{"{}color"{}}:}
+\DoxyCodeLine{[r,g,b,a]\}]\}]\}}
+
+\end{DoxyCode}
+ \Hypertarget{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af}\label{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af} 
+\index{meta@{meta}!gradient\_hue@{gradient\_hue}}
+\index{gradient\_hue@{gradient\_hue}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{gradient\_hue()}{gradient\_hue()}}
+{\footnotesize\ttfamily float meta\+::gradient\+\_\+hue (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops,  }\item[{int}]{samples = {\ttfamily 32} }\end{DoxyParamCaption})}
+
+
+
+Dominant hue of the gradient in degrees \mbox{[}0, 360). 
+
+Saturation-\/weighted circular mean of the HSV hue over {\ttfamily samples} evenly spaced samples. Returns -\/1 when the gradient is achromatic (total saturation weight below 1e-\/4), so hue-\/sorted lists can push greys last. \Hypertarget{namespacemeta_aaccf36f99bf4a4400c41184836650239}\label{namespacemeta_aaccf36f99bf4a4400c41184836650239} 
+\index{meta@{meta}!gradient\_luminance@{gradient\_luminance}}
+\index{gradient\_luminance@{gradient\_luminance}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{gradient\_luminance()}{gradient\_luminance()}}
+{\footnotesize\ttfamily float meta\+::gradient\+\_\+luminance (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops,  }\item[{int}]{samples = {\ttfamily 32} }\end{DoxyParamCaption})}
+
+
+
+Mean Rec.\+709 luma of the gradient in \mbox{[}0, 1\mbox{]}. 
+
+Averages {\ttfamily samples} evenly spaced samples of {\ttfamily 0.\+2126 R + 0.\+7152 G + 0.\+0722 B} on the stored (s\+RGB-\/encoded) components; alpha is ignored. Used for the "{}\+Luminance"{} sort of preset grids. \Hypertarget{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5}\label{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5} 
+\index{meta@{meta}!gradient\_sort\_from\_string@{gradient\_sort\_from\_string}}
+\index{gradient\_sort\_from\_string@{gradient\_sort\_from\_string}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{gradient\_sort\_from\_string()}{gradient\_sort\_from\_string()}}
+{\footnotesize\ttfamily std\+::optional$<$ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} $>$ meta\+::gradient\+\_\+sort\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{text }\end{DoxyParamCaption})}
+
+
+
+Inverse of \doxylink{namespacemeta_a62297b238ad02529168333feb2633f46}{to\+\_\+string(\+Gradient\+Sort)}; std\+::nullopt for unknown identifiers. 
+
+\Hypertarget{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1}\label{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1} 
+\index{meta@{meta}!parse\_gradient\_file@{parse\_gradient\_file}}
+\index{parse\_gradient\_file@{parse\_gradient\_file}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{parse\_gradient\_file()}{parse\_gradient\_file()}}
+{\footnotesize\ttfamily std\+::optional$<$ std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ $>$ meta\+::parse\+\_\+gradient\+\_\+file (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json,  }\item[{std\+::string\+\_\+view}]{fallback\+\_\+name = {\ttfamily "{}Gradient"{}} }\end{DoxyParamCaption})}
+
+
+
+Tolerant reader for gradient files. 
+
+Accepts the document produced by \doxylink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\+\_\+file\+\_\+json()}, a bare array of gradients, or a single gradient object. A gradient\textquotesingle{}s stops may live under "{}stops"{} or "{}value"{} (the \doxylink{classmeta_1_1ColorGradient_af237aee28617812c2124d1c1085fd6e2}{Color\+Gradient\+::json\+\_\+to()} shape); a missing name falls back to {\ttfamily fallback\+\_\+name} (numbered when the file holds several); colours with any component above 1 are read as 0-\/255; RGB colours get alpha 1; entries with fewer than two valid stops are dropped.
+
+\begin{DoxyReturn}{Returns}
+The parsed presets, or std\+::nullopt when nothing usable was found. 
+\end{DoxyReturn}
+\Hypertarget{namespacemeta_a37f460e894944044779e1ee21eca8881}\label{namespacemeta_a37f460e894944044779e1ee21eca8881} 
 \index{meta@{meta}!register\_attribute\_type@{register\_attribute\_type}}
 \index{register\_attribute\_type@{register\_attribute\_type}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{register\_attribute\_type()}{register\_attribute\_type()}}
@@ -237,7 +351,17 @@ Register a concrete attribute type in the factory.
 
 Register all built-\/in attribute types. 
 
-Invoked automatically on first use of \doxylink{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}{Attribute\+Factory\+::create()}; hosts do not need to call it. Calling it manually remains safe. \Hypertarget{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}\label{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128} 
+Invoked automatically on first use of \doxylink{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}{Attribute\+Factory\+::create()}; hosts do not need to call it. Calling it manually remains safe. \Hypertarget{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27}\label{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27} 
+\index{meta@{meta}!sample\_gradient@{sample\_gradient}}
+\index{sample\_gradient@{sample\_gradient}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{sample\_gradient()}{sample\_gradient()}}
+{\footnotesize\ttfamily std\+::array$<$ float, 4 $>$ meta\+::sample\+\_\+gradient (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops,  }\item[{float}]{t }\end{DoxyParamCaption})}
+
+
+
+Colour of a gradient at position {\ttfamily t}. 
+
+Linear interpolation between the two stops bracketing {\ttfamily t} (clamped to \mbox{[}0, 1\mbox{]}); positions outside the stop range hold the end colours. Stops need not be sorted. An empty gradient samples as opaque black. \Hypertarget{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}\label{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128} 
 \index{meta@{meta}!serialize\_metadata@{serialize\_metadata}}
 \index{serialize\_metadata@{serialize\_metadata}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{serialize\_metadata()}{serialize\_metadata()}}
@@ -257,7 +381,17 @@ Serialize metadata container to JSON. \Hypertarget{namespacemeta_aae9e5a9de8bd23
 
 Serialize attribute state to JSON. 
 
-Serialize state container to JSON. 
+Serialize state container to JSON. \Hypertarget{namespacemeta_a62297b238ad02529168333feb2633f46}\label{namespacemeta_a62297b238ad02529168333feb2633f46} 
+\index{meta@{meta}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!meta@{meta}}
+\doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily std\+::string\+\_\+view meta\+::to\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}}}]{sort }\end{DoxyParamCaption})}
+
+
+
+Persisted identifier of a sort key ("{}default"{}, "{}name"{}, "{}luminance"{}, "{}hue"{}). 
+
+
 
 \doxysubsection{Variable Documentation}
 \Hypertarget{namespacemeta_a75366aee356107c1efb503fd31f08fd1}\label{namespacemeta_a75366aee356107c1efb503fd31f08fd1} 

@@ -38,5 +38,5 @@
 | std::vector<float> | Qt | CurveEditor (default) | Interactive 2D curve canvas editor. | label, curve_size, min_x, max_x, min_y, max_y |
 | std::vector<glm::vec3> | Qt | PointsEditor (default) | Interactive 2D/3D points canvas editor with toolbar actions and background image provider. | label, min_x, max_x, min_y, max_y, z_step, closed, data_provider |
 | std::vector<glm::vec3> | Qt | PathEditor | Interactive connected path editor canvas with toolbar actions and background image provider. | label, min_x, max_x, min_y, max_y, z_step, closed, data_provider |
-| meta::ColorGradient | Qt | GradientEditor (default) | Interactive color gradient picker with stops and presets. | label, presets |
+| meta::ColorGradient | Qt | GradientEditor (default) | Interactive color gradient picker with stops; preset grid merges host presets with the user's persistent gradient library (save / import / export / favorites / sort by name, luminance or hue). | label, presets |
 | meta::Array | Qt | ArrayEditor (default) | 2D array drawing canvas with background image provider support. | label, width, height, data_provider |

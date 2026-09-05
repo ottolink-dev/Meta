@@ -15,6 +15,8 @@ var annotated_dup =
       [ "ContainerGroup", "classmeta_1_1ContainerGroup.html", "classmeta_1_1ContainerGroup" ],
       [ "Event", "classmeta_1_1Event.html", "classmeta_1_1Event" ],
       [ "EventConnection", "classmeta_1_1EventConnection.html", "classmeta_1_1EventConnection" ],
+      [ "GradientImportReport", "structmeta_1_1GradientImportReport.html", "structmeta_1_1GradientImportReport" ],
+      [ "GradientLibrary", "classmeta_1_1GradientLibrary.html", "classmeta_1_1GradientLibrary" ],
       [ "GradientPresets", "structmeta_1_1GradientPresets.html", "structmeta_1_1GradientPresets" ],
       [ "ICommand", "classmeta_1_1ICommand.html", "classmeta_1_1ICommand" ],
       [ "Logger", "classmeta_1_1Logger.html", "classmeta_1_1Logger" ],

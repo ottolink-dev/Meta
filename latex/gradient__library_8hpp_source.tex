@@ -1,0 +1,121 @@
+\doxysection{gradient\+\_\+library.\+hpp}
+\hypertarget{gradient__library_8hpp_source}{}\label{gradient__library_8hpp_source}\index{Meta/include/meta/ext/color\_gradient/gradient\_library.hpp@{Meta/include/meta/ext/color\_gradient/gradient\_library.hpp}}
+\mbox{\hyperlink{gradient__library_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ Copyright\ (c)\ 2026\ Otto\ Link.\ Distributed\ under\ the\ terms\ of\ the\ GNU\ General}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ \ \ Public\ License.\ The\ full\ license\ is\ in\ the\ file\ LICENSE,\ distributed\ with}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ \ \ this\ software.\ */}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string\_view>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <nlohmann/json.hpp>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{event_8hpp}{meta/core/event.hpp}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ext_2color__gradient_2color__gradient_8hpp}{meta/ext/color\_gradient/color\_gradient.hpp}}"{}}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemeta}{meta}}\ \{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{GradientSort}}\ \{}
+\DoxyCodeLine{00021\ \ \ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}{Default}},\ \ \ }
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a49ee3087348e8d44e1feda1917443987}{Name}},\ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b}{Luminance}},\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4afb5d805f5b3b22e4fd4a1bc66875dbe3}{Hue}}\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ std::string\_view\ \mbox{\hyperlink{namespacemeta_a62297b238ad02529168333feb2633f46}{to\_string}}(\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{GradientSort}}\ sort);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ std::optional<GradientSort>\ \mbox{\hyperlink{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5}{gradient\_sort\_from\_string}}(std::string\_view\ text);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmeta_1_1GradientImportReport}{GradientImportReport}}\ \{}
+\DoxyCodeLine{00035\ \ \ std::size\_t\ \mbox{\hyperlink{structmeta_1_1GradientImportReport_a8a67a008265f95e4606a0b272bec22c6}{added}}\ =\ 0;\ \ \ }
+\DoxyCodeLine{00036\ \ \ std::size\_t\ \mbox{\hyperlink{structmeta_1_1GradientImportReport_afeee56ad5a41cfbc869274cf5740dbbf}{renamed}}\ =\ 0;\ }
+\DoxyCodeLine{00037\ \ \ std::size\_t\ \mbox{\hyperlink{structmeta_1_1GradientImportReport_a64c6c418775c403ef337d4a825347050}{skipped}}\ =\ 0;\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structmeta_1_1GradientImportReport_ae7c8cf9b207a4a3d7cc0378c420673dd}{ok}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00050\ nlohmann::json\ \mbox{\hyperlink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\_file\_json}}(\textcolor{keyword}{const}\ std::vector<Preset>\ \&presets);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00064\ std::optional<std::vector<Preset>>}
+\DoxyCodeLine{00065\ \mbox{\hyperlink{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1}{parse\_gradient\_file}}(\textcolor{keyword}{const}\ nlohmann::json\ \&json,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\_view\ fallback\_name\ =\ \textcolor{stringliteral}{"{}Gradient"{}});}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classmeta_1_1GradientLibrary}{GradientLibrary}}\ \{}
+\DoxyCodeLine{00082\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{classmeta_1_1Event}{Event<>}}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a0d8970ad656ea38ae4a4b8482145e98a}{changed}};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \mbox{\hyperlink{classmeta_1_1GradientLibrary_af81bf32cab5b092baedee03ece80f883}{GradientLibrary}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary}{GradientLibrary}}\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_a6d8c6827f9f82f123d48ad96c2b35c4c}{instance}}();}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ storage}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a19ee36eb3cd6b0aae49000cc5859c27e}{set\_path}}(std::filesystem::path\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}});}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keyword}{const}\ std::filesystem::path\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00100\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a04402836b93a3cea882038d9bde529d3}{set\_autosave}}(\textcolor{keywordtype}{bool}\ on);}
+\DoxyCodeLine{00101\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a72e6ec576e7c91b05c657760f9e86df6}{autosave}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53}{load}}();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_acc60a8ec50b8610fa2a8339f42f20b32}{save}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ user\ presets}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \textcolor{keyword}{const}\ std::vector<Preset>\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_ace9d146de4ff9dff36e240ee4ab63a9c}{presets}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_abbc551e31c5e1f471ab653260cdc810a}{has}}(std::string\_view\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}}\ *\mbox{\hyperlink{classmeta_1_1GradientLibrary_a65c721677d4fa8c9652e657e347fcdc2}{find}}(std::string\_view\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00124\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a9f3808692c3948fedc9eb291faf877e4}{add}}(\mbox{\hyperlink{structmeta_1_1Preset}{Preset}}\ preset);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a9788431d10dbbafe844adee980a31610}{update}}(std::string\_view\ name,\ std::vector<Stop>\ stops);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_aad8cad804397615557b9a9c68d29d88f}{rename}}(std::string\_view\ from,\ std::string\_view\ to);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a17b93eeabcbf3f59553f243040a149d4}{remove}}(std::string\_view\ name);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00137\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_aebd6cc1c079a85696454ca1b6c3be360}{clear}}();}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00141\ \ \ std::string\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a80a9a562fd27608d1461118fa306d518}{unique\_name}}(std::string\_view\ base,}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&reserved\ =\ \{\})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ favourites}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a18227bec7305887da572ff7e2c8b3cc9}{is\_favorite}}(std::string\_view\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_adf4864af07e6cf485a8434832e2b7b46}{set\_favorite}}(std::string\_view\ name,\ \textcolor{keywordtype}{bool}\ on);}
+\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_a37f5e3b9bb017bb6f805941f2d69383a}{favorites}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ sort\ preference}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{GradientSort}}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ac2897feb2a61c6d446aa7cc62df780a2}{sort}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a0784787d96eb18e3fe84a491e68959a1}{set\_sort}}(\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{GradientSort}}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ac2897feb2a61c6d446aa7cc62df780a2}{sort}});}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \textcolor{comment}{//\ -\/-\/-\/\ serialization}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00158\ \ \ nlohmann::json\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ac5265d4ad0222d9fbd25e1c963177e4b}{json\_to}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ade9f1d4ff882aff7dad21ab12f331642}{json\_from}}(\textcolor{keyword}{const}\ nlohmann::json\ \&json);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00170\ \ \ \mbox{\hyperlink{structmeta_1_1GradientImportReport}{GradientImportReport}}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae28b9e75467380fba76b97e9934dd018}{import\_file}}(\textcolor{keyword}{const}\ std::filesystem::path\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}});}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a18fb8cc1deb03c08f13d99f9b7d0009f}{export\_file}}(\textcolor{keyword}{const}\ std::filesystem::path\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}},}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Preset>\ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_ace9d146de4ff9dff36e240ee4ab63a9c}{presets}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae8f99203a44a0e6dd9a2e1c03db0dc19}{on\_modified}}();}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ std::vector<Preset>\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae895b6e7a4b7ba9e981b85034bddf8c2}{presets\_}};}
+\DoxyCodeLine{00180\ \ \ std::vector<std::string>\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a8b62c0b109c475108a0175f075f4224e}{favorites\_}};}
+\DoxyCodeLine{00181\ \ \ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{GradientSort}}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a57296ec3c55a9f48f2eb195a4a1cc1a2}{sort\_}}\ =\ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}{GradientSort::Default}};}
+\DoxyCodeLine{00182\ \ \ std::filesystem::path\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ad8ecd7bc1781efab4ff0524aad223206}{path\_}};}
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classmeta_1_1GradientLibrary_aee1fb940a1ebb3d2f4aa786418361bec}{autosave\_}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00184\ \};}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \}\ \textcolor{comment}{//\ namespace\ meta}}
+
+\end{DoxyCode}

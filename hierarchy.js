@@ -14,6 +14,8 @@ var hierarchy =
     [ "meta::Event< meta::AbstractAttribute & >", "classmeta_1_1Event.html", null ],
     [ "meta::Event< T >", "classmeta_1_1Event.html", null ],
     [ "meta::EventConnection", "classmeta_1_1EventConnection.html", null ],
+    [ "meta::GradientImportReport", "structmeta_1_1GradientImportReport.html", null ],
+    [ "meta::GradientLibrary", "classmeta_1_1GradientLibrary.html", null ],
     [ "meta::GradientPresets", "structmeta_1_1GradientPresets.html", null ],
     [ "meta::ICommand", "classmeta_1_1ICommand.html", [
       [ "meta::CommandGroup", "classmeta_1_1CommandGroup.html", null ],

@@ -1,0 +1,395 @@
+\doxysection{meta\+::Gradient\+Library Class Reference}
+\hypertarget{classmeta_1_1GradientLibrary}{}\label{classmeta_1_1GradientLibrary}\index{meta::GradientLibrary@{meta::GradientLibrary}}
+
+
+The user\textquotesingle{}s gradient presets, shared by every gradient widget in the process and persisted across projects.  
+
+
+
+
+{\ttfamily \#include $<$gradient\+\_\+library.\+hpp$>$}
+
+
+
+Collaboration diagram for meta\+::Gradient\+Library\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classmeta_1_1GradientLibrary__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmeta_1_1GradientLibrary_af81bf32cab5b092baedee03ece80f883}{Gradient\+Library}} ()=default
+\item 
+void \mbox{\hyperlink{classmeta_1_1GradientLibrary_a19ee36eb3cd6b0aae49000cc5859c27e}{set\+\_\+path}} (std\+::filesystem\+::path \mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}})
+\begin{DoxyCompactList}\small\item\em Sets the file used by \doxylink{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53}{load()}/save() and by autosave. Does not load. \end{DoxyCompactList}\item 
+const std\+::filesystem\+::path \& \mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}} () const
+\begin{DoxyCompactList}\small\item\em File used for persistence; empty when the library is in-\/memory only. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1GradientLibrary_a04402836b93a3cea882038d9bde529d3}{set\+\_\+autosave}} (bool on)
+\begin{DoxyCompactList}\small\item\em Whether mutations save automatically (default true). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_a72e6ec576e7c91b05c657760f9e86df6}{autosave}} () const
+\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53}{load}} ()
+\begin{DoxyCompactList}\small\item\em Replaces the content with the document at \doxylink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path()}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_acc60a8ec50b8610fa2a8339f42f20b32}{save}} () const
+\begin{DoxyCompactList}\small\item\em Writes \doxylink{classmeta_1_1GradientLibrary_ac5265d4ad0222d9fbd25e1c963177e4b}{json\+\_\+to()} to \doxylink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path()}, creating parent directories. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \& \mbox{\hyperlink{classmeta_1_1GradientLibrary_ace9d146de4ff9dff36e240ee4ab63a9c}{presets}} () const
+\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_abbc551e31c5e1f471ab653260cdc810a}{has}} (std\+::string\+\_\+view name) const
+\item 
+const \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classmeta_1_1GradientLibrary_a65c721677d4fa8c9652e657e347fcdc2}{find}} (std\+::string\+\_\+view name) const
+\item 
+std\+::string \mbox{\hyperlink{classmeta_1_1GradientLibrary_a9f3808692c3948fedc9eb291faf877e4}{add}} (\mbox{\hyperlink{structmeta_1_1Preset}{Preset}} preset)
+\begin{DoxyCompactList}\small\item\em Stores a preset. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_a9788431d10dbbafe844adee980a31610}{update}} (std\+::string\+\_\+view name, std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ stops)
+\begin{DoxyCompactList}\small\item\em Replaces the stops of an existing preset (sorted by position). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_aad8cad804397615557b9a9c68d29d88f}{rename}} (std\+::string\+\_\+view from, std\+::string\+\_\+view to)
+\begin{DoxyCompactList}\small\item\em Renames a preset, carrying its favourite flag along. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_a17b93eeabcbf3f59553f243040a149d4}{remove}} (std\+::string\+\_\+view name)
+\begin{DoxyCompactList}\small\item\em Removes a preset and its favourite flag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classmeta_1_1GradientLibrary_aebd6cc1c079a85696454ca1b6c3be360}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Removes every preset and favourite. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classmeta_1_1GradientLibrary_a80a9a562fd27608d1461118fa306d518}{unique\+\_\+name}} (std\+::string\+\_\+view base, const std\+::vector$<$ std\+::string $>$ \&reserved=\{\}) const
+\begin{DoxyCompactList}\small\item\em {\ttfamily base} if free, otherwise "{}base (2)"{}, "{}base (3)"{}, ...; names in {\ttfamily reserved} (e.\+g. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_a18227bec7305887da572ff7e2c8b3cc9}{is\+\_\+favorite}} (std\+::string\+\_\+view name) const
+\item 
+void \mbox{\hyperlink{classmeta_1_1GradientLibrary_adf4864af07e6cf485a8434832e2b7b46}{set\+\_\+favorite}} (std\+::string\+\_\+view name, bool on)
+\item 
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classmeta_1_1GradientLibrary_a37f5e3b9bb017bb6f805941f2d69383a}{favorites}} () const
+\item 
+\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} \mbox{\hyperlink{classmeta_1_1GradientLibrary_ac2897feb2a61c6d446aa7cc62df780a2}{sort}} () const
+\item 
+void \mbox{\hyperlink{classmeta_1_1GradientLibrary_a0784787d96eb18e3fe84a491e68959a1}{set\+\_\+sort}} (\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} \mbox{\hyperlink{classmeta_1_1GradientLibrary_ac2897feb2a61c6d446aa7cc62df780a2}{sort}})
+\item 
+nlohmann\+::json \mbox{\hyperlink{classmeta_1_1GradientLibrary_ac5265d4ad0222d9fbd25e1c963177e4b}{json\+\_\+to}} () const
+\begin{DoxyCompactList}\small\item\em Library document\+: \doxylink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\+\_\+file\+\_\+json()} plus "{}favorites"{} and "{}sort"{}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_ade9f1d4ff882aff7dad21ab12f331642}{json\+\_\+from}} (const nlohmann\+::json \&json)
+\begin{DoxyCompactList}\small\item\em Replaces the content from a library document; false (state untouched) unless {\ttfamily json} is an object with a "{}gradients"{} array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmeta_1_1GradientImportReport}{Gradient\+Import\+Report}} \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae28b9e75467380fba76b97e9934dd018}{import\+\_\+file}} (const std\+::filesystem\+::path \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}})
+\begin{DoxyCompactList}\small\item\em Merges the gradients of a file into the library. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_a18fb8cc1deb03c08f13d99f9b7d0009f}{export\+\_\+file}} (const std\+::filesystem\+::path \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path}}, const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&\mbox{\hyperlink{classmeta_1_1GradientLibrary_ace9d146de4ff9dff36e240ee4ab63a9c}{presets}}) const
+\begin{DoxyCompactList}\small\item\em Writes {\ttfamily presets} as a gradient file (no favourites, no sort). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classmeta_1_1GradientLibrary}{Gradient\+Library}} \& \mbox{\hyperlink{classmeta_1_1GradientLibrary_a6d8c6827f9f82f123d48ad96c2b35c4c}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Process-\/wide default library. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmeta_1_1Event}{Event}} \mbox{\hyperlink{classmeta_1_1GradientLibrary_a0d8970ad656ea38ae4a4b8482145e98a}{changed}}
+\begin{DoxyCompactList}\small\item\em Fired after every effective mutation and after a successful load. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae8f99203a44a0e6dd9a2e1c03db0dc19}{on\+\_\+modified}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \mbox{\hyperlink{classmeta_1_1GradientLibrary_ae895b6e7a4b7ba9e981b85034bddf8c2}{presets\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmeta_1_1GradientLibrary_a8b62c0b109c475108a0175f075f4224e}{favorites\+\_\+}}
+\item 
+\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} \mbox{\hyperlink{classmeta_1_1GradientLibrary_a57296ec3c55a9f48f2eb195a4a1cc1a2}{sort\+\_\+}} = \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}{Gradient\+Sort\+::\+Default}}
+\item 
+std\+::filesystem\+::path \mbox{\hyperlink{classmeta_1_1GradientLibrary_ad8ecd7bc1781efab4ff0524aad223206}{path\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classmeta_1_1GradientLibrary_aee1fb940a1ebb3d2f4aa786418361bec}{autosave\+\_\+}} = true
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The user\textquotesingle{}s gradient presets, shared by every gradient widget in the process and persisted across projects. 
+
+Holds user presets (insertion ordered), favourite names (which may also refer to host presets that are not in the library) and the preferred sort key. Every effective mutation autosaves to \doxylink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path()} (when set) and notifies {\ttfamily changed}. Hosts normally use \doxylink{classmeta_1_1GradientLibrary_a6d8c6827f9f82f123d48ad96c2b35c4c}{instance()}; the class stays instantiable for tests and for hosts that want several libraries.
+
+The Qt Gradient\+Picker assigns a default per-\/user path on first use when none is set; call \doxylink{classmeta_1_1GradientLibrary_a19ee36eb3cd6b0aae49000cc5859c27e}{set\+\_\+path()} + \doxylink{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53}{load()} beforehand to choose another. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmeta_1_1GradientLibrary_af81bf32cab5b092baedee03ece80f883}\label{classmeta_1_1GradientLibrary_af81bf32cab5b092baedee03ece80f883} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!GradientLibrary@{GradientLibrary}}
+\index{GradientLibrary@{GradientLibrary}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{GradientLibrary()}{GradientLibrary()}}
+{\footnotesize\ttfamily meta\+::\+Gradient\+Library\+::\+Gradient\+Library (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmeta_1_1GradientLibrary_a9f3808692c3948fedc9eb291faf877e4}\label{classmeta_1_1GradientLibrary_a9f3808692c3948fedc9eb291faf877e4} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!add@{add}}
+\index{add@{add}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily std\+::string meta\+::\+Gradient\+Library\+::add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmeta_1_1Preset}{Preset}}}]{preset }\end{DoxyParamCaption})}
+
+
+
+Stores a preset. 
+
+The name is trimmed ("{}\+Gradient"{} when empty) and made unique with \doxylink{classmeta_1_1GradientLibrary_a80a9a562fd27608d1461118fa306d518}{unique\+\_\+name()}; stops are sorted by position. \begin{DoxyReturn}{Returns}
+The name the preset was stored under. 
+\end{DoxyReturn}
+\Hypertarget{classmeta_1_1GradientLibrary_a72e6ec576e7c91b05c657760f9e86df6}\label{classmeta_1_1GradientLibrary_a72e6ec576e7c91b05c657760f9e86df6} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!autosave@{autosave}}
+\index{autosave@{autosave}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{autosave()}{autosave()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::autosave (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_aebd6cc1c079a85696454ca1b6c3be360}\label{classmeta_1_1GradientLibrary_aebd6cc1c079a85696454ca1b6c3be360} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!clear@{clear}}
+\index{clear@{clear}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void meta\+::\+Gradient\+Library\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Removes every preset and favourite. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_a18fb8cc1deb03c08f13d99f9b7d0009f}\label{classmeta_1_1GradientLibrary_a18fb8cc1deb03c08f13d99f9b7d0009f} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!export\_file@{export\_file}}
+\index{export\_file@{export\_file}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{export\_file()}{export\_file()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::export\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{path,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&}]{presets }\end{DoxyParamCaption}) const}
+
+
+
+Writes {\ttfamily presets} as a gradient file (no favourites, no sort). 
+
+\Hypertarget{classmeta_1_1GradientLibrary_a37f5e3b9bb017bb6f805941f2d69383a}\label{classmeta_1_1GradientLibrary_a37f5e3b9bb017bb6f805941f2d69383a} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!favorites@{favorites}}
+\index{favorites@{favorites}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{favorites()}{favorites()}}
+{\footnotesize\ttfamily const std\+::vector$<$ std\+::string $>$ \& meta\+::\+Gradient\+Library\+::favorites (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_a65c721677d4fa8c9652e657e347fcdc2}\label{classmeta_1_1GradientLibrary_a65c721677d4fa8c9652e657e347fcdc2} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!find@{find}}
+\index{find@{find}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} \texorpdfstring{$\ast$}{*} meta\+::\+Gradient\+Library\+::find (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{name }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_abbc551e31c5e1f471ab653260cdc810a}\label{classmeta_1_1GradientLibrary_abbc551e31c5e1f471ab653260cdc810a} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!has@{has}}
+\index{has@{has}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{has()}{has()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::has (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{name }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_ae28b9e75467380fba76b97e9934dd018}\label{classmeta_1_1GradientLibrary_ae28b9e75467380fba76b97e9934dd018} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!import\_file@{import\_file}}
+\index{import\_file@{import\_file}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{import\_file()}{import\_file()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmeta_1_1GradientImportReport}{Gradient\+Import\+Report}} meta\+::\+Gradient\+Library\+::import\+\_\+file (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Merges the gradients of a file into the library. 
+
+Identical duplicates (same name and stops) are skipped; name clashes are stored under \doxylink{classmeta_1_1GradientLibrary_a80a9a562fd27608d1461118fa306d518}{unique\+\_\+name()}; everything else is added as is. \Hypertarget{classmeta_1_1GradientLibrary_a6d8c6827f9f82f123d48ad96c2b35c4c}\label{classmeta_1_1GradientLibrary_a6d8c6827f9f82f123d48ad96c2b35c4c} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!instance@{instance}}
+\index{instance@{instance}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classmeta_1_1GradientLibrary}{Gradient\+Library}} \& meta\+::\+Gradient\+Library\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Process-\/wide default library. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_a18227bec7305887da572ff7e2c8b3cc9}\label{classmeta_1_1GradientLibrary_a18227bec7305887da572ff7e2c8b3cc9} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!is\_favorite@{is\_favorite}}
+\index{is\_favorite@{is\_favorite}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{is\_favorite()}{is\_favorite()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::is\+\_\+favorite (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{name }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_ade9f1d4ff882aff7dad21ab12f331642}\label{classmeta_1_1GradientLibrary_ade9f1d4ff882aff7dad21ab12f331642} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!json\_from@{json\_from}}
+\index{json\_from@{json\_from}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json }\end{DoxyParamCaption})}
+
+
+
+Replaces the content from a library document; false (state untouched) unless {\ttfamily json} is an object with a "{}gradients"{} array. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_ac5265d4ad0222d9fbd25e1c963177e4b}\label{classmeta_1_1GradientLibrary_ac5265d4ad0222d9fbd25e1c963177e4b} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!json\_to@{json\_to}}
+\index{json\_to@{json\_to}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
+{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Gradient\+Library\+::json\+\_\+to (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Library document\+: \doxylink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\+\_\+file\+\_\+json()} plus "{}favorites"{} and "{}sort"{}. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53}\label{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!load@{load}}
+\index{load@{load}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Replaces the content with the document at \doxylink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path()}. 
+
+\begin{DoxyReturn}{Returns}
+false when no path is set, the file is missing or invalid; the current content is left untouched in every failure case. 
+\end{DoxyReturn}
+\Hypertarget{classmeta_1_1GradientLibrary_ae8f99203a44a0e6dd9a2e1c03db0dc19}\label{classmeta_1_1GradientLibrary_ae8f99203a44a0e6dd9a2e1c03db0dc19} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!on\_modified@{on\_modified}}
+\index{on\_modified@{on\_modified}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{on\_modified()}{on\_modified()}}
+{\footnotesize\ttfamily void meta\+::\+Gradient\+Library\+::on\+\_\+modified (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}\label{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!path@{path}}
+\index{path@{path}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{path()}{path()}}
+{\footnotesize\ttfamily const std\+::filesystem\+::path \& meta\+::\+Gradient\+Library\+::path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+File used for persistence; empty when the library is in-\/memory only. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_ace9d146de4ff9dff36e240ee4ab63a9c}\label{classmeta_1_1GradientLibrary_ace9d146de4ff9dff36e240ee4ab63a9c} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!presets@{presets}}
+\index{presets@{presets}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{presets()}{presets()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \& meta\+::\+Gradient\+Library\+::presets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_a17b93eeabcbf3f59553f243040a149d4}\label{classmeta_1_1GradientLibrary_a17b93eeabcbf3f59553f243040a149d4} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!remove@{remove}}
+\index{remove@{remove}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::remove (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{name }\end{DoxyParamCaption})}
+
+
+
+Removes a preset and its favourite flag. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_aad8cad804397615557b9a9c68d29d88f}\label{classmeta_1_1GradientLibrary_aad8cad804397615557b9a9c68d29d88f} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!rename@{rename}}
+\index{rename@{rename}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{rename()}{rename()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::rename (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{from,  }\item[{std\+::string\+\_\+view}]{to }\end{DoxyParamCaption})}
+
+
+
+Renames a preset, carrying its favourite flag along. 
+
+Fails when {\ttfamily from} is unknown, {\ttfamily to} is blank, or {\ttfamily to} already exists (unless equal). \Hypertarget{classmeta_1_1GradientLibrary_acc60a8ec50b8610fa2a8339f42f20b32}\label{classmeta_1_1GradientLibrary_acc60a8ec50b8610fa2a8339f42f20b32} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!save@{save}}
+\index{save@{save}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Writes \doxylink{classmeta_1_1GradientLibrary_ac5265d4ad0222d9fbd25e1c963177e4b}{json\+\_\+to()} to \doxylink{classmeta_1_1GradientLibrary_aec93f8fc27c244149086b3fba9171f54}{path()}, creating parent directories. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_a04402836b93a3cea882038d9bde529d3}\label{classmeta_1_1GradientLibrary_a04402836b93a3cea882038d9bde529d3} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!set\_autosave@{set\_autosave}}
+\index{set\_autosave@{set\_autosave}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{set\_autosave()}{set\_autosave()}}
+{\footnotesize\ttfamily void meta\+::\+Gradient\+Library\+::set\+\_\+autosave (\begin{DoxyParamCaption}\item[{bool}]{on }\end{DoxyParamCaption})}
+
+
+
+Whether mutations save automatically (default true). 
+
+\Hypertarget{classmeta_1_1GradientLibrary_adf4864af07e6cf485a8434832e2b7b46}\label{classmeta_1_1GradientLibrary_adf4864af07e6cf485a8434832e2b7b46} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!set\_favorite@{set\_favorite}}
+\index{set\_favorite@{set\_favorite}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{set\_favorite()}{set\_favorite()}}
+{\footnotesize\ttfamily void meta\+::\+Gradient\+Library\+::set\+\_\+favorite (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{name,  }\item[{bool}]{on }\end{DoxyParamCaption})}
+
+\Hypertarget{classmeta_1_1GradientLibrary_a19ee36eb3cd6b0aae49000cc5859c27e}\label{classmeta_1_1GradientLibrary_a19ee36eb3cd6b0aae49000cc5859c27e} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!set\_path@{set\_path}}
+\index{set\_path@{set\_path}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{set\_path()}{set\_path()}}
+{\footnotesize\ttfamily void meta\+::\+Gradient\+Library\+::set\+\_\+path (\begin{DoxyParamCaption}\item[{std\+::filesystem\+::path}]{path }\end{DoxyParamCaption})}
+
+
+
+Sets the file used by \doxylink{classmeta_1_1GradientLibrary_ae89bf56500530a8ab6f1960019d27e53}{load()}/save() and by autosave. Does not load. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_a0784787d96eb18e3fe84a491e68959a1}\label{classmeta_1_1GradientLibrary_a0784787d96eb18e3fe84a491e68959a1} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!set\_sort@{set\_sort}}
+\index{set\_sort@{set\_sort}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{set\_sort()}{set\_sort()}}
+{\footnotesize\ttfamily void meta\+::\+Gradient\+Library\+::set\+\_\+sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}}}]{sort }\end{DoxyParamCaption})}
+
+\Hypertarget{classmeta_1_1GradientLibrary_ac2897feb2a61c6d446aa7cc62df780a2}\label{classmeta_1_1GradientLibrary_ac2897feb2a61c6d446aa7cc62df780a2} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!sort@{sort}}
+\index{sort@{sort}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{sort()}{sort()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} meta\+::\+Gradient\+Library\+::sort (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classmeta_1_1GradientLibrary_a80a9a562fd27608d1461118fa306d518}\label{classmeta_1_1GradientLibrary_a80a9a562fd27608d1461118fa306d518} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!unique\_name@{unique\_name}}
+\index{unique\_name@{unique\_name}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{unique\_name()}{unique\_name()}}
+{\footnotesize\ttfamily std\+::string meta\+::\+Gradient\+Library\+::unique\+\_\+name (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{base,  }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{reserved = {\ttfamily \{\}} }\end{DoxyParamCaption}) const}
+
+
+
+{\ttfamily base} if free, otherwise "{}base (2)"{}, "{}base (3)"{}, ...; names in {\ttfamily reserved} (e.\+g. 
+
+host presets) count as taken. \Hypertarget{classmeta_1_1GradientLibrary_a9788431d10dbbafe844adee980a31610}\label{classmeta_1_1GradientLibrary_a9788431d10dbbafe844adee980a31610} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!update@{update}}
+\index{update@{update}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::update (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{name,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$}]{stops }\end{DoxyParamCaption})}
+
+
+
+Replaces the stops of an existing preset (sorted by position). 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmeta_1_1GradientLibrary_aee1fb940a1ebb3d2f4aa786418361bec}\label{classmeta_1_1GradientLibrary_aee1fb940a1ebb3d2f4aa786418361bec} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!autosave\_@{autosave\_}}
+\index{autosave\_@{autosave\_}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{autosave\_}{autosave\_}}
+{\footnotesize\ttfamily bool meta\+::\+Gradient\+Library\+::autosave\+\_\+ = true\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmeta_1_1GradientLibrary_a0d8970ad656ea38ae4a4b8482145e98a}\label{classmeta_1_1GradientLibrary_a0d8970ad656ea38ae4a4b8482145e98a} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!changed@{changed}}
+\index{changed@{changed}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{changed}{changed}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1Event}{Event}} meta\+::\+Gradient\+Library\+::changed}
+
+
+
+Fired after every effective mutation and after a successful load. 
+
+\Hypertarget{classmeta_1_1GradientLibrary_a8b62c0b109c475108a0175f075f4224e}\label{classmeta_1_1GradientLibrary_a8b62c0b109c475108a0175f075f4224e} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!favorites\_@{favorites\_}}
+\index{favorites\_@{favorites\_}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{favorites\_}{favorites\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ meta\+::\+Gradient\+Library\+::favorites\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmeta_1_1GradientLibrary_ad8ecd7bc1781efab4ff0524aad223206}\label{classmeta_1_1GradientLibrary_ad8ecd7bc1781efab4ff0524aad223206} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!path\_@{path\_}}
+\index{path\_@{path\_}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{path\_}{path\_}}
+{\footnotesize\ttfamily std\+::filesystem\+::path meta\+::\+Gradient\+Library\+::path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmeta_1_1GradientLibrary_ae895b6e7a4b7ba9e981b85034bddf8c2}\label{classmeta_1_1GradientLibrary_ae895b6e7a4b7ba9e981b85034bddf8c2} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!presets\_@{presets\_}}
+\index{presets\_@{presets\_}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{presets\_}{presets\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structmeta_1_1Preset}{Preset}}$>$ meta\+::\+Gradient\+Library\+::presets\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classmeta_1_1GradientLibrary_a57296ec3c55a9f48f2eb195a4a1cc1a2}\label{classmeta_1_1GradientLibrary_a57296ec3c55a9f48f2eb195a4a1cc1a2} 
+\index{meta::GradientLibrary@{meta::GradientLibrary}!sort\_@{sort\_}}
+\index{sort\_@{sort\_}!meta::GradientLibrary@{meta::GradientLibrary}}
+\doxysubsubsection{\texorpdfstring{sort\_}{sort\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} meta\+::\+Gradient\+Library\+::sort\+\_\+ = \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}{Gradient\+Sort\+::\+Default}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Meta/include/meta/ext/color\+\_\+gradient/\mbox{\hyperlink{gradient__library_8hpp}{gradient\+\_\+library.\+hpp}}\end{DoxyCompactItemize}

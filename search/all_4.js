@@ -11,5 +11,6 @@ var searchData=
   ['event_3c_20meta_3a_3aabstractattribute_20_26_20_3e_8',['Event&lt; meta::AbstractAttribute &amp; &gt;',['../classmeta_1_1Event.html',1,'meta']]],
   ['event_3c_20t_20_3e_9',['Event&lt; T &gt;',['../classmeta_1_1Event.html',1,'meta']]],
   ['eventconnection_10',['eventconnection',['../classmeta_1_1EventConnection.html',1,'meta::EventConnection'],['../classmeta_1_1EventConnection.html#a1e0427cb1c4ef64e7e5294bafa71ba9f',1,'meta::EventConnection::EventConnection()=default'],['../classmeta_1_1EventConnection.html#a5396cb3e9bb343d40aa89d971a6a768e',1,'meta::EventConnection::EventConnection(std::function&lt; void()&gt; disconnect)'],['../classmeta_1_1EventConnection.html#a16f8d697919bafd134d84365ae507b1a',1,'meta::EventConnection::EventConnection(const EventConnection &amp;)=delete'],['../classmeta_1_1EventConnection.html#a4f399b31b73f910c61df0dc7bfedbcc6',1,'meta::EventConnection::EventConnection(EventConnection &amp;&amp;other) noexcept']]],
-  ['execute_11',['execute',['../classmeta_1_1CommandStack.html#a938ea58ee5917fa6e30df7df80ec8796',1,'meta::CommandStack']]]
+  ['execute_11',['execute',['../classmeta_1_1CommandStack.html#a938ea58ee5917fa6e30df7df80ec8796',1,'meta::CommandStack']]],
+  ['export_5ffile_12',['export_file',['../classmeta_1_1GradientLibrary.html#a18fb8cc1deb03c08f13d99f9b7d0009f',1,'meta::GradientLibrary']]]
 ];
