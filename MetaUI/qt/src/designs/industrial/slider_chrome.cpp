@@ -72,8 +72,7 @@ void paint_slider_row(QPainter             &painter,
   const Metrics &m = theme.metrics;
 
   // --- label. Text is the only thing state is allowed to change.
-  QFont label_font = ui_font(12, false, 1.0);
-  label_font.setCapitalization(QFont::AllUppercase);
+  QFont label_font = row_label_font();
   painter.setFont(label_font);
   painter.setPen(theme.state_ink(visual.modified, visual.locked));
   painter.drawText(geometry.label,

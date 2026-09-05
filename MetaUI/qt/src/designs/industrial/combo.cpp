@@ -260,8 +260,7 @@ void paint_combo_field(QWidget       &widget,
                         m.label_min_width,
                         m.label_max_width));
 
-  QFont label_font = ui_font(12, false, 1.0);
-  label_font.setCapitalization(QFont::AllUppercase);
+  QFont label_font = row_label_font();
   painter.setFont(label_font);
   painter.setPen(theme.state_ink(modified, locked));
   painter.drawText(QRect(0, 0, label_width, height),

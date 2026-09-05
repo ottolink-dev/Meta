@@ -25,6 +25,21 @@ QFont mono_font(int pixel_size);
 /// The UI sans face. No family override -- the system font is correct here.
 QFont ui_font(int pixel_size, bool bold = false, qreal letter_spacing = 0.0);
 
+/** @brief Font for an attribute row's label.
+ *
+ * The host application's font, at the row size. Deliberately not a probed
+ * family, not letter-spaced and not uppercased.
+ *
+ * The design originally set all three, which made a panel of parameter names
+ * read as its own separate piece of UI sitting next to the rest of the
+ * application rather than part of it. Attribute keys are words the user reads,
+ * not chrome, and uppercasing them costs legibility for styling.
+ *
+ * Defined once because five row types were each setting the same two lines,
+ * which is five places for them to drift apart.
+ */
+QFont row_label_font();
+
 /** @brief Geometry and timing constants for a design.
  *
  * Separate from the palette because a colourway swap changes colours only,
