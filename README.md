@@ -43,6 +43,46 @@ This builds:
 | `META_ENABLE_FTXUI_UI`             | Enable FTXUI UI backend *(stub implementation)* | OFF     |
 | `META_ENABLE_QT_UI`                | Enable Qt UI backend                            | OFF     |
 
+## Gradient library
+
+`meta::ColorGradient` attributes render a `GradientPicker` whose preset grid
+shows two sources: host presets installed in attribute metadata
+(`keys::ui::presets` → `meta::GradientPresets`) and the user's own
+**gradient library** (`meta::GradientLibrary::instance()`), which persists
+across projects. From the picker the user can save the current gradient to the
+library, import/export gradient files, pin favorites (always shown first) and
+sort by name, luminance or hue. Library entries can be renamed, replaced with
+the current gradient or deleted from the swatch context menu.
+
+The library autosaves to a JSON file. The Qt picker picks a default location on
+first use (`QStandardPaths::AppConfigLocation/gradients.json`, falling back to
+`AppDataLocation`); a host can choose its own before any picker exists:
+
+```cpp
+auto &library = meta::GradientLibrary::instance();
+library.set_path(my_config_dir / "gradients.json");
+library.load();
+```
+
+Gradient files use the same document for the library, exports and imports:
+
+```json
+{
+  "format": "meta.gradients",
+  "version": 1,
+  "gradients": [
+    {"name": "Snow", "stops": [{"position": 0.0, "color": [0.78, 0.86, 1.0, 1.0]},
+                               {"position": 1.0, "color": [1.0, 1.0, 1.0, 1.0]}]}
+  ]
+}
+```
+
+The reader also accepts a bare array of gradients, a single gradient object,
+stops under `"value"` (the `ColorGradient::json_to()` shape) and 0–255 colour
+components, so existing per-gradient JSON assets import directly. Imports never
+prompt: identical duplicates are skipped and clashing names get a `" (2)"`
+suffix.
+
 > **FTXUI backend is currently a stub used for testing and experimental integration only. It is not a complete UI implementation.**
 
 ## Example configurations
