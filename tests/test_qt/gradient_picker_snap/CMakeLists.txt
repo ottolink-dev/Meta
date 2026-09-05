@@ -1,0 +1,2 @@
+add_executable(gradient_picker_snap main.cpp)
+target_link_libraries(gradient_picker_snap meta meta_qt)
