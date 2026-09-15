@@ -80,10 +80,11 @@ ParamSlider::ParamSlider(Attribute<float> &attr,
   // cap, Islands and n_vertices among them, and let a user type any number
   // into them.
   input_max_ = max_;
+  // An absent override leaves the full range; zero is a valid explicit cap.
   if (const float declared = meta::common::try_get<float>(
           attr,
           meta::keys::ui::drag_max,
-          0.f);
+          max_);
       declared > min_ && declared < max_)
   {
     max_ = declared; // the rail ends here; input_max_ keeps the real limit
