@@ -57,8 +57,8 @@ struct Metrics
       430; ///< row width below which the narrow branch applies
 
   // --- value field
-  int value_field_width = 74;
-  int value_field_width_narrow = 64;
+  int value_field_width = 90;
+  int value_field_width_narrow = 80;
   int value_field_height = 24;
 
   // --- rail and thumb
