@@ -1,4 +1,4 @@
-// Regression tests for two industrial slider behaviours.
+// Regression tests for industrial slider behaviours.
 //
 // 1. log_scale (Meta issue #55). The mapping used to be discarded whenever the
 //    minimum sat at or below the log floor, which includes the very common
@@ -13,6 +13,7 @@
 #include <cmath>
 #include <iostream>
 #include <limits>
+#include <utility>
 
 #include <QApplication>
 #include <QLineEdit>
@@ -21,6 +22,7 @@
 #include "meta/core/attribute_container.hpp"
 #include "meta/metadata/keys.hpp"
 
+#include "meta_qt/designs/industrial/int_slider.hpp"
 #include "meta_qt/designs/industrial/param_slider.hpp"
 
 using namespace meta::qt;
@@ -99,6 +101,83 @@ int main(int argc, char **argv)
   ctx.theme = &theme;
 
   meta::AttributeContainer container;
+
+  // --- an absent drag maximum must not cap a signed range at zero ---------
+  // FloodingFromBoundaries.elevation and HydraulicBlur.vmax both use -1..2.
+  for (const auto &[min, max] : {std::pair{-1.f, 2.f},
+                                 std::pair{-1.f, 1.f},
+                                 std::pair{-2.f, -1.f},
+                                 std::pair{0.f, 2.f}})
+  {
+    const auto name = "range_" + std::to_string(min) + "_" + std::to_string(max);
+    auto *attr = make_attr(container, name, (min + max) / 2.f, min, max);
+    industrial::ParamSlider slider(*attr, ctx);
+    slider.resize(400, 36);
+    flush();
+
+    const auto geometry = industrial::SliderGeometry::compute(
+        theme, slider.width(), slider.height(), 0.5);
+    click_rail(&slider, geometry.rail.left());
+    check(std::abs(slider.get() - min) < 1e-6f,
+          "without drag_max the left rail endpoint reaches the minimum");
+
+    click_rail(&slider, geometry.rail.right());
+    std::cout << "range [" << min << ", " << max
+              << "] right endpoint=" << slider.get() << '\n';
+    check(std::abs(slider.get() - max) < 1e-6f,
+          "without drag_max the right rail endpoint reaches the maximum");
+
+    click_rail(&slider, geometry.rail.center().x());
+    check(std::abs(slider.get() - (min + max) / 2.f) < (max - min) * 0.02f,
+          "without drag_max the middle of the rail reaches the range midpoint");
+  }
+
+  // Zero remains a valid cap when explicitly declared on a signed range.
+  {
+    auto *attr = make_attr(container, "zero_drag_max", 0.2f, -1.f, 2.f);
+    attr->metadata().add(meta::keys::ui::drag_max, 0.f);
+    industrial::ParamSlider slider(*attr, ctx);
+    slider.resize(400, 36);
+    flush();
+
+    const auto geometry = industrial::SliderGeometry::compute(
+        theme, slider.width(), slider.height(), 0.5);
+    click_rail(&slider, geometry.rail.right());
+    check(std::abs(slider.get()) < 1e-6f,
+          "an explicit zero drag_max caps the rail at zero");
+
+    QLineEdit *field = field_of(&slider);
+    check(field != nullptr, "the signed slider has a value field");
+    if (field)
+    {
+      field->setText("0.5");
+      Q_EMIT field->editingFinished();
+      flush();
+      check(std::abs(slider.get() - 0.5f) < 1e-6f,
+            "typing can exceed an explicit zero drag_max");
+    }
+  }
+
+  // The integer slider uses the same optional drag maximum.
+  for (bool capped : {false, true})
+  {
+    auto *attr = container.add(capped ? "int_capped" : "int_signed", 1);
+    attr->metadata().add(meta::keys::constraints::min, -10);
+    attr->metadata().add(meta::keys::constraints::max, 20);
+    if (capped) attr->metadata().add(meta::keys::ui::drag_max, 0);
+
+    industrial::IntSlider slider(*attr, ctx);
+    slider.resize(400, 36);
+    flush();
+
+    const auto geometry = industrial::SliderGeometry::compute(
+        theme, slider.width(), slider.height(), 0.5);
+    click_rail(&slider, geometry.rail.left());
+    check(slider.get() == -10, "a signed integer rail reaches its minimum");
+    click_rail(&slider, geometry.rail.right());
+    check(slider.get() == (capped ? 0 : 20),
+          "a signed integer rail is capped at zero only when declared");
+  }
 
   // --- a log rail must not behave like a linear one, even from zero --------
   //
