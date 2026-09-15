@@ -464,7 +464,7 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
       const bool full_domain = value.x <= min && value.y >= max;
       bar->setEnabled(active);
       reset_btn->setEnabled(active && !full_domain);
-      center_btn->setEnabled(active && value.y - value.x < max - min);
+      center_btn->setEnabled(active);
       unit_btn->setEnabled(active);
     };
 
@@ -574,22 +574,21 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
                        Q_EMIT widget->edit_ended();
                      });
 
-    QObject::connect(
-        center_btn,
-        &QPushButton::clicked,
-        widget,
-        [&value, &attr, min, max, bar, widget, set_active]()
-        {
-          const float span = value.y - value.x;
-          const float mid = (min + max) * 0.5f;
-          const float lo = std::clamp(mid - span * 0.5f, min, max - span);
-          bar->set_value({lo, lo + span});
-          attr.set_from_any(glm::vec2{lo, lo + span});
-          set_active(true);
-          Q_EMIT widget->edit_started();
-          Q_EMIT widget->value_changed();
-          Q_EMIT widget->edit_ended();
-        });
+    QObject::connect(center_btn,
+                     &QPushButton::clicked,
+                     widget,
+                     [&value, &attr, min, max, bar, widget, set_active]()
+                     {
+                       const float half_span = (value.y - value.x) * 0.5f;
+                       const float lo = std::clamp(-half_span, min, max);
+                       const float hi = std::clamp(half_span, min, max);
+                       bar->set_value({lo, hi});
+                       attr.set_from_any(glm::vec2{lo, hi});
+                       set_active(true);
+                       Q_EMIT widget->edit_started();
+                       Q_EMIT widget->value_changed();
+                       Q_EMIT widget->edit_ended();
+                     });
 
     QObject::connect(unit_btn,
                      &QPushButton::clicked,

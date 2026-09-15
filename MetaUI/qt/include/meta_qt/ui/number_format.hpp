@@ -18,8 +18,7 @@ namespace meta::qt
 inline bool has_exponent_format(const std::string &spec)
 {
   const auto close = spec.find_last_of('}');
-  if (close == std::string::npos || close == 0)
-    return false;
+  if (close == std::string::npos || close == 0) return false;
 
   const char type = spec[close - 1];
   return type == 'e' || type == 'E' || type == 'g' || type == 'G';

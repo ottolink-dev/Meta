@@ -49,7 +49,10 @@ void flush()
 }
 
 /// The value field a slider owns, so a typed commit can be exercised.
-QLineEdit *field_of(QWidget *slider) { return slider->findChild<QLineEdit *>(); }
+QLineEdit *field_of(QWidget *slider)
+{
+  return slider->findChild<QLineEdit *>();
+}
 
 /// Press, drag and release at `x`, which is how a rail is actually driven.
 void click_rail(QWidget *slider, int x)
@@ -122,7 +125,8 @@ int main(int argc, char **argv)
     const float linear_value = linear_slider.get();
     const float log_value = log_slider.get();
 
-    std::cout << "same press: linear=" << linear_value << " log=" << log_value << '\n';
+    std::cout << "same press: linear=" << linear_value << " log=" << log_value
+              << '\n';
 
     check(linear_value > 0.f, "the linear rail responded to a press");
     check(log_value < linear_value,
@@ -166,7 +170,8 @@ int main(int argc, char **argv)
       Q_EMIT field->editingFinished();
       flush();
 
-      check(slider.get() > 64.f, "a typed value above the rail maximum is accepted");
+      check(slider.get() > 64.f,
+            "a typed value above the rail maximum is accepted");
       check(std::abs(slider.get() - 512.f) < 1e-2f,
             "a typed value is held to the real maximum, not to the rail");
     }
@@ -198,15 +203,16 @@ int main(int argc, char **argv)
       Q_EMIT field->editingFinished();
       flush();
 
-      check(slider.get() <= 64.f, "a hard maximum of 64 still clamps a typed value");
+      check(slider.get() <= 64.f,
+            "a hard maximum of 64 still clamps a typed value");
     }
   }
 
   // --- the readout honours the declared presentation type -----------------
   //
-  // HydraulicParticle declares its rates as "{:.2e}" over [1e-6, 1e-1]. Rendered
-  // fixed, 1e-3 comes out as 0.00100000 and overruns the value field; Otto saw
-  // it clipped to a run of zeroes with no decimal point in sight.
+  // HydraulicParticle declares its rates as "{:.2e}" over [1e-6, 1e-1].
+  // Rendered fixed, 1e-3 comes out as 0.00100000 and overruns the value field;
+  // Otto saw it clipped to a run of zeroes with no decimal point in sight.
   {
     auto *attr = make_attr(container, "drag_rate", 1e-3f, 1e-6f, 1e-1f);
     attr->metadata().add(meta::keys::ui::format, std::string("{:.2e}"));
@@ -221,7 +227,8 @@ int main(int argc, char **argv)
 
     if (field)
     {
-      std::cout << "scientific readout: " << field->text().toStdString() << '\n';
+      std::cout << "scientific readout: " << field->text().toStdString()
+                << '\n';
       check(field->text().contains('e') || field->text().contains('E'),
             "a {:.2e} attribute renders with an exponent");
       check(field->text().size() <= 10,
@@ -244,7 +251,8 @@ int main(int argc, char **argv)
       std::cout << "fixed readout: " << field->text().toStdString() << '\n';
       check(field->text() != "0.00",
             "a small value under a fixed spec does not read as zero");
-      check(!field->text().contains('e'), "a fixed spec is not promoted to scientific");
+      check(!field->text().contains('e'),
+            "a fixed spec is not promoted to scientific");
     }
   }
 
