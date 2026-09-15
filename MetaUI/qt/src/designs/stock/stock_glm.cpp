@@ -407,7 +407,8 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
     if (const auto *p = attr.state().try_value<bool>(meta::keys::state::active))
       is_active = *p;
 
-    glm::vec2 last_active_value = is_active ? value : glm::vec2{min, max};
+    auto last_active_value = std::make_shared<glm::vec2>(
+        is_active ? value : glm::vec2{min, max});
 
     auto *bar = new RangeBar(value, min, max, decimals, widget);
 
@@ -471,7 +472,14 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
     set_active(is_active);
 
     widget->set_sync_from_model(
-        [&value, &attr, bar, toggle_btn, set_active, widget, range_provider]()
+        [&value,
+         &attr,
+         bar,
+         toggle_btn,
+         set_active,
+         widget,
+         range_provider,
+         last_active_value]()
         {
           bool active = true;
           if (const auto *p = attr.state().try_value<bool>(
@@ -479,6 +487,11 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
             active = *p;
 
           set_active(active);
+
+          if (active)
+          {
+            *last_active_value = value;
+          }
 
           {
             QSignalBlocker b(toggle_btn);
@@ -513,13 +526,8 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
         toggle_btn,
         &QPushButton::toggled,
         widget,
-        [&value,
-         &attr,
-         bar,
-         toggle_btn,
-         set_active,
-         widget,
-         lav = last_active_value](bool active) mutable
+        [&value, &attr, bar, toggle_btn, set_active, widget, last_active_value](
+            bool active)
         {
           toggle_btn->setText(active ? QObject::tr("On") : QObject::tr("Off"));
 
@@ -532,12 +540,12 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
 
           if (active)
           {
-            attr.set_from_any(lav);
-            bar->set_value(lav);
+            attr.set_from_any(*last_active_value);
+            bar->set_value(*last_active_value);
           }
           else
           {
-            lav = value;
+            *last_active_value = value;
             attr.set_from_any(glm::vec2{-1.f, 0.f});
             bar->set_value({-1.f, 0.f});
           }

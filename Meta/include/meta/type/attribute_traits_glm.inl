@@ -31,6 +31,10 @@ template <> struct AttributeTraits<glm::vec2>
 
   static glm::vec2 json_from(const nlohmann::json &j)
   {
+    if (j.is_array() && j.size() >= 2)
+    {
+      return {j[0].get<float>(), j[1].get<float>()};
+    }
     return {j.at("x").get<float>(), j.at("y").get<float>()};
   }
 };
@@ -51,6 +55,10 @@ template <> struct AttributeTraits<glm::vec3>
 
   static glm::vec3 json_from(const nlohmann::json &j)
   {
+    if (j.is_array() && j.size() >= 3)
+    {
+      return {j[0].get<float>(), j[1].get<float>(), j[2].get<float>()};
+    }
     return {j.at("x").get<float>(),
             j.at("y").get<float>(),
             j.at("z").get<float>()};
@@ -73,6 +81,13 @@ template <> struct AttributeTraits<glm::vec4>
 
   static glm::vec4 json_from(const nlohmann::json &j)
   {
+    if (j.is_array() && j.size() >= 4)
+    {
+      return {j[0].get<float>(),
+              j[1].get<float>(),
+              j[2].get<float>(),
+              j[3].get<float>()};
+    }
     return {j.at("x").get<float>(),
             j.at("y").get<float>(),
             j.at("z").get<float>(),
@@ -95,6 +110,10 @@ template <> struct AttributeTraits<glm::ivec2>
 
   static glm::ivec2 json_from(const nlohmann::json &j)
   {
+    if (j.is_array() && j.size() >= 2)
+    {
+      return {j[0].get<int>(), j[1].get<int>()};
+    }
     return {j.at("x").get<int>(), j.at("y").get<int>()};
   }
 };
@@ -115,6 +134,10 @@ template <> struct AttributeTraits<glm::ivec3>
 
   static glm::ivec3 json_from(const nlohmann::json &j)
   {
+    if (j.is_array() && j.size() >= 3)
+    {
+      return {j[0].get<int>(), j[1].get<int>(), j[2].get<int>()};
+    }
     return {j.at("x").get<int>(), j.at("y").get<int>(), j.at("z").get<int>()};
   }
 };
@@ -135,6 +158,13 @@ template <> struct AttributeTraits<glm::ivec4>
 
   static glm::ivec4 json_from(const nlohmann::json &j)
   {
+    if (j.is_array() && j.size() >= 4)
+    {
+      return {j[0].get<int>(),
+              j[1].get<int>(),
+              j[2].get<int>(),
+              j[3].get<int>()};
+    }
     return {j.at("x").get<int>(),
             j.at("y").get<int>(),
             j.at("z").get<int>(),

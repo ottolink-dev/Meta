@@ -224,3 +224,32 @@ TEST(SerializationTest, ContainerGroupClear)
   EXPECT_FALSE(group.current_container_name().has_value());
   EXPECT_TRUE(group.insertion_order().empty());
 }
+
+TEST(SerializationTest, MetadataAndStateRestoredBeforeValueNotification)
+{
+  meta::Attribute<int> attr("param", 10);
+  attr.metadata().add("label", std::string("Initial"));
+  attr.state().add("active", false);
+
+  nlohmann::json full_json = attr.json_to(meta::SerializationMode::full);
+  full_json["value"] = 42;
+  full_json["metadata"]["label"]["value"] = "Updated";
+  full_json["state"]["active"]["value"] = true;
+
+  bool seen_metadata = false;
+  bool seen_state = false;
+
+  auto conn = attr.value_changed.subscribe(
+      [&](int val)
+      {
+        EXPECT_EQ(val, 42);
+        seen_metadata = (attr.metadata().value<std::string>("label") ==
+                         "Updated");
+        seen_state = attr.state().value<bool>("active");
+      });
+
+  attr.json_from(full_json, meta::SerializationMode::full);
+
+  EXPECT_TRUE(seen_metadata);
+  EXPECT_TRUE(seen_state);
+}
