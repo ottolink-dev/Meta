@@ -8,7 +8,9 @@
 #include <QPushButton>
 
 #include "meta.hpp"
+#include "meta_qt/designs/industrial/industrial.hpp"
 #include "meta_qt/meta_widget.hpp"
+#include "meta_qt/ui/design_registry.hpp"
 #include "meta_qt/widget_renderer.hpp"
 
 static void check(bool ok, const char *msg)
@@ -100,6 +102,96 @@ int main(int argc, char **argv)
     center_btn->click();
     check(near(attr.value().x, -0.4f) && near(attr.value().y, 0.2f),
           "Case 3: Center failed");
+
+    delete w;
+  }
+
+  // Case 4: Persistence of last_active_value across widget regeneration (stock
+  // design).
+  {
+    meta::Attribute<glm::vec2> attr("range", glm::vec2(0.2f, 0.8f));
+    attr.metadata().add(meta::keys::ui::widget_type, "RangeBar");
+    attr.metadata().add(meta::keys::constraints::min, 0.f);
+    attr.metadata().add(meta::keys::constraints::max, 1.f);
+    attr.state().add(meta::keys::state::active, true);
+
+    auto *w = meta::qt::WidgetRenderer<glm::vec2>::render(attr, nullptr);
+    check(w != nullptr, "WidgetRenderer returned null");
+
+    auto *toggle_btn = find_button(w, QObject::tr("On"));
+    check(toggle_btn != nullptr, "Case 4: Toggle button not found");
+
+    // Toggle off -> value becomes inactive (-1, 0)
+    toggle_btn->click();
+    check(!attr.state().value<bool>(meta::keys::state::active),
+          "Case 4: Should be inactive");
+    check(near(attr.value().x, -1.0f) && near(attr.value().y, 0.0f),
+          "Case 4: Inactive value expected");
+
+    // Delete the widget to simulate regeneration
+    delete w;
+
+    // Regenerate widget with the existing attribute state
+    w = meta::qt::WidgetRenderer<glm::vec2>::render(attr, nullptr);
+    check(w != nullptr, "Case 4: Re-rendered widget returned null");
+
+    toggle_btn = find_button(w, QObject::tr("Off"));
+    check(toggle_btn != nullptr, "Case 4: Off toggle button not found");
+
+    // Toggle on -> should restore last active value (0.2, 0.8)
+    toggle_btn->click();
+    check(attr.state().value<bool>(meta::keys::state::active),
+          "Case 4: Should be active");
+    check(near(attr.value().x, 0.2f) && near(attr.value().y, 0.8f),
+          "Case 4: Restored active value failed");
+
+    delete w;
+  }
+
+  // Case 5: Persistence of last_active_value across widget regeneration
+  // (industrial design).
+  {
+    meta::Attribute<glm::vec2> attr("range", glm::vec2(0.3f, 0.7f));
+    attr.metadata().add(meta::keys::ui::widget_type, "RangeBar");
+    attr.metadata().add(meta::keys::constraints::min, 0.f);
+    attr.metadata().add(meta::keys::constraints::max, 1.f);
+    attr.state().add(meta::keys::state::active, true);
+
+    meta::qt::industrial::register_design();
+
+    auto *w = meta::qt::DesignRegistry::instance().render(&attr,
+                                                          "industrial",
+                                                          {},
+                                                          nullptr);
+    check(w != nullptr, "Industrial render returned null");
+
+    auto *toggle_btn = find_button(w, QObject::tr("On"));
+    check(toggle_btn != nullptr,
+          "Case 5: Industrial On toggle button not found");
+
+    toggle_btn->click();
+    check(!attr.state().value<bool>(meta::keys::state::active),
+          "Case 5: Industrial should be inactive");
+
+    // Delete the widget to simulate regeneration
+    delete w;
+
+    // Regenerate industrial widget
+    w = meta::qt::DesignRegistry::instance().render(&attr,
+                                                    "industrial",
+                                                    {},
+                                                    nullptr);
+    check(w != nullptr, "Case 5: Re-rendered industrial widget returned null");
+
+    toggle_btn = find_button(w, QObject::tr("Off"));
+    check(toggle_btn != nullptr,
+          "Case 5: Industrial Off toggle button not found");
+
+    toggle_btn->click();
+    check(attr.state().value<bool>(meta::keys::state::active),
+          "Case 5: Industrial should be active");
+    check(near(attr.value().x, 0.3f) && near(attr.value().y, 0.7f),
+          "Case 5: Industrial restored active value failed");
 
     delete w;
   }

@@ -21,6 +21,7 @@ namespace meta::keys::state
 {
 
 inline constexpr char active[] = "state.active";
+inline constexpr char last_active_value[] = "state.last_active_value";
 inline constexpr char locked_xy[] = "state.locked_xy";
 
 } // namespace meta::keys::state

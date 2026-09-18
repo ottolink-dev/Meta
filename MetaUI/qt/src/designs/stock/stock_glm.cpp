@@ -407,8 +407,14 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
     if (const auto *p = attr.state().try_value<bool>(meta::keys::state::active))
       is_active = *p;
 
-    auto last_active_value = std::make_shared<glm::vec2>(
-        is_active ? value : glm::vec2{min, max});
+    if (!attr.state().try_value<glm::vec2>(
+            meta::keys::state::last_active_value))
+    {
+      const glm::vec2 initial_last_active = is_active ? value
+                                                      : glm::vec2{min, max};
+      attr.state().try_add(meta::keys::state::last_active_value,
+                           initial_last_active);
+    }
 
     auto *bar = new RangeBar(value, min, max, decimals, widget);
 
@@ -472,14 +478,7 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
     set_active(is_active);
 
     widget->set_sync_from_model(
-        [&value,
-         &attr,
-         bar,
-         toggle_btn,
-         set_active,
-         widget,
-         range_provider,
-         last_active_value]()
+        [&value, &attr, bar, toggle_btn, set_active, widget, range_provider]()
         {
           bool active = true;
           if (const auto *p = attr.state().try_value<bool>(
@@ -490,7 +489,11 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
 
           if (active)
           {
-            *last_active_value = value;
+            if (auto *p = attr.state().try_value<glm::vec2>(
+                    meta::keys::state::last_active_value))
+              *p = value;
+            else
+              attr.state().try_add(meta::keys::state::last_active_value, value);
           }
 
           {
@@ -526,7 +529,7 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
         toggle_btn,
         &QPushButton::toggled,
         widget,
-        [&value, &attr, bar, toggle_btn, set_active, widget, last_active_value](
+        [&value, &attr, bar, toggle_btn, set_active, widget, min, max](
             bool active)
         {
           toggle_btn->setText(active ? QObject::tr("On") : QObject::tr("Off"));
@@ -536,16 +539,28 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
           // refresh the widget through the model subscription.
           if (auto *p = attr.state().try_value<bool>(meta::keys::state::active))
             *p = active;
+          else
+            attr.state().try_add(meta::keys::state::active, active);
           set_active(active);
 
           if (active)
           {
-            attr.set_from_any(*last_active_value);
-            bar->set_value(*last_active_value);
+            glm::vec2 last_val = {min, max};
+            if (const auto *p = attr.state().try_value<glm::vec2>(
+                    meta::keys::state::last_active_value))
+              last_val = *p;
+
+            attr.set_from_any(last_val);
+            bar->set_value(last_val);
           }
           else
           {
-            *last_active_value = value;
+            if (auto *p = attr.state().try_value<glm::vec2>(
+                    meta::keys::state::last_active_value))
+              *p = value;
+            else
+              attr.state().try_add(meta::keys::state::last_active_value, value);
+
             attr.set_from_any(glm::vec2{-1.f, 0.f});
             bar->set_value({-1.f, 0.f});
           }
@@ -554,15 +569,22 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
           Q_EMIT widget->edit_ended();
         });
 
-    QObject::connect(bar,
-                     &RangeBar::value_changed,
-                     widget,
-                     [widget, set_active](glm::vec2)
-                     {
-                       set_active(true);
-                       Q_EMIT widget->edit_started();
-                       Q_EMIT widget->value_changed();
-                     });
+    QObject::connect(
+        bar,
+        &RangeBar::value_changed,
+        widget,
+        [&attr, widget, set_active](glm::vec2 v)
+        {
+          if (auto *p = attr.state().try_value<glm::vec2>(
+                  meta::keys::state::last_active_value))
+            *p = v;
+          else
+            attr.state().try_add(meta::keys::state::last_active_value, v);
+
+          set_active(true);
+          Q_EMIT widget->edit_started();
+          Q_EMIT widget->value_changed();
+        });
 
     QObject::connect(bar,
                      &RangeBar::drag_ended,
@@ -575,6 +597,13 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
                      [&attr, min, max, bar, widget, set_active]()
                      {
                        bar->set_value({min, max});
+                       if (auto *p = attr.state().try_value<glm::vec2>(
+                               meta::keys::state::last_active_value))
+                         *p = {min, max};
+                       else
+                         attr.state().try_add(
+                             meta::keys::state::last_active_value,
+                             glm::vec2{min, max});
                        attr.set_from_any(glm::vec2{min, max});
                        set_active(true);
                        Q_EMIT widget->edit_started();
@@ -591,6 +620,13 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
                        const float lo = std::clamp(-half_span, min, max);
                        const float hi = std::clamp(half_span, min, max);
                        bar->set_value({lo, hi});
+                       if (auto *p = attr.state().try_value<glm::vec2>(
+                               meta::keys::state::last_active_value))
+                         *p = {lo, hi};
+                       else
+                         attr.state().try_add(
+                             meta::keys::state::last_active_value,
+                             glm::vec2{lo, hi});
                        attr.set_from_any(glm::vec2{lo, hi});
                        set_active(true);
                        Q_EMIT widget->edit_started();
@@ -606,6 +642,13 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
                        const float lo = std::clamp(0.f, min, max);
                        const float hi = std::clamp(1.f, min, max);
                        bar->set_value({lo, hi});
+                       if (auto *p = attr.state().try_value<glm::vec2>(
+                               meta::keys::state::last_active_value))
+                         *p = {lo, hi};
+                       else
+                         attr.state().try_add(
+                             meta::keys::state::last_active_value,
+                             glm::vec2{lo, hi});
                        attr.set_from_any(glm::vec2{lo, hi});
                        set_active(true);
                        Q_EMIT widget->edit_started();
