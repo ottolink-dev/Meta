@@ -69,6 +69,26 @@ void ContainerGroup::bind_container(const std::string  &key,
             {
               is_synchronizing_ = true;
               attr.set_from_any(source->to_any());
+              if (source->has_state())
+              {
+                for (const auto &s_item : source->state())
+                {
+                  const auto *s_attr = s_item.second.get();
+                  if (!s_attr) continue;
+                  if (auto *tgt_s = attr.state().find(s_attr->name()))
+                  {
+                    if (tgt_s->type() == s_attr->type())
+                      tgt_s->set_from_any(s_attr->to_any());
+                  }
+                  else
+                  {
+                    attr.state().json_from(
+                        source->state().json_to(SerializationMode::state),
+                        SerializationMode::state);
+                    break;
+                  }
+                }
+              }
               is_synchronizing_ = false;
             }
           }
@@ -113,6 +133,30 @@ void ContainerGroup::sync_attribute_across_containers(const std::string &key,
     if (target_attr->type() == src_type)
     {
       target_attr->set_from_any(val);
+
+      // Also propagate any state attributes (such as state.active) across containers
+      if (source.has_state())
+      {
+        for (const auto &s_item : source.state())
+        {
+          const auto *s_attr = s_item.second.get();
+          if (!s_attr) continue;
+          if (auto *tgt_s = target_attr->state().find(s_attr->name()))
+          {
+            if (tgt_s->type() == s_attr->type())
+            {
+              tgt_s->set_from_any(s_attr->to_any());
+            }
+          }
+          else
+          {
+            // If not present in target state container, copy it via JSON state deserialization
+            target_attr->state().json_from(source.state().json_to(SerializationMode::state),
+                                           SerializationMode::state);
+            break;
+          }
+        }
+      }
     }
     else
     {
@@ -536,6 +580,32 @@ void ContainerGroup::json_from(const nlohmann::json &j,
       {
         set_synchronized(attr_val.get<std::string>(), true);
       }
+    }
+  }
+
+  // After deserializing all containers, re-propagate synchronized attributes from the
+  // first (or current) group container so that the reference container's state and values
+  // are synced across all containers in the group.
+  for (const auto &sync_key : synchronized_attributes_)
+  {
+    AbstractAttribute *source = nullptr;
+    // Prefer first container in insertion order, or current
+    if (!insertion_order_.empty())
+    {
+      auto it = containers_.find(insertion_order_.front());
+      if (it != containers_.end() && it->second)
+        source = it->second->find(sync_key);
+    }
+    if (!source && current_)
+    {
+      source = current_->find(sync_key);
+    }
+
+    if (source)
+    {
+      is_synchronizing_ = true;
+      sync_attribute_across_containers(sync_key, *source);
+      is_synchronizing_ = false;
     }
   }
 }

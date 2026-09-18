@@ -581,15 +581,21 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
           else
             attr.state().try_add(meta::keys::state::last_active_value, v);
 
+          attr.set_from_any(v);
           set_active(true);
           Q_EMIT widget->edit_started();
           Q_EMIT widget->value_changed();
         });
 
-    QObject::connect(bar,
-                     &RangeBar::drag_ended,
-                     widget,
-                     [widget](glm::vec2) { Q_EMIT widget->edit_ended(); });
+    QObject::connect(
+        bar,
+        &RangeBar::drag_ended,
+        widget,
+        [&attr, widget](glm::vec2 v)
+        {
+          attr.set_from_any(v);
+          Q_EMIT widget->edit_ended();
+        });
 
     QObject::connect(reset_btn,
                      &QPushButton::clicked,
