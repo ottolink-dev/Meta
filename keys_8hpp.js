@@ -14,6 +14,7 @@ var keys_8hpp =
     [ "label", "keys_8hpp.html#a0df564b58f287af0329c510ea64902b5", null ],
     [ "label_false", "keys_8hpp.html#af48255382d5bc72fe5b5dedc0a5fe7bf", null ],
     [ "label_true", "keys_8hpp.html#a26f3f0e56572e4493f07e53d8ee238c1", null ],
+    [ "last_active_value", "keys_8hpp.html#af585e82ba1d0e0b07f7e6fd042914464", null ],
     [ "locked_xy", "keys_8hpp.html#ae1f27191e1a668b2f8eb92ad6ad1377b", null ],
     [ "log_scale", "keys_8hpp.html#a3ce5bb3ab0f3ff0d58ec6e2adee7c573", null ],
     [ "max", "keys_8hpp.html#a95348dc98f507f5e81b9546b5dee24d9", null ],

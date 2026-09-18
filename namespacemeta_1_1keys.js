@@ -12,6 +12,7 @@ var namespacemeta_1_1keys =
     ] ],
     [ "state", "namespacemeta_1_1keys_1_1state.html", [
       [ "active", "namespacemeta_1_1keys_1_1state.html#a282afb7816edfbadabc0297d4ccbca60", null ],
+      [ "last_active_value", "namespacemeta_1_1keys_1_1state.html#af585e82ba1d0e0b07f7e6fd042914464", null ],
       [ "locked_xy", "namespacemeta_1_1keys_1_1state.html#ae1f27191e1a668b2f8eb92ad6ad1377b", null ]
     ] ],
     [ "ui", "namespacemeta_1_1keys_1_1ui.html", [
