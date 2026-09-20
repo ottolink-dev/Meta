@@ -128,7 +128,7 @@ private:
   void     schedule_rebuild();
   void     rebuild_entries();
   void     rebuild_preset_grid();
-  QPixmap  make_swatch(const Entry &entry, bool favorite) const;
+  QPixmap  make_swatch(const Entry &entry, bool favorite, QSize size) const;
   void     apply_stops(const std::vector<Stop> &stops);
 
   std::vector<std::string> host_names() const;
@@ -154,8 +154,10 @@ private:
   bool               rebuild_pending_ = false;
 
   static constexpr int SWATCH_W = 72;  // each preset swatch width
-  static constexpr int SWATCH_H = 36;  // each preset swatch height
+  static constexpr int SWATCH_H = 40;  // each preset swatch height
   static constexpr int TOOLBAR_H = 28; // toolbar row height
+
+  static constexpr int PREFERRED_ROWS = 6; // grid rows before it scrolls
 
   // Declared last so it disconnects before the members its callback touches
   // are destroyed.

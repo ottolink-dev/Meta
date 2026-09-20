@@ -1,0 +1,2 @@
+add_executable(test_gradient_picker_panel main.cpp)
+target_link_libraries(test_gradient_picker_panel meta meta_qt)

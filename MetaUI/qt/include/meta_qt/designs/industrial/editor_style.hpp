@@ -30,6 +30,8 @@ inline void style_editor(QWidget *host, const Theme &theme)
   host->setFont(row_label_font());
   host->setStyleSheet(
       QString(
+          // Plain containers, or a host `*` background rule paints a slab
+          "#IndustrialEditor .QWidget { background: transparent; }"
           "#IndustrialEditor QLabel { color: %1; background: transparent; }"
           "#IndustrialEditor QPushButton, #IndustrialEditor QToolButton, "
           "#IndustrialEditor QComboBox {"
