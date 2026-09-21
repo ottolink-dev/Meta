@@ -53,24 +53,25 @@ public:
                bool                    closed = false,
                QWidget                *parent = nullptr);
 
-  void clear_all();
-  void randomize(int count);
-  void load_csv(const QString &path); // x,y,z per line (z clamped to [0,1])
-  void set_points(const std::vector<glm::vec3> &new_points);
-  void set_background_image(const std::vector<uint8_t> &pixels,
-                            int                         w,
-                            int                         h,
-                            int                         channels);
+  void  clear_all();
+  QSize sizeHint() const override { return QSize(320, 320); }
+  QSize minimumSizeHint() const override { return QSize(120, 120); }
+  int   heightForWidth(int width) const override { return width; }
+  void  randomize(int count);
+  void  load_csv(const QString &path); // x,y,z per line (z clamped to [0,1])
+  void  set_points(const std::vector<glm::vec3> &new_points);
+  void  set_background_image(const std::vector<uint8_t> &pixels,
+                             int                         w,
+                             int                         h,
+                             int                         channels);
 
 Q_SIGNALS:
   void points_changed();
   void drag_ended();
 
 protected:
-  /// Keeps the canvas square: the point domain is square, so a fixed height
-  /// only matches it at one panel width.
+  void keyPressEvent(QKeyEvent *event) override;
   void resizeEvent(QResizeEvent *event) override;
-
   void paintEvent(QPaintEvent *) override;
   void mousePressEvent(QMouseEvent *e) override;
   void mouseMoveEvent(QMouseEvent *e) override;
@@ -92,10 +93,11 @@ private:
   std::vector<glm::vec3> &points_;
   float                   min_x_, max_x_, min_y_, max_y_, z_step_;
 
-  int  hovered_idx_ = -1;
-  int  drag_idx_ = -1;
-  bool moved_during_drag_ = false;
-  int  hovered_segment_ = -1;
+  int     hovered_idx_ = -1;
+  QString order_input_;
+  int     drag_idx_ = -1;
+  bool    moved_during_drag_ = false;
+  int     hovered_segment_ = -1;
 
   Mode mode_;
   bool closed_;

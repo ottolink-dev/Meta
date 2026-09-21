@@ -21,6 +21,8 @@ public:
                        QWidget           *parent = nullptr);
 
   QSize sizeHint() const override;
+  QSize minimumSizeHint() const override { return QSize(120, 120); }
+  int   heightForWidth(int width) const override { return width; }
 
   void                      set_field_data(const std::vector<float> &data);
   const std::vector<float> &get_field_data() const;
@@ -40,6 +42,7 @@ signals:
   void edit_ended();
 
 protected:
+  void resizeEvent(QResizeEvent *event) override;
   void paintEvent(QPaintEvent *event) override;
   void mousePressEvent(QMouseEvent *event) override;
   void mouseReleaseEvent(QMouseEvent *event) override;
@@ -51,6 +54,7 @@ protected:
 
 private:
   void   draw_at(const QPoint &pos, Qt::MouseButtons buttons);
+  QPoint field_position(const QPoint &pos) const;
   void   update_geometry();
   bool   is_mouse_cursor_on_img() const;
   QColor colormap(float v) const;

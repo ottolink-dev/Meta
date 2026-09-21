@@ -20,6 +20,12 @@ CheckRow::CheckRow(Attribute<bool>  &attr,
 {
   key_ = attr.name();
   label_ = meta::common::label(attr);
+  if (label_.find('_') != std::string::npos)
+  {
+    QString readable = QString::fromStdString(label_).replace('_', ' ');
+    if (!readable.isEmpty()) readable[0] = readable[0].toUpper();
+    label_ = readable.toStdString();
+  }
   value_ = attr.value();
   knob_ = value_ ? 1.0 : 0.0;
 

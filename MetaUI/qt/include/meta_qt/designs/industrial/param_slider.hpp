@@ -92,11 +92,21 @@ private:
    */
   void commit_value(float value);
 
-  float       min_ = 0.f;
-  float       max_ = 1.f;
-  float       value_ = 0.f;
-  bool        log_scale_ = false;
-  int         decimals_ = 2;
+  float min_ = 0.f;
+  float max_ = 1.f;
+  float input_max_ = 1.f;
+  float value_ = 0.f;
+  bool  log_scale_ = false;
+  int   decimals_ = 2;
+
+  /** @brief The attribute's declared format spec, e.g. "{:.2e}".
+   *
+   * Kept whole rather than reduced to a decimal count, because the
+   * presentation type carries as much intent as the precision does. A rate
+   * declared over five decades wants 1.00e-03, not 0.001, and certainly not
+   * the eight characters of 0.00000100 that a fixed readout produces.
+   */
+  std::string format_;
   std::string label_;
   std::string category_;
   std::string key_; ///< attribute name, for the defaults lookup on reset

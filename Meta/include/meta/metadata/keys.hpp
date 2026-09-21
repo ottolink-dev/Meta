@@ -21,6 +21,7 @@ namespace meta::keys::state
 {
 
 inline constexpr char active[] = "state.active";
+inline constexpr char last_active_value[] = "state.last_active_value";
 inline constexpr char locked_xy[] = "state.locked_xy";
 
 } // namespace meta::keys::state
@@ -31,6 +32,18 @@ namespace meta::keys::ui
 inline constexpr char category[] = "ui.category";
 inline constexpr char closed[] = "ui.closed";
 inline constexpr char data_provider[] = "ui.data_provider";
+
+/** @brief Highest value the rail spans, when that is lower than the real max.
+ *
+ * A rail has to end somewhere comfortable to drag across, but the parameter
+ * behind it may legitimately accept far more. Spatial Frequency is the case
+ * that prompted this: 0 to 64 is the useful range to aim at, yet a user who
+ * knows they want 512 should be able to type it.
+ *
+ * Absent, the rail spans to constraints::max and typing is bounded by the same
+ * value, which is the behaviour every attribute had before this key existed.
+ */
+inline constexpr char drag_max[] = "ui.drag_max";
 inline constexpr char format[] = "ui.format";
 inline constexpr char label[] = "ui.label";
 inline constexpr char label_false[] = "ui.label_false";

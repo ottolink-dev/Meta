@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QPainterPath>
+#include <QResizeEvent>
 #include <QWheelEvent>
 #include <algorithm>
 #include <cmath>
@@ -25,6 +27,10 @@ ArrayCanvas::ArrayCanvas(const std::string &label,
   setFocusPolicy(Qt::StrongFocus);
   setMouseTracking(true);
   setAttribute(Qt::WA_Hover);
+  QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+  policy.setHeightForWidth(true);
+  setSizePolicy(policy);
+  setMinimumSize(120, 120);
 
   help_msg_ =
       "Array editor\n- Left-click: Paint\n- Right-click: Erase\n- Mousewheel: "
@@ -35,12 +41,7 @@ ArrayCanvas::ArrayCanvas(const std::string &label,
   update_geometry();
 }
 
-QSize ArrayCanvas::sizeHint() const
-{
-  Style style(this);
-  int   gap = style.border_radius();
-  return QSize(width_ + 2 * gap, height_ + 2 * gap);
-}
+QSize ArrayCanvas::sizeHint() const { return QSize(320, 320); }
 
 void ArrayCanvas::set_field_data(const std::vector<float> &data)
 {
@@ -153,9 +154,6 @@ void ArrayCanvas::draw_at(const QPoint &pos, Qt::MouseButtons buttons)
       }
     }
   }
-
-  update();
-  Q_EMIT value_changed();
 }
 
 QColor ArrayCanvas::colormap(float v) const
@@ -176,15 +174,23 @@ void ArrayCanvas::update_geometry()
   Style style(this);
   int   gap = style.border_radius();
 
-  int canvas_width = width_ + 2 * gap;
-  int canvas_height = height_ + 2 * gap;
-
-  rect_img_ = QRect(QPoint(gap, gap), QSize(width_, height_));
-
-  setMinimumSize(canvas_width, canvas_height);
-  setMaximumSize(canvas_width, canvas_height);
-  setFixedSize(canvas_width, canvas_height);
+  const int side = std::max(1, std::min(width(), height()) - 2 * gap);
+  rect_img_ = QRect((width() - side) / 2, (height() - side) / 2, side, side);
   update();
+}
+
+void ArrayCanvas::resizeEvent(QResizeEvent *event)
+{
+  if (height() != width()) setFixedHeight(width());
+  update_geometry();
+  QWidget::resizeEvent(event);
+}
+
+QPoint ArrayCanvas::field_position(const QPoint &pos) const
+{
+  return QPoint(
+      int(double(pos.x() - rect_img_.x()) * width_ / rect_img_.width()),
+      int(double(pos.y() - rect_img_.y()) * height_ / rect_img_.height()));
 }
 
 bool ArrayCanvas::event(QEvent *event)
@@ -270,9 +276,13 @@ void ArrayCanvas::mousePressEvent(QMouseEvent *event)
 {
   if (event->button() == Qt::LeftButton || event->button() == Qt::RightButton)
   {
+    if (!rect_img_.contains(event->position().toPoint())) return;
     is_drawing_ = true;
-    QPoint pos = event->position().toPoint() - rect_img_.topLeft();
+    QPoint pos = field_position(event->position().toPoint());
+    pos_previous_ = pos;
     draw_at(pos, event->buttons());
+    update();
+    Q_EMIT value_changed();
   }
 }
 
@@ -290,8 +300,19 @@ void ArrayCanvas::mouseMoveEvent(QMouseEvent *event)
 {
   if (is_drawing_)
   {
-    QPoint pos = event->position().toPoint() - rect_img_.topLeft();
-    draw_at(pos, event->buttons());
+    const QPoint pos = field_position(event->position().toPoint());
+    const QPoint delta = pos - pos_previous_;
+    const int    steps = std::max(
+        1,
+        int(std::ceil(std::hypot(delta.x(), delta.y()) /
+                      std::max(1., brush_radius_ / 3.))));
+    for (int i = 1; i <= steps; ++i)
+      draw_at(pos_previous_ + QPoint(qRound(double(delta.x()) * i / steps),
+                                     qRound(double(delta.y()) * i / steps)),
+              event->buttons());
+    pos_previous_ = pos;
+    update();
+    Q_EMIT value_changed();
   }
   QWidget::mouseMoveEvent(event);
 }
@@ -328,7 +349,10 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
                                 : style.border_width();
 
   // Background filled area
-  painter.fillRect(rect(), palette().color(QPalette::Base));
+  QPainterPath outline;
+  outline.addRoundedRect(QRectF(rect()), radius, radius);
+  painter.setClipPath(outline);
+  painter.fillPath(outline, palette().color(QPalette::Base));
 
   // Background image
   bool is_image = !bg_image_.isNull() && show_bg_image_;
@@ -359,6 +383,7 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
   }
 
   // Draw label
+  if (!property("industrialEditor").toBool())
   {
     painter.setPen(palette().color(QPalette::Text));
     painter.drawText(rect_img_,
@@ -377,7 +402,9 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
     }
     painter.setPen(pen);
     painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(mouse_pos, brush_radius_, brush_radius_);
+    painter.drawEllipse(QPointF(mouse_pos),
+                        double(brush_radius_) * rect_img_.width() / width_,
+                        double(brush_radius_) * rect_img_.height() / height_);
 
     // Info overlay
     QString txt;

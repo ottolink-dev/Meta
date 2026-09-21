@@ -47,6 +47,7 @@ Attribute<glm::vec2> &range(AttributeContainer &c,
   m.add(keys::constraints::min, vmin);
   m.add(keys::constraints::max, vmax);
   a->state().add(keys::state::active, is_active);
+  a->state().add(keys::state::last_active_value, value);
   return *a;
 }
 

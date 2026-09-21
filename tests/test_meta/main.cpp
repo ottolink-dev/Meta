@@ -416,6 +416,8 @@ int main()
     auto &r =
         meta::presets::range(pc, "r", "Range", {0.f, 1.f}, -1.f, 2.f, false);
     assert(r.state().value<bool>(meta::keys::state::active) == false);
+    assert(r.state().value<glm::vec2>(meta::keys::state::last_active_value) ==
+           glm::vec2(0.f, 1.f));
 
     auto &ch = meta::presets::string_choice(pc, "c", "Choice", {"x", "y"}, "x");
     assert(ch.value() == "x");

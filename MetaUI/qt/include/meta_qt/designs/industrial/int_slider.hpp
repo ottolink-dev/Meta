@@ -86,6 +86,7 @@ private:
 
   int         min_ = 0;
   int         max_ = 1;
+  int         input_max_ = 1;
   int         value_ = 0;
   std::string label_;
   std::string category_;

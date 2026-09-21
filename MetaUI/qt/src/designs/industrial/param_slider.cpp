@@ -2,6 +2,9 @@
    Public License. The full license is in the file LICENSE, distributed with
    this software. */
 #include "meta_qt/designs/industrial/param_slider.hpp"
+#include <format>
+
+#include "meta_qt/ui/number_format.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -48,7 +51,8 @@ ParamSlider::ParamSlider(Attribute<float> &attr,
   log_scale_ = meta::common::try_get<bool>(attr,
                                            meta::keys::ui::log_scale,
                                            false);
-  decimals_ = meta::common::try_get_format_decimals(meta::common::format(attr));
+  format_ = meta::common::format(attr);
+  decimals_ = meta::common::try_get_format_decimals(format_);
 
   unbounded_ = !has_usable_range(min_, max_);
 
@@ -62,12 +66,30 @@ ParamSlider::ParamSlider(Attribute<float> &attr,
     max_ = std::numeric_limits<float>::max();
   }
 
-  // A log mapping needs a strictly positive lower bound; fall back to linear
-  // rather than producing NaNs across the whole rail. An unbounded range has
-  // no span to lay a mapping over in the first place.
-  if (log_scale_ && (unbounded_ || min_ <= kLogFloor)) log_scale_ = false;
+  // Only an unbounded range defeats a log mapping outright, because there is
+  // no span to lay one over. A minimum of zero does not: the domain is simply
+  // clamped up to kLogFloor, which is what stock's SliderFloat has always
+  // done. Bailing to linear here instead meant every log attribute starting at
+  // zero silently drew as linear, which is nearly all of them.
+  if (log_scale_ && unbounded_) log_scale_ = false;
 
-  value_ = std::clamp(attr.value(), min_, max_);
+  // The rail may deliberately stop short of what the parameter accepts. Where
+  // it does, dragging is held to the rail while typing goes to the real
+  // maximum. Declared per attribute rather than inferred: this used to trigger
+  // on max == 64 exactly, which caught unrelated parameters whose 64 is a hard
+  // cap, Islands and n_vertices among them, and let a user type any number
+  // into them.
+  input_max_ = max_;
+  // An absent override leaves the full range; zero is a valid explicit cap.
+  if (const float declared = meta::common::try_get<float>(
+          attr,
+          meta::keys::ui::drag_max,
+          max_);
+      declared > min_ && declared < max_)
+  {
+    max_ = declared; // the rail ends here; input_max_ keeps the real limit
+  }
+  value_ = std::clamp(attr.value(), min_, input_max_);
   norm_ = unbounded_ ? kRestNorm : to_norm(value_);
 
   setFixedHeight(theme().metrics.row_height);
@@ -114,7 +136,10 @@ ParamSlider::ParamSlider(Attribute<float> &attr,
             notify_value_changed();
             end_edit();
           });
-  glide_->jump(norm_);
+  {
+    const QSignalBlocker blocker(glide_);
+    glide_->jump(norm_);
+  }
 
   field_ = new QLineEdit(this);
   field_->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -162,7 +187,7 @@ bool ParamSlider::can_render(const Attribute<float> &attr)
 
 void ParamSlider::set(const float &value)
 {
-  const float clamped = std::clamp(value, min_, max_);
+  const float clamped = std::clamp(value, min_, input_max_);
 
   // Unbounded: the thumb encodes drag distance, not the value, so a sync from
   // the model leaves it where it rests. jump() also cancels a recentre still
@@ -191,9 +216,16 @@ qreal ParamSlider::to_norm(float value) const
 
   if (log_scale_)
   {
-    const qreal lo = std::log(qreal(min_));
-    const qreal hi = std::log(qreal(max_));
+    // Every endpoint is floored, not just the value. log(0) is negative
+    // infinity, and a minimum of zero is the common case rather than the
+    // exotic one, so leaving lo unfloored produced a NaN across the whole rail
+    // and was why this fell back to linear instead.
+    const qreal lo = std::log(std::max(qreal(min_), kLogFloor));
+    const qreal hi = std::log(std::max(qreal(max_), kLogFloor));
     const qreal v = std::log(std::max(qreal(value), kLogFloor));
+
+    if (hi <= lo) return 0.0;
+
     return std::clamp((v - lo) / (hi - lo), 0.0, 1.0);
   }
 
@@ -206,8 +238,14 @@ float ParamSlider::from_norm(qreal t) const
 
   if (log_scale_)
   {
-    const qreal lo = std::log(qreal(min_));
-    const qreal hi = std::log(qreal(max_));
+    const qreal lo = std::log(std::max(qreal(min_), kLogFloor));
+    const qreal hi = std::log(std::max(qreal(max_), kLogFloor));
+
+    // Snap the bottom of the rail back to the real minimum. The floor is a
+    // device for making the mapping well defined, and without this a rail
+    // declared from zero would bottom out at 1e-6 instead of at zero.
+    if (t <= 0.0) return min_;
+
     return float(std::exp(lo + t * (hi - lo)));
   }
 
@@ -459,7 +497,7 @@ void ParamSlider::drag_by(int x, Qt::KeyboardModifiers modifiers)
 
 void ParamSlider::apply_value(float value)
 {
-  const float clamped = std::clamp(value, min_, max_);
+  const float clamped = std::clamp(value, min_, input_max_);
   const bool  changed = clamped != value_;
 
   value_ = clamped;
@@ -473,22 +511,48 @@ void ParamSlider::commit_value(float value)
 {
   begin_edit();
 
-  const float clamped = std::clamp(value, min_, max_);
+  const float clamped = std::clamp(value, min_, input_max_);
 
   if (!unbounded_)
   {
-    glide_->to(to_norm(clamped)); // finished() commits and ends the edit
-    return;
+    // Typed numbers are authoritative, even where normalising a wide range
+    // cannot represent all their digits. Position the rail, then seat the
+    // value.
+    glide_->jump(to_norm(clamped));
   }
 
-  // Nothing to glide towards: the thumb is already at rest and stays there.
-  apply_value(clamped);
+  value_ = clamped;
+  refresh_field();
+  update();
+  notify_value_changed();
   end_edit();
 }
 
 QString ParamSlider::format_value(float value) const
 {
-  return QString::number(value, 'f', decimals_);
+  // Honour the presentation type the attribute declared. A rate spanning five
+  // decades declares "{:.2e}" precisely so its readout stays three characters
+  // of mantissa and an exponent; rendering it fixed gives 0.00000100, which
+  // does not fit the value field and reads as a truncated number rather than
+  // a small one.
+  //
+  // Only e and g are routed here. A fixed spec goes to display_float, which
+  // widens the precision rather than letting a small non-zero value round away
+  // to 0.00, and that is the behaviour a fixed readout wants.
+  if (has_exponent_format(format_))
+  {
+    try
+    {
+      return QString::fromStdString(
+          std::vformat(format_, std::make_format_args(value)));
+    }
+    catch (const std::format_error &)
+    {
+      // A malformed spec is a host bug, not a reason to render nothing.
+    }
+  }
+
+  return display_float(value, decimals_);
 }
 
 void ParamSlider::refresh_field()

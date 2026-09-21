@@ -138,6 +138,12 @@ int ClipBox::body_height() const
 {
   if (!body_) return 0;
 
+  if (body_->hasHeightForWidth())
+  {
+    const int height = body_->heightForWidth(width());
+    if (height >= 0) return height;
+  }
+
   // sizeHint() rather than height(): the body is laid out at its natural size
   // and never resized, so the hint is what it actually occupies.
   const int hint = body_->sizeHint().height();

@@ -5,9 +5,11 @@
 #include <algorithm>
 #include <random>
 
+#include "meta_qt/ui/number_format.hpp"
 #include <QFile>
 #include <QFontDatabase>
 #include <QImage>
+#include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
@@ -19,6 +21,52 @@
 
 namespace meta::qt
 {
+
+void PointsCanvas::resizeEvent(QResizeEvent *event)
+{
+  if (height() != width()) setFixedHeight(width());
+  QWidget::resizeEvent(event);
+}
+
+void PointsCanvas::keyPressEvent(QKeyEvent *event)
+{
+  if (mode_ != Mode::Path || hovered_idx_ < 0 ||
+      hovered_idx_ >= int(points_.size()) || drag_idx_ >= 0)
+  {
+    QWidget::keyPressEvent(event);
+    return;
+  }
+  if (event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9)
+  {
+    if (order_input_.size() < 9) order_input_ += event->text();
+  }
+  else if (event->key() == Qt::Key_Backspace)
+    order_input_.chop(1);
+  else if (event->key() == Qt::Key_Escape)
+    order_input_.clear();
+  else if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+  {
+    bool      valid = false;
+    const int destination = order_input_.toInt(&valid) - 1;
+    if (valid && destination >= 0 && destination < int(points_.size()))
+    {
+      const auto point = points_[hovered_idx_];
+      points_.erase(points_.begin() + hovered_idx_);
+      points_.insert(points_.begin() + destination, point);
+      hovered_idx_ = destination;
+      order_input_.clear();
+      Q_EMIT points_changed();
+      Q_EMIT drag_ended();
+    }
+  }
+  else
+  {
+    QWidget::keyPressEvent(event);
+    return;
+  }
+  event->accept();
+  update();
+}
 
 PointsCanvas::PointsCanvas(std::vector<glm::vec3> &points,
                            float                   min_x,
@@ -39,26 +87,21 @@ PointsCanvas::PointsCanvas(std::vector<glm::vec3> &points,
       mode_(mode),
       closed_(closed)
 {
-  setMinimumSize(200, 200);
-  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  setMinimumSize(120, 120);
+  QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+  policy.setHeightForWidth(true);
+  setSizePolicy(policy);
   setMouseTracking(true);
+  setFocusPolicy(Qt::StrongFocus);
+  setToolTip(tr("Hover a point and scroll to change its height. For paths, "
+                "type its new position and press Enter. Escape cancels."));
   setCursor(Qt::CrossCursor);
-}
-
-void PointsCanvas::resizeEvent(QResizeEvent *event)
-{
-  // Only react to a width change. Recomputing height inside the layout pass
-  // that just resized us re-invalidates it, turning one resize into several
-  // full layout passes.
-  if (event->oldSize().width() != event->size().width())
-    setFixedHeight(width());
-
-  QWidget::resizeEvent(event);
 }
 
 QRect PointsCanvas::canvas_rect() const
 {
-  return rect().adjusted(PAD, PAD, -PAD, -PAD);
+  const int side = std::max(1, std::min(width(), height()) - 2 * PAD);
+  return QRect((width() - side) / 2, (height() - side) / 2, side, side);
 }
 
 glm::vec2 PointsCanvas::canvas_to_value(const QPoint &p) const
@@ -160,6 +203,11 @@ void PointsCanvas::mouseMoveEvent(QMouseEvent *e)
     const int prev_pt = hovered_idx_;
     const int prev_seg = hovered_segment_;
     hovered_idx_ = hit_test(e->pos());
+    if (hovered_idx_ != prev_pt)
+    {
+      order_input_.clear();
+      if (hovered_idx_ >= 0) setFocus(Qt::MouseFocusReason);
+    }
 
     // In Path mode, also track the nearest segment for insert-on-click
     // feedback. Only highlight a segment when NOT hovering an existing point.
@@ -254,7 +302,9 @@ void PointsCanvas::paintEvent(QPaintEvent *)
   const QRect r = canvas_rect();
 
   // Background
-  p.fillRect(rect(), palette().color(QPalette::Base));
+  p.setPen(Qt::NoPen);
+  p.setBrush(palette().color(QPalette::Base));
+  p.drawRoundedRect(rect().adjusted(1, 1, -1, -1), 8, 8);
 
   // Background image
   if (!this->bg_pixels_.empty() && this->bg_w_ > 0 && this->bg_h_ > 0)
@@ -274,7 +324,9 @@ void PointsCanvas::paintEvent(QPaintEvent *)
 
   // Grid
   {
-    QPen gp(palette().color(QPalette::Mid), 1, Qt::DotLine);
+    QColor grid = palette().color(QPalette::Mid);
+    grid.setAlpha(100);
+    QPen gp(grid, 1, Qt::DotLine);
     p.setPen(gp);
     constexpr int div = 4;
     for (int i = 1; i < div; ++i)
@@ -325,7 +377,7 @@ void PointsCanvas::paintEvent(QPaintEvent *)
     {
       const QPoint cp = value_to_canvas(points_[i].x, points_[i].y);
       p.drawText(cp + QPoint(int(POINT_R) + 3, -int(POINT_R)),
-                 QString::number(i));
+                 QString::number(i + 1));
     }
   }
 
@@ -352,19 +404,27 @@ void PointsCanvas::paintEvent(QPaintEvent *)
     {
       p.setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
       p.setPen(palette().color(QPalette::Text));
-      p.drawText(cp + QPoint(int(POINT_R) + 3, 4),
-                 QString::number(double(pt.z), 'f', 2));
+      const QString info =
+          order_input_.isEmpty()
+              ? tr("Point %1 · Height %2").arg(i + 1).arg(display_float(pt.z))
+              : tr("Move to %1 · Enter to apply").arg(order_input_);
+      p.fillRect(r.adjusted(0, r.height() - 30, 0, 0),
+                 palette().color(QPalette::Base));
+      p.drawText(r.adjusted(6, 0, -6, -10),
+                 Qt::AlignLeft | Qt::AlignBottom,
+                 info);
     }
   }
 
   // Point count
   p.setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
   p.setPen(palette().color(QPalette::PlaceholderText));
-  p.drawText(r.adjusted(4, 0, 0, -3),
-             Qt::AlignLeft | Qt::AlignBottom,
-             QString("%1 pt%2")
-                 .arg(points_.size())
-                 .arg(points_.size() != 1 ? "s" : ""));
+  if (hovered_idx_ < 0 && drag_idx_ < 0)
+    p.drawText(r.adjusted(4, 0, 0, -3),
+               Qt::AlignLeft | Qt::AlignBottom,
+               QString("%1 pt%2")
+                   .arg(points_.size())
+                   .arg(points_.size() != 1 ? "s" : ""));
 
   // Legend: colour ramp strip bottom-right
   {
@@ -496,6 +556,10 @@ void PointsCanvas::wheelEvent(QWheelEvent *e)
 
 QColor PointsCanvas::z_to_color(float z) const
 {
+  if (property("industrialEditor").toBool())
+    return palette()
+        .color(QPalette::Highlight)
+        .lighter(70 + int(60 * std::clamp(z, 0.f, 1.f)));
   // Simple blue(0) → cyan → green → yellow → red(1) heatmap.
   z = std::clamp(z, 0.f, 1.f);
   float r, g, b;

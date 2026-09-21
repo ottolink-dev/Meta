@@ -1,0 +1,2 @@
+add_executable(test_editor_controls main.cpp)
+target_link_libraries(test_editor_controls meta_qt)

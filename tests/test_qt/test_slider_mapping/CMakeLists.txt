@@ -1,0 +1,2 @@
+add_executable(test_slider_mapping main.cpp)
+target_link_libraries(test_slider_mapping meta meta_qt)

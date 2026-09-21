@@ -1,0 +1,2 @@
+add_executable(industrial_gradient_snap main.cpp)
+target_link_libraries(industrial_gradient_snap meta meta_qt)

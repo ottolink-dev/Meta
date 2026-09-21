@@ -3,7 +3,10 @@
    this software. */
 #include <algorithm>
 
+#include "meta_qt/ui/number_format.hpp"
+#include "meta_qt/ui/theme.hpp"
 #include <QFontDatabase>
+#include <QLinearGradient>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
@@ -164,19 +167,22 @@ void RangeBar::paintEvent(QPaintEvent *)
   p.setRenderHint(QPainter::Antialiasing);
 
   const QRect tr = track_rect();
-  const int   lx = value_to_canvas(value_.x);
-  const int   hx = value_to_canvas(value_.y);
+  const float lo = isEnabled() ? value_.x : domain_min_;
+  const float hi = isEnabled() ? value_.y : domain_max_;
+  const int   lx = value_to_canvas(lo);
+  const int   hx = value_to_canvas(hi);
 
   // Track background
   p.setPen(Qt::NoPen);
-  p.setBrush(palette().color(QPalette::Mid));
+  p.setBrush(industrial_ ? theme_.rail_well : palette().color(QPalette::Mid));
   p.drawRoundedRect(tr, 3, 3);
 
   // Filled section between handles
   if (hx > lx)
   {
     QRect filled(lx, tr.top(), hx - lx, tr.height());
-    p.setBrush(palette().color(QPalette::Highlight).darker(110));
+    p.setBrush(industrial_ ? theme_.rail_fill("", !isEnabled())
+                           : palette().color(QPalette::Highlight).darker(110));
     p.drawRect(filled);
   }
 
@@ -270,8 +276,28 @@ void RangeBar::paintEvent(QPaintEvent *)
   // outlined with the text color so it stays visible on the track.
   auto draw_handle = [&](int x, bool hovered, bool dragged)
   {
+    if (industrial_)
+    {
+      const auto     &m = theme_.metrics;
+      const QRectF    thumb(x - m.thumb_width / 2.,
+                         tr.center().y() - m.thumb_height / 2.,
+                         m.thumb_width,
+                         m.thumb_height);
+      QLinearGradient metal(thumb.topLeft(), thumb.bottomLeft());
+      metal.setColorAt(0, theme_.thumb_top);
+      metal.setColorAt(1, theme_.thumb_bottom);
+      p.setOpacity(isEnabled() ? 1. : theme_.locked_thumb_alpha);
+      p.setPen(QPen(theme_.thumb_border, 1));
+      p.setBrush(metal);
+      p.drawRoundedRect(thumb.adjusted(.5, .5, -.5, -.5), m.radius, m.radius);
+      p.setPen(Qt::NoPen);
+      p.setBrush(theme_.thumb_grip);
+      p.drawRect(QRectF(thumb.center().x(), thumb.center().y() - 3, 2, 8));
+      p.setOpacity(1.);
+      return;
+    }
     const QRect hr(x - handle_w_, tr.top() - 3, handle_w_ * 2, tr.height() + 6);
-    p.setPen(QPen(palette().color(QPalette::Text), 1));
+    p.setPen(QPen(palette().color(QPalette::Dark), 1));
     p.setBrush(dragged   ? palette().color(QPalette::Highlight)
                : hovered ? palette().color(QPalette::Light)
                          : palette().color(QPalette::Button));
@@ -285,28 +311,27 @@ void RangeBar::paintEvent(QPaintEvent *)
 
   // Labels: low value left of low handle, high value right of high handle,
   // span in the center of the filled section.
-  p.setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
+  p.setFont(mono_font(12));
   p.setPen(palette().color(QPalette::Text));
 
-  const QString lo_txt = QString::number(double(value_.x), 'f', decimals_);
-  const QString hi_txt = QString::number(double(value_.y), 'f', decimals_);
+  const QString lo_txt = display_float(lo);
+  const QString hi_txt = display_float(hi);
 
   // Low label — left-aligned below the low handle
-  p.drawText(QRect(tr.left(), tr.bottom() + 3, (lx - tr.left()) * 2, 16),
+  p.drawText(QRect(tr.left(), tr.bottom() + 5, tr.width() / 2, 20),
              Qt::AlignLeft | Qt::AlignTop,
              lo_txt);
 
   // High label — right-aligned below the high handle
-  p.drawText(
-      QRect(hx - (tr.right() - hx), tr.bottom() + 3, (tr.right() - hx) * 2, 16),
-      Qt::AlignRight | Qt::AlignTop,
-      hi_txt);
+  p.drawText(QRect(tr.center().x(), tr.bottom() + 5, tr.width() / 2, 20),
+             Qt::AlignRight | Qt::AlignTop,
+             hi_txt);
 }
 
 void RangeBar::set_value(glm::vec2 v)
 {
   value_ = v;
-  clamp_and_order();
+  if (isEnabled()) clamp_and_order();
   update();
 }
 
@@ -323,7 +348,8 @@ QRect RangeBar::track_rect() const
 {
   const int cy = height() / 2 -
                  4; // slight upward bias to leave room for labels
-  return QRect(pad_h_, cy - track_h_ / 2, width() - 2 * pad_h_, track_h_);
+  const int h = industrial_ ? theme_.metrics.rail_height : track_h_;
+  return QRect(pad_h_, cy - h / 2, width() - 2 * pad_h_, h);
 }
 
 int RangeBar::value_to_canvas(float v) const

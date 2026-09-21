@@ -179,11 +179,6 @@ public:
   void json_from(const nlohmann::json &j,
                  SerializationMode     mode = SerializationMode::full) override
   {
-    if (j.contains("value"))
-    {
-      value_ = AttributeTraits<T>::json_from(j.at("value"));
-      value_changed.notify(value_);
-    }
     if (mode == SerializationMode::full && j.contains("metadata"))
     {
       deserialize_metadata(metadata(), j.at("metadata"));
@@ -191,6 +186,15 @@ public:
     if (j.contains("state"))
     {
       deserialize_state(state(), j.at("state"));
+    }
+    if (j.contains("value"))
+    {
+      value_ = AttributeTraits<T>::json_from(j.at("value"));
+      value_changed.notify(value_);
+    }
+    else if (j.contains("state"))
+    {
+      value_changed.notify(value_);
     }
   }
 
