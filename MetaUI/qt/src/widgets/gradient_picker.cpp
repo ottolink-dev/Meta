@@ -7,7 +7,6 @@
 #include <functional>
 #include <numbers>
 
-#include <QColorDialog>
 #include <QComboBox>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -33,6 +32,7 @@
 #include "meta/ext/color_gradient/gradient_library.hpp"
 #include "meta/ext/color_gradient/gradient_metrics.hpp"
 #include "meta/logger.hpp"
+#include "meta_qt/ui/color_picker.hpp"
 #include "meta_qt/ui/theme.hpp"
 #include "meta_qt/widgets/gradient_picker.hpp"
 
@@ -138,38 +138,53 @@ void GradientBarWidget::paintEvent(QPaintEvent *)
   const QRectF    br = bar_rect();
   const QPalette &pal = palette();
 
-  // Gradient bar
+  // Gradient bar: a checkerboard under it (transparent stops read as such),
+  // the gradient, a hairline rim
   {
+    QPainterPath shape;
+    shape.addRoundedRect(br, RADIUS, RADIUS);
+    p.save();
+    p.setClipPath(shape);
+    const qreal cell = 6.0;
+    p.fillRect(br, QColor(200, 200, 200));
+    for (int row = 0; row * cell < br.height(); ++row)
+      for (int col = row % 2; col * cell < br.width(); col += 2)
+        p.fillRect(QRectF(br.left() + col * cell, br.top() + row * cell, cell, cell),
+                   QColor(150, 150, 150));
+
     QLinearGradient grad(br.topLeft(), br.topRight());
     for (const auto &s : stops_)
       grad.setColorAt(double(s.position), to_qcolor(s.color));
-    p.setBrush(grad);
-    p.setPen(QPen(pal.color(QPalette::Mid), 1));
-    p.drawRoundedRect(br, RADIUS, RADIUS);
+    p.fillRect(br, grad);
+    p.restore();
+
+    QColor rim = pal.color(QPalette::Shadow);
+    rim.setAlphaF(0.55);
+    p.setPen(QPen(rim, 1));
+    p.setBrush(Qt::NoBrush);
+    p.drawRoundedRect(br.adjusted(0.5, 0.5, -0.5, -0.5), RADIUS, RADIUS);
   }
 
-  // Stop handles
+  // Stop handles: a pin under the bar, on a thin stem to its position
   for (int i = 0; i < static_cast<int>(stops_.size()); ++i)
   {
     const QRectF r = stop_rect(stops_[i]);
     const bool   sel = (i == selected_idx_);
+    const QColor accent = pal.color(QPalette::Highlight);
 
-    // Small triangle pointing up from bar bottom to handle
-    const float cx = float(r.center().x());
-    const float ty = float(br.bottom());
-    QPolygonF   tri;
-    tri << QPointF(cx - 4, ty + 8) << QPointF(cx + 4, ty + 8)
-        << QPointF(cx, ty + 1);
+    const qreal cx = r.center().x();
+    p.setPen(QPen(sel ? accent : QColor(255, 255, 255, 170), sel ? 1.5 : 1.0));
+    p.drawLine(QPointF(cx, br.bottom() - 3), QPointF(cx, r.top()));
+
+    // soft shadow, white ring (accent when selected), the stop's colour
     p.setPen(Qt::NoPen);
-    p.setBrush(pal.color(sel ? QPalette::Highlight : QPalette::Button));
-    p.drawPolygon(tri);
-
-    // Colour disc
-    p.setBrush(to_qcolor(stops_[i].color));
-    p.setPen(
-        QPen(sel ? pal.color(QPalette::Highlight) : pal.color(QPalette::Dark),
-             sel ? 2 : 1));
+    p.setBrush(QColor(0, 0, 0, 70));
+    p.drawEllipse(r.translated(0, 1).adjusted(-1, -1, 1, 1));
+    p.setBrush(sel ? accent : QColor(245, 245, 245));
     p.drawEllipse(r);
+    p.setBrush(to_qcolor(stops_[i].color));
+    const qreal ring = sel ? 2.5 : 2.0;
+    p.drawEllipse(r.adjusted(ring, ring, -ring, -ring));
   }
 }
 
@@ -180,11 +195,10 @@ void GradientBarWidget::mouseDoubleClickEvent(QMouseEvent *e)
   if (idx >= 0)
   {
     // Edit existing stop colour
-    const QColor picked = QColorDialog::getColor(
-        to_qcolor(stops_[idx].color),
-        this,
-        QString(),
-        QColorDialog::ShowAlphaChannel | QColorDialog::DontUseNativeDialog);
+    const QColor picked = meta::qt::pick_color(to_qcolor(stops_[idx].color),
+                                               this,
+                                               "Gradient stop color",
+                                               true);
 
     if (picked.isValid())
     {
@@ -580,6 +594,41 @@ GradientPicker::GradientPicker(std::vector<Stop>         &stops,
   library_connection_ = GradientLibrary::instance().changed.subscribe(
       [this]() { schedule_rebuild(); });
 
+  // Tiles are cards, not push buttons: no bevel, a soft hover, the current
+  // gradient outlined in the accent. The toolbar's buttons are quiet ghosts.
+  {
+    const QPalette &pal = palette();
+    const auto      rgba = [](const QColor &c, qreal a)
+    {
+      return QString("rgba(%1, %2, %3, %4)")
+          .arg(c.red())
+          .arg(c.green())
+          .arg(c.blue())
+          .arg(int(a * 255));
+    };
+    const QColor ink = pal.color(QPalette::Text);
+    const QColor accent = pal.color(QPalette::Highlight);
+    setStyleSheet(
+        QString(R"(
+      QPushButton#gradientPresetTile {
+        border: 1px solid transparent; border-radius: 8px; padding: 2px;
+        background: transparent; }
+      QPushButton#gradientPresetTile:hover { background: %1; }
+      QPushButton#gradientPresetTile:checked { border-color: %2; background: %3; }
+      QToolButton#gradientToolButton {
+        border: 1px solid %4; border-radius: 7px; padding: 0px 10px;
+        background: %5; color: %6; }
+      QToolButton#gradientToolButton:hover { border-color: %2; }
+      QToolButton#gradientToolButton::menu-indicator { image: none; width: 0px; }
+    )")
+            .arg(rgba(ink, 0.07),
+                 accent.name(),
+                 rgba(accent, 0.14),
+                 rgba(ink, 0.14),
+                 rgba(ink, 0.04),
+                 ink.name()));
+  }
+
   rebuild_preset_grid();
 }
 
@@ -602,6 +651,7 @@ QWidget *GradientPicker::build_toolbar()
     button->setAutoRaise(true);
     button->setToolButtonStyle(Qt::ToolButtonTextOnly);
     button->setFixedHeight(TOOLBAR_H);
+    button->setObjectName("gradientToolButton");
     button->setCursor(Qt::PointingHandCursor);
     return button;
   };
@@ -789,34 +839,54 @@ QPixmap GradientPicker::make_swatch(const Entry &entry,
                                     bool         favorite,
                                     QSize        size) const
 {
-  QPixmap pix(size.isValid() ? size : QSize(SWATCH_W, SWATCH_H));
+  // drawn at the screen's pixel density: an icon at logical size is blurry
+  // on a scaled display
+  const QSize logical = size.isValid() ? size : QSize(SWATCH_W, SWATCH_H);
+  const qreal dpr = std::max(1.0, devicePixelRatioF());
+  QPixmap     pix(logical * dpr);
+  pix.setDevicePixelRatio(dpr);
   pix.fill(Qt::transparent);
+
   QPainter pp(&pix);
   pp.setRenderHint(QPainter::Antialiasing);
-  QPainterPath outline;
-  outline.addRoundedRect(QRectF(pix.rect()), 4, 4);
-  pp.setClipPath(outline);
+  pp.setRenderHint(QPainter::TextAntialiasing);
 
-  QLinearGradient grad(0, 0, pix.width(), 0);
+  // a gradient chip on top, the name under it (generated ids included: hosts
+  // ship whole libraries of them)
+  const QFont        font = ui_font(11);
+  const QFontMetrics fm(font);
+  const qreal        text_h = fm.height();
+  const QRectF       chip(0.5,
+                    0.5,
+                    logical.width() - 1.0,
+                    std::max(12.0, logical.height() - text_h - 4.0));
+
+  QPainterPath outline;
+  outline.addRoundedRect(chip, 5, 5);
+
+  QLinearGradient grad(chip.topLeft(), chip.topRight());
   for (const auto &s : entry.preset.stops)
     grad.setColorAt(double(s.position), to_qcolor(s.color));
-  pp.fillRect(pix.rect(), grad);
+  pp.fillPath(outline, grad);
 
-  // Name overlay, generated ids included: hosts ship whole libraries of them
+  // top sheen, then a hairline rim
   {
-    const QFont font = ui_font(11);
-    pp.setFont(font);
-    const int band_h = QFontMetrics(font).height() + 2;
-    pp.fillRect(QRect(0, pix.height() - band_h, pix.width(), band_h),
-                QColor(0, 0, 0, 150));
-    pp.setPen(Qt::white);
-    pp.drawText(
-        pix.rect().adjusted(3, 0, -3, -1),
-        Qt::AlignBottom | Qt::AlignHCenter,
-        QFontMetrics(font).elidedText(QString::fromStdString(entry.preset.name),
-                                      Qt::ElideRight,
-                                      pix.width() - 6));
+    QLinearGradient sheen(chip.topLeft(), chip.bottomLeft());
+    sheen.setColorAt(0.0, QColor(255, 255, 255, 34));
+    sheen.setColorAt(0.5, QColor(255, 255, 255, 0));
+    pp.fillPath(outline, sheen);
+    pp.setPen(QPen(QColor(0, 0, 0, 110), 1));
+    pp.setBrush(Qt::NoBrush);
+    pp.drawPath(outline);
   }
+
+  pp.setFont(font);
+  pp.setPen(palette().color(QPalette::Text));
+  pp.drawText(QRectF(0, chip.bottom() + 2, logical.width(), text_h + 2),
+              Qt::AlignHCenter | Qt::AlignTop,
+              fm.elidedText(QString::fromStdString(entry.preset.name),
+                            Qt::ElideRight,
+                            logical.width() - 4));
 
   // Favourite star (top-left) and library marker (top-right)
   if (favorite) draw_star(pp, QPointF(8, 8), 5.5);
@@ -825,15 +895,8 @@ QPixmap GradientPicker::make_swatch(const Entry &entry,
   {
     pp.setPen(QPen(QColor(40, 40, 40), 1));
     pp.setBrush(Qt::white);
-    pp.drawEllipse(QPointF(pix.width() - 7, 7), 3, 3);
+    pp.drawEllipse(QPointF(logical.width() - 7, 7), 3, 3);
   }
-
-  // Border
-  pp.setPen(QPen(QColor(80, 80, 80), 1));
-  pp.setBrush(Qt::NoBrush);
-  pp.drawRoundedRect(pix.rect().adjusted(0, 0, -1, -1),
-                     GradientBarWidget::RADIUS,
-                     GradientBarWidget::RADIUS);
 
   return pix;
 }
@@ -868,6 +931,7 @@ void GradientPicker::rebuild_preset_grid()
 
     auto *btn = new QPushButton(preset_grid_);
     btn->setFixedSize(SWATCH_W, SWATCH_H);
+    btn->setObjectName("gradientPresetTile");
     btn->setFlat(true);
     btn->setToolTip(
         QString("%1\n%2, %3 %4")
