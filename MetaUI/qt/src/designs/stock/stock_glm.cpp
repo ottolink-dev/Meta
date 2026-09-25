@@ -9,7 +9,6 @@
 #include <random>
 
 #include <QCheckBox>
-#include <QColorDialog>
 #include <QFileDialog>
 #include <QFontDatabase>
 #include <QFormLayout>
@@ -23,6 +22,7 @@
 
 #include "meta/core/data_provider.hpp"
 #include "meta_common.hpp"
+#include "meta_qt/ui/color_picker.hpp"
 #include "meta_qt/designs/stock/stock.hpp"
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/widgets/points_canvas.hpp"
@@ -331,6 +331,8 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
 
     auto *canvas =
         new XYCanvas(value, min_x, max_x, min_y, max_y, show_grid, widget);
+    canvas->set_plane_aspect(
+        meta::common::try_get<float>(attr, meta::keys::ui::plane_aspect, 1.f));
     layout->addWidget(canvas);
 
     auto *btn_row = new QHBoxLayout();
@@ -1144,10 +1146,8 @@ MetaWidget *render_vec3(AbstractAttribute &abstract_attr,
                            std::clamp(value.g, 0.0f, 1.0f),
                            std::clamp(value.b, 0.0f, 1.0f));
 
-                       const QColor color = QColorDialog::getColor(
-                           initial_color,
-                           widget,
-                           "Select Color");
+                       const QColor color =
+                           meta::qt::pick_color(initial_color, widget, "Select Color", false);
 
                        if (color.isValid())
                        {
@@ -1359,11 +1359,8 @@ MetaWidget *render_vec4(AbstractAttribute &abstract_attr,
                            std::clamp(value.b, 0.0f, 1.0f),
                            std::clamp(value.a, 0.0f, 1.0f));
 
-                       const QColor color = QColorDialog::getColor(
-                           initial_color,
-                           widget,
-                           "Select Color",
-                           QColorDialog::ShowAlphaChannel);
+                       const QColor color =
+                           meta::qt::pick_color(initial_color, widget, "Select Color", true);
 
                        if (color.isValid())
                        {

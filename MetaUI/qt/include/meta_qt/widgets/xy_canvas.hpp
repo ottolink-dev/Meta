@@ -25,6 +25,16 @@ public:
   // External write (Center / Random buttons) — updates value ref + repaints.
   void set_value(glm::vec2 v);
 
+  // The plane keeps its aspect (set_plane_aspect, 1:1 by default) at any
+  // panel width: the widget's height follows its width, up to max_side_, and
+  // the plane is centred in it.
+  bool  hasHeightForWidth() const override { return true; }
+  int   heightForWidth(int w) const override;
+  QSize sizeHint() const override;
+
+  // width / height of the plane (the domain it stands for); 1: square
+  void set_plane_aspect(float aspect);
+
 Q_SIGNALS:
   void value_changed(glm::vec2 v);
   void drag_ended(glm::vec2 v);
@@ -34,6 +44,7 @@ protected:
   void mousePressEvent(QMouseEvent *e) override;
   void mouseMoveEvent(QMouseEvent *e) override;
   void mouseReleaseEvent(QMouseEvent *e) override;
+  void resizeEvent(QResizeEvent *e) override;
 
 private:
   QRect     padded_rect() const;
@@ -48,7 +59,9 @@ private:
   bool       dragging_ = false;
 
   static constexpr int pad_ = 8;
-  static constexpr int point_r_ = 5;
+  static constexpr int point_r_ = 6;
+  static constexpr int max_side_ = 520;
+  float                plane_aspect_ = 1.f;
 };
 
 } // namespace meta::qt
