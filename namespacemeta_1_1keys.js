@@ -30,6 +30,7 @@ var namespacemeta_1_1keys =
       [ "max_y", "namespacemeta_1_1keys_1_1ui.html#abd9bd2b1f01350fd4f4f62abc72e123d", null ],
       [ "min_x", "namespacemeta_1_1keys_1_1ui.html#ac81a65280be4f906e78e9ed4823c6154", null ],
       [ "min_y", "namespacemeta_1_1keys_1_1ui.html#a18af73df9db6712f7c1fd149e722464d", null ],
+      [ "plane_aspect", "namespacemeta_1_1keys_1_1ui.html#abca20660e8affd0b248e3a7258df478d", null ],
       [ "presets", "namespacemeta_1_1keys_1_1ui.html#aa10c249df5f6548c5ee851d7d010eeb8", null ],
       [ "read_only", "namespacemeta_1_1keys_1_1ui.html#a0c990cdf97c705ff3def6eaca0a25491", null ],
       [ "tooltip", "namespacemeta_1_1keys_1_1ui.html#a414a3aab9a63dfbcb792722e89e4a03d", null ],

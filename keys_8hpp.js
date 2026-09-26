@@ -23,6 +23,7 @@ var keys_8hpp =
     [ "min", "keys_8hpp.html#a48d52b68a2ffb44683062dad9fc4e260", null ],
     [ "min_x", "keys_8hpp.html#ac81a65280be4f906e78e9ed4823c6154", null ],
     [ "min_y", "keys_8hpp.html#a18af73df9db6712f7c1fd149e722464d", null ],
+    [ "plane_aspect", "keys_8hpp.html#abca20660e8affd0b248e3a7258df478d", null ],
     [ "power_of_two", "keys_8hpp.html#a41a01ae5d2b6f41b08fd8cdf8c2a7ed4", null ],
     [ "presets", "keys_8hpp.html#aa10c249df5f6548c5ee851d7d010eeb8", null ],
     [ "read_only", "keys_8hpp.html#a0c990cdf97c705ff3def6eaca0a25491", null ],
