@@ -53,6 +53,9 @@ inline constexpr char max_x[] = "ui.max_x";
 inline constexpr char max_y[] = "ui.max_y";
 inline constexpr char min_x[] = "ui.min_x";
 inline constexpr char min_y[] = "ui.min_y";
+// width / height of the plane an XY canvas shows (e.g. the domain's aspect);
+// 1 when absent
+inline constexpr char plane_aspect[] = "ui.plane_aspect";
 inline constexpr char presets[] = "ui.presets";
 inline constexpr char read_only[] = "ui.read_only";
 inline constexpr char tooltip[] = "ui.tooltip";

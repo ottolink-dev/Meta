@@ -47,7 +47,8 @@ private:
   meta::ContainerGroup  &group;   /// Underlying container group
   ContainerRenderOptions options; /// Rendering options
 
-  QTabWidget *tabs = nullptr; /// Tab widget (when using GSM_TABS)
+  QTabWidget *tabs = nullptr; /// Tab widget (when using GSM_TABS, stock design)
+  QWidget    *segments = nullptr; /// Segmented switch (GSM_TABS, designs with chrome)
   QComboBox  *combo =
       nullptr; /// Selector for container keys (when using GSM_COMBO_BOX)
   QStackedWidget *stacked =

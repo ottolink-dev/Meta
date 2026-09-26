@@ -32,11 +32,11 @@ class GradientBarWidget : public QWidget
   Q_OBJECT
 
 public:
-  static constexpr int BAR_H = 28;
-  static constexpr int STOP_R = 6;
+  static constexpr int BAR_H = 26;
+  static constexpr int STOP_R = 7;
   static constexpr int PAD = 10;
   static constexpr int TOTAL_H = PAD + BAR_H + STOP_R * 2 + 6;
-  static constexpr int RADIUS = 4;
+  static constexpr int RADIUS = 7;
 
   explicit GradientBarWidget(std::vector<Stop> &stops,
                              QWidget           *parent = nullptr);
@@ -154,7 +154,7 @@ private:
   bool               rebuild_pending_ = false;
 
   static constexpr int SWATCH_W = 72;  // each preset swatch width
-  static constexpr int SWATCH_H = 40;  // each preset swatch height
+  static constexpr int SWATCH_H = 50;  // each preset swatch height (chip + name)
   static constexpr int TOOLBAR_H = 28; // toolbar row height
 
   static constexpr int PREFERRED_ROWS = 6; // grid rows before it scrolls
