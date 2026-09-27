@@ -108,4 +108,11 @@ QString field_stylesheet(const Theme &theme,
                          bool         modified,
                          bool         locked);
 
+/**
+ * The value field's font, a pixel smaller at a time until @p text fits in
+ * @p field_width. Long readouts (engineering notation, many decimals) then
+ * stay whole instead of being cut off by the fixed-width field.
+ */
+QFont fitted_field_font(const QString &text, int field_width);
+
 } // namespace meta::qt::industrial

@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cmath>
 
+#include <QFontMetrics>
 #include <QLinearGradient>
 #include <QPainter>
 
@@ -158,6 +159,20 @@ QString field_stylesheet(const Theme &theme,
       .arg(border.name())
       .arg(theme.metrics.radius)
       .arg(theme.state_ink(modified, locked).name());
+}
+
+QFont fitted_field_font(const QString &text, int field_width)
+{
+  QFont font = mono_font(13);
+
+  // the border and padding-right of field_stylesheet, and a pixel of air
+  const int room = field_width - 7;
+
+  while (font.pixelSize() > 9 &&
+         QFontMetrics(font).horizontalAdvance(text) > room)
+    font.setPixelSize(font.pixelSize() - 1);
+
+  return font;
 }
 
 } // namespace meta::qt::industrial
