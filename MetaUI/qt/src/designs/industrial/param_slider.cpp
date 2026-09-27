@@ -290,6 +290,7 @@ void ParamSlider::resizeEvent(QResizeEvent *event)
 
   field_->setGeometry(
       SliderGeometry::compute(theme(), width(), height(), norm_).field);
+  field_->setFont(fitted_field_font(field_->text(), field_->width()));
 
   QWidget::resizeEvent(event);
 }
@@ -561,6 +562,7 @@ void ParamSlider::refresh_field()
 
   const QSignalBlocker blocker(field_);
   field_->setText(format_value(value_));
+  field_->setFont(fitted_field_font(field_->text(), field_->width()));
 }
 
 void ParamSlider::restyle_field(bool editing)

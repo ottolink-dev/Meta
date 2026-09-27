@@ -217,6 +217,7 @@ void IntSlider::resizeEvent(QResizeEvent *event)
 
   field_->setGeometry(
       SliderGeometry::compute(theme(), width(), height(), norm_).field);
+  field_->setFont(fitted_field_font(field_->text(), field_->width()));
 
   QWidget::resizeEvent(event);
 }
@@ -451,6 +452,7 @@ void IntSlider::refresh_field()
 
   const QSignalBlocker blocker(field_);
   field_->setText(QString::number(value_));
+  field_->setFont(fitted_field_font(field_->text(), field_->width()));
 }
 
 void IntSlider::restyle_field(bool editing)
