@@ -5,6 +5,7 @@ var namespacemeta =
       [ "angle", "namespacemeta_1_1presets.html#a12c87d3cc24e4a6f323c5389b714667e", null ],
       [ "binary_buttons", "namespacemeta_1_1presets.html#acbf6c96fadb9cc2380a9dad37251ea79", null ],
       [ "checkbox", "namespacemeta_1_1presets.html#ac6020ea6cccd122a6fcac8d1e9a43131", null ],
+      [ "comment", "namespacemeta_1_1presets.html#a7c1757fd1a8ab41581e3b186215c8b7d", null ],
       [ "curve", "namespacemeta_1_1presets.html#a9bfed3c04419e1e0ac83800868ff4bec", null ],
       [ "enum_choice", "namespacemeta_1_1presets.html#acb0b77c927e12aa19b6152648bb7f196", null ],
       [ "file", "namespacemeta_1_1presets.html#a25c323e1427495a6dba0b2c0d4f6064c", null ],

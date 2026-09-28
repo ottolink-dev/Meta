@@ -5,6 +5,7 @@ var searchData=
   ['command_2ehpp_2',['command.hpp',['../command_8hpp.html',1,'']]],
   ['command_5fgroup_2ehpp_3',['command_group.hpp',['../command__group_8hpp.html',1,'']]],
   ['command_5fstack_2ehpp_4',['command_stack.hpp',['../command__stack_8hpp.html',1,'']]],
-  ['container_5fgroup_2ehpp_5',['container_group.hpp',['../container__group_8hpp.html',1,'']]],
-  ['curve_2ehpp_6',['curve.hpp',['../curve_8hpp.html',1,'']]]
+  ['comment_2ehpp_5',['comment.hpp',['../comment_8hpp.html',1,'']]],
+  ['container_5fgroup_2ehpp_6',['container_group.hpp',['../container__group_8hpp.html',1,'']]],
+  ['curve_2ehpp_7',['curve.hpp',['../curve_8hpp.html',1,'']]]
 ];
