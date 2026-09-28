@@ -8,6 +8,19 @@
 namespace meta::presets
 {
 
+Attribute<std::string> &comment(AttributeContainer &c,
+                                std::string_view    key,
+                                std::string_view    label,
+                                std::string         value)
+{
+  auto *a = c.add(std::string(key), std::move(value));
+  auto &m = a->metadata();
+  m.add(keys::ui::widget_type, "Comment");
+  m.add(keys::ui::label, std::string(label));
+  m.add(keys::ui::read_only, true);
+  return *a;
+}
+
 Attribute<std::string> &text(AttributeContainer &c,
                              std::string_view    key,
                              std::string_view    label,

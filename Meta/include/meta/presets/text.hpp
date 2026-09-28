@@ -8,6 +8,11 @@
 namespace meta::presets
 {
 
+Attribute<std::string> &comment(AttributeContainer &c,
+                                std::string_view    key,
+                                std::string_view    label,
+                                std::string         value);
+
 Attribute<std::string> &text(AttributeContainer &c,
                              std::string_view    key,
                              std::string_view    label,
