@@ -149,8 +149,9 @@ void GradientBarWidget::paintEvent(QPaintEvent *)
     p.fillRect(br, QColor(200, 200, 200));
     for (int row = 0; row * cell < br.height(); ++row)
       for (int col = row % 2; col * cell < br.width(); col += 2)
-        p.fillRect(QRectF(br.left() + col * cell, br.top() + row * cell, cell, cell),
-                   QColor(150, 150, 150));
+        p.fillRect(
+            QRectF(br.left() + col * cell, br.top() + row * cell, cell, cell),
+            QColor(150, 150, 150));
 
     QLinearGradient grad(br.topLeft(), br.topRight());
     for (const auto &s : stops_)
@@ -608,8 +609,7 @@ GradientPicker::GradientPicker(std::vector<Stop>         &stops,
     };
     const QColor ink = pal.color(QPalette::Text);
     const QColor accent = pal.color(QPalette::Highlight);
-    setStyleSheet(
-        QString(R"(
+    setStyleSheet(QString(R"(
       QPushButton#gradientPresetTile {
         border: 1px solid transparent; border-radius: 8px; padding: 2px;
         background: transparent; }
@@ -621,12 +621,12 @@ GradientPicker::GradientPicker(std::vector<Stop>         &stops,
       QToolButton#gradientToolButton:hover { border-color: %2; }
       QToolButton#gradientToolButton::menu-indicator { image: none; width: 0px; }
     )")
-            .arg(rgba(ink, 0.07),
-                 accent.name(),
-                 rgba(accent, 0.14),
-                 rgba(ink, 0.14),
-                 rgba(ink, 0.04),
-                 ink.name()));
+                      .arg(rgba(ink, 0.07),
+                           accent.name(),
+                           rgba(accent, 0.14),
+                           rgba(ink, 0.14),
+                           rgba(ink, 0.04),
+                           ink.name()));
   }
 
   rebuild_preset_grid();

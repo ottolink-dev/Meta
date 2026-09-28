@@ -14,8 +14,10 @@ namespace meta::qt
 
 /// Signature of an application-provided colour picker. Returns an invalid
 /// QColor when the user cancels.
-using ColorPickerFn = std::function<
-    QColor(const QColor &initial, QWidget *parent, const QString &title, bool alpha)>;
+using ColorPickerFn = std::function<QColor(const QColor  &initial,
+                                           QWidget       *parent,
+                                           const QString &title,
+                                           bool           alpha)>;
 
 /// Route every colour pick made by MetaUI widgets through @p fn, so the host
 /// application can show a picker in its own style. An empty function restores

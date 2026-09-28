@@ -97,8 +97,9 @@ QSize XYCanvas::sizeHint() const { return QSize(240, heightForWidth(240)); }
 
 void XYCanvas::set_plane_aspect(float aspect)
 {
-  plane_aspect_ = (std::isfinite(aspect) && aspect > 0.f) ? std::clamp(aspect, 0.1f, 10.f)
-                                                          : 1.f;
+  plane_aspect_ = (std::isfinite(aspect) && aspect > 0.f)
+                      ? std::clamp(aspect, 0.1f, 10.f)
+                      : 1.f;
   setFixedHeight(heightForWidth(width() > 0 ? width() : 240));
   update();
 }
@@ -126,9 +127,11 @@ QRect XYCanvas::padded_rect() const
     h = room_h;
     w = h * plane_aspect_;
   }
-  return QRect(int((width() - w) / 2.0), int((height() - h) / 2.0), int(w), int(h));
+  return QRect(int((width() - w) / 2.0),
+               int((height() - h) / 2.0),
+               int(w),
+               int(h));
 }
-
 
 void XYCanvas::paintEvent(QPaintEvent *)
 {
@@ -208,7 +211,7 @@ void XYCanvas::paintEvent(QPaintEvent *)
                             .arg(double(value_.x), 0, 'f', 3)
                             .arg(double(value_.y), 0, 'f', 3);
     const QFontMetrics fm(font);
-    const QRectF pill(r.left() + 6,
+    const QRectF       pill(r.left() + 6,
                       r.bottom() - 6 - (fm.height() + 4),
                       fm.horizontalAdvance(lbl) + 12,
                       fm.height() + 4);

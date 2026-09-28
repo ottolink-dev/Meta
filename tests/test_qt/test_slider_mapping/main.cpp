@@ -109,14 +109,17 @@ int main(int argc, char **argv)
                                  std::pair{-2.f, -1.f},
                                  std::pair{0.f, 2.f}})
   {
-    const auto name = "range_" + std::to_string(min) + "_" + std::to_string(max);
+    const auto name = "range_" + std::to_string(min) + "_" +
+                      std::to_string(max);
     auto *attr = make_attr(container, name, (min + max) / 2.f, min, max);
     industrial::ParamSlider slider(*attr, ctx);
     slider.resize(400, 36);
     flush();
 
-    const auto geometry = industrial::SliderGeometry::compute(
-        theme, slider.width(), slider.height(), 0.5);
+    const auto geometry = industrial::SliderGeometry::compute(theme,
+                                                              slider.width(),
+                                                              slider.height(),
+                                                              0.5);
     click_rail(&slider, geometry.rail.left());
     check(std::abs(slider.get() - min) < 1e-6f,
           "without drag_max the left rail endpoint reaches the minimum");
@@ -140,8 +143,10 @@ int main(int argc, char **argv)
     slider.resize(400, 36);
     flush();
 
-    const auto geometry = industrial::SliderGeometry::compute(
-        theme, slider.width(), slider.height(), 0.5);
+    const auto geometry = industrial::SliderGeometry::compute(theme,
+                                                              slider.width(),
+                                                              slider.height(),
+                                                              0.5);
     click_rail(&slider, geometry.rail.right());
     check(std::abs(slider.get()) < 1e-6f,
           "an explicit zero drag_max caps the rail at zero");
@@ -170,8 +175,10 @@ int main(int argc, char **argv)
     slider.resize(400, 36);
     flush();
 
-    const auto geometry = industrial::SliderGeometry::compute(
-        theme, slider.width(), slider.height(), 0.5);
+    const auto geometry = industrial::SliderGeometry::compute(theme,
+                                                              slider.width(),
+                                                              slider.height(),
+                                                              0.5);
     click_rail(&slider, geometry.rail.left());
     check(slider.get() == -10, "a signed integer rail reaches its minimum");
     click_rail(&slider, geometry.rail.right());

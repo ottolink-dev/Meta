@@ -59,3 +59,21 @@ TEST(AttributeTest, MetadataAndStateSeparation)
   EXPECT_EQ(attr.state().value<bool>("active"), true);
   EXPECT_EQ(attr.state().value<bool>("collapsed"), false);
 }
+
+TEST(AttributeTest, PresetComment)
+{
+  meta::AttributeContainer container;
+  auto                    &c = meta::presets::comment(container,
+                                   "note",
+                                   "Description",
+                                   "This is a comment note");
+
+  EXPECT_EQ(c.name(), "note");
+  EXPECT_EQ(c.value(), "This is a comment note");
+  EXPECT_EQ(c.metadata().value<std::string>(meta::keys::ui::widget_type),
+            "Comment");
+  EXPECT_EQ(c.metadata().value<std::string>(meta::keys::ui::label),
+            "Description");
+  EXPECT_TRUE(c.metadata().value<bool>(meta::keys::ui::read_only));
+  EXPECT_TRUE(container.contains("note"));
+}

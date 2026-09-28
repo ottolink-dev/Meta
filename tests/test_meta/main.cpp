@@ -431,6 +431,12 @@ int main()
     assert(sf.metadata().value<std::string>(meta::keys::ui::widget_type) ==
            "SaveFile");
 
+    auto &cm = meta::presets::comment(pc, "cm", "Comment", "Note text");
+    assert(cm.metadata().value<std::string>(meta::keys::ui::widget_type) ==
+           "Comment");
+    assert(cm.metadata().value<bool>(meta::keys::ui::read_only) == true);
+    assert(cm.value() == "Note text");
+
     std::cout << "presets::compat smoke OK" << std::endl;
   }
 

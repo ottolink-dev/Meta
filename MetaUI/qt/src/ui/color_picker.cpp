@@ -19,14 +19,16 @@ ColorPickerFn &registered_picker()
 
 void set_color_picker(ColorPickerFn fn) { registered_picker() = std::move(fn); }
 
-QColor pick_color(const QColor &initial, QWidget *parent, const QString &title, bool alpha)
+QColor pick_color(const QColor  &initial,
+                  QWidget       *parent,
+                  const QString &title,
+                  bool           alpha)
 {
   if (const ColorPickerFn &fn = registered_picker())
     return fn(initial, parent, title, alpha);
 
   QColorDialog::ColorDialogOptions options = QColorDialog::DontUseNativeDialog;
-  if (alpha)
-    options |= QColorDialog::ShowAlphaChannel;
+  if (alpha) options |= QColorDialog::ShowAlphaChannel;
   return QColorDialog::getColor(initial, parent, title, options);
 }
 

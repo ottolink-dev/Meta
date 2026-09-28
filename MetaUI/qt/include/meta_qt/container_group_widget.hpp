@@ -48,8 +48,9 @@ private:
   ContainerRenderOptions options; /// Rendering options
 
   QTabWidget *tabs = nullptr; /// Tab widget (when using GSM_TABS, stock design)
-  QWidget    *segments = nullptr; /// Segmented switch (GSM_TABS, designs with chrome)
-  QComboBox  *combo =
+  QWidget
+      *segments = nullptr; /// Segmented switch (GSM_TABS, designs with chrome)
+  QComboBox *combo =
       nullptr; /// Selector for container keys (when using GSM_COMBO_BOX)
   QStackedWidget *stacked =
       nullptr; /// Stacked pages for each container (when using GSM_COMBO_BOX)

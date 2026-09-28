@@ -3,8 +3,7 @@
    this software. */
 #include <gtest/gtest.h>
 
-#include "meta/core/attribute.hpp"
-#include "meta/core/attribute_container.hpp"
+#include "meta.hpp"
 #include "meta_common.hpp"
 #include "meta_qt/container_widget.hpp"
 #include "meta_qt/designs/industrial/industrial.hpp"
@@ -203,6 +202,21 @@ TEST(DesignRegistryTest, ContainerWidgetDesignIntegration)
     options.design = "industrial";
     options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
     auto *widget = meta::qt::render(container, options);
+    ASSERT_NE(widget, nullptr);
+    delete widget;
+  }
+
+  // Render comment in stock design
+  {
+    meta::AttributeContainer comment_c;
+    meta::presets::comment(comment_c,
+                           "comment_key",
+                           "Comment Label",
+                           "Test text");
+    meta::qt::ContainerRenderOptions options;
+    options.design = "stock";
+    options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+    auto *widget = meta::qt::render(comment_c, options);
     ASSERT_NE(widget, nullptr);
     delete widget;
   }

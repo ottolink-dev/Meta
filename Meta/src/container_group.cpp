@@ -134,7 +134,8 @@ void ContainerGroup::sync_attribute_across_containers(const std::string &key,
     {
       target_attr->set_from_any(val);
 
-      // Also propagate any state attributes (such as state.active) across containers
+      // Also propagate any state attributes (such as state.active) across
+      // containers
       if (source.has_state())
       {
         for (const auto &s_item : source.state())
@@ -150,9 +151,11 @@ void ContainerGroup::sync_attribute_across_containers(const std::string &key,
           }
           else
           {
-            // If not present in target state container, copy it via JSON state deserialization
-            target_attr->state().json_from(source.state().json_to(SerializationMode::state),
-                                           SerializationMode::state);
+            // If not present in target state container, copy it via JSON state
+            // deserialization
+            target_attr->state().json_from(
+                source.state().json_to(SerializationMode::state),
+                SerializationMode::state);
             break;
           }
         }
@@ -583,9 +586,9 @@ void ContainerGroup::json_from(const nlohmann::json &j,
     }
   }
 
-  // After deserializing all containers, re-propagate synchronized attributes from the
-  // first (or current) group container so that the reference container's state and values
-  // are synced across all containers in the group.
+  // After deserializing all containers, re-propagate synchronized attributes
+  // from the first (or current) group container so that the reference
+  // container's state and values are synced across all containers in the group.
   for (const auto &sync_key : synchronized_attributes_)
   {
     AbstractAttribute *source = nullptr;

@@ -25,6 +25,7 @@
 #include "meta/metadata/keys.hpp"
 #include "meta/presets/choice.hpp"
 #include "meta/presets/color_gradient.hpp"
+#include "meta/presets/comment.hpp"
 #include "meta/presets/curve.hpp"
 #include "meta/presets/file.hpp"
 #include "meta/presets/glm.hpp"

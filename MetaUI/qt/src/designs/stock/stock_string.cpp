@@ -73,7 +73,8 @@ MetaWidget *render_string(AbstractAttribute &abstract_attr,
     widget_type = options.empty() ? "SingleLineText" : "ComboBox";
 
   const bool needs_vbox = (widget_type == "MultilineText" ||
-                           widget_type == "CodeEditor");
+                           widget_type == "CodeEditor" ||
+                           widget_type == "Comment");
 
   MetaWidget *widget = needs_vbox ? make_meta_widget_vbox(parent)
                                   : make_meta_widget_hbox(parent);
@@ -86,6 +87,17 @@ MetaWidget *render_string(AbstractAttribute &abstract_attr,
   if (widget_type == "None")
   {
     return nullptr;
+  }
+  else if (widget_type == "Comment")
+  {
+    auto *val_label = new QLabel(QString::fromStdString(value), widget);
+    val_label->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    val_label->setWordWrap(true);
+    layout->addWidget(val_label);
+
+    widget->set_sync_from_model(
+        [val_label, &value]()
+        { val_label->setText(QString::fromStdString(value)); });
   }
   else if (widget_type == "ReadOnlyText")
   {
@@ -391,6 +403,7 @@ void register_stock_string(DesignRegistry &registry)
   registry.add(kDesignName, type, "MultilineText", render_string);
   registry.add(kDesignName, type, "CodeEditor", render_string);
   registry.add(kDesignName, type, "ReadOnlyText", render_string);
+  registry.add(kDesignName, type, "Comment", render_string);
   registry.add(kDesignName, type, kAnyWidgetType, render_string);
 }
 

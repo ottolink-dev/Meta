@@ -153,8 +153,8 @@ private:
   PresetGridWidget  *preset_grid_ = nullptr;
   bool               rebuild_pending_ = false;
 
-  static constexpr int SWATCH_W = 72;  // each preset swatch width
-  static constexpr int SWATCH_H = 50;  // each preset swatch height (chip + name)
+  static constexpr int SWATCH_W = 72; // each preset swatch width
+  static constexpr int SWATCH_H = 50; // each preset swatch height (chip + name)
   static constexpr int TOOLBAR_H = 28; // toolbar row height
 
   static constexpr int PREFERRED_ROWS = 6; // grid rows before it scrolls

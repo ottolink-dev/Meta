@@ -102,7 +102,14 @@ int main(int argc, char *argv[])
   // 6. Text preset
   meta::presets::text(other_c, "text", "Text Input", "Hello Meta!");
 
-  // 7. Curve preset
+  // 7. Comment preset
+  meta::presets::comment(
+      other_c,
+      "comment",
+      "Comment (Read Only)",
+      "This is a comment annotation displayed below its label.");
+
+  // 8. Curve preset
   meta::presets::curve(other_c,
                        "curve",
                        "Curve Editor",

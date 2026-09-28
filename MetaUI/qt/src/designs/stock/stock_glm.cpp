@@ -22,9 +22,9 @@
 
 #include "meta/core/data_provider.hpp"
 #include "meta_common.hpp"
-#include "meta_qt/ui/color_picker.hpp"
 #include "meta_qt/designs/stock/stock.hpp"
 #include "meta_qt/meta_widget.hpp"
+#include "meta_qt/ui/color_picker.hpp"
 #include "meta_qt/widgets/points_canvas.hpp"
 #include "meta_qt/widgets/power_of_two_spin_box.hpp"
 #include "meta_qt/widgets/range_bar.hpp"
@@ -589,15 +589,14 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
           Q_EMIT widget->value_changed();
         });
 
-    QObject::connect(
-        bar,
-        &RangeBar::drag_ended,
-        widget,
-        [&attr, widget](glm::vec2 v)
-        {
-          attr.set_from_any(v);
-          Q_EMIT widget->edit_ended();
-        });
+    QObject::connect(bar,
+                     &RangeBar::drag_ended,
+                     widget,
+                     [&attr, widget](glm::vec2 v)
+                     {
+                       attr.set_from_any(v);
+                       Q_EMIT widget->edit_ended();
+                     });
 
     QObject::connect(reset_btn,
                      &QPushButton::clicked,
@@ -1146,8 +1145,10 @@ MetaWidget *render_vec3(AbstractAttribute &abstract_attr,
                            std::clamp(value.g, 0.0f, 1.0f),
                            std::clamp(value.b, 0.0f, 1.0f));
 
-                       const QColor color =
-                           meta::qt::pick_color(initial_color, widget, "Select Color", false);
+                       const QColor color = meta::qt::pick_color(initial_color,
+                                                                 widget,
+                                                                 "Select Color",
+                                                                 false);
 
                        if (color.isValid())
                        {
@@ -1359,8 +1360,10 @@ MetaWidget *render_vec4(AbstractAttribute &abstract_attr,
                            std::clamp(value.b, 0.0f, 1.0f),
                            std::clamp(value.a, 0.0f, 1.0f));
 
-                       const QColor color =
-                           meta::qt::pick_color(initial_color, widget, "Select Color", true);
+                       const QColor color = meta::qt::pick_color(initial_color,
+                                                                 widget,
+                                                                 "Select Color",
+                                                                 true);
 
                        if (color.isValid())
                        {

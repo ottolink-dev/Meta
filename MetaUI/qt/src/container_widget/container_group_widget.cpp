@@ -9,8 +9,8 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
-#include <QVariantAnimation>
 #include <QVBoxLayout>
+#include <QVariantAnimation>
 
 #include "meta/logger.hpp"
 
@@ -34,7 +34,8 @@ namespace
 class SegmentedTabs final : public QWidget
 {
 public:
-  SegmentedTabs(const Theme &theme, QWidget *parent) : QWidget(parent), theme(theme)
+  SegmentedTabs(const Theme &theme, QWidget *parent)
+      : QWidget(parent), theme(theme)
   {
     this->setAttribute(Qt::WA_Hover);
     this->setMouseTracking(true);
@@ -55,14 +56,13 @@ public:
                      });
   }
 
-  void add(const QString &label) { this->labels.push_back(label); }
-  int  count() const { return int(this->labels.size()); }
+  void    add(const QString &label) { this->labels.push_back(label); }
+  int     count() const { return int(this->labels.size()); }
   QString text(int i) const { return this->labels.at(i); }
 
   void set_current(int index, bool animate)
   {
-    if (index < 0 || index >= this->count())
-      return;
+    if (index < 0 || index >= this->count()) return;
     this->current = index;
     this->slide->stop();
     if (!animate || !this->isVisible())
@@ -91,8 +91,7 @@ protected:
     p.setBrush(this->theme.rail_well);
     p.drawRoundedRect(track, r, r);
 
-    if (this->labels.empty())
-      return;
+    if (this->labels.empty()) return;
 
     const qreal inset = 3.0;
     const qreal w = (track.width() - 2 * inset) / this->count();
@@ -104,15 +103,22 @@ protected:
       hover.setAlphaF(0.35);
       p.setPen(Qt::NoPen);
       p.setBrush(hover);
-      p.drawRoundedRect(this->segment(this->hovered, w, inset), r - inset, r - inset);
+      p.drawRoundedRect(this->segment(this->hovered, w, inset),
+                        r - inset,
+                        r - inset);
     }
 
     {
       const QRectF a = this->segment(0, w, inset);
-      const QRectF knob(a.left() + this->position * w, a.top(), a.width(), a.height());
+      const QRectF knob(a.left() + this->position * w,
+                        a.top(),
+                        a.width(),
+                        a.height());
       p.setPen(QPen(this->theme.field_border, 1));
       p.setBrush(this->theme.section_surface);
-      p.drawRoundedRect(knob.adjusted(0.5, 0.5, -0.5, -0.5), r - inset, r - inset);
+      p.drawRoundedRect(knob.adjusted(0.5, 0.5, -0.5, -0.5),
+                        r - inset,
+                        r - inset);
     }
 
     p.setFont(ui_font(12, true));
@@ -120,12 +126,13 @@ protected:
     {
       const QRectF cell = this->segment(i, w, inset);
       // ink follows the highlight as it passes, rather than switching at once
-      const qreal  on = std::clamp(1.0 - std::abs(this->position - i), 0.0, 1.0);
-      const QColor dim = i == this->hovered ? this->theme.ink_primary : this->theme.ink_dim;
-      p.setPen(QColor::fromRgbF(dim.redF() + (this->theme.ink_primary.redF() - dim.redF()) * on,
-                                dim.greenF() +
-                                    (this->theme.ink_primary.greenF() - dim.greenF()) * on,
-                                dim.blueF() + (this->theme.ink_primary.blueF() - dim.blueF()) * on));
+      const qreal on = std::clamp(1.0 - std::abs(this->position - i), 0.0, 1.0);
+      const QColor dim = i == this->hovered ? this->theme.ink_primary
+                                            : this->theme.ink_dim;
+      p.setPen(QColor::fromRgbF(
+          dim.redF() + (this->theme.ink_primary.redF() - dim.redF()) * on,
+          dim.greenF() + (this->theme.ink_primary.greenF() - dim.greenF()) * on,
+          dim.blueF() + (this->theme.ink_primary.blueF() - dim.blueF()) * on));
       const QString text = p.fontMetrics().elidedText(this->labels[i],
                                                       Qt::ElideRight,
                                                       int(cell.width() - 10));
@@ -153,11 +160,11 @@ protected:
   void mousePressEvent(QMouseEvent *event) override
   {
     const int index = this->index_at(event->position());
-    if (event->button() != Qt::LeftButton || index < 0 || index == this->current)
+    if (event->button() != Qt::LeftButton || index < 0 ||
+        index == this->current)
       return;
     this->set_current(index, true);
-    if (this->on_selected)
-      this->on_selected(index);
+    if (this->on_selected) this->on_selected(index);
   }
 
 private:
@@ -168,19 +175,18 @@ private:
 
   int index_at(const QPointF &pos) const
   {
-    if (this->labels.empty())
-      return -1;
+    if (this->labels.empty()) return -1;
     const qreal w = (this->width() - 6.0) / this->count();
     const int   i = int(std::floor((pos.x() - 3.0) / w));
     return (i >= 0 && i < this->count()) ? i : -1;
   }
 
-  const Theme          &theme;
-  std::vector<QString>  labels;
-  int                   current = 0;
-  int                   hovered = -1;
-  qreal                 position = 0.0;
-  QVariantAnimation    *slide = nullptr;
+  const Theme         &theme;
+  std::vector<QString> labels;
+  int                  current = 0;
+  int                  hovered = -1;
+  qreal                position = 0.0;
+  QVariantAnimation   *slide = nullptr;
 };
 
 } // namespace
@@ -224,7 +230,8 @@ ContainerGroupWidget::ContainerGroupWidget(meta::ContainerGroup  &group,
     bar->on_selected = [this, bar](int index)
     {
       const std::string new_current = bar->text(index).toStdString();
-      Logger::log()->trace("ContainerGroupWidget: switching to '{}'", new_current);
+      Logger::log()->trace("ContainerGroupWidget: switching to '{}'",
+                           new_current);
       this->group.set_current(new_current);
       this->stacked->setCurrentIndex(index);
       Q_EMIT current_container_changed(new_current);
@@ -380,9 +387,9 @@ void ContainerGroupWidget::sync_stack()
         return;
       }
 
-    Logger::log()->warn(
-        "ContainerGroupWidget::sync_stack: container '{}' not found in the switch",
-        *current_name);
+    Logger::log()->warn("ContainerGroupWidget::sync_stack: container '{}' not "
+                        "found in the switch",
+                        *current_name);
   }
   else if (tabs)
   {
