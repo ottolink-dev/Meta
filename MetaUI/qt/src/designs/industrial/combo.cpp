@@ -24,7 +24,7 @@ namespace
 
 constexpr int kRowHeight = 26;
 constexpr int kPopupPadding = 4;
-constexpr int kMaxVisibleRows = 12;
+constexpr int kMaxVisibleRows = 24;
 
 /// Timestamp of the last popup close, for the close-then-reopen race.
 qint64 g_last_close_ms = 0;
