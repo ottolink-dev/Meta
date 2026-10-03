@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2026
  */
 #pragma once
+#include <sstream>
 #include <string>
 #include <vector>
 
