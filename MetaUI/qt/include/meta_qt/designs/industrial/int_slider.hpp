@@ -64,7 +64,8 @@ private:
   qreal to_norm(int value) const;
   int   from_norm(qreal t) const;
 
-  void set_from_position(int x);
+  void set_from_position(int                   x,
+                         Qt::KeyboardModifiers modifiers = Qt::NoModifier);
   void apply_value(int value, bool glide);
   void refresh_field(bool force = false);
   void restyle_field(bool editing = false);
@@ -103,9 +104,10 @@ private:
   QLineEdit *field_ = nullptr;
   bool       dragging_ = false;
 
-  // --- unbounded drag reference, both only meaningful while dragging_
-  int drag_origin_x_ = 0;
-  int value_at_press_ = 0;
+  // --- drag reference, meaningful while dragging_
+  int   drag_origin_x_ = 0;
+  int   value_at_press_ = 0;
+  qreal norm_at_press_ = 0.0;
 };
 
 } // namespace meta::qt::industrial

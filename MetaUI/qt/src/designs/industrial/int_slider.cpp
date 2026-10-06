@@ -230,15 +230,24 @@ void IntSlider::mousePressEvent(QMouseEvent *event)
     return;
   }
 
-  const QRect rail = SliderGeometry::compute(theme(), width(), height(), norm_)
-                         .rail;
-  if (!rail.adjusted(-4, -10, 4, 10).contains(event->pos()))
+  const SliderGeometry g = SliderGeometry::compute(theme(),
+                                                   width(),
+                                                   height(),
+                                                   norm_);
+  if (!g.rail.adjusted(-4, -10, 4, 10).contains(event->pos()))
   {
     event->ignore();
     return;
   }
 
   setFocus(Qt::MouseFocusReason);
+
+  dragging_ = true;
+  begin_edit();
+
+  drag_origin_x_ = event->pos().x();
+  value_at_press_ = value_;
+  norm_at_press_ = norm_;
 
   if (unbounded_)
   {
@@ -247,11 +256,6 @@ void IntSlider::mousePressEvent(QMouseEvent *event)
     // mid-drag; jump() cancels it without emitting one.
     glide_->jump(kRestNorm);
     norm_ = kRestNorm;
-    drag_origin_x_ = event->pos().x();
-    value_at_press_ = value_;
-
-    dragging_ = true;
-    begin_edit();
     update();
 
     // Deliberately no set_from_position(): a rate drag measures from where the
@@ -259,9 +263,21 @@ void IntSlider::mousePressEvent(QMouseEvent *event)
     return;
   }
 
-  dragging_ = true;
-  begin_edit();
-  set_from_position(event->pos().x());
+  // Without modifiers, jump directly to the click position. With Ctrl or Shift,
+  // hold the existing value and begin a fine/coarse drag from where it sits.
+  if (!(event->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier)))
+  {
+    const int   travel = std::max(1,
+                                g.rail.width() - theme().metrics.thumb_width);
+    const qreal click_norm = std::clamp(
+        qreal(event->pos().x() - g.rail.x() - theme().metrics.thumb_width / 2) /
+            qreal(travel),
+        0.0,
+        1.0);
+    apply_value(from_norm(click_norm), false);
+    norm_at_press_ = norm_;
+    value_at_press_ = value_;
+  }
 }
 
 void IntSlider::mouseMoveEvent(QMouseEvent *event)
@@ -274,7 +290,7 @@ void IntSlider::mouseMoveEvent(QMouseEvent *event)
     return;
   }
 
-  set_from_position(event->pos().x());
+  set_from_position(event->pos().x(), event->modifiers());
 }
 
 void IntSlider::mouseReleaseEvent(QMouseEvent *event)
@@ -295,7 +311,7 @@ void IntSlider::mouseReleaseEvent(QMouseEvent *event)
     return;
   }
 
-  set_from_position(event->pos().x());
+  set_from_position(event->pos().x(), event->modifiers());
   end_edit();
 }
 
@@ -331,11 +347,15 @@ void IntSlider::handle_wheel(QWheelEvent *event)
     return;
   }
 
+  long long step_mult = 1;
+  if (event->modifiers() & Qt::ShiftModifier)
+    step_mult = static_cast<long long>(kFineMultiplier);
+
   // One notch is one unit, which is what an integer control should do
   // regardless of how wide its range happens to be. Widened to 64 bits before
   // the clamp because a Seed sits in [0, INT_MAX] and value_ + steps would
   // otherwise overflow at the top of it.
-  const long long stepped = static_cast<long long>(value_) + steps;
+  const long long stepped = static_cast<long long>(value_) + steps * step_mult;
   commit_value(int(std::clamp<long long>(stepped, min_, max_)));
   event->accept();
 }
@@ -359,7 +379,7 @@ bool IntSlider::eventFilter(QObject *watched, QEvent *event)
   return Control<int>::eventFilter(watched, event);
 }
 
-void IntSlider::set_from_position(int x)
+void IntSlider::set_from_position(int x, Qt::KeyboardModifiers modifiers)
 {
   const Metrics       &m = theme().metrics;
   const SliderGeometry g = SliderGeometry::compute(theme(),
@@ -368,9 +388,15 @@ void IntSlider::set_from_position(int x)
                                                    norm_);
   const int            travel = std::max(1, g.rail.width() - m.thumb_width);
 
-  const qreal t = std::clamp(qreal(x - g.rail.x() - m.thumb_width / 2) / travel,
-                             0.0,
-                             1.0);
+  const int dx = x - drag_origin_x_;
+  qreal     scale = 1.0;
+  if (modifiers & Qt::ControlModifier)
+    scale /= kFineMultiplier;
+  else if (modifiers & Qt::ShiftModifier)
+    scale *= kFineMultiplier;
+
+  const qreal d_norm = (qreal(dx) * scale) / qreal(travel);
+  const qreal t = std::clamp(norm_at_press_ + d_norm, 0.0, 1.0);
 
   // Quantise to the integer the rail actually represents, so the thumb sits on
   // whole values during a drag rather than between them.

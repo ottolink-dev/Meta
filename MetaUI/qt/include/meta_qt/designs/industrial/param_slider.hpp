@@ -67,7 +67,8 @@ private:
   qreal to_norm(float value) const;
   float from_norm(qreal t) const;
 
-  void    set_from_position(int x);
+  void    set_from_position(int                   x,
+                            Qt::KeyboardModifiers modifiers = Qt::NoModifier);
   void    apply_norm(qreal t);
   QString format_value(float value) const;
   void    refresh_field(bool force = false);
@@ -123,9 +124,10 @@ private:
   bool       dragging_ = false;
   bool       hovered_rail_ = false;
 
-  // --- unbounded drag reference, both only meaningful while dragging_
+  // --- drag reference, meaningful while dragging_
   int   drag_origin_x_ = 0;
   float value_at_press_ = 0.f;
+  qreal norm_at_press_ = 0.0;
 };
 
 } // namespace meta::qt::industrial

@@ -48,14 +48,17 @@ void describe(meta::Attribute<T> &a, const char *kind, const char *label)
   a.metadata().add(meta::keys::ui::widget_type, std::string(kind));
   a.metadata().add(meta::keys::ui::label, std::string(label));
 }
-void mouse(QWidget *w, QEvent::Type type, QPoint pos)
+void mouse(QWidget              *w,
+           QEvent::Type          type,
+           QPoint                pos,
+           Qt::KeyboardModifiers modifiers = Qt::NoModifier)
 {
   QMouseEvent event(type,
                     QPointF(pos),
                     QPointF(w->mapToGlobal(pos)),
                     Qt::LeftButton,
                     Qt::LeftButton,
-                    Qt::NoModifier);
+                    modifiers);
   QApplication::sendEvent(w, &event);
 }
 } // namespace
@@ -119,6 +122,53 @@ int main(int argc, char **argv)
           QEvent::MouseButtonRelease,
           QPoint(800, slider.height() / 2));
     check(slider.get() <= 64.f, "float drag exceeded 64");
+
+    // Test fine (Ctrl) and coarse (Shift) dragging on a bounded float slider
+    meta::Attribute<float> bounded_float("b_float", 50.f);
+    describe(bounded_float, "Slider", "Bounded Float");
+    bounded_float.metadata().add(meta::keys::constraints::min, 0.f);
+    bounded_float.metadata().add(meta::keys::constraints::max, 100.f);
+    industrial::ParamSlider bf_slider(bounded_float, ctx);
+    bf_slider.resize(400, bf_slider.height());
+    bf_slider.show();
+    flush();
+
+    // Fine drag with Ctrl
+    bf_slider.set(50.f);
+    mouse(&bf_slider,
+          QEvent::MouseButtonPress,
+          QPoint(200, bf_slider.height() / 2),
+          Qt::ControlModifier);
+    mouse(&bf_slider,
+          QEvent::MouseMove,
+          QPoint(250, bf_slider.height() / 2),
+          Qt::ControlModifier);
+    mouse(&bf_slider,
+          QEvent::MouseButtonRelease,
+          QPoint(250, bf_slider.height() / 2),
+          Qt::ControlModifier);
+    const float fine_val = bf_slider.get();
+    check(fine_val > 50.f && fine_val < 55.f,
+          "Ctrl fine drag did not produce expected fine increment");
+
+    // Coarse drag with Shift
+    bf_slider.set(50.f);
+    mouse(&bf_slider,
+          QEvent::MouseButtonPress,
+          QPoint(200, bf_slider.height() / 2),
+          Qt::ShiftModifier);
+    mouse(&bf_slider,
+          QEvent::MouseMove,
+          QPoint(250, bf_slider.height() / 2),
+          Qt::ShiftModifier);
+    mouse(&bf_slider,
+          QEvent::MouseButtonRelease,
+          QPoint(250, bf_slider.height() / 2),
+          Qt::ShiftModifier);
+    const float coarse_val = bf_slider.get();
+    check(coarse_val > 70.f,
+          "Shift coarse drag did not produce expected coarse increment");
+
     meta::Attribute<int> integer("integer", 512);
     describe(integer, "Slider", "Integer");
     integer.metadata().add(meta::keys::constraints::min, 0);
@@ -156,6 +206,51 @@ int main(int argc, char **argv)
         "editingFinished on unchanged int slider must not emit value_changed");
     check(int_edit_ended == 1,
           "editingFinished on unchanged int slider must not emit edit_ended");
+
+    // Test fine (Ctrl) and coarse (Shift) dragging on a bounded int slider
+    meta::Attribute<int> bounded_int("b_int", 50);
+    describe(bounded_int, "Slider", "Bounded Int");
+    bounded_int.metadata().add(meta::keys::constraints::min, 0);
+    bounded_int.metadata().add(meta::keys::constraints::max, 100);
+    industrial::IntSlider bi_slider(bounded_int, ctx);
+    bi_slider.resize(400, bi_slider.height());
+    bi_slider.show();
+    flush();
+
+    bi_slider.set(50);
+    mouse(&bi_slider,
+          QEvent::MouseButtonPress,
+          QPoint(200, bi_slider.height() / 2),
+          Qt::ControlModifier);
+    mouse(&bi_slider,
+          QEvent::MouseMove,
+          QPoint(220, bi_slider.height() / 2),
+          Qt::ControlModifier);
+    mouse(&bi_slider,
+          QEvent::MouseButtonRelease,
+          QPoint(220, bi_slider.height() / 2),
+          Qt::ControlModifier);
+    const int fine_int_val = bi_slider.get();
+    check(fine_int_val >= 50 && fine_int_val <= 52,
+          "Ctrl fine drag on int slider did not produce expected fine value");
+
+    bi_slider.set(50);
+    mouse(&bi_slider,
+          QEvent::MouseButtonPress,
+          QPoint(200, bi_slider.height() / 2),
+          Qt::ShiftModifier);
+    mouse(&bi_slider,
+          QEvent::MouseMove,
+          QPoint(220, bi_slider.height() / 2),
+          Qt::ShiftModifier);
+    mouse(&bi_slider,
+          QEvent::MouseButtonRelease,
+          QPoint(220, bi_slider.height() / 2),
+          Qt::ShiftModifier);
+    const int coarse_int_val = bi_slider.get();
+    check(coarse_int_val > 60,
+          "Shift coarse drag on int slider did not produce expected coarse "
+          "value");
   }
   check(display_float(.001f) == "0.001", "small float displayed as zero");
   check(display_float(-.0001f) == "-0.0001",

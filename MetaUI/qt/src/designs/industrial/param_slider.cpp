@@ -305,15 +305,24 @@ void ParamSlider::mousePressEvent(QMouseEvent *event)
     return;
   }
 
-  const QRect rail = SliderGeometry::compute(theme(), width(), height(), norm_)
-                         .rail;
-  if (!rail.adjusted(-4, -10, 4, 10).contains(event->pos()))
+  const SliderGeometry g = SliderGeometry::compute(theme(),
+                                                   width(),
+                                                   height(),
+                                                   norm_);
+  if (!g.rail.adjusted(-4, -10, 4, 10).contains(event->pos()))
   {
     event->ignore();
     return;
   }
 
   setFocus(Qt::MouseFocusReason);
+
+  dragging_ = true;
+  begin_edit();
+
+  drag_origin_x_ = event->pos().x();
+  value_at_press_ = value_;
+  norm_at_press_ = norm_;
 
   if (unbounded_)
   {
@@ -322,11 +331,6 @@ void ParamSlider::mousePressEvent(QMouseEvent *event)
     // mid-drag; jump() cancels it without emitting one.
     glide_->jump(kRestNorm);
     norm_ = kRestNorm;
-    drag_origin_x_ = event->pos().x();
-    value_at_press_ = value_;
-
-    dragging_ = true;
-    begin_edit();
     update();
 
     // Deliberately no set_from_position(): a rate drag measures from where the
@@ -334,9 +338,21 @@ void ParamSlider::mousePressEvent(QMouseEvent *event)
     return;
   }
 
-  dragging_ = true;
-  begin_edit();
-  set_from_position(event->pos().x());
+  // Without modifiers, jump directly to the click position. With Ctrl or Shift,
+  // hold the existing value and begin a fine/coarse drag from where it sits.
+  if (!(event->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier)))
+  {
+    const int   travel = std::max(1,
+                                g.rail.width() - theme().metrics.thumb_width);
+    const qreal click_norm = std::clamp(
+        qreal(event->pos().x() - g.rail.x() - theme().metrics.thumb_width / 2) /
+            qreal(travel),
+        0.0,
+        1.0);
+    apply_norm(click_norm);
+    norm_at_press_ = norm_;
+    value_at_press_ = value_;
+  }
 }
 
 void ParamSlider::mouseMoveEvent(QMouseEvent *event)
@@ -349,7 +365,7 @@ void ParamSlider::mouseMoveEvent(QMouseEvent *event)
     return;
   }
 
-  set_from_position(event->pos().x());
+  set_from_position(event->pos().x(), event->modifiers());
 }
 
 void ParamSlider::mouseReleaseEvent(QMouseEvent *event)
@@ -370,7 +386,7 @@ void ParamSlider::mouseReleaseEvent(QMouseEvent *event)
     return;
   }
 
-  set_from_position(event->pos().x());
+  set_from_position(event->pos().x(), event->modifiers());
   end_edit();
 }
 
@@ -406,18 +422,24 @@ void ParamSlider::handle_wheel(QWheelEvent *event)
     return;
   }
 
+  qreal scale = 1.0;
+  if (event->modifiers() & Qt::ControlModifier)
+    scale /= kFineMultiplier;
+  else if (event->modifiers() & Qt::ShiftModifier)
+    scale *= kFineMultiplier;
+
   if (unbounded_)
   {
     // One unit per notch. A percentage of the rail is the wrong measure when
     // the rail represents no span, and it is what stock does here too.
-    commit_value(value_ + float(steps));
+    commit_value(value_ + float(steps * scale));
     event->accept();
     return;
   }
 
   // One notch moves 1% of the rail, which stays sane under a log mapping.
   begin_edit();
-  glide_->to(std::clamp(norm_ + steps * 0.01, 0.0, 1.0));
+  glide_->to(std::clamp(norm_ + steps * 0.01 * scale, 0.0, 1.0));
   event->accept();
 }
 
@@ -444,7 +466,7 @@ bool ParamSlider::eventFilter(QObject *watched, QEvent *event)
   return Control<float>::eventFilter(watched, event);
 }
 
-void ParamSlider::set_from_position(int x)
+void ParamSlider::set_from_position(int x, Qt::KeyboardModifiers modifiers)
 {
   const Metrics       &m = theme().metrics;
   const SliderGeometry g = SliderGeometry::compute(theme(),
@@ -453,8 +475,15 @@ void ParamSlider::set_from_position(int x)
                                                    norm_);
   const int            travel = std::max(1, g.rail.width() - m.thumb_width);
 
-  apply_norm(
-      std::clamp(qreal(x - g.rail.x() - m.thumb_width / 2) / travel, 0.0, 1.0));
+  const int dx = x - drag_origin_x_;
+  qreal     scale = 1.0;
+  if (modifiers & Qt::ControlModifier)
+    scale /= kFineMultiplier;
+  else if (modifiers & Qt::ShiftModifier)
+    scale *= kFineMultiplier;
+
+  const qreal d_norm = (qreal(dx) * scale) / qreal(travel);
+  apply_norm(std::clamp(norm_at_press_ + d_norm, 0.0, 1.0));
 }
 
 void ParamSlider::apply_norm(qreal t)
