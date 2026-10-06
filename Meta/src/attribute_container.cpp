@@ -50,12 +50,12 @@ void AttributeContainer::compact_insertion_order()
 {
   Logger::log()->trace("AttributeContainer::compact_insertion_order");
 
-  insertion_order_.erase(std::remove_if(insertion_order_.begin(),
-                                        insertion_order_.end(),
-                                        [this](const std::string &name) {
-                                          return !attributes_.contains(name);
-                                        }),
-                         insertion_order_.end());
+  insertion_order_.erase(
+      std::remove_if(insertion_order_.begin(),
+                     insertion_order_.end(),
+                     [this](const std::string &name)
+                     { return !attributes_.contains(name); }),
+      insertion_order_.end());
 }
 
 bool AttributeContainer::contains(const std::string &name) const

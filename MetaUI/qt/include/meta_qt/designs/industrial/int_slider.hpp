@@ -66,7 +66,7 @@ private:
 
   void set_from_position(int x);
   void apply_value(int value, bool glide);
-  void refresh_field();
+  void refresh_field(bool force = false);
   void restyle_field(bool editing = false);
 
   /** @brief Advance an unbounded drag to cursor position `x`.

@@ -70,7 +70,7 @@ private:
   void    set_from_position(int x);
   void    apply_norm(qreal t);
   QString format_value(float value) const;
-  void    refresh_field();
+  void    refresh_field(bool force = false);
   void    restyle_field(bool editing = false);
 
   /** @brief Advance an unbounded drag to cursor position `x`.

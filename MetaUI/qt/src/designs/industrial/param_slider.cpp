@@ -437,7 +437,7 @@ bool ParamSlider::eventFilter(QObject *watched, QEvent *event)
     // hasFocus() is not yet settled while the event is being delivered, so the
     // event type is the authority on which way the transition goes.
     const bool editing = event->type() == QEvent::FocusIn;
-    if (!editing) refresh_field();
+    if (!editing) refresh_field(true);
     restyle_field(editing);
   }
 
@@ -510,9 +510,14 @@ void ParamSlider::apply_value(float value)
 
 void ParamSlider::commit_value(float value)
 {
-  begin_edit();
-
   const float clamped = std::clamp(value, min_, input_max_);
+  if (clamped == value_)
+  {
+    refresh_field(true);
+    return;
+  }
+
+  begin_edit();
 
   if (!unbounded_)
   {
@@ -523,7 +528,7 @@ void ParamSlider::commit_value(float value)
   }
 
   value_ = clamped;
-  refresh_field();
+  refresh_field(true);
   update();
   notify_value_changed();
   end_edit();
@@ -556,9 +561,10 @@ QString ParamSlider::format_value(float value) const
   return display_float(value, decimals_);
 }
 
-void ParamSlider::refresh_field()
+void ParamSlider::refresh_field(bool force)
 {
-  if (!field_ || field_->hasFocus()) return; // never overwrite mid-typing
+  if (!field_) return;
+  if (!force && field_->hasFocus()) return; // never overwrite mid-typing
 
   const QSignalBlocker blocker(field_);
   field_->setText(format_value(value_));

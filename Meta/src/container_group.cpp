@@ -175,12 +175,12 @@ void ContainerGroup::compact_insertion_order()
 {
   Logger::log()->trace("ContainerGroup::compact_insertion_order");
 
-  insertion_order_.erase(std::remove_if(insertion_order_.begin(),
-                                        insertion_order_.end(),
-                                        [this](const std::string &name) {
-                                          return !containers_.contains(name);
-                                        }),
-                         insertion_order_.end());
+  insertion_order_.erase(
+      std::remove_if(insertion_order_.begin(),
+                     insertion_order_.end(),
+                     [this](const std::string &name)
+                     { return !containers_.contains(name); }),
+      insertion_order_.end());
 }
 
 const std::unordered_map<std::string, std::unique_ptr<AttributeContainer>> &

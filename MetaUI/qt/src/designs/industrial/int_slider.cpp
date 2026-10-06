@@ -352,7 +352,7 @@ bool IntSlider::eventFilter(QObject *watched, QEvent *event)
       (event->type() == QEvent::FocusIn || event->type() == QEvent::FocusOut))
   {
     const bool editing = event->type() == QEvent::FocusIn;
-    if (!editing) refresh_field();
+    if (!editing) refresh_field(true);
     restyle_field(editing);
   }
 
@@ -412,8 +412,15 @@ void IntSlider::drag_by(int x, Qt::KeyboardModifiers modifiers)
 
 void IntSlider::commit_value(int value)
 {
+  const int clamped = std::clamp(value, min_, input_max_);
+  if (clamped == value_)
+  {
+    refresh_field(true);
+    return;
+  }
+
   begin_edit();
-  apply_value(std::clamp(value, min_, input_max_), !unbounded_);
+  apply_value(clamped, !unbounded_);
 
   // A bounded row ends its edit when the glide settles. An unbounded one has
   // no glide to wait on, so it ends here.
@@ -440,15 +447,16 @@ void IntSlider::apply_value(int value, bool glide)
     }
   }
 
-  refresh_field();
+  refresh_field(true);
   update();
 
   if (changed) notify_value_changed();
 }
 
-void IntSlider::refresh_field()
+void IntSlider::refresh_field(bool force)
 {
-  if (!field_ || field_->hasFocus()) return; // never overwrite mid-typing
+  if (!field_) return;
+  if (!force && field_->hasFocus()) return; // never overwrite mid-typing
 
   const QSignalBlocker blocker(field_);
   field_->setText(QString::number(value_));

@@ -86,9 +86,30 @@ int main(int argc, char **argv)
     slider.set(1024.f);
     check(slider.get() == 1024.f, "float above drag range was lost on refresh");
     auto *field = slider.findChild<QLineEdit *>();
+    int   slider_val_changed = 0;
+    int   slider_edit_ended = 0;
+    QObject::connect(&slider,
+                     &ControlBase::value_changed,
+                     [&]() { ++slider_val_changed; });
+    QObject::connect(&slider,
+                     &ControlBase::edit_ended,
+                     [&]() { ++slider_edit_ended; });
+
     field->setText("512");
     QMetaObject::invokeMethod(field, "editingFinished");
     check(slider.get() == 512.f, "typed float capped at drag limit");
+    check(slider_val_changed == 1,
+          "editingFinished should emit value_changed once");
+    check(slider_edit_ended == 1,
+          "editingFinished should emit edit_ended once");
+
+    // a second editingFinished (e.g. on blur) must not ignite another edit
+    QMetaObject::invokeMethod(field, "editingFinished");
+    check(slider_val_changed == 1,
+          "editingFinished on unchanged value must not emit value_changed");
+    check(slider_edit_ended == 1,
+          "editingFinished on unchanged value must not emit edit_ended");
+
     slider.resize(400, slider.height());
     slider.show();
     flush();
@@ -107,10 +128,34 @@ int main(int argc, char **argv)
     check(ints.get() == 512, "initial integer above drag range was lost");
     ints.set(1024);
     check(ints.get() == 1024, "integer refresh capped at drag limit");
+
+    int int_val_changed = 0;
+    int int_edit_ended = 0;
+    QObject::connect(&ints,
+                     &ControlBase::value_changed,
+                     [&]() { ++int_val_changed; });
+    QObject::connect(&ints,
+                     &ControlBase::edit_ended,
+                     [&]() { ++int_edit_ended; });
+
     auto *int_field = ints.findChild<QLineEdit *>();
     int_field->setText("512");
     QMetaObject::invokeMethod(int_field, "editingFinished");
+    flush();
     check(ints.get() == 512, "typed integer capped at drag limit");
+    check(int_val_changed == 1,
+          "editingFinished on int slider should emit value_changed once");
+    check(int_edit_ended == 1,
+          "editingFinished on int slider should emit edit_ended once");
+
+    // blur on unchanged value must not ignite another edit
+    QMetaObject::invokeMethod(int_field, "editingFinished");
+    flush();
+    check(
+        int_val_changed == 1,
+        "editingFinished on unchanged int slider must not emit value_changed");
+    check(int_edit_ended == 1,
+          "editingFinished on unchanged int slider must not emit edit_ended");
   }
   check(display_float(.001f) == "0.001", "small float displayed as zero");
   check(display_float(-.0001f) == "-0.0001",

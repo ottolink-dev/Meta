@@ -688,7 +688,8 @@ QWidget *GradientPicker::build_toolbar()
   connect(sort_combo_,
           QOverload<int>::of(&QComboBox::activated),
           this,
-          [](int index) {
+          [](int index)
+          {
             GradientLibrary::instance().set_sort(
                 static_cast<GradientSort>(index));
           });
