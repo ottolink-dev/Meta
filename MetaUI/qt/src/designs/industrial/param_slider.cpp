@@ -565,16 +565,7 @@ void ParamSlider::commit_value(float value)
 
 QString ParamSlider::format_value(float value) const
 {
-  // Honour the presentation type the attribute declared. A rate spanning five
-  // decades declares "{:.2e}" precisely so its readout stays three characters
-  // of mantissa and an exponent; rendering it fixed gives 0.00000100, which
-  // does not fit the value field and reads as a truncated number rather than
-  // a small one.
-  //
-  // Only e and g are routed here. A fixed spec goes to display_float, which
-  // widens the precision rather than letting a small non-zero value round away
-  // to 0.00, and that is the behaviour a fixed readout wants.
-  if (has_exponent_format(format_))
+  if (!format_.empty() && format_ != META_DEFAULT_FORMAT)
   {
     try
     {
@@ -583,7 +574,7 @@ QString ParamSlider::format_value(float value) const
     }
     catch (const std::format_error &)
     {
-      // A malformed spec is a host bug, not a reason to render nothing.
+      // a malformed spec is a host bug, fall back to display_float
     }
   }
 

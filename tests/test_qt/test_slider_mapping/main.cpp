@@ -322,7 +322,7 @@ int main(int argc, char **argv)
     }
   }
 
-  // --- a fixed spec still widens rather than rounding a small value away ---
+  // --- a fixed spec honours the format without blowing up precision ---
   {
     auto *attr = make_attr(container, "fixed_small", 0.001f, 0.f, 1.f);
     attr->metadata().add(meta::keys::ui::format, std::string("{:.2f}"));
@@ -335,10 +335,8 @@ int main(int argc, char **argv)
     if (field)
     {
       std::cout << "fixed readout: " << field->text().toStdString() << '\n';
-      check(field->text() != "0.00",
-            "a small value under a fixed spec does not read as zero");
-      check(!field->text().contains('e'),
-            "a fixed spec is not promoted to scientific");
+      check(field->text() == "0.00",
+            "a small value under a {:.2f} spec formats strictly as 0.00");
     }
   }
 
