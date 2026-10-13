@@ -33,21 +33,31 @@ RangeBar::RangeBar(glm::vec2 &value,
   setMouseTracking(true);
 }
 
-void RangeBar::apply_drag(const QPoint &pos)
+void RangeBar::apply_drag(const QPoint &pos, Qt::KeyboardModifiers mods)
 {
+  float ppu = float(track_rect().width()) / (domain_max_ - domain_min_);
+
+  if (mods & Qt::ControlModifier)
+  {
+    ppu *= PPU_MULT_FINE;
+  }
+  else if (mods & Qt::ShiftModifier)
+  {
+    ppu /= PPU_MULT_FINE;
+  }
+
   const int   dx = pos.x() - drag_anchor_px_;
-  const float dv = float(dx) / float(track_rect().width()) *
-                   (domain_max_ - domain_min_);
+  const float dv = float(dx) / ppu;
   const float span = drag_high_start_ - drag_low_start_;
 
   switch (drag_handle_)
   {
   case Handle::Low:
-    value_.x = std::clamp(canvas_to_value(pos.x()), domain_min_, value_.y);
+    value_.x = std::clamp(drag_low_start_ + dv, domain_min_, value_.y);
     break;
 
   case Handle::High:
-    value_.y = std::clamp(canvas_to_value(pos.x()), value_.x, domain_max_);
+    value_.y = std::clamp(drag_high_start_ + dv, value_.x, domain_max_);
     break;
 
   case Handle::Track:
@@ -55,16 +65,19 @@ void RangeBar::apply_drag(const QPoint &pos)
     // Shift the whole range, clamping at both edges while preserving span.
     float lo = drag_low_start_ + dv;
     float hi = drag_high_start_ + dv;
+
     if (lo < domain_min_)
     {
       lo = domain_min_;
       hi = lo + span;
     }
+
     if (hi > domain_max_)
     {
       hi = domain_max_;
       lo = hi - span;
     }
+
     value_.x = lo;
     value_.y = hi;
     break;
@@ -125,7 +138,7 @@ void RangeBar::mouseMoveEvent(QMouseEvent *e)
 {
   if (drag_handle_ != Handle::None)
   {
-    apply_drag(e->pos());
+    apply_drag(e->pos(), e->modifiers());
   }
   else
   {
@@ -153,7 +166,7 @@ void RangeBar::mouseReleaseEvent(QMouseEvent *e)
 {
   if (e->button() == Qt::LeftButton && drag_handle_ != Handle::None)
   {
-    apply_drag(e->pos());
+    apply_drag(e->pos(), e->modifiers());
     drag_handle_ = Handle::None;
     setCursor(Qt::ArrowCursor);
     Q_EMIT drag_ended(value_);

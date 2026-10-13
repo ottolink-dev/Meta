@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include <QApplication>
+#include <QMouseEvent>
 #include <QPushButton>
 
 #include "meta.hpp"
@@ -12,6 +13,7 @@
 #include "meta_qt/meta_widget.hpp"
 #include "meta_qt/ui/design_registry.hpp"
 #include "meta_qt/widget_renderer.hpp"
+#include "meta_qt/widgets/range_bar.hpp"
 
 static void check(bool ok, const char *msg)
 {
@@ -194,6 +196,93 @@ int main(int argc, char **argv)
           "Case 5: Industrial restored active value failed");
 
     delete w;
+  }
+
+  // Case 6: Finer adjustments to range sliders by holding Ctrl while dragging.
+  {
+    class TestRangeBar : public meta::qt::RangeBar
+    {
+    public:
+      using meta::qt::RangeBar::mouseMoveEvent;
+      using meta::qt::RangeBar::mousePressEvent;
+      using meta::qt::RangeBar::mouseReleaseEvent;
+      using meta::qt::RangeBar::RangeBar;
+    };
+
+    glm::vec2    val(0.2f, 0.8f);
+    TestRangeBar bar(val, 0.0f, 1.0f, 3);
+    bar.resize(200, 44);
+
+    // Track rectangle with width 200 - 2 * 10 = 180, cy = 44 / 2 - 4 = 18
+    const QPointF start_pos(100.0, 18.0);
+    const QPointF drag_pos(118.0, 18.0); // dx = +18 px
+
+    // Normal drag on track (without Ctrl)
+    QMouseEvent press1(QEvent::MouseButtonPress,
+                       start_pos,
+                       start_pos,
+                       Qt::LeftButton,
+                       Qt::LeftButton,
+                       Qt::NoModifier);
+    bar.mousePressEvent(&press1);
+
+    QMouseEvent move1(QEvent::MouseMove,
+                      drag_pos,
+                      drag_pos,
+                      Qt::NoButton,
+                      Qt::LeftButton,
+                      Qt::NoModifier);
+    bar.mouseMoveEvent(&move1);
+
+    const glm::vec2 normal_drag_val = val;
+
+    QMouseEvent release1(QEvent::MouseButtonRelease,
+                         drag_pos,
+                         drag_pos,
+                         Qt::LeftButton,
+                         Qt::NoButton,
+                         Qt::NoModifier);
+    bar.mouseReleaseEvent(&release1);
+
+    // Reset value
+    val = glm::vec2(0.2f, 0.8f);
+    bar.set_value(val);
+
+    // Fine drag on track (with Ctrl)
+    QMouseEvent press2(QEvent::MouseButtonPress,
+                       start_pos,
+                       start_pos,
+                       Qt::LeftButton,
+                       Qt::LeftButton,
+                       Qt::ControlModifier);
+    bar.mousePressEvent(&press2);
+
+    QMouseEvent move2(QEvent::MouseMove,
+                      drag_pos,
+                      drag_pos,
+                      Qt::NoButton,
+                      Qt::LeftButton,
+                      Qt::ControlModifier);
+    bar.mouseMoveEvent(&move2);
+
+    const glm::vec2 ctrl_drag_val = val;
+
+    QMouseEvent release2(QEvent::MouseButtonRelease,
+                         drag_pos,
+                         drag_pos,
+                         Qt::LeftButton,
+                         Qt::NoButton,
+                         Qt::ControlModifier);
+    bar.mouseReleaseEvent(&release2);
+
+    const float normal_delta = normal_drag_val.x - 0.2f;
+    const float ctrl_delta = ctrl_drag_val.x - 0.2f;
+
+    check(normal_delta > 0.0f, "Case 6: Normal drag should change value");
+    check(ctrl_delta > 0.0f, "Case 6: Ctrl drag should change value");
+    check(
+        near(normal_delta, ctrl_delta * meta::qt::RangeBar::PPU_MULT_FINE),
+        "Case 6: Ctrl drag should make 10x finer adjustment than normal drag");
   }
 
   return 0;

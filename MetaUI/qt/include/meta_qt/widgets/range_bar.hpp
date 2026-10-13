@@ -42,6 +42,8 @@ public:
   }
   void set_histogram(const std::vector<float> &x, const std::vector<float> &y);
 
+  static constexpr float PPU_MULT_FINE = 10.f;
+
 Q_SIGNALS:
   void value_changed(glm::vec2 v);
   void drag_ended(glm::vec2 v);
@@ -68,7 +70,8 @@ private:
   float  canvas_to_value(int px) const;
   int    value_to_canvas(float v) const;
   Handle hit_test(const QPoint &pos) const;
-  void   apply_drag(const QPoint &pos);
+  void   apply_drag(const QPoint         &pos,
+                    Qt::KeyboardModifiers mods = Qt::NoModifier);
   void   clamp_and_order();
 
   glm::vec2 &value_;
