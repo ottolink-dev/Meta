@@ -356,6 +356,8 @@ void ContainerGroupWidget::on_sync_meta_widgets_from_model()
 {
   Logger::log()->trace("ContainerGroupWidget::on_sync_meta_widgets_from_model");
 
+  sync_stack();
+
   for (const auto &[key, widget] : pages)
   {
     if (auto *meta_widget = qobject_cast<MetaWidget *>(widget))
