@@ -12,6 +12,7 @@
 
 #include "meta/core/event.hpp"
 #include "meta/serialization/snapshot_manager.hpp"
+#include "meta_qt/ui/theme.hpp"
 
 namespace meta::qt
 {
@@ -20,6 +21,7 @@ namespace meta::qt
  * @brief Combo box backed by a SnapshotManager: offers a "Save preset..."
  * action item followed by the list of saved preset names ("default" pinned
  * first if present, remaining names sorted alphabetically).
+ * Supports optional industrial styling via set_theme().
  */
 class PresetComboBox : public QWidget
 {
@@ -31,6 +33,9 @@ public:
   /// Ctor
   explicit PresetComboBox(SnapshotManager *snapshot_manager,
                           QWidget         *parent = nullptr);
+
+  /// Apply a Theme to enable custom industrial styling with card margin
+  void set_theme(const Theme &theme);
 
   /**
    * @brief Set the callback invoked to capture the current state when the
@@ -58,12 +63,18 @@ signals:
   /// Emitted after a preset has been deleted.
   void preset_deleted(std::string name);
 
+protected:
+  void  mouseReleaseEvent(QMouseEvent *event) override;
+  void  paintEvent(QPaintEvent *event) override;
+  QSize sizeHint() const override;
+
 private slots:
   void on_context_menu_requested(const QPoint &pos);
   void on_index_activated(int index);
 
 private:
   void delete_preset(const std::string &name);
+  void open_industrial_popup();
   void save_new_preset();
 
   void populate_combo(const std::string &select_name = {});
@@ -72,6 +83,10 @@ private:
   QComboBox                      *combo = nullptr;
   std::function<nlohmann::json()> snapshot_provider;
   std::string                     current_preset;
+
+  bool  industrial_ = false;
+  Theme theme_;
+  bool  popup_open_ = false;
 
   static constexpr int save_action_index = 0;
 };
