@@ -224,7 +224,23 @@ void ComboPopup::mousePressEvent(QMouseEvent *event)
 void ComboPopup::mouseReleaseEvent(QMouseEvent *event)
 {
   if (closing_) return;
+
   const int index = index_at(event->pos());
+
+  if (event->button() == Qt::RightButton)
+  {
+    if (index >= 0)
+    {
+      const QPoint global_pos = mapToGlobal(event->pos());
+      close();
+      Q_EMIT item_context_menu_requested(index, global_pos);
+      return;
+    }
+
+    if (!card_rect().contains(event->pos())) close();
+    return;
+  }
+
   if (index >= 0)
   {
     close();

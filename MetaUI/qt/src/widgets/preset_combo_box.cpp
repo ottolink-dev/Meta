@@ -274,6 +274,48 @@ void PresetComboBox::open_industrial_popup()
                 });
 
   this->connect(popup,
+                &industrial::ComboPopup::item_context_menu_requested,
+                this,
+                [this, names](int index, const QPoint &global_pos)
+                {
+                  const int name_idx = index - 1;
+                  if (name_idx < 0 || name_idx >= int(names.size()))
+                    return;
+
+                  const std::string &name = names[name_idx];
+                  if (name.empty() || name == "default")
+                    return;
+
+                  QMenu menu(this);
+                  menu.setWindowFlag(Qt::NoDropShadowWindowHint);
+                  menu.setFont(ui_font(12));
+                  menu.setStyleSheet(
+                      QString(
+                          "QMenu { background: %1; color: %2; border: 1px solid %3;"
+                          " border-radius: 8px; padding: 6px; }"
+                          "QMenu::item { padding: 7px 18px 7px 10px; border-radius: 4px; }"
+                          "QMenu::item:selected { background: %4; }"
+                          "QMenu::separator { height: 1px; background: %3; margin: 5px 8px; "
+                          "}")
+                          .arg(this->theme_.bar.name(),
+                               this->theme_.ink_primary.name(),
+                               this->theme_.field_border.name(),
+                               this->theme_.section_header_hover.name()));
+
+                  QAction *delete_action = menu.addAction(tr("Delete preset"));
+                  QAction *selected = menu.exec(global_pos);
+
+                  if (selected == delete_action)
+                  {
+                    Logger::log()->trace(
+                        "PresetComboBox::open_industrial_popup: delete '{}'",
+                        name);
+
+                    this->delete_preset(name);
+                  }
+                });
+
+  this->connect(popup,
                 &QObject::destroyed,
                 this,
                 [this]()

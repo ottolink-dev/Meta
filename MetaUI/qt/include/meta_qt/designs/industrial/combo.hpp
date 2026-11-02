@@ -55,6 +55,7 @@ public:
 
 signals:
   void selected(int index);
+  void item_context_menu_requested(int index, const QPoint &global_pos);
 
 protected:
   void paintEvent(QPaintEvent *event) override;
