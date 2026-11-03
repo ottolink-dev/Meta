@@ -246,6 +246,9 @@ public:
   /// Register a theme under `theme.name`, replacing any existing entry.
   void add(Theme theme);
 
+  /// Force-update or populate the "palette" theme from the given palette (or QApplication::palette())
+  void update_palette_theme(const QPalette &palette);
+
   /** @brief Look up a theme by name.
    *
    * Returns the default theme when `name` is unknown, so a stale settings file

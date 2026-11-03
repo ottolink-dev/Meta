@@ -127,37 +127,37 @@ Theme Theme::from_palette(const QPalette &palette, const std::string &name)
   const QColor mid = palette.color(QPalette::Active, QPalette::Mid);
   const QColor light = palette.color(QPalette::Active, QPalette::Light);
 
+  const bool is_dark = window.lightness() < 128;
+
   // --- surfaces
   t.page = window;
-  t.bar = sink(window, 0.06);
-  // A clear step off the page, but only just. At a 0.30 lift the cards read as
-  // a separate piece of UI laid on top of the application rather than part of
-  // it, which is the main thing that made the panel stand out.
-  //
-  // 0.15 is roughly one step, and on a host whose window is #2B2B2B it lands on
-  // #4B4B4B, the same value such applications typically use for their secondary
-  // surface. Derived rather than hardcoded, so it still tracks the palette.
-  t.section_surface = lift(window, 0.15);
+  t.bar = is_dark ? sink(window, 0.06) : lift(window, 0.06);
+
+  // A clear step off the page. On dark themes we lift the card above the background;
+  // on light themes we sink it (or lift towards pure white).
+  t.section_surface = is_dark ? lift(window, 0.15) : sink(window, 0.06);
 
   // The header shares the card surface so a section reads as one block rather
   // than a bar with a differently coloured body under it. Hover and press are
   // small steps off that, not a different colour.
   t.section_header = t.section_surface;
-  t.section_header_hover = lift(t.section_surface, 0.06);
-  t.section_header_press = sink(t.section_surface, 0.04);
-  t.rail_well = sink(window, 0.35);
+  t.section_header_hover = is_dark ? lift(t.section_surface, 0.06)
+                                   : sink(t.section_surface, 0.04);
+  t.section_header_press = is_dark ? sink(t.section_surface, 0.04)
+                                   : lift(t.section_surface, 0.04);
+  t.rail_well = is_dark ? sink(window, 0.35) : lift(window, 0.35);
   t.field = base;
-  t.field_hover = lift(base, 0.05);
-  t.field_editing = sink(base, 0.25);
+  t.field_hover = is_dark ? lift(base, 0.05) : sink(base, 0.04);
+  t.field_editing = is_dark ? sink(base, 0.25) : lift(base, 0.15);
   t.switch_track_off = base;
 
   // --- hairlines and bevels
-  t.bevel_top = lift(window, 0.12);
-  t.bevel_bottom = sink(window, 0.10);
-  t.hairline = sink(window, 0.40);
-  t.rail_well_border = sink(window, 0.50);
+  t.bevel_top = is_dark ? lift(window, 0.12) : sink(window, 0.08);
+  t.bevel_bottom = is_dark ? sink(window, 0.10) : lift(window, 0.08);
+  t.hairline = is_dark ? sink(window, 0.40) : lift(window, 0.30);
+  t.rail_well_border = is_dark ? sink(window, 0.50) : lift(window, 0.40);
   t.field_border = mid;
-  t.field_border_hover = lift(mid, 0.15);
+  t.field_border_hover = is_dark ? lift(mid, 0.15) : sink(mid, 0.15);
 
   // --- ink. Dimming blends towards the window, so it reads as "less
   // prominent" whichever side of the light/dark line the scheme sits on.
@@ -257,6 +257,11 @@ void ThemeRegistry::ensure_palette_theme() const
   if (themes_.find(kPaletteTheme) != themes_.end()) return;
 
   const QPalette palette = QApplication::palette();
+  themes_[kPaletteTheme] = Theme::from_palette(palette, kPaletteTheme);
+}
+
+void ThemeRegistry::update_palette_theme(const QPalette &palette)
+{
   themes_[kPaletteTheme] = Theme::from_palette(palette, kPaletteTheme);
 }
 
