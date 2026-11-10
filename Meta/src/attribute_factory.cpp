@@ -30,10 +30,6 @@ std::unique_ptr<AbstractAttribute> AttributeFactory::create(
   static std::once_flag builtin_types_once;
   std::call_once(builtin_types_once, register_builtin_types);
 
-  Logger::log()->trace("AttributeFactory::create: type='{}', name='{}'",
-                       name,
-                       attr_name);
-
   auto it = registry_.find(name);
   if (it == registry_.end())
   {
@@ -41,7 +37,6 @@ std::unique_ptr<AbstractAttribute> AttributeFactory::create(
     return nullptr;
   }
 
-  Logger::log()->trace("AttributeFactory::create: success '{}'", name);
   return it->second(attr_name);
 }
 

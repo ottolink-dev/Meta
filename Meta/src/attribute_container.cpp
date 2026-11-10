@@ -165,10 +165,6 @@ void AttributeContainer::json_from(const nlohmann::json &j,
 
       const std::string attr_type = value["type"].get<std::string>();
 
-      Logger::log()->trace("json_from: creating attribute '{}' of type '{}'",
-                           name,
-                           attr_type);
-
       auto new_attr = AttributeFactory::instance().create(attr_type, name);
 
       if (!new_attr)
@@ -242,8 +238,6 @@ void AttributeContainer::json_from(const nlohmann::json &j,
 
 nlohmann::json AttributeContainer::json_to(SerializationMode mode) const
 {
-  Logger::log()->trace("AttributeContainer::json_to");
-
   nlohmann::json j = nlohmann::json::object();
 
   for (const auto &[name, attr] : attributes_)
@@ -302,25 +296,21 @@ const SnapshotManager &AttributeContainer::snapshot_manager() const
 
 void deserialize_metadata(AttributeContainer &m, const nlohmann::json &j)
 {
-  Logger::log()->trace("deserialize_metadata");
   m.json_from(j);
 }
 
 nlohmann::json serialize_metadata(const AttributeContainer &m)
 {
-  Logger::log()->trace("serialize_metadata");
   return m.json_to();
 }
 
 void deserialize_state(AttributeContainer &s, const nlohmann::json &j)
 {
-  Logger::log()->trace("deserialize_state");
   s.json_from(j);
 }
 
 nlohmann::json serialize_state(const AttributeContainer &s)
 {
-  Logger::log()->trace("serialize_state");
   return s.json_to();
 }
 
