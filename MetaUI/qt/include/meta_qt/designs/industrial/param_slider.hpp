@@ -96,6 +96,7 @@ private:
   float min_ = 0.f;
   float max_ = 1.f;
   float input_max_ = 1.f;
+  float step_ = 0.f;
   float value_ = 0.f;
   bool  log_scale_ = false;
   int   decimals_ = 2;
