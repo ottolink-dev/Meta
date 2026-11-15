@@ -1,7 +1,7 @@
 <map id="meta::ICommand" name="meta::ICommand">
-<area shape="rect" id="Node000001" title="Abstract interface for reversible operations." alt="" coords="139,5,274,31"/>
-<area shape="rect" id="Node000002" href="$classmeta_1_1CommandGroup.html" title="Command that groups multiple commands into a single undo/redo step." alt="" coords="5,79,176,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,40,111,81,108,76,175,35"/>
-<area shape="rect" id="Node000003" href="$classmeta_1_1SetAttributeCommand.html" title=" " alt="" coords="201,79,447,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,35,306,76,303,81,236,40"/>
+<area shape="rect" id="Node000001" title="Abstract interface for reversible operations." alt="" coords="139,5,273,33"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1CommandGroup.html" title="Command that groups multiple commands into a single undo/redo step." alt="" coords="5,81,175,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,41,112,83,109,78,170,42"/>
+<area shape="rect" id="Node000003" href="$classmeta_1_1SetAttributeCommand.html" title=" " alt="" coords="199,81,445,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,39,304,81,299,81,239,44"/>
 </map>

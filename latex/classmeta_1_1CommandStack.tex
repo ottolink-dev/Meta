@@ -38,42 +38,44 @@ Simple undo/redo stack based on \doxylink{classmeta_1_1ICommand}{ICommand}.
 
 Stores executed commands and allows stepping backward (undo) and forward (redo). Supports optional command merging for continuous interactions (e.\+g. sliders). 
 
+\label{doc-func-members}
+\Hypertarget{classmeta_1_1CommandStack_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classmeta_1_1CommandStack_a2dfe9a53e062e22e7a0a35b672c9ff06}\label{classmeta_1_1CommandStack_a2dfe9a53e062e22e7a0a35b672c9ff06} 
-\index{meta::CommandStack@{meta::CommandStack}!can\_redo@{can\_redo}}
+\Hypertarget{classmeta_1_1CommandStack_a2dfe9a53e062e22e7a0a35b672c9ff06}\index{meta::CommandStack@{meta::CommandStack}!can\_redo@{can\_redo}}
 \index{can\_redo@{can\_redo}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{can\_redo()}{can\_redo()}}
-{\footnotesize\ttfamily bool meta\+::\+Command\+Stack\+::can\+\_\+redo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_a2dfe9a53e062e22e7a0a35b672c9ff06} 
+bool meta\+::\+Command\+Stack\+::can\+\_\+redo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Returns true if a redo operation is possible. 
 
-\Hypertarget{classmeta_1_1CommandStack_a403264c4addb021f9cd740ae08749800}\label{classmeta_1_1CommandStack_a403264c4addb021f9cd740ae08749800} 
-\index{meta::CommandStack@{meta::CommandStack}!can\_undo@{can\_undo}}
+\Hypertarget{classmeta_1_1CommandStack_a403264c4addb021f9cd740ae08749800}\index{meta::CommandStack@{meta::CommandStack}!can\_undo@{can\_undo}}
 \index{can\_undo@{can\_undo}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{can\_undo()}{can\_undo()}}
-{\footnotesize\ttfamily bool meta\+::\+Command\+Stack\+::can\+\_\+undo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_a403264c4addb021f9cd740ae08749800} 
+bool meta\+::\+Command\+Stack\+::can\+\_\+undo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Returns true if an undo operation is possible. 
 
-\Hypertarget{classmeta_1_1CommandStack_a2082d1a50774d7fb485f2854f22553aa}\label{classmeta_1_1CommandStack_a2082d1a50774d7fb485f2854f22553aa} 
-\index{meta::CommandStack@{meta::CommandStack}!clear@{clear}}
+\Hypertarget{classmeta_1_1CommandStack_a2082d1a50774d7fb485f2854f22553aa}\index{meta::CommandStack@{meta::CommandStack}!clear@{clear}}
 \index{clear@{clear}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{clear()}{clear()}}
-{\footnotesize\ttfamily void meta\+::\+Command\+Stack\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_a2082d1a50774d7fb485f2854f22553aa} 
+void meta\+::\+Command\+Stack\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Clears both undo and redo history. 
 
-\Hypertarget{classmeta_1_1CommandStack_a938ea58ee5917fa6e30df7df80ec8796}\label{classmeta_1_1CommandStack_a938ea58ee5917fa6e30df7df80ec8796} 
-\index{meta::CommandStack@{meta::CommandStack}!execute@{execute}}
+\Hypertarget{classmeta_1_1CommandStack_a938ea58ee5917fa6e30df7df80ec8796}\index{meta::CommandStack@{meta::CommandStack}!execute@{execute}}
 \index{execute@{execute}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{execute()}{execute()}}
-{\footnotesize\ttfamily void meta\+::\+Command\+Stack\+::execute (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}} $>$}]{command,  }\item[{bool}]{allow\+\_\+merge = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_a938ea58ee5917fa6e30df7df80ec8796} 
+void meta\+::\+Command\+Stack\+::execute (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}} $>$}]{command}{, }\item[{bool}]{allow\+\_\+merge}{ = {\ttfamily false}}\end{DoxyParamCaption})}
 
 
 
@@ -86,21 +88,21 @@ Executes a command and stores it in the undo stack.
 {\em allow\+\_\+merge} & If true, allows merging with previous command. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classmeta_1_1CommandStack_ada6b37d9cd6bd95e76989d8a2b15e5b7}\label{classmeta_1_1CommandStack_ada6b37d9cd6bd95e76989d8a2b15e5b7} 
-\index{meta::CommandStack@{meta::CommandStack}!redo@{redo}}
+\Hypertarget{classmeta_1_1CommandStack_ada6b37d9cd6bd95e76989d8a2b15e5b7}\index{meta::CommandStack@{meta::CommandStack}!redo@{redo}}
 \index{redo@{redo}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{redo()}{redo()}}
-{\footnotesize\ttfamily void meta\+::\+Command\+Stack\+::redo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_ada6b37d9cd6bd95e76989d8a2b15e5b7} 
+void meta\+::\+Command\+Stack\+::redo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Redoes the last undone command. 
 
-\Hypertarget{classmeta_1_1CommandStack_afccc95f38a315c1063a3c72d5e5b2e4a}\label{classmeta_1_1CommandStack_afccc95f38a315c1063a3c72d5e5b2e4a} 
-\index{meta::CommandStack@{meta::CommandStack}!undo@{undo}}
+\Hypertarget{classmeta_1_1CommandStack_afccc95f38a315c1063a3c72d5e5b2e4a}\index{meta::CommandStack@{meta::CommandStack}!undo@{undo}}
 \index{undo@{undo}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{undo()}{undo()}}
-{\footnotesize\ttfamily void meta\+::\+Command\+Stack\+::undo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_afccc95f38a315c1063a3c72d5e5b2e4a} 
+void meta\+::\+Command\+Stack\+::undo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
@@ -108,18 +110,20 @@ Undoes the last executed command.
 
 
 
+\label{doc-variable-members}
+\Hypertarget{classmeta_1_1CommandStack_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classmeta_1_1CommandStack_ab9be62e015bccc777ea9b1d40a09e80a}\label{classmeta_1_1CommandStack_ab9be62e015bccc777ea9b1d40a09e80a} 
-\index{meta::CommandStack@{meta::CommandStack}!redo\_stack\_@{redo\_stack\_}}
+\Hypertarget{classmeta_1_1CommandStack_ab9be62e015bccc777ea9b1d40a09e80a}\index{meta::CommandStack@{meta::CommandStack}!redo\_stack\_@{redo\_stack\_}}
 \index{redo\_stack\_@{redo\_stack\_}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{redo\_stack\_}{redo\_stack\_}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}$>$ $>$ meta\+::\+Command\+Stack\+::redo\+\_\+stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_ab9be62e015bccc777ea9b1d40a09e80a} 
+std\+::vector$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}$>$ $>$ meta\+::\+Command\+Stack\+::redo\+\_\+stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1CommandStack_ae281a38f4c8cc324ac9807e2854ba45e}\label{classmeta_1_1CommandStack_ae281a38f4c8cc324ac9807e2854ba45e} 
-\index{meta::CommandStack@{meta::CommandStack}!undo\_stack\_@{undo\_stack\_}}
+\Hypertarget{classmeta_1_1CommandStack_ae281a38f4c8cc324ac9807e2854ba45e}\index{meta::CommandStack@{meta::CommandStack}!undo\_stack\_@{undo\_stack\_}}
 \index{undo\_stack\_@{undo\_stack\_}!meta::CommandStack@{meta::CommandStack}}
 \doxysubsubsection{\texorpdfstring{undo\_stack\_}{undo\_stack\_}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}$>$ $>$ meta\+::\+Command\+Stack\+::undo\+\_\+stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1CommandStack_ae281a38f4c8cc324ac9807e2854ba45e} 
+std\+::vector$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}$>$ $>$ meta\+::\+Command\+Stack\+::undo\+\_\+stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

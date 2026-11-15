@@ -12,12 +12,12 @@ Factory for runtime creation of attributes by type name.
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}{Create\+Fn}} = std\+::function$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} $>$(const std\+::string \&)$>$
+using \mbox{\hyperlink{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}{Create\+Fn}}
 \begin{DoxyCompactList}\small\item\em Function type used to create attributes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{classmeta_1_1AttributeFactory_a173bb33e9292c6cd8c6bd17a7ce961d8}{register\+\_\+attribute\+\_\+type}} (std\+::string name, \mbox{\hyperlink{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}{Create\+Fn}} fn)
+void \mbox{\hyperlink{classmeta_1_1AttributeFactory_a173bb33e9292c6cd8c6bd17a7ce961d8}{register\+\_\+attribute\+\_\+type}} (std\+::string name, \mbox{\hyperlink{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}{Create\+Fn}} fn)
 \begin{DoxyCompactList}\small\item\em Register a new attribute type. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} $>$ \mbox{\hyperlink{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}{create}} (const std\+::string \&type, const std\+::string \&name) const
 \begin{DoxyCompactList}\small\item\em Create an attribute from a type name. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -29,7 +29,7 @@ static \mbox{\hyperlink{classmeta_1_1AttributeFactory}{Attribute\+Factory}} \& \
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}{Create\+Fn}} $>$ \mbox{\hyperlink{classmeta_1_1AttributeFactory_aafa70505df005aa3c0e90c2c0aeff662}{registry\+\_\+}}
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}{Create\+Fn}} $>$ \mbox{\hyperlink{classmeta_1_1AttributeFactory_aafa70505df005aa3c0e90c2c0aeff662}{registry\+\_\+}}
 \end{DoxyCompactItemize}
 
 
@@ -40,13 +40,21 @@ This registry enables deserialization and dynamic instantiation of attributes wi
 
 It maps string identifiers to factory functions producing \doxylink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute} instances. 
 
+\label{doc-typedef-members}
+\Hypertarget{classmeta_1_1AttributeFactory_doc-typedef-members}
 \doxysubsection{Member Typedef Documentation}
-\Hypertarget{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}\label{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c} 
-\index{meta::AttributeFactory@{meta::AttributeFactory}!CreateFn@{CreateFn}}
+\Hypertarget{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}\index{meta::AttributeFactory@{meta::AttributeFactory}!CreateFn@{CreateFn}}
 \index{CreateFn@{CreateFn}!meta::AttributeFactory@{meta::AttributeFactory}}
 \doxysubsubsection{\texorpdfstring{CreateFn}{CreateFn}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}{meta\+::\+Attribute\+Factory\+::\+Create\+Fn}} =  std\+::function$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}}$>$(const std\+::string \&)$>$}
+{\footnotesize\ttfamily \label{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd} 
+using \mbox{\hyperlink{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}{meta\+::\+Attribute\+Factory\+::\+Create\+Fn}}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ std::function<std::unique\_ptr<AbstractAttribute>(\textcolor{keyword}{const}\ std::string\ \&)>}
+
+\end{DoxyCode}
 
 
 Function type used to create attributes. 
@@ -61,12 +69,14 @@ Newly created attribute instance.
 \end{DoxyReturn}
 
 
+\label{doc-func-members}
+\Hypertarget{classmeta_1_1AttributeFactory_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}\label{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05} 
-\index{meta::AttributeFactory@{meta::AttributeFactory}!create@{create}}
+\Hypertarget{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}\index{meta::AttributeFactory@{meta::AttributeFactory}!create@{create}}
 \index{create@{create}!meta::AttributeFactory@{meta::AttributeFactory}}
 \doxysubsubsection{\texorpdfstring{create()}{create()}}
-{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} $>$ meta\+::\+Attribute\+Factory\+::create (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type,  }\item[{const std\+::string \&}]{name }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} $>$ meta\+::\+Attribute\+Factory\+::create (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type}{, }\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -82,21 +92,21 @@ Create an attribute from a type name.
 \begin{DoxyReturn}{Returns}
 Newly created attribute or nullptr if type is unknown. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1AttributeFactory_a3860d3bf84d293a18564987219d79ee2}\label{classmeta_1_1AttributeFactory_a3860d3bf84d293a18564987219d79ee2} 
-\index{meta::AttributeFactory@{meta::AttributeFactory}!instance@{instance}}
+\Hypertarget{classmeta_1_1AttributeFactory_a3860d3bf84d293a18564987219d79ee2}\index{meta::AttributeFactory@{meta::AttributeFactory}!instance@{instance}}
 \index{instance@{instance}!meta::AttributeFactory@{meta::AttributeFactory}}
 \doxysubsubsection{\texorpdfstring{instance()}{instance()}}
-{\footnotesize\ttfamily static \mbox{\hyperlink{classmeta_1_1AttributeFactory}{Attribute\+Factory}} \& meta\+::\+Attribute\+Factory\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily \label{classmeta_1_1AttributeFactory_a3860d3bf84d293a18564987219d79ee2} 
+\mbox{\hyperlink{classmeta_1_1AttributeFactory}{Attribute\+Factory}} \& meta\+::\+Attribute\+Factory\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
 Access singleton instance. 
 
-\Hypertarget{classmeta_1_1AttributeFactory_a173bb33e9292c6cd8c6bd17a7ce961d8}\label{classmeta_1_1AttributeFactory_a173bb33e9292c6cd8c6bd17a7ce961d8} 
-\index{meta::AttributeFactory@{meta::AttributeFactory}!register\_attribute\_type@{register\_attribute\_type}}
+\Hypertarget{classmeta_1_1AttributeFactory_a173bb33e9292c6cd8c6bd17a7ce961d8}\index{meta::AttributeFactory@{meta::AttributeFactory}!register\_attribute\_type@{register\_attribute\_type}}
 \index{register\_attribute\_type@{register\_attribute\_type}!meta::AttributeFactory@{meta::AttributeFactory}}
 \doxysubsubsection{\texorpdfstring{register\_attribute\_type()}{register\_attribute\_type()}}
-{\footnotesize\ttfamily void meta\+::\+Attribute\+Factory\+::register\+\_\+attribute\+\_\+type (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{\mbox{\hyperlink{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}{Create\+Fn}}}]{fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \label{classmeta_1_1AttributeFactory_a173bb33e9292c6cd8c6bd17a7ce961d8} 
+void meta\+::\+Attribute\+Factory\+::register\+\_\+attribute\+\_\+type (\begin{DoxyParamCaption}\item[{std\+::string}]{name}{, }\item[{\mbox{\hyperlink{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}{Create\+Fn}}}]{fn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -113,12 +123,14 @@ Associates a type name with a factory function.
 \end{DoxyParams}
 
 
+\label{doc-variable-members}
+\Hypertarget{classmeta_1_1AttributeFactory_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classmeta_1_1AttributeFactory_aafa70505df005aa3c0e90c2c0aeff662}\label{classmeta_1_1AttributeFactory_aafa70505df005aa3c0e90c2c0aeff662} 
-\index{meta::AttributeFactory@{meta::AttributeFactory}!registry\_@{registry\_}}
+\Hypertarget{classmeta_1_1AttributeFactory_aafa70505df005aa3c0e90c2c0aeff662}\index{meta::AttributeFactory@{meta::AttributeFactory}!registry\_@{registry\_}}
 \index{registry\_@{registry\_}!meta::AttributeFactory@{meta::AttributeFactory}}
 \doxysubsubsection{\texorpdfstring{registry\_}{registry\_}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{classmeta_1_1AttributeFactory_a6bf0732503ef6d96713eaaa0a414fe3c}{Create\+Fn}}$>$ meta\+::\+Attribute\+Factory\+::registry\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1AttributeFactory_aafa70505df005aa3c0e90c2c0aeff662} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{classmeta_1_1AttributeFactory_a7dc443c90e977bde5fc5509d7b1d34cd}{Create\+Fn}}$>$ meta\+::\+Attribute\+Factory\+::registry\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

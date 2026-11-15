@@ -1,7 +1,7 @@
 <map id="meta::Attribute&lt; T &gt;" name="meta::Attribute&lt; T &gt;">
-<area shape="rect" id="Node000001" title="Typed runtime attribute with reflection support." alt="" coords="13,152,172,177"/>
-<area shape="rect" id="Node000002" href="$classmeta_1_1AbstractAttribute.html" title="Base class for all attribute types stored in the reflection system." alt="" coords="5,79,180,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,118,95,152,90,152,90,118"/>
-<area shape="rect" id="Node000003" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="23,5,162,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="95,44,95,79,90,79,90,44"/>
+<area shape="rect" id="Node000001" title="Typed runtime attribute with reflection support." alt="" coords="13,157,172,184"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1AbstractAttribute.html" title="Base class for all attribute types stored in the reflection system." alt="" coords="5,81,180,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,123,95,157,90,155,91,126"/>
+<area shape="rect" id="Node000003" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="23,5,162,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,46,95,81,90,80,91,51"/>
 </map>

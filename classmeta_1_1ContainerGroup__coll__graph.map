@@ -1,16 +1,16 @@
 <map id="meta::ContainerGroup" name="meta::ContainerGroup">
-<area shape="rect" id="Node000001" title="Collection of named attribute containers." alt="" coords="1003,36,1169,61"/>
-<area shape="rect" id="Node000002" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="369,5,508,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="522,19,979,41,1003,42,1002,47,979,46,522,24"/>
-<area shape="rect" id="Node000003" href="$classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="713,71,897,96"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="522,30,734,68,733,73,521,35"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="911,68,1002,56,1003,62,911,73"/>
-<area shape="rect" id="Node000004" href="$classmeta_1_1Event.html" title=" " alt="" coords="357,61,520,101"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="534,79,553,79,713,80,713,86,553,85,534,84"/>
-<area shape="rect" id="Node000005" href="$classmeta_1_1Event.html" title=" " alt="" coords="363,125,514,165"/>
-<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="528,128,689,101,731,93,732,99,690,106,528,133"/>
-<area shape="rect" id="Node000006" href="$classmeta_1_1SnapshotManager.html" title=" " alt="" coords="348,189,529,215"/>
-<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="541,184,614,168,688,145,741,120,784,94,787,98,744,124,690,150,615,173,542,189"/>
-<area shape="rect" id="Node000007" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="5,189,165,215"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="179,199,348,199,348,205,179,205"/>
+<area shape="rect" id="Node000001" title="Collection of named attribute containers." alt="" coords="1010,37,1176,65"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1MetaObject.html" title="Base class enabling runtime metadata attachment." alt="" coords="372,5,510,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="525,16,735,20,987,34,1013,39,1007,39,986,39,735,25,526,22"/>
+<area shape="rect" id="Node000003" href="$classmeta_1_1AttributeContainer.html" title="Container of named runtime attributes." alt="" coords="718,77,901,105"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="525,30,695,62,752,77,746,77,693,67,525,36"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="916,73,1012,62,1007,63,917,79"/>
+<area shape="rect" id="Node000004" href="$classmeta_1_1Event.html" title=" " alt="" coords="360,62,522,107"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="537,86,555,87,720,91,715,92,555,92,537,92"/>
+<area shape="rect" id="Node000005" href="$classmeta_1_1Event.html" title=" " alt="" coords="366,132,516,176"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="531,143,693,119,757,106,762,105,695,124,532,148"/>
+<area shape="rect" id="Node000006" href="$classmeta_1_1SnapshotManager.html" title=" " alt="" coords="351,200,531,228"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="546,205,619,192,693,170,722,155,749,138,791,106,796,105,752,142,725,160,695,175,621,197,546,210"/>
+<area shape="rect" id="Node000007" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="5,200,165,228"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="180,211,353,212,348,215,180,216"/>
 </map>

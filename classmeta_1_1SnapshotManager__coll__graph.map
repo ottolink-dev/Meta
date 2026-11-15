@@ -1,5 +1,5 @@
 <map id="meta::SnapshotManager" name="meta::SnapshotManager">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,93,187,119"/>
-<area shape="rect" id="Node000002" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="16,5,176,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,45,99,93,93,93,93,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,106,186,134"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="16,5,175,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,47,98,106,93,105,93,50"/>
 </map>

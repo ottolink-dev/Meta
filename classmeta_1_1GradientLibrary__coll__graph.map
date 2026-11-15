@@ -1,5 +1,5 @@
 <map id="meta::GradientLibrary" name="meta::GradientLibrary">
-<area shape="rect" id="Node000001" title="The user&#39;s gradient presets, shared by every gradient widget in the process and persisted across proj..." alt="" coords="5,93,171,119"/>
-<area shape="rect" id="Node000002" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="8,5,168,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,45,91,93,85,93,85,45"/>
+<area shape="rect" id="Node000001" title="The user&#39;s gradient presets, shared by every gradient widget in the process and persisted across proj..." alt="" coords="5,106,170,134"/>
+<area shape="rect" id="Node000002" href="$classmeta_1_1Event.html" title="Thread&#45;unsafe publisher&#45;subscriber event stream." alt="" coords="8,5,167,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,47,90,106,85,105,85,50"/>
 </map>

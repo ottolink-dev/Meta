@@ -62,10 +62,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "abstract__attribute_8hpp.html",
-"classmeta_1_1ContainerGroup.html#a4dde409a177c45795bd880eefcf9379c",
-"classmeta_1_1SnapshotManager.html#af024ebc2a539d260fc163332618ef12d",
-"structmeta_1_1AttributeTraits.html#aea52842559753728aa5b07153bb93732"
+"classmeta_1_1ContainerGroup.html#a869e7c2de22d43cd0a9bf5f55c35229a",
+"dir_35ea7bc14f4abd42fa1e8a69aa16bb86.html",
+"structmeta_1_1TypeName_3_01uint16__t_01_4.html#a28ca83287efa7a149b60636e79ad81ef"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

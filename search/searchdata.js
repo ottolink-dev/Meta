@@ -11,7 +11,7 @@ var indexSectionsWithContent =
   8: "dfhlns",
   9: "m",
   10: "abist",
-  11: "m"
+  11: "s"
 };
 
 var indexSectionNames =

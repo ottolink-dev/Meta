@@ -16,7 +16,7 @@ Inheritance diagram for meta\+::Container\+Group\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=205pt]{classmeta_1_1ContainerGroup__inherit__graph}
+\includegraphics[width=204pt]{classmeta_1_1ContainerGroup__inherit__graph}
 \end{center}
 \end{figure}
 
@@ -32,14 +32,14 @@ Collaboration diagram for meta\+::Container\+Group\+:
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{Container\+Map}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} $>$ $>$
+using \mbox{\hyperlink{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}{Container\+Map}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& \mbox{\hyperlink{classmeta_1_1ContainerGroup_a918824727c79ce9b1dce17880e7b374a}{add}} (const std\+::string \&key)
 \begin{DoxyCompactList}\small\item\em Add a new container. \end{DoxyCompactList}\item 
-const \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{Container\+Map}} \& \mbox{\hyperlink{classmeta_1_1ContainerGroup_a73569f2df904f8ec28f79c50c0c08be7}{containers}} () const
+const \mbox{\hyperlink{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}{Container\+Map}} \& \mbox{\hyperlink{classmeta_1_1ContainerGroup_a73569f2df904f8ec28f79c50c0c08be7}{containers}} () const
 \begin{DoxyCompactList}\small\item\em Get all registered containers. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classmeta_1_1ContainerGroup_a49b6f21d85c6066d81a46c74bd21d30a}{contains}} (const std\+::string \&key) const
 \begin{DoxyCompactList}\small\item\em Check whether a container exists. \end{DoxyCompactList}\item 
@@ -120,7 +120,7 @@ void \mbox{\hyperlink{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa1
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{Container\+Map}} \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb}{containers\+\_\+}}
+\mbox{\hyperlink{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}{Container\+Map}} \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb}{containers\+\_\+}}
 \item 
 std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6}{insertion\+\_\+order\+\_\+}}
 \item 
@@ -139,21 +139,31 @@ Collection of named attribute containers.
 
 One container can be selected as the current container. Most operations are forwarded to the current container, allowing UI code to interact with a single \doxylink{classmeta_1_1AttributeContainer}{Attribute\+Container} interface while the underlying settings group changes at runtime. 
 
+\label{doc-typedef-members}
+\Hypertarget{classmeta_1_1ContainerGroup_doc-typedef-members}
 \doxysubsection{Member Typedef Documentation}
-\Hypertarget{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}\label{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!ContainerMap@{ContainerMap}}
+\Hypertarget{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}\index{meta::ContainerGroup@{meta::ContainerGroup}!ContainerMap@{ContainerMap}}
 \index{ContainerMap@{ContainerMap}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{ContainerMap}{ContainerMap}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{meta\+::\+Container\+Group\+::\+Container\+Map}} =  std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}$>$ $>$}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6} 
+using \mbox{\hyperlink{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}{meta\+::\+Container\+Group\+::\+Container\+Map}}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ std::unordered\_map<std::string,\ std::unique\_ptr<AttributeContainer>>}
+
+\end{DoxyCode}
 
 
-
+\label{doc-func-members}
+\Hypertarget{classmeta_1_1ContainerGroup_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classmeta_1_1ContainerGroup_a918824727c79ce9b1dce17880e7b374a}\label{classmeta_1_1ContainerGroup_a918824727c79ce9b1dce17880e7b374a} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!add@{add}}
+\Hypertarget{classmeta_1_1ContainerGroup_a918824727c79ce9b1dce17880e7b374a}\index{meta::ContainerGroup@{meta::ContainerGroup}!add@{add}}
 \index{add@{add}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{add()}{add()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Container\+Group\+::add (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a918824727c79ce9b1dce17880e7b374a} 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Container\+Group\+::add (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})}
 
 
 
@@ -172,53 +182,53 @@ Reference to the created container.
 {\em std\+::runtime\+\_\+error} & if the key already exists. \\
 \hline
 \end{DoxyExceptions}
-\Hypertarget{classmeta_1_1ContainerGroup_a232d21844cbb0dd38366d060caaefb5a}\label{classmeta_1_1ContainerGroup_a232d21844cbb0dd38366d060caaefb5a} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!bind\_attribute@{bind\_attribute}}
+\Hypertarget{classmeta_1_1ContainerGroup_a232d21844cbb0dd38366d060caaefb5a}\index{meta::ContainerGroup@{meta::ContainerGroup}!bind\_attribute@{bind\_attribute}}
 \index{bind\_attribute@{bind\_attribute}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{bind\_attribute()}{bind\_attribute()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::bind\+\_\+attribute (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{container\+\_\+key,  }\item[{\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} \&}]{attr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a232d21844cbb0dd38366d060caaefb5a} 
+void meta\+::\+Container\+Group\+::bind\+\_\+attribute (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{container\+\_\+key}{, }\item[{\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} \&}]{attr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_a957ab04b6e11917581dfa89acc80366a}\label{classmeta_1_1ContainerGroup_a957ab04b6e11917581dfa89acc80366a} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!bind\_container@{bind\_container}}
+\Hypertarget{classmeta_1_1ContainerGroup_a957ab04b6e11917581dfa89acc80366a}\index{meta::ContainerGroup@{meta::ContainerGroup}!bind\_container@{bind\_container}}
 \index{bind\_container@{bind\_container}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{bind\_container()}{bind\_container()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::bind\+\_\+container (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{container }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a957ab04b6e11917581dfa89acc80366a} 
+void meta\+::\+Container\+Group\+::bind\+\_\+container (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{container}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd}\label{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!clear@{clear}}
+\Hypertarget{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd}\index{meta::ContainerGroup@{meta::ContainerGroup}!clear@{clear}}
 \index{clear@{clear}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{clear()}{clear()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_acce79df218caceaf4afdc435e5b292cd} 
+void meta\+::\+Container\+Group\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Clear all containers. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_a6f62da662394a4d772f49ef04b701b56}\label{classmeta_1_1ContainerGroup_a6f62da662394a4d772f49ef04b701b56} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!clear\_synchronizations@{clear\_synchronizations}}
+\Hypertarget{classmeta_1_1ContainerGroup_a6f62da662394a4d772f49ef04b701b56}\index{meta::ContainerGroup@{meta::ContainerGroup}!clear\_synchronizations@{clear\_synchronizations}}
 \index{clear\_synchronizations@{clear\_synchronizations}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{clear\_synchronizations()}{clear\_synchronizations()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::clear\+\_\+synchronizations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a6f62da662394a4d772f49ef04b701b56} 
+void meta\+::\+Container\+Group\+::clear\+\_\+synchronizations (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Disables synchronization for all attributes. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7}\label{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!compact\_insertion\_order@{compact\_insertion\_order}}
+\Hypertarget{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7}\index{meta::ContainerGroup@{meta::ContainerGroup}!compact\_insertion\_order@{compact\_insertion\_order}}
 \index{compact\_insertion\_order@{compact\_insertion\_order}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{compact\_insertion\_order()}{compact\_insertion\_order()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::compact\+\_\+insertion\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_afff92035db82abbbd2dc995c41aa15c7} 
+void meta\+::\+Container\+Group\+::compact\+\_\+insertion\+\_\+order (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
 Removes stale entries from insertion\+\_\+order\+\_\+ that no longer exist in attributes\+\_\+ (e.\+g. 
 
-after external erasure or clear). \Hypertarget{classmeta_1_1ContainerGroup_a73569f2df904f8ec28f79c50c0c08be7}\label{classmeta_1_1ContainerGroup_a73569f2df904f8ec28f79c50c0c08be7} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!containers@{containers}}
+after external erasure or clear). \Hypertarget{classmeta_1_1ContainerGroup_a73569f2df904f8ec28f79c50c0c08be7}\index{meta::ContainerGroup@{meta::ContainerGroup}!containers@{containers}}
 \index{containers@{containers}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{containers()}{containers()}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{Container\+Map}} \& meta\+::\+Container\+Group\+::containers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a73569f2df904f8ec28f79c50c0c08be7} 
+const \mbox{\hyperlink{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}{Container\+Map}} \& meta\+::\+Container\+Group\+::containers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -227,41 +237,41 @@ Get all registered containers.
 \begin{DoxyReturn}{Returns}
 Constant reference to the internal container map. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_a49b6f21d85c6066d81a46c74bd21d30a}\label{classmeta_1_1ContainerGroup_a49b6f21d85c6066d81a46c74bd21d30a} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!contains@{contains}}
+\Hypertarget{classmeta_1_1ContainerGroup_a49b6f21d85c6066d81a46c74bd21d30a}\index{meta::ContainerGroup@{meta::ContainerGroup}!contains@{contains}}
 \index{contains@{contains}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{contains()}{contains()}}
-{\footnotesize\ttfamily bool meta\+::\+Container\+Group\+::contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a49b6f21d85c6066d81a46c74bd21d30a} 
+bool meta\+::\+Container\+Group\+::contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
 
 
 
 Check whether a container exists. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_a39ee411467d4e5aab715d698afc75366}\label{classmeta_1_1ContainerGroup_a39ee411467d4e5aab715d698afc75366} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!current@{current}}
+\Hypertarget{classmeta_1_1ContainerGroup_a39ee411467d4e5aab715d698afc75366}\index{meta::ContainerGroup@{meta::ContainerGroup}!current@{current}}
 \index{current@{current}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{current()}{current()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Container\+Group\+::current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a39ee411467d4e5aab715d698afc75366} 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Container\+Group\+::current (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Return the active container. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_a132a4460fc7e05d24d56db87a72c0a88}\label{classmeta_1_1ContainerGroup_a132a4460fc7e05d24d56db87a72c0a88} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!current@{current}}
+\Hypertarget{classmeta_1_1ContainerGroup_a132a4460fc7e05d24d56db87a72c0a88}\index{meta::ContainerGroup@{meta::ContainerGroup}!current@{current}}
 \index{current@{current}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{current()}{current()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Container\+Group\+::current (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a132a4460fc7e05d24d56db87a72c0a88} 
+const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \& meta\+::\+Container\+Group\+::current (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Return the active container. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_afbdc01cf13a0cdc86738ea19e78d8d83}\label{classmeta_1_1ContainerGroup_afbdc01cf13a0cdc86738ea19e78d8d83} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!current\_container\_name@{current\_container\_name}}
+\Hypertarget{classmeta_1_1ContainerGroup_afbdc01cf13a0cdc86738ea19e78d8d83}\index{meta::ContainerGroup@{meta::ContainerGroup}!current\_container\_name@{current\_container\_name}}
 \index{current\_container\_name@{current\_container\_name}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{current\_container\_name()}{current\_container\_name()}}
-{\footnotesize\ttfamily std\+::optional$<$ std\+::string $>$ meta\+::\+Container\+Group\+::current\+\_\+container\+\_\+name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_afbdc01cf13a0cdc86738ea19e78d8d83} 
+std\+::optional$<$ std\+::string $>$ meta\+::\+Container\+Group\+::current\+\_\+container\+\_\+name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -270,11 +280,11 @@ Get the name of the active container.
 \begin{DoxyReturn}{Returns}
 The current container name if one is selected, otherwise std\+::nullopt. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_a6c33bb10ada1b36593d223b9eb81631a}\label{classmeta_1_1ContainerGroup_a6c33bb10ada1b36593d223b9eb81631a} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!erase@{erase}}
+\Hypertarget{classmeta_1_1ContainerGroup_a6c33bb10ada1b36593d223b9eb81631a}\index{meta::ContainerGroup@{meta::ContainerGroup}!erase@{erase}}
 \index{erase@{erase}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{erase()}{erase()}}
-{\footnotesize\ttfamily bool meta\+::\+Container\+Group\+::erase (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a6c33bb10ada1b36593d223b9eb81631a} 
+bool meta\+::\+Container\+Group\+::erase (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})}
 
 
 
@@ -283,11 +293,11 @@ Remove a container.
 \begin{DoxyReturn}{Returns}
 true if removed. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_aedffc128ac2ff1e15ae51be8668c1bf3}\label{classmeta_1_1ContainerGroup_aedffc128ac2ff1e15ae51be8668c1bf3} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!find@{find}}
+\Hypertarget{classmeta_1_1ContainerGroup_aedffc128ac2ff1e15ae51be8668c1bf3}\index{meta::ContainerGroup@{meta::ContainerGroup}!find@{find}}
 \index{find@{find}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \texorpdfstring{$\ast$}{*} meta\+::\+Container\+Group\+::find (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_aedffc128ac2ff1e15ae51be8668c1bf3} 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \texorpdfstring{$\ast$}{*} meta\+::\+Container\+Group\+::find (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})}
 
 
 
@@ -296,11 +306,11 @@ Find a container by key.
 \begin{DoxyReturn}{Returns}
 Pointer to container or nullptr. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_a044982d334e14c800ff69eff0428edcc}\label{classmeta_1_1ContainerGroup_a044982d334e14c800ff69eff0428edcc} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!find@{find}}
+\Hypertarget{classmeta_1_1ContainerGroup_a044982d334e14c800ff69eff0428edcc}\index{meta::ContainerGroup@{meta::ContainerGroup}!find@{find}}
 \index{find@{find}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{find()}{find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \texorpdfstring{$\ast$}{*} meta\+::\+Container\+Group\+::find (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a044982d334e14c800ff69eff0428edcc} 
+const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \texorpdfstring{$\ast$}{*} meta\+::\+Container\+Group\+::find (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -309,21 +319,21 @@ Find a container by key.
 \begin{DoxyReturn}{Returns}
 Pointer to container or nullptr. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_ab50ef7edf1436674c9b04efbd19dd023}\label{classmeta_1_1ContainerGroup_ab50ef7edf1436674c9b04efbd19dd023} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!insertion\_order@{insertion\_order}}
+\Hypertarget{classmeta_1_1ContainerGroup_ab50ef7edf1436674c9b04efbd19dd023}\index{meta::ContainerGroup@{meta::ContainerGroup}!insertion\_order@{insertion\_order}}
 \index{insertion\_order@{insertion\_order}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{insertion\_order()}{insertion\_order()}}
-{\footnotesize\ttfamily const std\+::vector$<$ std\+::string $>$ \& meta\+::\+Container\+Group\+::insertion\+\_\+order (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_ab50ef7edf1436674c9b04efbd19dd023} 
+const std\+::vector$<$ std\+::string $>$ \& meta\+::\+Container\+Group\+::insertion\+\_\+order (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Returns the container names in insertion order. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_afccb12ec965d859dd28ec1f68795c783}\label{classmeta_1_1ContainerGroup_afccb12ec965d859dd28ec1f68795c783} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!is\_shared@{is\_shared}}
+\Hypertarget{classmeta_1_1ContainerGroup_afccb12ec965d859dd28ec1f68795c783}\index{meta::ContainerGroup@{meta::ContainerGroup}!is\_shared@{is\_shared}}
 \index{is\_shared@{is\_shared}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{is\_shared()}{is\_shared()}}
-{\footnotesize\ttfamily bool meta\+::\+Container\+Group\+::is\+\_\+shared (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_afccb12ec965d859dd28ec1f68795c783} 
+bool meta\+::\+Container\+Group\+::is\+\_\+shared (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -337,11 +347,11 @@ Checks whether an attribute key is shared across at least two containers with ma
 \begin{DoxyReturn}{Returns}
 true if shared, false otherwise. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_aaa9a85ee02ea912f0d0e1edef4775ef2}\label{classmeta_1_1ContainerGroup_aaa9a85ee02ea912f0d0e1edef4775ef2} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!is\_synchronized@{is\_synchronized}}
+\Hypertarget{classmeta_1_1ContainerGroup_aaa9a85ee02ea912f0d0e1edef4775ef2}\index{meta::ContainerGroup@{meta::ContainerGroup}!is\_synchronized@{is\_synchronized}}
 \index{is\_synchronized@{is\_synchronized}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{is\_synchronized()}{is\_synchronized()}}
-{\footnotesize\ttfamily bool meta\+::\+Container\+Group\+::is\+\_\+synchronized (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_aaa9a85ee02ea912f0d0e1edef4775ef2} 
+bool meta\+::\+Container\+Group\+::is\+\_\+synchronized (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -355,11 +365,11 @@ Check whether an attribute is marked for synchronization.
 \begin{DoxyReturn}{Returns}
 true if synchronized. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9}\label{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_from@{json\_from}}
+\Hypertarget{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9}\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_from@{json\_from}}
 \index{json\_from@{json\_from}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a66ff54e1e6b75fd624fdad7e7bd2ade9} 
+void meta\+::\+Container\+Group\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j}{, }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -372,11 +382,11 @@ Deserializes the container group from JSON.
 {\em exclude\+\_\+snapshot\+\_\+manager} & Whether to exclude snapshot manager when deserializing individual containers. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c}\label{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_from@{json\_from}}
+\Hypertarget{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c}\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_from@{json\_from}}
 \index{json\_from@{json\_from}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j,  }\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}},  }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager = {\ttfamily true} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a07017cde81c9403a87f28afa3b4da18c} 
+void meta\+::\+Container\+Group\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j}{, }\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode}{ = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}}, }\item[{bool}]{exclude\+\_\+snapshot\+\_\+manager}{ = {\ttfamily true}}\end{DoxyParamCaption})}
 
 
 
@@ -391,11 +401,11 @@ Deserializes the container group from JSON.
 {\em exclude\+\_\+snapshot\+\_\+manager} & Whether to exclude snapshot manager when deserializing individual containers. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5}\label{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_to@{json\_to}}
+\Hypertarget{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5}\index{meta::ContainerGroup@{meta::ContainerGroup}!json\_to@{json\_to}}
 \index{json\_to@{json\_to}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Container\+Group\+::json\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}} }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a594a60bbe32c08c81508bdfbe1112bb5} 
+nlohmann\+::json meta\+::\+Container\+Group\+::json\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{Serialization\+Mode}}}]{mode}{ = {\ttfamily \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}{Serialization\+Mode\+::full}}}}\end{DoxyParamCaption}) const}
 
 
 
@@ -409,11 +419,11 @@ Serializes the container group to JSON.
 \begin{DoxyReturn}{Returns}
 JSON representation of the container group. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a}\label{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_current@{set\_current}}
+\Hypertarget{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a}\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_current@{set\_current}}
 \index{set\_current@{set\_current}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{set\_current()}{set\_current()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::set\+\_\+current (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a869e7c2de22d43cd0a9bf5f55c35229a} 
+void meta\+::\+Container\+Group\+::set\+\_\+current (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})}
 
 
 
@@ -424,11 +434,11 @@ Set the active container.
 {\em std\+::runtime\+\_\+error} & if the container does not exist. \\
 \hline
 \end{DoxyExceptions}
-\Hypertarget{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279}\label{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_current\_to\_first@{set\_current\_to\_first}}
+\Hypertarget{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279}\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_current\_to\_first@{set\_current\_to\_first}}
 \index{set\_current\_to\_first@{set\_current\_to\_first}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{set\_current\_to\_first()}{set\_current\_to\_first()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::set\+\_\+current\+\_\+to\+\_\+first (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a28ed2f86713d3ebdd57b469c47409279} 
+void meta\+::\+Container\+Group\+::set\+\_\+current\+\_\+to\+\_\+first (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
@@ -439,11 +449,11 @@ Set the active container to the first container in the list.
 {\em std\+::runtime\+\_\+error} & if there are no containers in the group. \\
 \hline
 \end{DoxyExceptions}
-\Hypertarget{classmeta_1_1ContainerGroup_accb8dc4d9bd477b415e5e71c563fd42f}\label{classmeta_1_1ContainerGroup_accb8dc4d9bd477b415e5e71c563fd42f} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_synchronized@{set\_synchronized}}
+\Hypertarget{classmeta_1_1ContainerGroup_accb8dc4d9bd477b415e5e71c563fd42f}\index{meta::ContainerGroup@{meta::ContainerGroup}!set\_synchronized@{set\_synchronized}}
 \index{set\_synchronized@{set\_synchronized}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{set\_synchronized()}{set\_synchronized()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::set\+\_\+synchronized (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{bool}]{synchronize = {\ttfamily true} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_accb8dc4d9bd477b415e5e71c563fd42f} 
+void meta\+::\+Container\+Group\+::set\+\_\+synchronized (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{bool}]{synchronize}{ = {\ttfamily true}}\end{DoxyParamCaption})}
 
 
 
@@ -458,11 +468,11 @@ When enabled, the attribute\textquotesingle{}s current value (from the active co
 {\em synchronize} & Whether to synchronize. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classmeta_1_1ContainerGroup_a89247e1e458ee41ece312baf05b42d03}\label{classmeta_1_1ContainerGroup_a89247e1e458ee41ece312baf05b42d03} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!shared\_attributes@{shared\_attributes}}
+\Hypertarget{classmeta_1_1ContainerGroup_a89247e1e458ee41ece312baf05b42d03}\index{meta::ContainerGroup@{meta::ContainerGroup}!shared\_attributes@{shared\_attributes}}
 \index{shared\_attributes@{shared\_attributes}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{shared\_attributes()}{shared\_attributes()}}
-{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ meta\+::\+Container\+Group\+::shared\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a89247e1e458ee41ece312baf05b42d03} 
+std\+::vector$<$ std\+::string $>$ meta\+::\+Container\+Group\+::shared\+\_\+attributes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -471,21 +481,21 @@ Detects attribute keys shared across at least two containers with matching types
 \begin{DoxyReturn}{Returns}
 Vector of shared attribute keys in insertion order. 
 \end{DoxyReturn}
-\Hypertarget{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9}\label{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!size@{size}}
+\Hypertarget{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9}\index{meta::ContainerGroup@{meta::ContainerGroup}!size@{size}}
 \index{size@{size}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{size()}{size()}}
-{\footnotesize\ttfamily size\+\_\+t meta\+::\+Container\+Group\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a9c03b68dbd3ad3bcdc4f6eaec65db3a9} 
+size\+\_\+t meta\+::\+Container\+Group\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
 Returns the number of groups. 
 
-\Hypertarget{classmeta_1_1ContainerGroup_a4dde409a177c45795bd880eefcf9379c}\label{classmeta_1_1ContainerGroup_a4dde409a177c45795bd880eefcf9379c} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!sync\_attribute@{sync\_attribute}}
+\Hypertarget{classmeta_1_1ContainerGroup_a4dde409a177c45795bd880eefcf9379c}\index{meta::ContainerGroup@{meta::ContainerGroup}!sync\_attribute@{sync\_attribute}}
 \index{sync\_attribute@{sync\_attribute}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{sync\_attribute()}{sync\_attribute()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::sync\+\_\+attribute (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a4dde409a177c45795bd880eefcf9379c} 
+void meta\+::\+Container\+Group\+::sync\+\_\+attribute (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})}
 
 
 
@@ -496,17 +506,17 @@ Manually propagate the value of an attribute from the active container (or first
 {\em key} & \doxylink{classmeta_1_1Attribute}{Attribute} identifier. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classmeta_1_1ContainerGroup_a2805b319223592a3e645b3503b3d8d95}\label{classmeta_1_1ContainerGroup_a2805b319223592a3e645b3503b3d8d95} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!sync\_attribute\_across\_containers@{sync\_attribute\_across\_containers}}
+\Hypertarget{classmeta_1_1ContainerGroup_a2805b319223592a3e645b3503b3d8d95}\index{meta::ContainerGroup@{meta::ContainerGroup}!sync\_attribute\_across\_containers@{sync\_attribute\_across\_containers}}
 \index{sync\_attribute\_across\_containers@{sync\_attribute\_across\_containers}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{sync\_attribute\_across\_containers()}{sync\_attribute\_across\_containers()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::sync\+\_\+attribute\+\_\+across\+\_\+containers (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key,  }\item[{\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a2805b319223592a3e645b3503b3d8d95} 
+void meta\+::\+Container\+Group\+::sync\+\_\+attribute\+\_\+across\+\_\+containers (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} \&}]{source}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_aee1b02d0ffda778717622c910e6344a8}\label{classmeta_1_1ContainerGroup_aee1b02d0ffda778717622c910e6344a8} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!synchronize\_all@{synchronize\_all}}
+\Hypertarget{classmeta_1_1ContainerGroup_aee1b02d0ffda778717622c910e6344a8}\index{meta::ContainerGroup@{meta::ContainerGroup}!synchronize\_all@{synchronize\_all}}
 \index{synchronize\_all@{synchronize\_all}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{synchronize\_all()}{synchronize\_all()}}
-{\footnotesize\ttfamily void meta\+::\+Container\+Group\+::synchronize\+\_\+all (\begin{DoxyParamCaption}\item[{bool}]{synchronize = {\ttfamily true} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_aee1b02d0ffda778717622c910e6344a8} 
+void meta\+::\+Container\+Group\+::synchronize\+\_\+all (\begin{DoxyParamCaption}\item[{bool}]{synchronize}{ = {\ttfamily true}}\end{DoxyParamCaption})}
 
 
 
@@ -517,11 +527,11 @@ Synchronizes all detected shared attributes across containers.
 {\em synchronize} & Whether to enable or disable synchronization for all. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classmeta_1_1ContainerGroup_a34a596c7759e9ec4ba1e7b3eb0b0dc25}\label{classmeta_1_1ContainerGroup_a34a596c7759e9ec4ba1e7b3eb0b0dc25} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!synchronized\_attributes@{synchronized\_attributes}}
+\Hypertarget{classmeta_1_1ContainerGroup_a34a596c7759e9ec4ba1e7b3eb0b0dc25}\index{meta::ContainerGroup@{meta::ContainerGroup}!synchronized\_attributes@{synchronized\_attributes}}
 \index{synchronized\_attributes@{synchronized\_attributes}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{synchronized\_attributes()}{synchronized\_attributes()}}
-{\footnotesize\ttfamily const std\+::unordered\+\_\+set$<$ std\+::string $>$ \& meta\+::\+Container\+Group\+::synchronized\+\_\+attributes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a34a596c7759e9ec4ba1e7b3eb0b0dc25} 
+const std\+::unordered\+\_\+set$<$ std\+::string $>$ \& meta\+::\+Container\+Group\+::synchronized\+\_\+attributes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -532,42 +542,44 @@ Constant reference to the set of synchronized attribute names.
 \end{DoxyReturn}
 
 
+\label{doc-variable-members}
+\Hypertarget{classmeta_1_1ContainerGroup_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classmeta_1_1ContainerGroup_a0f023afa246811dfe2d851a02ee720d2}\label{classmeta_1_1ContainerGroup_a0f023afa246811dfe2d851a02ee720d2} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!container\_connections\_@{container\_connections\_}}
+\Hypertarget{classmeta_1_1ContainerGroup_a0f023afa246811dfe2d851a02ee720d2}\index{meta::ContainerGroup@{meta::ContainerGroup}!container\_connections\_@{container\_connections\_}}
 \index{container\_connections\_@{container\_connections\_}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{container\_connections\_}{container\_connections\_}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::vector$<$\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}}$>$ $>$ meta\+::\+Container\+Group\+::container\+\_\+connections\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a0f023afa246811dfe2d851a02ee720d2} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::vector$<$\mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}}$>$ $>$ meta\+::\+Container\+Group\+::container\+\_\+connections\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb}\label{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!containers\_@{containers\_}}
+\Hypertarget{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb}\index{meta::ContainerGroup@{meta::ContainerGroup}!containers\_@{containers\_}}
 \index{containers\_@{containers\_}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{containers\_}{containers\_}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1ContainerGroup_ae6cc32c9c807cc51cce5209f82d3a042}{Container\+Map}} meta\+::\+Container\+Group\+::containers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_ae59f77d5182a0796a6f3e652fb0de9cb} 
+\mbox{\hyperlink{classmeta_1_1ContainerGroup_a562df2451c5132b41c279e99ba866fb6}{Container\+Map}} meta\+::\+Container\+Group\+::containers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_a8e98dc31a645f4f50a43d03c64c58f0b}\label{classmeta_1_1ContainerGroup_a8e98dc31a645f4f50a43d03c64c58f0b} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!current\_@{current\_}}
+\Hypertarget{classmeta_1_1ContainerGroup_a8e98dc31a645f4f50a43d03c64c58f0b}\index{meta::ContainerGroup@{meta::ContainerGroup}!current\_@{current\_}}
 \index{current\_@{current\_}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{current\_}{current\_}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}\texorpdfstring{$\ast$}{*} meta\+::\+Container\+Group\+::current\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a8e98dc31a645f4f50a43d03c64c58f0b} 
+\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}\texorpdfstring{$\ast$}{*} meta\+::\+Container\+Group\+::current\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6}\label{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!insertion\_order\_@{insertion\_order\_}}
+\Hypertarget{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6}\index{meta::ContainerGroup@{meta::ContainerGroup}!insertion\_order\_@{insertion\_order\_}}
 \index{insertion\_order\_@{insertion\_order\_}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{insertion\_order\_}{insertion\_order\_}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ meta\+::\+Container\+Group\+::insertion\+\_\+order\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a9fc3d761be570b229a6e6f7a3260eff6} 
+std\+::vector$<$std\+::string$>$ meta\+::\+Container\+Group\+::insertion\+\_\+order\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_a7fea8ff088c79310d06bdc5b5073939b}\label{classmeta_1_1ContainerGroup_a7fea8ff088c79310d06bdc5b5073939b} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!is\_synchronizing\_@{is\_synchronizing\_}}
+\Hypertarget{classmeta_1_1ContainerGroup_a7fea8ff088c79310d06bdc5b5073939b}\index{meta::ContainerGroup@{meta::ContainerGroup}!is\_synchronizing\_@{is\_synchronizing\_}}
 \index{is\_synchronizing\_@{is\_synchronizing\_}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{is\_synchronizing\_}{is\_synchronizing\_}}
-{\footnotesize\ttfamily bool meta\+::\+Container\+Group\+::is\+\_\+synchronizing\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a7fea8ff088c79310d06bdc5b5073939b} 
+bool meta\+::\+Container\+Group\+::is\+\_\+synchronizing\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
 
-\Hypertarget{classmeta_1_1ContainerGroup_a5a0c8f3654704317dcf3b64a1b5c7b16}\label{classmeta_1_1ContainerGroup_a5a0c8f3654704317dcf3b64a1b5c7b16} 
-\index{meta::ContainerGroup@{meta::ContainerGroup}!synchronized\_attributes\_@{synchronized\_attributes\_}}
+\Hypertarget{classmeta_1_1ContainerGroup_a5a0c8f3654704317dcf3b64a1b5c7b16}\index{meta::ContainerGroup@{meta::ContainerGroup}!synchronized\_attributes\_@{synchronized\_attributes\_}}
 \index{synchronized\_attributes\_@{synchronized\_attributes\_}!meta::ContainerGroup@{meta::ContainerGroup}}
 \doxysubsubsection{\texorpdfstring{synchronized\_attributes\_}{synchronized\_attributes\_}}
-{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$std\+::string$>$ meta\+::\+Container\+Group\+::synchronized\+\_\+attributes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ContainerGroup_a5a0c8f3654704317dcf3b64a1b5c7b16} 
+std\+::unordered\+\_\+set$<$std\+::string$>$ meta\+::\+Container\+Group\+::synchronized\+\_\+attributes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

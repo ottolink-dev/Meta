@@ -12,9 +12,9 @@ A structure representing an array with dimensions (shape) and flat data (vector)
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{void}} \mbox{\hyperlink{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b}{json\+\_\+from}} (nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{const}} \&\mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{json}})
+void \mbox{\hyperlink{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b}{json\+\_\+from}} (nlohmann\+::json const \&json)
 \begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON representation. \end{DoxyCompactList}\item 
-nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf}{json\+\_\+to}} () \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{const}}
+nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf}{json\+\_\+to}} () const
 \begin{DoxyCompactList}\small\item\em Serializes the object to a JSON representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -28,12 +28,14 @@ std\+::vector$<$ float $>$ \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d210
 \doxysubsection{Detailed Description}
 A structure representing an array with dimensions (shape) and flat data (vector). 
 
+\label{doc-func-members}
+\Hypertarget{structmeta_1_1Array_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b}\label{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b} 
-\index{meta::Array@{meta::Array}!json\_from@{json\_from}}
+\Hypertarget{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b}\index{meta::Array@{meta::Array}!json\_from@{json\_from}}
 \index{json\_from@{json\_from}!meta::Array@{meta::Array}}
 \doxysubsubsection{\texorpdfstring{json\_from()}{json\_from()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{void}} meta\+::\+Array\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{nlohmann\+::json \mbox{\hyperlink{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}{const}} \&}]{json }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{structmeta_1_1Array_a09b5f7b23a11632c75d2a2c0d8047c1b} 
+void meta\+::\+Array\+::json\+\_\+from (\begin{DoxyParamCaption}\item[{nlohmann\+::json const \&}]{json}{}\end{DoxyParamCaption})}
 
 
 
@@ -44,11 +46,11 @@ Deserializes the object from a JSON representation.
 {\em json} & Input JSON data used to restore the object state. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf}\label{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf} 
-\index{meta::Array@{meta::Array}!json\_to@{json\_to}}
+\Hypertarget{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf}\index{meta::Array@{meta::Array}!json\_to@{json\_to}}
 \index{json\_to@{json\_to}!meta::Array@{meta::Array}}
 \doxysubsubsection{\texorpdfstring{json\_to()}{json\_to()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::\+Array\+::json\+\_\+to (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily \label{structmeta_1_1Array_acaeb3ccd084f38e1e392bb777cffacdf} 
+nlohmann\+::json meta\+::\+Array\+::json\+\_\+to (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -59,22 +61,24 @@ nlohmann\+::json JSON object representing the current state.
 \end{DoxyReturn}
 
 
+\label{doc-variable-members}
+\Hypertarget{structmeta_1_1Array_doc-variable-members}
 \doxysubsection{Member Data Documentation}
-\Hypertarget{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3}\label{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3} 
-\index{meta::Array@{meta::Array}!shape@{shape}}
+\Hypertarget{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3}\index{meta::Array@{meta::Array}!shape@{shape}}
 \index{shape@{shape}!meta::Array@{meta::Array}}
 \doxysubsubsection{\texorpdfstring{shape}{shape}}
-{\footnotesize\ttfamily glm\+::ivec2 meta\+::\+Array\+::shape \{0, 0\}}
+{\footnotesize\ttfamily \label{structmeta_1_1Array_a0573856453ef70ebae39479d5920a4d3} 
+glm\+::ivec2 meta\+::\+Array\+::shape \{0, 0\}}
 
 
 
 \doxylink{structmeta_1_1Array}{Array} dimensions (e.\+g. width, height). 
 
-\Hypertarget{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}\label{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a} 
-\index{meta::Array@{meta::Array}!vector@{vector}}
+\Hypertarget{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a}\index{meta::Array@{meta::Array}!vector@{vector}}
 \index{vector@{vector}!meta::Array@{meta::Array}}
 \doxysubsubsection{\texorpdfstring{vector}{vector}}
-{\footnotesize\ttfamily std\+::vector$<$float$>$ meta\+::\+Array\+::vector}
+{\footnotesize\ttfamily \label{structmeta_1_1Array_afad0fa3a954d2101ba6644ab7914761a} 
+std\+::vector$<$float$>$ meta\+::\+Array\+::vector}
 
 
 

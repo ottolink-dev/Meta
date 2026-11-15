@@ -11,7 +11,7 @@ var searchData=
   ['locked_5fxy_8',['locked_xy',['../namespacemeta_1_1keys_1_1state.html#ae1f27191e1a668b2f8eb92ad6ad1377b',1,'meta::keys::state']]],
   ['log_9',['log',['../classmeta_1_1Logger.html#a1a17c53906d2694c2711f9772ed23c8f',1,'meta::Logger']]],
   ['log_5fscale_10',['log_scale',['../namespacemeta_1_1keys_1_1ui.html#a3ce5bb3ab0f3ff0d58ec6e2adee7c573',1,'meta::keys::ui']]],
-  ['logger_11',['logger',['../classmeta_1_1Logger.html',1,'meta::Logger'],['../classmeta_1_1Logger.html#a06c2fdf792a63812b3dee60cf74d6982',1,'meta::Logger::Logger(const Logger &amp;)=delete'],['../classmeta_1_1Logger.html#a2956a0a1184ca30178841c5d47ae513d',1,'meta::Logger::Logger()=default']]],
+  ['logger_11',['Logger',['../classmeta_1_1Logger.html',1,'meta::Logger'],['../classmeta_1_1Logger.html#a2956a0a1184ca30178841c5d47ae513d',1,'meta::Logger::Logger()=default'],['../classmeta_1_1Logger.html#a06c2fdf792a63812b3dee60cf74d6982',1,'meta::Logger::Logger(const Logger &amp;)=delete']]],
   ['logger_2ehpp_12',['logger.hpp',['../logger_8hpp.html',1,'']]],
   ['luminance_13',['Luminance',['../namespacemeta.html#ad3322e486b144bbdeb5e5e74056a51b4a280f73691109aeaa235ffddd2d154d9b',1,'meta']]]
 ];

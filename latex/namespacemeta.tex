@@ -12,63 +12,57 @@ namespace \mbox{\hyperlink{namespacemeta_1_1presets}{presets}}
 \item 
 class \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}}
 \begin{DoxyCompactList}\small\item\em Base class for all attribute types stored in the reflection system. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1Any}{Any}}
-\begin{DoxyCompactList}\small\item\em A type-\/erased container class inheriting from std\+::any. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1Array}{Array}}
-\begin{DoxyCompactList}\small\item\em A structure representing an array with dimensions (shape) and flat data (vector). \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1Attribute}{Attribute}}
 \begin{DoxyCompactList}\small\item\em Typed runtime attribute with reflection support. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}}
 \begin{DoxyCompactList}\small\item\em Container of named runtime attributes. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1AttributeFactory}{Attribute\+Factory}}
-\begin{DoxyCompactList}\small\item\em Factory for runtime creation of attributes by type name. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1AttributeTraits}{Attribute\+Traits}}
-\begin{DoxyCompactList}\small\item\em Default traits for attribute value conversion. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1AttributeTraits_3_01DataProvider_01_4}{Attribute\+Traits$<$ Data\+Provider $>$}}
-\begin{DoxyCompactList}\small\item\em No-\/op traits\+: a Data\+Provider carries runtime state that must not be serialized. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1ColorGradient}{Color\+Gradient}}
-\begin{DoxyCompactList}\small\item\em Editable color gradient. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1CommandGroup}{Command\+Group}}
-\begin{DoxyCompactList}\small\item\em Command that groups multiple commands into a single undo/redo step. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1CommandStack}{Command\+Stack}}
-\begin{DoxyCompactList}\small\item\em Simple undo/redo stack based on \doxylink{classmeta_1_1ICommand}{ICommand}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1ContainerGroup}{Container\+Group}}
 \begin{DoxyCompactList}\small\item\em Collection of named attribute containers. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1Event}{Event}}
-\begin{DoxyCompactList}\small\item\em Thread-\/unsafe publisher-\/subscriber event stream. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1Any}{Any}}
+\begin{DoxyCompactList}\small\item\em A type-\/erased container class inheriting from std\+::any. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1AttributeTraits_3_01DataProvider_01_4}{Attribute\+Traits$<$ Data\+Provider $>$}}
+\begin{DoxyCompactList}\small\item\em No-\/op traits\+: a \doxylink{namespacemeta_a7569e04c74055f2d0aac32eb390abc6f}{Data\+Provider} carries runtime state that must not be serialized. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01meta_1_1DataProvider_01_4}{Type\+Name$<$ meta\+::\+Data\+Provider $>$}}
+\item 
 class \mbox{\hyperlink{classmeta_1_1EventConnection}{Event\+Connection}}
 \begin{DoxyCompactList}\small\item\em Manages the lifetime of a subscription to an \doxylink{classmeta_1_1Event}{Event}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1Event}{Event}}
+\begin{DoxyCompactList}\small\item\em Thread-\/unsafe publisher-\/subscriber event stream. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1MetaObject}{Meta\+Object}}
+\begin{DoxyCompactList}\small\item\em Base class enabling runtime metadata attachment. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1Array}{Array}}
+\begin{DoxyCompactList}\small\item\em A structure representing an array with dimensions (shape) and flat data (vector). \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1Stop}{Stop}}
+\begin{DoxyCompactList}\small\item\em A color stop in a gradient. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1Preset}{Preset}}
+\begin{DoxyCompactList}\small\item\em A named color gradient preset. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1ColorGradient}{Color\+Gradient}}
+\begin{DoxyCompactList}\small\item\em Editable color gradient. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1GradientPresets}{Gradient\+Presets}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structmeta_1_1Preset}{Preset} library for a gradient attribute, installed by the host into attribute metadata under \doxylink{namespacemeta_1_1keys_1_1ui_aa10c249df5f6548c5ee851d7d010eeb8}{keys\+::ui\+::presets}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structmeta_1_1GradientImportReport}{Gradient\+Import\+Report}}
 \begin{DoxyCompactList}\small\item\em Outcome of \doxylink{classmeta_1_1GradientLibrary_ae28b9e75467380fba76b97e9934dd018}{Gradient\+Library\+::import\+\_\+file()}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1GradientLibrary}{Gradient\+Library}}
 \begin{DoxyCompactList}\small\item\em The user\textquotesingle{}s gradient presets, shared by every gradient widget in the process and persisted across projects. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1GradientPresets}{Gradient\+Presets}}
-\begin{DoxyCompactList}\small\item\em \doxylink{structmeta_1_1Preset}{Preset} library for a gradient attribute, installed by the host into attribute metadata under \doxylink{namespacemeta_1_1keys_1_1ui_aa10c249df5f6548c5ee851d7d010eeb8}{keys\+::ui\+::presets}. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}
-\begin{DoxyCompactList}\small\item\em Abstract interface for reversible operations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1Logger}{Logger}}
 \item 
-class \mbox{\hyperlink{classmeta_1_1MetaObject}{Meta\+Object}}
-\begin{DoxyCompactList}\small\item\em Base class enabling runtime metadata attachment. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1Preset}{Preset}}
-\begin{DoxyCompactList}\small\item\em A named color gradient preset. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classmeta_1_1SetAttributeCommand}{Set\+Attribute\+Command}}
-\item 
+class \mbox{\hyperlink{classmeta_1_1AttributeFactory}{Attribute\+Factory}}
+\begin{DoxyCompactList}\small\item\em Factory for runtime creation of attributes by type name. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classmeta_1_1SnapshotManager}{Snapshot\+Manager}}
 \item 
-struct \mbox{\hyperlink{structmeta_1_1Stop}{Stop}}
-\begin{DoxyCompactList}\small\item\em A color stop in a gradient. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmeta_1_1AttributeTraits}{Attribute\+Traits}}
+\begin{DoxyCompactList}\small\item\em Default traits for attribute value conversion. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName}{Type\+Name}}
 \begin{DoxyCompactList}\small\item\em Primary \doxylink{structmeta_1_1TypeName}{Type\+Name} template (unspecialized). \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01bool_01_4}{Type\+Name$<$ bool $>$}}
+struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01float_01_4}{Type\+Name$<$ float $>$}}
 \item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01double_01_4}{Type\+Name$<$ double $>$}}
 \item 
-struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01float_01_4}{Type\+Name$<$ float $>$}}
-\item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01int_01_4}{Type\+Name$<$ int $>$}}
 \item 
-struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01meta_1_1DataProvider_01_4}{Type\+Name$<$ meta\+::\+Data\+Provider $>$}}
+struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01bool_01_4}{Type\+Name$<$ bool $>$}}
+\item 
+struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint8__t_01_4}{Type\+Name$<$ uint8\+\_\+t $>$}}
 \item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint16__t_01_4}{Type\+Name$<$ uint16\+\_\+t $>$}}
 \item 
@@ -76,7 +70,13 @@ struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint32__t_01_4}{Type\+Name$<$
 \item 
 struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint64__t_01_4}{Type\+Name$<$ uint64\+\_\+t $>$}}
 \item 
-struct \mbox{\hyperlink{structmeta_1_1TypeName_3_01uint8__t_01_4}{Type\+Name$<$ uint8\+\_\+t $>$}}
+class \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}}
+\begin{DoxyCompactList}\small\item\em Abstract interface for reversible operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1CommandGroup}{Command\+Group}}
+\begin{DoxyCompactList}\small\item\em Command that groups multiple commands into a single undo/redo step. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1CommandStack}{Command\+Stack}}
+\begin{DoxyCompactList}\small\item\em Simple undo/redo stack based on \doxylink{classmeta_1_1ICommand}{ICommand}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classmeta_1_1SetAttributeCommand}{Set\+Attribute\+Command}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Concepts}
 \begin{DoxyCompactItemize}
@@ -86,13 +86,13 @@ concept \mbox{\hyperlink{conceptmeta_1_1StringLike}{String\+Like}}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-using \mbox{\hyperlink{namespacemeta_a7aa591df94fd2685bcb8e24adcdf9fda}{Attr\+Container\+Type}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}} $>$ $>$
+using \mbox{\hyperlink{namespacemeta_a93dcdb3ae2203876460f0c5b36978de3}{Attr\+Container\+Type}}
 \begin{DoxyCompactList}\small\item\em Internal storage type for attributes. \end{DoxyCompactList}\item 
-using \mbox{\hyperlink{namespacemeta_a041b3b46016d4565e45294279f021fa4}{Attr\+Iterator}} = Attr\+Container\+Type\+::iterator
+using \mbox{\hyperlink{namespacemeta_ac92a0f6790547b1ef4009c9ec6414f4b}{Attr\+Iterator}} = Attr\+Container\+Type\+::iterator
 \begin{DoxyCompactList}\small\item\em Mutable iterator over attributes. \end{DoxyCompactList}\item 
-using \mbox{\hyperlink{namespacemeta_a3819cf59692150303d5cd95dc4bd2979}{Const\+Attr\+Iterator}} = Attr\+Container\+Type\+::const\+\_\+iterator
+using \mbox{\hyperlink{namespacemeta_aa5761fb9e25ecbac8312d5174a179ad6}{Const\+Attr\+Iterator}} = Attr\+Container\+Type\+::const\+\_\+iterator
 \begin{DoxyCompactList}\small\item\em Const iterator over attributes. \end{DoxyCompactList}\item 
-using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{Data\+Provider}} = std\+::function$<$ \mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$
+using \mbox{\hyperlink{namespacemeta_a7569e04c74055f2d0aac32eb390abc6f}{Data\+Provider}} = std\+::function$<$\mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$
 \begin{DoxyCompactList}\small\item\em Host-\/supplied callback returning fresh display data on each call. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -122,7 +122,7 @@ std\+::string\+\_\+view \mbox{\hyperlink{namespacemeta_a62297b238ad02529168333fe
 \begin{DoxyCompactList}\small\item\em Persisted identifier of a sort key ("{}default"{}, "{}name"{}, "{}luminance"{}, "{}hue"{}). \end{DoxyCompactList}\item 
 std\+::optional$<$ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} $>$ \mbox{\hyperlink{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5}{gradient\+\_\+sort\+\_\+from\+\_\+string}} (std\+::string\+\_\+view text)
 \begin{DoxyCompactList}\small\item\em Inverse of \doxylink{namespacemeta_a62297b238ad02529168333feb2633f46}{to\+\_\+string(\+Gradient\+Sort)}; std\+::nullopt for unknown identifiers. \end{DoxyCompactList}\item 
-nlohmann\+::json \mbox{\hyperlink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\+\_\+file\+\_\+json}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&presets)
+nlohmann\+::json \mbox{\hyperlink{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}{gradient\+\_\+file\+\_\+json}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&\mbox{\hyperlink{namespacemeta_1_1presets}{presets}})
 \begin{DoxyCompactList}\small\item\em Gradient file document ("{}meta.\+gradients"{}, version 1) for a list of presets\+: \end{DoxyCompactList}\item 
 std\+::optional$<$ std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ $>$ \mbox{\hyperlink{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1}{parse\+\_\+gradient\+\_\+file}} (const nlohmann\+::json \&json, std\+::string\+\_\+view fallback\+\_\+name="{}Gradient"{})
 \begin{DoxyCompactList}\small\item\em Tolerant reader for gradient files. \end{DoxyCompactList}\item 
@@ -132,53 +132,61 @@ float \mbox{\hyperlink{namespacemeta_aaccf36f99bf4a4400c41184836650239}{gradient
 \begin{DoxyCompactList}\small\item\em Mean Rec.\+709 luma of the gradient in \mbox{[}0, 1\mbox{]}. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af}{gradient\+\_\+hue}} (const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&stops, int samples=32)
 \begin{DoxyCompactList}\small\item\em Dominant hue of the gradient in degrees \mbox{[}0, 360). \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacemeta_a37f460e894944044779e1ee21eca8881}{register\+\_\+attribute\+\_\+type}} (const std\+::string \&name)
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{namespacemeta_a37f460e894944044779e1ee21eca8881}{register\+\_\+attribute\+\_\+type}} (const std\+::string \&name)
 \begin{DoxyCompactList}\small\item\em Register a concrete attribute type in the factory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3}{register\+\_\+builtin\+\_\+types}} ()
 \begin{DoxyCompactList}\small\item\em Register all built-\/in attribute types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T $>$ }\\constexpr bool \mbox{\hyperlink{namespacemeta_a75366aee356107c1efb503fd31f08fd1}{has\+\_\+type\+\_\+name\+\_\+v}} = requires \{ \mbox{\hyperlink{structmeta_1_1TypeName}{Type\+Name}}$<$T$>$\+::name; \}
+{\footnotesize template$<$typename T$>$ }\\constexpr bool \mbox{\hyperlink{namespacemeta_a75366aee356107c1efb503fd31f08fd1}{has\+\_\+type\+\_\+name\+\_\+v}} = requires \{ \mbox{\hyperlink{structmeta_1_1TypeName}{Type\+Name}}$<$T$>$\+::name; \}
 \begin{DoxyCompactList}\small\item\em Compile-\/time check for valid \doxylink{structmeta_1_1TypeName}{Type\+Name} specialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-typedef-members}
+\Hypertarget{namespacemeta_doc-typedef-members}
 \doxysubsection{Typedef Documentation}
-\Hypertarget{namespacemeta_a7aa591df94fd2685bcb8e24adcdf9fda}\label{namespacemeta_a7aa591df94fd2685bcb8e24adcdf9fda} 
-\index{meta@{meta}!AttrContainerType@{AttrContainerType}}
+\Hypertarget{namespacemeta_a93dcdb3ae2203876460f0c5b36978de3}\index{meta@{meta}!AttrContainerType@{AttrContainerType}}
 \index{AttrContainerType@{AttrContainerType}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{AttrContainerType}{AttrContainerType}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{namespacemeta_a7aa591df94fd2685bcb8e24adcdf9fda}{meta\+::\+Attr\+Container\+Type}} = typedef std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classmeta_1_1AbstractAttribute}{Abstract\+Attribute}}$>$ $>$}
+{\footnotesize\ttfamily \label{namespacemeta_a93dcdb3ae2203876460f0c5b36978de3} 
+using \mbox{\hyperlink{namespacemeta_a93dcdb3ae2203876460f0c5b36978de3}{meta\+::\+Attr\+Container\+Type}}}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ std::unordered\_map<std::string,\ std::unique\_ptr<AbstractAttribute>>}
+
+\end{DoxyCode}
 
 
 Internal storage type for attributes. 
 
-Maps attribute names to polymorphic attribute instances. \Hypertarget{namespacemeta_a041b3b46016d4565e45294279f021fa4}\label{namespacemeta_a041b3b46016d4565e45294279f021fa4} 
-\index{meta@{meta}!AttrIterator@{AttrIterator}}
+Maps attribute names to polymorphic attribute instances. \Hypertarget{namespacemeta_ac92a0f6790547b1ef4009c9ec6414f4b}\index{meta@{meta}!AttrIterator@{AttrIterator}}
 \index{AttrIterator@{AttrIterator}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{AttrIterator}{AttrIterator}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{namespacemeta_a041b3b46016d4565e45294279f021fa4}{meta\+::\+Attr\+Iterator}} = typedef Attr\+Container\+Type\+::iterator}
+{\footnotesize\ttfamily \label{namespacemeta_ac92a0f6790547b1ef4009c9ec6414f4b} 
+using \mbox{\hyperlink{namespacemeta_ac92a0f6790547b1ef4009c9ec6414f4b}{meta\+::\+Attr\+Iterator}} = Attr\+Container\+Type\+::iterator}
 
 
 
 Mutable iterator over attributes. 
 
-\Hypertarget{namespacemeta_a3819cf59692150303d5cd95dc4bd2979}\label{namespacemeta_a3819cf59692150303d5cd95dc4bd2979} 
-\index{meta@{meta}!ConstAttrIterator@{ConstAttrIterator}}
+\Hypertarget{namespacemeta_aa5761fb9e25ecbac8312d5174a179ad6}\index{meta@{meta}!ConstAttrIterator@{ConstAttrIterator}}
 \index{ConstAttrIterator@{ConstAttrIterator}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{ConstAttrIterator}{ConstAttrIterator}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{namespacemeta_a3819cf59692150303d5cd95dc4bd2979}{meta\+::\+Const\+Attr\+Iterator}} = typedef Attr\+Container\+Type\+::const\+\_\+iterator}
+{\footnotesize\ttfamily \label{namespacemeta_aa5761fb9e25ecbac8312d5174a179ad6} 
+using \mbox{\hyperlink{namespacemeta_aa5761fb9e25ecbac8312d5174a179ad6}{meta\+::\+Const\+Attr\+Iterator}} = Attr\+Container\+Type\+::const\+\_\+iterator}
 
 
 
 Const iterator over attributes. 
 
-\Hypertarget{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}\label{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423} 
-\index{meta@{meta}!DataProvider@{DataProvider}}
+\Hypertarget{namespacemeta_a7569e04c74055f2d0aac32eb390abc6f}\index{meta@{meta}!DataProvider@{DataProvider}}
 \index{DataProvider@{DataProvider}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{DataProvider}{DataProvider}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{namespacemeta_afd4af6ca658fc67dcb0d6c5545d15423}{meta\+::\+Data\+Provider}} = typedef std\+::function$<$\mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$}
+{\footnotesize\ttfamily \label{namespacemeta_a7569e04c74055f2d0aac32eb390abc6f} 
+using \mbox{\hyperlink{namespacemeta_a7569e04c74055f2d0aac32eb390abc6f}{meta\+::\+Data\+Provider}} = std\+::function$<$\mbox{\hyperlink{structmeta_1_1Any}{Any}}()$>$}
 
 
 
@@ -186,18 +194,20 @@ Host-\/supplied callback returning fresh display data on each call.
 
 Non-\/serializable. 
 
+\label{doc-enum-members}
+\Hypertarget{namespacemeta_doc-enum-members}
 \doxysubsection{Enumeration Type Documentation}
-\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4} 
-\index{meta@{meta}!GradientSort@{GradientSort}}
+\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}\index{meta@{meta}!GradientSort@{GradientSort}}
 \index{GradientSort@{GradientSort}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{GradientSort}{GradientSort}}
-{\footnotesize\ttfamily enum class \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{meta\+::\+Gradient\+Sort}}\hspace{0.3cm}{\ttfamily [strong]}}
+{\footnotesize\ttfamily \label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4} 
+enum class \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{meta\+::\+Gradient\+Sort}}\hspace{0.3cm}{\ttfamily [strong]}}
 
 
 
 Ordering applied to preset grids. Favourites are always pinned first. 
 
-\begin{DoxyEnumFields}{Enumerator}
+\begin{DoxyEnumFields}[2]{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{Default@{Default}!meta@{meta}}\index{meta@{meta}!Default@{Default}}}\Hypertarget{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67}\label{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4a7a1920d61156abc05a60135aefe8bc67} 
 Default&host order, then library insertion order \\
 \hline
@@ -215,17 +225,17 @@ Hue&around the colour wheel, achromatic last (gradient\+\_\+hue) \\
 \hline
 
 \end{DoxyEnumFields}
-\Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}\label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901} 
-\index{meta@{meta}!SerializationMode@{SerializationMode}}
+\Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}\index{meta@{meta}!SerializationMode@{SerializationMode}}
 \index{SerializationMode@{SerializationMode}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{SerializationMode}{SerializationMode}}
-{\footnotesize\ttfamily enum class \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{meta\+::\+Serialization\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+{\footnotesize\ttfamily \label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901} 
+enum class \mbox{\hyperlink{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901}{meta\+::\+Serialization\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
 
 
 
 Controls the scope and behavior of attribute serialization. 
 
-\begin{DoxyEnumFields}{Enumerator}
+\begin{DoxyEnumFields}[2]{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{full@{full}!meta@{meta}}\index{meta@{meta}!full@{full}}}\Hypertarget{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0}\label{namespacemeta_a51c4cfffa1e177f08174aced5ccc8901ae9dc924f238fa6cc29465942875fe8f0} 
 full&Full serialization\+: types, values, metadata, and state (default). \\
 \hline
@@ -237,32 +247,34 @@ state&State-\/only serialization\+: only values and state container, no metadata
 \end{DoxyEnumFields}
 
 
+\label{doc-func-members}
+\Hypertarget{namespacemeta_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{namespacemeta_a1ec007edebf611446a66ccb33aff0311}\label{namespacemeta_a1ec007edebf611446a66ccb33aff0311} 
-\index{meta@{meta}!deserialize\_metadata@{deserialize\_metadata}}
+\Hypertarget{namespacemeta_a1ec007edebf611446a66ccb33aff0311}\index{meta@{meta}!deserialize\_metadata@{deserialize\_metadata}}
 \index{deserialize\_metadata@{deserialize\_metadata}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{deserialize\_metadata()}{deserialize\_metadata()}}
-{\footnotesize\ttfamily void meta\+::deserialize\+\_\+metadata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{m,  }\item[{const nlohmann\+::json \&}]{j }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_a1ec007edebf611446a66ccb33aff0311} 
+void meta\+::deserialize\+\_\+metadata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{m}{, }\item[{const nlohmann\+::json \&}]{j}{}\end{DoxyParamCaption})}
 
 
 
 Deserialize attribute metadata from JSON. 
 
-Deserialize metadata container from JSON. \Hypertarget{namespacemeta_a86700a5afa8d165942a704ecd155cbff}\label{namespacemeta_a86700a5afa8d165942a704ecd155cbff} 
-\index{meta@{meta}!deserialize\_state@{deserialize\_state}}
+Deserialize metadata container from JSON. \Hypertarget{namespacemeta_a86700a5afa8d165942a704ecd155cbff}\index{meta@{meta}!deserialize\_state@{deserialize\_state}}
 \index{deserialize\_state@{deserialize\_state}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{deserialize\_state()}{deserialize\_state()}}
-{\footnotesize\ttfamily void meta\+::deserialize\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{s,  }\item[{const nlohmann\+::json \&}]{j }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_a86700a5afa8d165942a704ecd155cbff} 
+void meta\+::deserialize\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{s}{, }\item[{const nlohmann\+::json \&}]{j}{}\end{DoxyParamCaption})}
 
 
 
 Deserialize attribute state from JSON. 
 
-Deserialize state container from JSON. \Hypertarget{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}\label{namespacemeta_ac78753c79f3410338cdb05e143eb5a36} 
-\index{meta@{meta}!gradient\_file\_json@{gradient\_file\_json}}
+Deserialize state container from JSON. \Hypertarget{namespacemeta_ac78753c79f3410338cdb05e143eb5a36}\index{meta@{meta}!gradient\_file\_json@{gradient\_file\_json}}
 \index{gradient\_file\_json@{gradient\_file\_json}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{gradient\_file\_json()}{gradient\_file\_json()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::gradient\+\_\+file\+\_\+json (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&}]{presets }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_ac78753c79f3410338cdb05e143eb5a36} 
+nlohmann\+::json meta\+::gradient\+\_\+file\+\_\+json (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ \&}]{presets}{}\end{DoxyParamCaption})}
 
 
 
@@ -275,41 +287,41 @@ Gradient file document ("{}meta.\+gradients"{}, version 1) for a list of presets
 \DoxyCodeLine{[r,g,b,a]\}]\}]\}}
 
 \end{DoxyCode}
- \Hypertarget{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af}\label{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af} 
-\index{meta@{meta}!gradient\_hue@{gradient\_hue}}
+ \Hypertarget{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af}\index{meta@{meta}!gradient\_hue@{gradient\_hue}}
 \index{gradient\_hue@{gradient\_hue}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{gradient\_hue()}{gradient\_hue()}}
-{\footnotesize\ttfamily float meta\+::gradient\+\_\+hue (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops,  }\item[{int}]{samples = {\ttfamily 32} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_a6b638ae2d2a2133e82d95229e0be47af} 
+float meta\+::gradient\+\_\+hue (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops}{, }\item[{int}]{samples}{ = {\ttfamily 32}}\end{DoxyParamCaption})}
 
 
 
 Dominant hue of the gradient in degrees \mbox{[}0, 360). 
 
-Saturation-\/weighted circular mean of the HSV hue over {\ttfamily samples} evenly spaced samples. Returns -\/1 when the gradient is achromatic (total saturation weight below 1e-\/4), so hue-\/sorted lists can push greys last. \Hypertarget{namespacemeta_aaccf36f99bf4a4400c41184836650239}\label{namespacemeta_aaccf36f99bf4a4400c41184836650239} 
-\index{meta@{meta}!gradient\_luminance@{gradient\_luminance}}
+Saturation-\/weighted circular mean of the HSV hue over {\ttfamily samples} evenly spaced samples. Returns -\/1 when the gradient is achromatic (total saturation weight below 1e-\/4), so hue-\/sorted lists can push greys last. \Hypertarget{namespacemeta_aaccf36f99bf4a4400c41184836650239}\index{meta@{meta}!gradient\_luminance@{gradient\_luminance}}
 \index{gradient\_luminance@{gradient\_luminance}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{gradient\_luminance()}{gradient\_luminance()}}
-{\footnotesize\ttfamily float meta\+::gradient\+\_\+luminance (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops,  }\item[{int}]{samples = {\ttfamily 32} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_aaccf36f99bf4a4400c41184836650239} 
+float meta\+::gradient\+\_\+luminance (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops}{, }\item[{int}]{samples}{ = {\ttfamily 32}}\end{DoxyParamCaption})}
 
 
 
 Mean Rec.\+709 luma of the gradient in \mbox{[}0, 1\mbox{]}. 
 
-Averages {\ttfamily samples} evenly spaced samples of {\ttfamily 0.\+2126 R + 0.\+7152 G + 0.\+0722 B} on the stored (s\+RGB-\/encoded) components; alpha is ignored. Used for the "{}\+Luminance"{} sort of preset grids. \Hypertarget{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5}\label{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5} 
-\index{meta@{meta}!gradient\_sort\_from\_string@{gradient\_sort\_from\_string}}
+Averages {\ttfamily samples} evenly spaced samples of {\ttfamily 0.\+2126 R + 0.\+7152 G + 0.\+0722 B} on the stored (s\+RGB-\/encoded) components; alpha is ignored. Used for the "{}\+Luminance"{} sort of preset grids. \Hypertarget{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5}\index{meta@{meta}!gradient\_sort\_from\_string@{gradient\_sort\_from\_string}}
 \index{gradient\_sort\_from\_string@{gradient\_sort\_from\_string}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{gradient\_sort\_from\_string()}{gradient\_sort\_from\_string()}}
-{\footnotesize\ttfamily std\+::optional$<$ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} $>$ meta\+::gradient\+\_\+sort\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{text }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_ad76f6cbce9bf6385439eadc80b20e7c5} 
+std\+::optional$<$ \mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}} $>$ meta\+::gradient\+\_\+sort\+\_\+from\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{text}{}\end{DoxyParamCaption})}
 
 
 
 Inverse of \doxylink{namespacemeta_a62297b238ad02529168333feb2633f46}{to\+\_\+string(\+Gradient\+Sort)}; std\+::nullopt for unknown identifiers. 
 
-\Hypertarget{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1}\label{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1} 
-\index{meta@{meta}!parse\_gradient\_file@{parse\_gradient\_file}}
+\Hypertarget{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1}\index{meta@{meta}!parse\_gradient\_file@{parse\_gradient\_file}}
 \index{parse\_gradient\_file@{parse\_gradient\_file}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{parse\_gradient\_file()}{parse\_gradient\_file()}}
-{\footnotesize\ttfamily std\+::optional$<$ std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ $>$ meta\+::parse\+\_\+gradient\+\_\+file (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json,  }\item[{std\+::string\+\_\+view}]{fallback\+\_\+name = {\ttfamily "{}Gradient"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_af66b49cc676a33f4dc1aa12400c174b1} 
+std\+::optional$<$ std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Preset}{Preset}} $>$ $>$ meta\+::parse\+\_\+gradient\+\_\+file (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{, }\item[{std\+::string\+\_\+view}]{fallback\+\_\+name}{ = {\ttfamily "{}Gradient"{}}}\end{DoxyParamCaption})}
 
 
 
@@ -320,12 +332,12 @@ Accepts the document produced by \doxylink{namespacemeta_ac78753c79f3410338cdb05
 \begin{DoxyReturn}{Returns}
 The parsed presets, or std\+::nullopt when nothing usable was found. 
 \end{DoxyReturn}
-\Hypertarget{namespacemeta_a37f460e894944044779e1ee21eca8881}\label{namespacemeta_a37f460e894944044779e1ee21eca8881} 
-\index{meta@{meta}!register\_attribute\_type@{register\_attribute\_type}}
+\Hypertarget{namespacemeta_a37f460e894944044779e1ee21eca8881}\index{meta@{meta}!register\_attribute\_type@{register\_attribute\_type}}
 \index{register\_attribute\_type@{register\_attribute\_type}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{register\_attribute\_type()}{register\_attribute\_type()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-void meta\+::register\+\_\+attribute\+\_\+type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_a37f460e894944044779e1ee21eca8881} 
+template$<$typename T$>$ \\
+void meta\+::register\+\_\+attribute\+\_\+type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
 
 
 
@@ -341,51 +353,51 @@ Register a concrete attribute type in the factory.
 {\em name} & Type identifier used in JSON serialization. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3}\label{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3} 
-\index{meta@{meta}!register\_builtin\_types@{register\_builtin\_types}}
+\Hypertarget{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3}\index{meta@{meta}!register\_builtin\_types@{register\_builtin\_types}}
 \index{register\_builtin\_types@{register\_builtin\_types}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{register\_builtin\_types()}{register\_builtin\_types()}}
-{\footnotesize\ttfamily void meta\+::register\+\_\+builtin\+\_\+types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_aa568359dcd9dfc14b28fdd87e4a06dd3} 
+void meta\+::register\+\_\+builtin\+\_\+types (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Register all built-\/in attribute types. 
 
-Invoked automatically on first use of \doxylink{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}{Attribute\+Factory\+::create()}; hosts do not need to call it. Calling it manually remains safe. \Hypertarget{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27}\label{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27} 
-\index{meta@{meta}!sample\_gradient@{sample\_gradient}}
+Invoked automatically on first use of \doxylink{classmeta_1_1AttributeFactory_ad0cf99a93945ab0e5f1345d0dae45b05}{Attribute\+Factory\+::create()}; hosts do not need to call it. Calling it manually remains safe. \Hypertarget{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27}\index{meta@{meta}!sample\_gradient@{sample\_gradient}}
 \index{sample\_gradient@{sample\_gradient}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{sample\_gradient()}{sample\_gradient()}}
-{\footnotesize\ttfamily std\+::array$<$ float, 4 $>$ meta\+::sample\+\_\+gradient (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops,  }\item[{float}]{t }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_ac923af7be2d00f1e3f6eb80e730ddd27} 
+std\+::array$<$ float, 4 $>$ meta\+::sample\+\_\+gradient (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structmeta_1_1Stop}{Stop}} $>$ \&}]{stops}{, }\item[{float}]{t}{}\end{DoxyParamCaption})}
 
 
 
 Colour of a gradient at position {\ttfamily t}. 
 
-Linear interpolation between the two stops bracketing {\ttfamily t} (clamped to \mbox{[}0, 1\mbox{]}); positions outside the stop range hold the end colours. Stops need not be sorted. An empty gradient samples as opaque black. \Hypertarget{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}\label{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128} 
-\index{meta@{meta}!serialize\_metadata@{serialize\_metadata}}
+Linear interpolation between the two stops bracketing {\ttfamily t} (clamped to \mbox{[}0, 1\mbox{]}); positions outside the stop range hold the end colours. Stops need not be sorted. An empty gradient samples as opaque black. \Hypertarget{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128}\index{meta@{meta}!serialize\_metadata@{serialize\_metadata}}
 \index{serialize\_metadata@{serialize\_metadata}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{serialize\_metadata()}{serialize\_metadata()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::serialize\+\_\+metadata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{m }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_a7bc00a3e6c82bebf50d9bd6b724d8128} 
+nlohmann\+::json meta\+::serialize\+\_\+metadata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{m}{}\end{DoxyParamCaption})}
 
 
 
 Serialize attribute metadata to JSON. 
 
-Serialize metadata container to JSON. \Hypertarget{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}\label{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e} 
-\index{meta@{meta}!serialize\_state@{serialize\_state}}
+Serialize metadata container to JSON. \Hypertarget{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e}\index{meta@{meta}!serialize\_state@{serialize\_state}}
 \index{serialize\_state@{serialize\_state}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{serialize\_state()}{serialize\_state()}}
-{\footnotesize\ttfamily nlohmann\+::json meta\+::serialize\+\_\+state (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{s }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_aae9e5a9de8bd2327d4d016478a582d0e} 
+nlohmann\+::json meta\+::serialize\+\_\+state (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1AttributeContainer}{Attribute\+Container}} \&}]{s}{}\end{DoxyParamCaption})}
 
 
 
 Serialize attribute state to JSON. 
 
-Serialize state container to JSON. \Hypertarget{namespacemeta_a62297b238ad02529168333feb2633f46}\label{namespacemeta_a62297b238ad02529168333feb2633f46} 
-\index{meta@{meta}!to\_string@{to\_string}}
+Serialize state container to JSON. \Hypertarget{namespacemeta_a62297b238ad02529168333feb2633f46}\index{meta@{meta}!to\_string@{to\_string}}
 \index{to\_string@{to\_string}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
-{\footnotesize\ttfamily std\+::string\+\_\+view meta\+::to\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}}}]{sort }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacemeta_a62297b238ad02529168333feb2633f46} 
+std\+::string\+\_\+view meta\+::to\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacemeta_ad3322e486b144bbdeb5e5e74056a51b4}{Gradient\+Sort}}}]{sort}{}\end{DoxyParamCaption})}
 
 
 
@@ -393,13 +405,15 @@ Persisted identifier of a sort key ("{}default"{}, "{}name"{}, "{}luminance"{}, 
 
 
 
+\label{doc-var-members}
+\Hypertarget{namespacemeta_doc-var-members}
 \doxysubsection{Variable Documentation}
-\Hypertarget{namespacemeta_a75366aee356107c1efb503fd31f08fd1}\label{namespacemeta_a75366aee356107c1efb503fd31f08fd1} 
-\index{meta@{meta}!has\_type\_name\_v@{has\_type\_name\_v}}
+\Hypertarget{namespacemeta_a75366aee356107c1efb503fd31f08fd1}\index{meta@{meta}!has\_type\_name\_v@{has\_type\_name\_v}}
 \index{has\_type\_name\_v@{has\_type\_name\_v}!meta@{meta}}
 \doxysubsubsection{\texorpdfstring{has\_type\_name\_v}{has\_type\_name\_v}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-constexpr bool meta\+::has\+\_\+type\+\_\+name\+\_\+v = requires \{ \mbox{\hyperlink{structmeta_1_1TypeName}{Type\+Name}}$<$T$>$\+::name; \}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+{\footnotesize\ttfamily \label{namespacemeta_a75366aee356107c1efb503fd31f08fd1} 
+template$<$typename T$>$ \\
+bool meta\+::has\+\_\+type\+\_\+name\+\_\+v = requires \{ \mbox{\hyperlink{structmeta_1_1TypeName}{Type\+Name}}$<$T$>$\+::name; \}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 

@@ -37,21 +37,25 @@ Abstract interface for reversible operations.
 
 Commands implement undo/redo logic and can optionally support merging with consecutive commands (e.\+g. continuous edits). 
 
+\label{doc-constructors}
+\Hypertarget{classmeta_1_1ICommand_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classmeta_1_1ICommand_ab24f79a1493c3f846c245f0f5f09d7df}\label{classmeta_1_1ICommand_ab24f79a1493c3f846c245f0f5f09d7df} 
-\index{meta::ICommand@{meta::ICommand}!````~ICommand@{\texorpdfstring{$\sim$}{\string~}ICommand}}
+\Hypertarget{classmeta_1_1ICommand_ab24f79a1493c3f846c245f0f5f09d7df}\index{meta::ICommand@{meta::ICommand}!````~ICommand@{\texorpdfstring{$\sim$}{\string~}ICommand}}
 \index{````~ICommand@{\texorpdfstring{$\sim$}{\string~}ICommand}!meta::ICommand@{meta::ICommand}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ICommand()}{\string~ICommand()}}
-{\footnotesize\ttfamily virtual meta\+::\+ICommand\+::\texorpdfstring{$\sim$}{\string~}\+ICommand (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ICommand_ab24f79a1493c3f846c245f0f5f09d7df} 
+virtual meta\+::\+ICommand\+::\texorpdfstring{$\sim$}{\string~}\+ICommand (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
 
 
 
+\label{doc-func-members}
+\Hypertarget{classmeta_1_1ICommand_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classmeta_1_1ICommand_a83574bc0d07a22884bec79b5b41296fb}\label{classmeta_1_1ICommand_a83574bc0d07a22884bec79b5b41296fb} 
-\index{meta::ICommand@{meta::ICommand}!merge\_with@{merge\_with}}
+\Hypertarget{classmeta_1_1ICommand_a83574bc0d07a22884bec79b5b41296fb}\index{meta::ICommand@{meta::ICommand}!merge\_with@{merge\_with}}
 \index{merge\_with@{merge\_with}!meta::ICommand@{meta::ICommand}}
 \doxysubsubsection{\texorpdfstring{merge\_with()}{merge\_with()}}
-{\footnotesize\ttfamily virtual bool meta\+::\+ICommand\+::merge\+\_\+with (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ICommand_a83574bc0d07a22884bec79b5b41296fb} 
+virtual bool meta\+::\+ICommand\+::merge\+\_\+with (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmeta_1_1ICommand}{ICommand}} \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
 
 
 
@@ -64,11 +68,11 @@ true if merge succeeded, false otherwise.
 
 Reimplemented in \mbox{\hyperlink{classmeta_1_1SetAttributeCommand_ac264abccfedc901be3b3dd67242fa51d}{meta\+::\+Set\+Attribute\+Command$<$ T $>$}}.
 
-\Hypertarget{classmeta_1_1ICommand_abde54c0572caf5fe8e14ddaf956d0e42}\label{classmeta_1_1ICommand_abde54c0572caf5fe8e14ddaf956d0e42} 
-\index{meta::ICommand@{meta::ICommand}!redo@{redo}}
+\Hypertarget{classmeta_1_1ICommand_abde54c0572caf5fe8e14ddaf956d0e42}\index{meta::ICommand@{meta::ICommand}!redo@{redo}}
 \index{redo@{redo}!meta::ICommand@{meta::ICommand}}
 \doxysubsubsection{\texorpdfstring{redo()}{redo()}}
-{\footnotesize\ttfamily virtual void meta\+::\+ICommand\+::redo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ICommand_abde54c0572caf5fe8e14ddaf956d0e42} 
+virtual void meta\+::\+ICommand\+::redo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -78,11 +82,11 @@ Applies the command effect.
 
 Implemented in \mbox{\hyperlink{classmeta_1_1CommandGroup_a2cc2ad365dc7a2381a63d57d9cb60194}{meta\+::\+Command\+Group}}, and \mbox{\hyperlink{classmeta_1_1SetAttributeCommand_a3716d6401bec3db98eb96311e3597131}{meta\+::\+Set\+Attribute\+Command$<$ T $>$}}.
 
-\Hypertarget{classmeta_1_1ICommand_a94e10a0ad799408fe29ba21361d5b889}\label{classmeta_1_1ICommand_a94e10a0ad799408fe29ba21361d5b889} 
-\index{meta::ICommand@{meta::ICommand}!undo@{undo}}
+\Hypertarget{classmeta_1_1ICommand_a94e10a0ad799408fe29ba21361d5b889}\index{meta::ICommand@{meta::ICommand}!undo@{undo}}
 \index{undo@{undo}!meta::ICommand@{meta::ICommand}}
 \doxysubsubsection{\texorpdfstring{undo()}{undo()}}
-{\footnotesize\ttfamily virtual void meta\+::\+ICommand\+::undo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily \label{classmeta_1_1ICommand_a94e10a0ad799408fe29ba21361d5b889} 
+virtual void meta\+::\+ICommand\+::undo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
