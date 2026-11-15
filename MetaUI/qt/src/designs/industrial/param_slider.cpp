@@ -48,6 +48,7 @@ ParamSlider::ParamSlider(Attribute<float> &attr,
   category_ = meta::common::category(attr);
   min_ = meta::common::min(attr);
   max_ = meta::common::max(attr);
+  step_ = meta::common::try_get<float>(attr, meta::keys::constraints::step, 0.f);
   log_scale_ = meta::common::try_get<bool>(attr,
                                            meta::keys::ui::log_scale,
                                            false);
@@ -437,6 +438,18 @@ void ParamSlider::handle_wheel(QWheelEvent *event)
     return;
   }
 
+  if (step_ > 0.f)
+  {
+    const float target = std::clamp(value_ + float(steps * step_ * scale),
+                                    min_,
+                                    max_);
+    begin_edit();
+    commit_value(target);
+    glide_->jump(unbounded_ ? kRestNorm : to_norm(target));
+    event->accept();
+    return;
+  }
+
   // One notch moves 1% of the rail, which stays sane under a log mapping.
   begin_edit();
   glide_->to(std::clamp(norm_ + steps * 0.01 * scale, 0.0, 1.0));
@@ -482,8 +495,23 @@ void ParamSlider::set_from_position(int x, Qt::KeyboardModifiers modifiers)
   else if (modifiers & Qt::ShiftModifier)
     scale *= kFineMultiplier;
 
-  const qreal d_norm = (qreal(dx) * scale) / qreal(travel);
-  apply_norm(std::clamp(norm_at_press_ + d_norm, 0.0, 1.0));
+  const qreal effective_travel =
+      (step_ > 0.f && !log_scale_ && max_ > min_)
+          ? std::max(qreal(travel), qreal(max_ - min_) / qreal(step_))
+          : qreal(travel);
+  const qreal d_norm = (qreal(dx) * scale) / effective_travel;
+  qreal       t = std::clamp(norm_at_press_ + d_norm, 0.0, 1.0);
+  if (step_ > 0.f)
+  {
+    const float effective_step = (modifiers & Qt::ControlModifier)
+                                     ? step_ / float(kFineMultiplier)
+                                     : step_;
+    float       v = from_norm(t);
+    v = std::round(v / effective_step) * effective_step;
+    v = std::clamp(v, min_, max_);
+    t = to_norm(v);
+  }
+  apply_norm(t);
 }
 
 void ParamSlider::apply_norm(qreal t)
