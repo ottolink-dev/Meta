@@ -58,6 +58,13 @@ inline constexpr char min_y[] = "ui.min_y";
 inline constexpr char plane_aspect[] = "ui.plane_aspect";
 inline constexpr char presets[] = "ui.presets";
 inline constexpr char read_only[] = "ui.read_only";
+/** @brief Whether a range row shows its own On/Off toggle; true when absent.
+ *
+ * A host that switches the range on and off itself, through state.active,
+ * sets this to false. The row keeps its bar and its presets and leaves the
+ * switching to the host.
+ */
+inline constexpr char show_toggle[] = "ui.show_toggle";
 inline constexpr char tooltip[] = "ui.tooltip";
 inline constexpr char widget_type[] = "ui.widget_type";
 inline constexpr char width[] = "ui.width";
