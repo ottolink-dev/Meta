@@ -12,8 +12,11 @@ var namespacemeta_1_1keys =
     ] ],
     [ "state", "namespacemeta_1_1keys_1_1state.html", [
       [ "active", "namespacemeta_1_1keys_1_1state.html#a282afb7816edfbadabc0297d4ccbca60", null ],
+      [ "brush_radius", "namespacemeta_1_1keys_1_1state.html#a2fe765caee5530180b7878bd51a2da8c", null ],
+      [ "brush_strength", "namespacemeta_1_1keys_1_1state.html#a1e16eccf37c1f905767f1a3007a34206", null ],
       [ "last_active_value", "namespacemeta_1_1keys_1_1state.html#af585e82ba1d0e0b07f7e6fd042914464", null ],
-      [ "locked_xy", "namespacemeta_1_1keys_1_1state.html#ae1f27191e1a668b2f8eb92ad6ad1377b", null ]
+      [ "locked_xy", "namespacemeta_1_1keys_1_1state.html#ae1f27191e1a668b2f8eb92ad6ad1377b", null ],
+      [ "show_bg_image", "namespacemeta_1_1keys_1_1state.html#a73a712f791010ca0ed2216d5484ca406", null ]
     ] ],
     [ "ui", "namespacemeta_1_1keys_1_1ui.html", [
       [ "category", "namespacemeta_1_1keys_1_1ui.html#af0ac6f352b76ce82ed944bf38611fd28", null ],
