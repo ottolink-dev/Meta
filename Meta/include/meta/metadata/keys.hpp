@@ -21,8 +21,11 @@ namespace meta::keys::state
 {
 
 inline constexpr char active[] = "state.active";
+inline constexpr char brush_radius[] = "state.brush_radius";
+inline constexpr char brush_strength[] = "state.brush_strength";
 inline constexpr char last_active_value[] = "state.last_active_value";
 inline constexpr char locked_xy[] = "state.locked_xy";
+inline constexpr char show_bg_image[] = "state.show_bg_image";
 
 } // namespace meta::keys::state
 

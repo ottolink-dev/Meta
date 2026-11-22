@@ -37,9 +37,17 @@ public:
   int get_field_width() const { return width_; }
   int get_field_height() const { return height_; }
 
+  int   get_brush_radius() const { return brush_radius_; }
+  void  set_brush_radius(int radius);
+  float get_brush_strength() const { return brush_strength_; }
+  void  set_brush_strength(float strength);
+  bool  get_show_bg_image() const { return show_bg_image_; }
+  void  set_show_bg_image(bool show);
+
 signals:
   void value_changed();
   void edit_ended();
+  void setup_changed();
 
 protected:
   void resizeEvent(QResizeEvent *event) override;

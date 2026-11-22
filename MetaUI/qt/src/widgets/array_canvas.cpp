@@ -63,6 +63,33 @@ void ArrayCanvas::set_field_data(const std::vector<float> &data)
 
 const std::vector<float> &ArrayCanvas::get_field_data() const { return field_; }
 
+void ArrayCanvas::set_brush_radius(int radius)
+{
+  radius = std::max(1, radius);
+  if (brush_radius_ == radius)
+    return;
+  brush_radius_ = radius;
+  update();
+}
+
+void ArrayCanvas::set_brush_strength(float strength)
+{
+  strength = std::max(0.01f, strength);
+  if (brush_strength_ == strength)
+    return;
+  brush_strength_ = strength;
+  update();
+}
+
+void ArrayCanvas::set_show_bg_image(bool show)
+{
+  if (show_bg_image_ == show)
+    return;
+  show_bg_image_ = show;
+  update_field_image(QRect(0, 0, width_, height_));
+  update();
+}
+
 void ArrayCanvas::set_background_image(const std::vector<uint8_t> &pixels,
                                        int                         w,
                                        int                         h,
@@ -280,6 +307,7 @@ void ArrayCanvas::keyPressEvent(QKeyEvent *event)
     show_bg_image_ = !show_bg_image_;
     update_field_image(QRect(0, 0, width_, height_));
     update();
+    Q_EMIT setup_changed();
   }
   else
   {
@@ -366,6 +394,7 @@ void ArrayCanvas::wheelEvent(QWheelEvent *event)
       brush_radius_ = std::max(1, brush_radius_ + diff);
     }
     update();
+    Q_EMIT setup_changed();
   }
 }
 

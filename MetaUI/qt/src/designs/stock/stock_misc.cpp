@@ -378,6 +378,16 @@ MetaWidget *render_array(AbstractAttribute &abstract_attr,
                                          canvas->get_field_width(),
                                          canvas->get_field_height());
           canvas->set_field_data(data);
+
+          if (const auto *v = attr.state().try_value<int>(
+                  meta::keys::state::brush_radius))
+            canvas->set_brush_radius(*v);
+          if (const auto *v = attr.state().try_value<float>(
+                  meta::keys::state::brush_strength))
+            canvas->set_brush_strength(*v);
+          if (const auto *v = attr.state().try_value<bool>(
+                  meta::keys::state::show_bg_image))
+            canvas->set_show_bg_image(*v);
         });
 
     widget->sync_widget_from_model();
@@ -441,6 +451,26 @@ MetaWidget *render_array(AbstractAttribute &abstract_attr,
                        Q_EMIT widget->edit_ended();
                        attr.value_changed.notify(attr.value());
                      });
+
+    QObject::connect(
+        canvas,
+        &ArrayCanvas::setup_changed,
+        widget,
+        [&attr, canvas]()
+        {
+          attr.state()
+              .try_add(meta::keys::state::brush_radius,
+                       canvas->get_brush_radius())
+              ->value() = canvas->get_brush_radius();
+          attr.state()
+              .try_add(meta::keys::state::brush_strength,
+                       canvas->get_brush_strength())
+              ->value() = canvas->get_brush_strength();
+          attr.state()
+              .try_add(meta::keys::state::show_bg_image,
+                       canvas->get_show_bg_image())
+              ->value() = canvas->get_show_bg_image();
+        });
   }
   else
   {
