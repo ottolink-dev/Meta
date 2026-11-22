@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
   QApplication app(argc, argv);
 
   meta::qt::ContainerRenderOptions options;
-  options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+  options.category_policy = meta::qt::CategoryPolicy::Merged;
   options.snapshot_manager = false;
 
   meta::qt::MetaWidget *widget = meta::qt::render(group, options);

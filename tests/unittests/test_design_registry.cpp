@@ -190,7 +190,7 @@ TEST(DesignRegistryTest, ContainerWidgetDesignIntegration)
   {
     meta::qt::ContainerRenderOptions options;
     options.design = "stock";
-    options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+    options.category_policy = meta::qt::CategoryPolicy::Merged;
     auto *widget = meta::qt::render(container, options);
     ASSERT_NE(widget, nullptr);
     delete widget;
@@ -200,7 +200,7 @@ TEST(DesignRegistryTest, ContainerWidgetDesignIntegration)
   {
     meta::qt::ContainerRenderOptions options;
     options.design = "industrial";
-    options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+    options.category_policy = meta::qt::CategoryPolicy::Merged;
     auto *widget = meta::qt::render(container, options);
     ASSERT_NE(widget, nullptr);
     delete widget;
@@ -215,7 +215,7 @@ TEST(DesignRegistryTest, ContainerWidgetDesignIntegration)
                            "Test text");
     meta::qt::ContainerRenderOptions options;
     options.design = "stock";
-    options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+    options.category_policy = meta::qt::CategoryPolicy::Merged;
     auto *widget = meta::qt::render(comment_c, options);
     ASSERT_NE(widget, nullptr);
     delete widget;

@@ -245,7 +245,7 @@ int main(int argc, char **argv)
     ContainerRenderOptions opt;
     opt.design = industrial::kDesignName;
     opt.row_context.theme = &theme;
-    opt.category_policy = CategoryPolicy::CP_MERGED;
+    opt.category_policy = CategoryPolicy::Merged;
     opt.root_category_name = "Parameters";
 
     QWidget host;

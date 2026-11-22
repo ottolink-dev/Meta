@@ -164,7 +164,7 @@ QWidget *make_container_view(meta::AttributeContainer &container,
 
   meta::qt::ContainerRenderOptions options;
   options.design = design;
-  options.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+  options.category_policy = meta::qt::CategoryPolicy::Merged;
   options.snapshot_manager = snapshots;
 
   auto *widget = meta::qt::render(container, options);
@@ -204,7 +204,7 @@ QWidget *make_group_view(meta::ContainerGroup &group,
 
   meta::qt::ContainerRenderOptions options;
   options.design = design;
-  options.category_policy = meta::qt::CategoryPolicy::CP_TREE;
+  options.category_policy = meta::qt::CategoryPolicy::Tree;
   options.collapse_regex = std::regex("^Cat 1");
   options.snapshot_manager = true;
 
@@ -1128,7 +1128,7 @@ int main(int argc, char *argv[])
         [&group]()
         {
           meta::qt::ContainerRenderOptions options;
-          options.category_policy = meta::qt::CategoryPolicy::CP_TREE;
+          options.category_policy = meta::qt::CategoryPolicy::Tree;
           options.collapse_regex = std::regex("^Cat 1");
 
           auto *widget = meta::qt::render(group, options);

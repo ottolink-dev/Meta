@@ -18,19 +18,19 @@ namespace meta::qt
 {
 
 /// Policy used to organize attribute categories in the UI.
-enum CategoryPolicy
+enum class CategoryPolicy
 {
-  CP_FLAT,   ///< No hierarchy, all attributes in a single list
-  CP_TREE,   ///< Strict tree hierarchy based on attribute paths
-  CP_MERGED, ///< Merge similar categories into shared groups
-  CP_SMART   ///< Heuristic-based hybrid organization
+  Flat,   ///< No hierarchy, all attributes in a single list
+  Tree,   ///< Strict tree hierarchy based on attribute paths
+  Merged, ///< Merge similar categories into shared groups
+  Smart   ///< Heuristic-based hybrid organization
 };
 
 /// Policy used to switch between groups in a ContainerGroup.
-enum GroupSwitchMode
+enum class GroupSwitchMode
 {
-  GSM_TABS,     ///< Use tabs for switching groups
-  GSM_COMBO_BOX ///< Use a combo box for switching groups
+  Tabs,    ///< Use tabs for switching groups
+  ComboBox ///< Use a combo box for switching groups
 };
 
 /** @brief Builds the widget for a single attribute.
@@ -54,8 +54,8 @@ struct ContainerRenderOptions
   // clang-format off
   std::string design = "stock";                                  ///< Visual design name from DesignRegistry
   RowContext row_context = {};                                   ///< Context passed to row controls
-  CategoryPolicy category_policy = CategoryPolicy::CP_SMART;     ///< Category organization strategy
-  GroupSwitchMode group_switch_mode = GroupSwitchMode::GSM_TABS; ///< Container group switching style
+  CategoryPolicy category_policy = CategoryPolicy::Smart;     ///< Category organization strategy
+  GroupSwitchMode group_switch_mode = GroupSwitchMode::Tabs; ///< Container group switching style
   std::string root_category_name = META_ROOT_CATEGORY;           ///< Optional root category label
   std::vector<std::string> insertion_order = {};                 ///< Explicit ordering of categories
   std::optional<std::regex> collapse_regex = std::nullopt;       ///< Regex used to collapse categories

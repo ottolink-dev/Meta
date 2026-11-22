@@ -219,7 +219,7 @@ int main(int argc, char **argv)
     meta::qt::ContainerRenderOptions opt;
     opt.design = design;
     opt.row_context.theme = &theme;
-    opt.category_policy = meta::qt::CategoryPolicy::CP_MERGED;
+    opt.category_policy = meta::qt::CategoryPolicy::Merged;
     opt.root_category_name = own_chrome ? "Parameters" : "";
 
     for (int width : {360, 480})

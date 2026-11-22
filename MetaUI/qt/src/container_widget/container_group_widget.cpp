@@ -203,7 +203,7 @@ ContainerGroupWidget::ContainerGroupWidget(meta::ContainerGroup  &group,
 
   // designs with their own chrome get a segmented switch in their colours
   // (stock keeps Qt's tabs: it is the unmodified-Qt reference)
-  if (options.group_switch_mode == GroupSwitchMode::GSM_TABS &&
+  if (options.group_switch_mode == GroupSwitchMode::Tabs &&
       options.design != "stock" && options.row_context.theme)
   {
     root->setContentsMargins(0, 0, 0, 0);
@@ -237,7 +237,7 @@ ContainerGroupWidget::ContainerGroupWidget(meta::ContainerGroup  &group,
       Q_EMIT current_container_changed(new_current);
     };
   }
-  else if (options.group_switch_mode == GroupSwitchMode::GSM_TABS)
+  else if (options.group_switch_mode == GroupSwitchMode::Tabs)
   {
     tabs = new QTabWidget(this);
     root->addWidget(tabs);

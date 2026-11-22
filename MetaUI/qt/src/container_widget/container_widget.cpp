@@ -381,7 +381,7 @@ MetaWidget *render(AttributeContainer    &container,
 
   switch (options.category_policy)
   {
-  case CategoryPolicy::CP_TREE:
+  case CategoryPolicy::Tree:
     Logger::log()->trace("container_widget::render: tree mode");
     render_category(container,
                     root,
@@ -392,7 +392,7 @@ MetaWidget *render(AttributeContainer    &container,
                     effective_section_factory);
     break;
 
-  case CategoryPolicy::CP_MERGED:
+  case CategoryPolicy::Merged:
     Logger::log()->trace("container_widget::render: merged mode");
     render_category_merged(container,
                            root,
@@ -404,7 +404,7 @@ MetaWidget *render(AttributeContainer    &container,
                            effective_section_factory);
     break;
 
-  case CategoryPolicy::CP_SMART:
+  case CategoryPolicy::Smart:
     Logger::log()->trace("container_widget::render: smart mode");
 
     if (has_no_categorys)
@@ -423,7 +423,7 @@ MetaWidget *render(AttributeContainer    &container,
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
 
-  case CategoryPolicy::CP_FLAT:
+  case CategoryPolicy::Flat:
     Logger::log()->trace("container_widget::render: flat mode");
   default:
     render_flat(root, layout, collected_widgets, effective_row_renderer);
