@@ -56,6 +56,7 @@ private:
   void   draw_at(const QPoint &pos, Qt::MouseButtons buttons);
   QPoint field_position(const QPoint &pos) const;
   void   update_geometry();
+  void   update_field_image(const QRect &region);
   bool   is_mouse_cursor_on_img() const;
   QColor colormap(float v) const;
 
@@ -64,6 +65,7 @@ private:
   int         height_ = 128;
 
   std::vector<float> field_;
+  QImage             field_image_;
 
   // Background image
   QImage bg_image_;

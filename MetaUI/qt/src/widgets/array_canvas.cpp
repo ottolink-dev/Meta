@@ -23,6 +23,8 @@ ArrayCanvas::ArrayCanvas(const std::string &label,
     : QWidget(parent), label_(label), width_(width), height_(height)
 {
   field_.resize(static_cast<size_t>(width_ * height_), 0.f);
+  field_image_ = QImage(width_, height_, QImage::Format_ARGB32);
+  update_field_image(QRect(0, 0, width_, height_));
 
   setFocusPolicy(Qt::StrongFocus);
   setMouseTracking(true);
@@ -55,6 +57,7 @@ void ArrayCanvas::set_field_data(const std::vector<float> &data)
     size_t copy_size = std::min(data.size(), field_.size());
     std::copy_n(data.begin(), copy_size, field_.begin());
   }
+  update_field_image(QRect(0, 0, width_, height_));
   update();
 }
 
@@ -77,12 +80,14 @@ void ArrayCanvas::set_background_image(const std::vector<uint8_t> &pixels,
     bg_image_ = QImage(pixels.data(), w, h, w * channels, fmt).copy();
   }
   update_geometry();
+  update_field_image(QRect(0, 0, width_, height_));
   update();
 }
 
 void ArrayCanvas::clear()
 {
   std::fill(field_.begin(), field_.end(), 0.f);
+  update_field_image(QRect(0, 0, width_, height_));
   update();
   Q_EMIT value_changed();
   Q_EMIT edit_ended();
@@ -152,6 +157,33 @@ void ArrayCanvas::draw_at(const QPoint &pos, Qt::MouseButtons buttons)
           field_[idx] = std::clamp(field_[idx], 0.f, 1.f);
         }
       }
+    }
+  }
+
+  update_field_image(QRect(pos.x() - ir, pos.y() - ir, 2 * ir + 1, 2 * ir + 1));
+}
+
+void ArrayCanvas::update_field_image(const QRect &region)
+{
+  if (field_image_.isNull())
+    return;
+
+  const QRect bounds = region.intersected(QRect(0, 0, width_, height_));
+  if (bounds.isEmpty())
+    return;
+
+  const bool is_image = !bg_image_.isNull() && show_bg_image_;
+
+  for (int j = bounds.top(); j <= bounds.bottom(); ++j)
+  {
+    QRgb *row = reinterpret_cast<QRgb *>(field_image_.scanLine(j));
+    for (int i = bounds.left(); i <= bounds.right(); ++i)
+    {
+      const float val = field_[static_cast<size_t>(j * width_ + i)];
+      QColor      c = colormap(val);
+      if (is_image)
+        c.setAlphaF(val);
+      row[i] = c.rgba();
     }
   }
 }
@@ -246,6 +278,7 @@ void ArrayCanvas::keyPressEvent(QKeyEvent *event)
   else if (event->key() == Qt::Key_Space)
   {
     show_bg_image_ = !show_bg_image_;
+    update_field_image(QRect(0, 0, width_, height_));
     update();
   }
   else
@@ -364,23 +397,7 @@ void ArrayCanvas::paintEvent(QPaintEvent *)
   }
 
   // Draw data field
-  {
-    QImage image(width_, height_, QImage::Format_ARGB32);
-    for (int j = 0; j < height_; ++j)
-    {
-      for (int i = 0; i < width_; ++i)
-      {
-        float  val = field_[static_cast<size_t>(j * width_ + i)];
-        QColor c = colormap(val);
-        if (is_image)
-        {
-          c.setAlphaF(val);
-        }
-        image.setPixel(i, j, c.rgba());
-      }
-    }
-    painter.drawImage(rect_img_, image);
-  }
+  painter.drawImage(rect_img_, field_image_);
 
   // Draw label
   if (!property("industrialEditor").toBool())
