@@ -446,11 +446,19 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
     auto *center_btn = new QPushButton(QObject::tr("Center"), widget);
     auto *unit_btn = new QPushButton(QObject::tr("[0, 1]"), widget);
 
+    // Off when the host switches the range on and off itself: the toggle is
+    // still there for the code below to keep in step, it is just not shown.
+    const bool show_toggle = meta::common::try_get<bool>(
+        attr,
+        meta::keys::ui::show_toggle,
+        true);
+
     toggle_btn->setCheckable(true);
     toggle_btn->setChecked(is_active);
     toggle_btn->setText(is_active ? QObject::tr("On") : QObject::tr("Off"));
     toggle_btn->setFixedHeight(22);
     toggle_btn->setFixedWidth(40);
+    toggle_btn->setVisible(show_toggle);
 
     for (auto *btn : {reset_btn, center_btn, unit_btn})
     {
@@ -458,8 +466,11 @@ MetaWidget *render_vec2(AbstractAttribute &abstract_attr,
       btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     }
 
-    btn_row->addWidget(toggle_btn);
-    btn_row->addSpacing(4);
+    if (show_toggle)
+    {
+      btn_row->addWidget(toggle_btn);
+      btn_row->addSpacing(4);
+    }
     btn_row->addWidget(reset_btn);
     btn_row->addWidget(center_btn);
     btn_row->addWidget(unit_btn);
