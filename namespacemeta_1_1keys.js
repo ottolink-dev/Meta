@@ -36,6 +36,7 @@ var namespacemeta_1_1keys =
       [ "plane_aspect", "namespacemeta_1_1keys_1_1ui.html#abca20660e8affd0b248e3a7258df478d", null ],
       [ "presets", "namespacemeta_1_1keys_1_1ui.html#aa10c249df5f6548c5ee851d7d010eeb8", null ],
       [ "read_only", "namespacemeta_1_1keys_1_1ui.html#a0c990cdf97c705ff3def6eaca0a25491", null ],
+      [ "show_toggle", "namespacemeta_1_1keys_1_1ui.html#a8b7331d7018d03d54bf5e6d9dc33e8e7", null ],
       [ "tooltip", "namespacemeta_1_1keys_1_1ui.html#a414a3aab9a63dfbcb792722e89e4a03d", null ],
       [ "widget_type", "namespacemeta_1_1keys_1_1ui.html#a795cd51a9d7dd259db39581857b53642", null ],
       [ "width", "namespacemeta_1_1keys_1_1ui.html#ae4e6cf0e267ff49461d6f93e6ff9a641", null ]

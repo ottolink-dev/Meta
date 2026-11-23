@@ -30,6 +30,7 @@ var keys_8hpp =
     [ "meta::keys::ui::presets", "namespacemeta_1_1keys_1_1ui.html#aa10c249df5f6548c5ee851d7d010eeb8", null ],
     [ "meta::keys::ui::read_only", "namespacemeta_1_1keys_1_1ui.html#a0c990cdf97c705ff3def6eaca0a25491", null ],
     [ "meta::keys::state::show_bg_image", "namespacemeta_1_1keys_1_1state.html#a73a712f791010ca0ed2216d5484ca406", null ],
+    [ "meta::keys::ui::show_toggle", "namespacemeta_1_1keys_1_1ui.html#a8b7331d7018d03d54bf5e6d9dc33e8e7", null ],
     [ "meta::keys::constraints::step", "namespacemeta_1_1keys_1_1constraints.html#a572252adc3aacfe9c5759f4015ec65ab", null ],
     [ "meta::keys::ui::tooltip", "namespacemeta_1_1keys_1_1ui.html#a414a3aab9a63dfbcb792722e89e4a03d", null ],
     [ "meta::keys::ui::widget_type", "namespacemeta_1_1keys_1_1ui.html#a795cd51a9d7dd259db39581857b53642", null ],

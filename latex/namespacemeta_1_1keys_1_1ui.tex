@@ -35,6 +35,8 @@ constexpr char \mbox{\hyperlink{namespacemeta_1_1keys_1_1ui_aa10c249df5f6548c5ee
 \item 
 constexpr char \mbox{\hyperlink{namespacemeta_1_1keys_1_1ui_a0c990cdf97c705ff3def6eaca0a25491}{read\+\_\+only}} \mbox{[}$\,$\mbox{]} = "{}ui.\+read\+\_\+only"{}
 \item 
+constexpr char \mbox{\hyperlink{namespacemeta_1_1keys_1_1ui_a8b7331d7018d03d54bf5e6d9dc33e8e7}{show\+\_\+toggle}} \mbox{[}$\,$\mbox{]} = "{}ui.\+show\+\_\+toggle"{}
+\begin{DoxyCompactList}\small\item\em Whether a range row shows its own On/\+Off toggle; true when absent. \end{DoxyCompactList}\item 
 constexpr char \mbox{\hyperlink{namespacemeta_1_1keys_1_1ui_a414a3aab9a63dfbcb792722e89e4a03d}{tooltip}} \mbox{[}$\,$\mbox{]} = "{}ui.\+tooltip"{}
 \item 
 constexpr char \mbox{\hyperlink{namespacemeta_1_1keys_1_1ui_a795cd51a9d7dd259db39581857b53642}{widget\+\_\+type}} \mbox{[}$\,$\mbox{]} = "{}ui.\+widget\+\_\+type"{}
@@ -156,7 +158,17 @@ char meta\+::keys\+::ui\+::presets\mbox{[}$\,$\mbox{]} = "{}ui.\+presets"{}\hspa
 {\footnotesize\ttfamily \label{namespacemeta_1_1keys_1_1ui_a0c990cdf97c705ff3def6eaca0a25491} 
 char meta\+::keys\+::ui\+::read\+\_\+only\mbox{[}$\,$\mbox{]} = "{}ui.\+read\+\_\+only"{}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
-\Hypertarget{namespacemeta_1_1keys_1_1ui_a414a3aab9a63dfbcb792722e89e4a03d}\index{meta::keys::ui@{meta::keys::ui}!tooltip@{tooltip}}
+\Hypertarget{namespacemeta_1_1keys_1_1ui_a8b7331d7018d03d54bf5e6d9dc33e8e7}\index{meta::keys::ui@{meta::keys::ui}!show\_toggle@{show\_toggle}}
+\index{show\_toggle@{show\_toggle}!meta::keys::ui@{meta::keys::ui}}
+\doxysubsubsection{\texorpdfstring{show\_toggle}{show\_toggle}}
+{\footnotesize\ttfamily \label{namespacemeta_1_1keys_1_1ui_a8b7331d7018d03d54bf5e6d9dc33e8e7} 
+char meta\+::keys\+::ui\+::show\+\_\+toggle\mbox{[}$\,$\mbox{]} = "{}ui.\+show\+\_\+toggle"{}\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Whether a range row shows its own On/\+Off toggle; true when absent. 
+
+A host that switches the range on and off itself, through \doxylink{namespacemeta_1_1keys_1_1state_a282afb7816edfbadabc0297d4ccbca60}{state.\+active}, sets this to false. The row keeps its bar and its presets and leaves the switching to the host. \Hypertarget{namespacemeta_1_1keys_1_1ui_a414a3aab9a63dfbcb792722e89e4a03d}\index{meta::keys::ui@{meta::keys::ui}!tooltip@{tooltip}}
 \index{tooltip@{tooltip}!meta::keys::ui@{meta::keys::ui}}
 \doxysubsubsection{\texorpdfstring{tooltip}{tooltip}}
 {\footnotesize\ttfamily \label{namespacemeta_1_1keys_1_1ui_a414a3aab9a63dfbcb792722e89e4a03d} 
